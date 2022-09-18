@@ -1,0 +1,26 @@
+@media only screen and (max-width: 768px) {
+  .album-details-preloader-title {
+    height: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .album-details-preloader-title {
+    height: 2.25em;
+  }
+}
+
+.album-details-preloader-title {
+  width: 18em;
+  margin-block: 0.4em;
+}
+
+.album-details-preloader-line {
+  width: 8em;
+  height: 1.1em;
+}
+
+.album-details-preloader-line:last-child {
+  width: 12em;
+  margin-top: 0.2em;
+}

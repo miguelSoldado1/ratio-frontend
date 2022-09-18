@@ -1,0 +1,35 @@
+@media only screen and (max-width: 768px) {
+  .search {
+    max-width: 18em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .search {
+    width: 36em;
+  }
+}
+
+.search {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  padding-left: 0.5em;
+}
+
+.search-input {
+  background-color: white;
+  border: none;
+  outline: none;
+  padding-block: 0.6em;
+  padding-left: 2.35em;
+  padding-right: 0.5em;
+  font-size: 1em;
+  border-radius: 2em;
+  width: 100%;
+  -webkit-appearance: none;
+}

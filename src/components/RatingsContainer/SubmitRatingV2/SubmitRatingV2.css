@@ -1,0 +1,53 @@
+@media only screen and (min-width: 769px) {
+  .submit-rating {
+    gap: 2em;
+  }
+}
+
+.submit-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-item-color);
+  margin: 1em;
+  padding: 1em 2em;
+  border-radius: 1em;
+}
+
+.submit-rating-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.submit-rating-comment {
+  display: flex;
+  justify-content: center;
+  background-color: var(--accent-text-color);
+  padding: 0.8em;
+  font-family: Helvetica;
+  resize: none;
+  border-radius: 0.5em;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-rating-input-text {
+  width: 100%;
+}
+
+.submit-rating-form-error {
+  color: red;
+  height: 1em;
+  margin-left: 1em;
+}
+
+.submit {
+  width: 6em;
+}
+
+.submit-rating > div > div:nth-child(2) > svg > svg {
+  display: none !important;
+}

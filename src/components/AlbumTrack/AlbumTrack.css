@@ -1,0 +1,117 @@
+@media only screen and (max-width: 768px) {
+  .album-track-outter {
+    border-bottom: 0.1px solid var(--accent-text-color);
+    margin-inline: 0.5em;
+    padding-inline: 0.5em;
+  }
+
+  .album-track-outter:last-child {
+    border-bottom: none;
+  }
+
+  .album-track-detail {
+    overflow-x: auto;
+  }
+
+  .album-track-detail::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  .album-track-detail > * {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .album-track-container {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .album-track-outter {
+    padding-inline: 0.5em 1.5em;
+  }
+
+  .album-track-outter:hover {
+    background-color: var(--hover-color);
+  }
+
+  .album-track-outter:hover .album-track-duration {
+    opacity: 1;
+  }
+
+  .album-track-duration {
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .album-track-detail > * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .album-track-container {
+    width: 95%;
+  }
+}
+
+.album-track-outter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.album-track-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.album-track-detail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.2em;
+  padding: 0.5em;
+  overflow-x: auto;
+}
+
+.album-track-detail::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.album-track-number {
+  min-width: 1.1125em;
+  text-align: right;
+}
+
+.album-track-artist {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.album-track-artist-names > * {
+  color: var(--accent-text-color);
+}
+
+.album-track-duration {
+  color: var(--accent-text-color);
+}
+
+.explicit {
+  box-sizing: border-box;
+  cursor: default;
+  border: 0;
+  margin: 0;
+  align-items: center;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  border-radius: 2px;
+  color: #121212;
+  font-size: 0.5em;
+  justify-content: center;
+  padding: 0.4em 0.6em;
+  text-transform: uppercase;
+}

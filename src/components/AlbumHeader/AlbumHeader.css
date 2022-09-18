@@ -1,0 +1,69 @@
+@media only screen and (max-width: 768px) {
+  .album-header {
+    flex-direction: column;
+  }
+
+  .album-header-image {
+    width: 15em;
+  }
+
+  .album-details-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .album-details-details > h1 {
+    font-size: 1.2em;
+  }
+
+  .album-details-details > a,
+  p {
+    font-size: 1em;
+  }
+
+  .album-details-details > * {
+    margin: 0.1em 0em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .album-header-image {
+    width: 20em;
+  }
+
+  .album-details-details {
+    margin: 0 0.7em;
+    overflow: hidden;
+  }
+
+  .album-details-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .album-details-details > * {
+    margin: 0.25em 0em;
+  }
+}
+
+.album-header-image {
+  aspect-ratio: 1;
+}
+
+.album-details-line {
+  color: var(--accent-text-color);
+}
+
+.album-header {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+}
+
+.spotify-logo-album-details {
+  opacity: 0.7;
+  margin: 0;
+}

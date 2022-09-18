@@ -1,0 +1,24 @@
+@media only screen and (max-width: 768px) {
+  .profile-screen-title {
+    font-size: 1.4em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .profile-screen-title {
+    font-size: 2em;
+  }
+}
+
+.profile-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-screen-title {
+  align-self: center;
+}
+
+.profile-screen-title {
+  margin: 0;
+}

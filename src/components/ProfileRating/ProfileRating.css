@@ -1,0 +1,127 @@
+@media only screen and (max-width: 768px) {
+  .profile-rating {
+    border-bottom: 0.1px solid var(--accent-text-color);
+  }
+
+  .profile-rating:last-child {
+    border-bottom: none;
+  }
+
+  .profile-rating-img {
+    height: 5em;
+    margin: 0.2em 0.3em;
+  }
+
+  .profile-ratings-circles {
+    overflow-x: auto;
+    scroll-snap-type: inline mandatory;
+    margin-right: 1em;
+    padding-bottom: 0.5em;
+    gap: 1em;
+    width: 7.8em;
+  }
+
+  .profile-rating-text > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .profile-rating-artist {
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+  }
+
+  .profile-rating-text {
+    gap: 0.1em;
+    margin: 0.5em 0;
+  }
+
+  .profile-rating-release {
+    display: none;
+  }
+
+  .profile-ratings-circles::-webkit-scrollbar-thumb {
+    width: 55%;
+  }
+
+  .profile-ratings-circles::-webkit-scrollbar-track {
+    /* background-color: var(--accent-text-color); */
+    border-radius: 1em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .profile-rating-img {
+    height: 7.5em;
+    margin: 0.5em 0.7em;
+  }
+
+  .profile-ratings-circles {
+    gap: 2em;
+    margin: 1em 2em;
+  }
+
+  .profile-rating-text {
+    gap: 0.25em;
+  }
+
+  .profile-rating:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+  }
+}
+
+.profile-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+.profile-rating-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.profile-rating-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-rating-text > p {
+  padding: 0;
+  margin: 0;
+}
+
+.profile-rating-date {
+  color: var(--accent-text-color);
+  font-size: 0.8em;
+}
+
+.profile-rating-name {
+  font-size: 1.2em;
+}
+
+.profile-rating-artist {
+  color: var(--accent-text-color);
+  font-size: 1em;
+}
+
+.profile-ratings-circles {
+  display: flex;
+  align-items: center;
+}
+
+.profile-ratings-circles > .rating-circle-container {
+  min-width: 5.5em;
+  width: 5.5em;
+}
+
+.profile-ratings-circles > .rating-circle-container > * {
+  font-size: 0.6em;
+}

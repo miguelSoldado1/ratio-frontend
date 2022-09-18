@@ -1,0 +1,55 @@
+@media only screen and (max-width: 768px) {
+  .grid {
+    --grid-layout-gap: 1.5vw;
+    --grid-column-count: 3;
+    --grid-item--max-width: calc((84% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .grid {
+    --grid-layout-gap: 1.5vw;
+    --grid-column-count: 7;
+    --grid-item--max-width: calc((94% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.8em;
+  }
+
+  .grid:hover::-webkit-scrollbar-thumb {
+    background-color: var(--accent-text-color) !important;
+  }
+}
+
+.grid {
+  /* Calculated values. */
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--grid-item--max-width);
+  grid-gap: var(--grid-layout-gap);
+  overflow-x: auto;
+  scroll-snap-type: inline mandatory;
+  padding-bottom: 0.5em;
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background-color: transparent !important;
+}
+
+.grid > * {
+  scroll-snap-align: start;
+}
+
+.grid-title {
+  color: white;
+  font-family: Helvetica;
+  margin: 2vh 2vw;
+}

@@ -1,0 +1,59 @@
+:root {
+  --background-color: #151515;
+  --hover-color: rgba(37, 37, 37, 0.7);
+  --background-item-color: rgba(37, 37, 37, 0.3);
+  --accent-text-color: rgba(255, 255, 255, 0.6);
+  --button-color: #1db954;
+  --button-hover-color: #1ed760;
+  --button-text-color: white;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: #fff;
+  font-family: Helvetica;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent !important;
+  height: 5px !important;
+  width: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--accent-text-color);
+}
+
+Scrollbar for Firefox :root {
+  scrollbar-color: var(--accent-text-color) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}

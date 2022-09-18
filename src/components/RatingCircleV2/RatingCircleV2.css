@@ -1,0 +1,12 @@
+.rating-circle-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: 0.5em;
+}
+
+.rating-circle-tag > * {
+  margin: 0;
+}

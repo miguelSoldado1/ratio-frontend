@@ -1,0 +1,20 @@
+.filters {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  margin: 0 1em;
+}
+
+.filters > .filter {
+  cursor: pointer;
+  color: var(--accent-text-color);
+}
+
+.filters > .enabled {
+  color: white;
+}
+
+.filters > .single {
+  color: var(--accent-text-color);
+  cursor: not-allowed;
+}

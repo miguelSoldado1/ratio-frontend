@@ -1,0 +1,126 @@
+@media only screen and (min-width: 769px) {
+  .rating-posts-button:hover {
+    background-color: var(--hover-color);
+  }
+
+  .post-avatar:hover {
+    background-color: var(--hover-color);
+  }
+}
+
+.rating-posts-container {
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  background-color: var(--background-item-color);
+  padding: 0.25em 1em 0.25em 0.3em;
+  border-radius: 1em;
+  gap: 0.1em;
+  margin-inline: 1em;
+}
+
+.rating-posts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.1em 0 0 0;
+}
+
+.rating-posts-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5em;
+  gap: 0.5em;
+  min-height: 2em;
+}
+
+.rating-posts-content {
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0 0.75em;
+  margin: 0 0.5em;
+  border-radius: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.expanded {
+  -webkit-line-clamp: 10;
+  line-clamp: 10;
+}
+
+.rating-posts-footer {
+  display: flex;
+  align-items: center;
+  margin: 0.1em 1em 0.25em 2em;
+  justify-content: space-between;
+  word-spacing: -0.1em;
+}
+
+.rating-posts-button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.6em;
+  gap: 0.5em;
+  padding: 0.3em 0.6em;
+  font-size: 1em;
+  min-width: 4.65em;
+}
+
+.heart > * {
+  transition: fill 200ms linear;
+}
+
+.liked > * {
+  fill: white;
+}
+
+.rating-posts-arrow {
+  fill: white;
+  cursor: pointer;
+}
+
+.arrow-down {
+  transform: rotate(-90deg);
+}
+
+.arrow-up {
+  transform: rotate(90deg);
+}
+
+.rating-posts-body > .rating-circle-container {
+  width: 2.5em;
+}
+
+.rating-posts-body > .rating-circle-container > * {
+  font-size: 0.35em;
+}
+
+/* AVATAR */
+
+.post-avatar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 1em;
+  padding: 0.1em 0.75em 0.1em 0.4em;
+  height: 2em;
+}
+
+.post-avatar-img {
+  width: 1.8em;
+  border-radius: 50%;
+}
+
+.post-avatar-name {
+  margin-left: 0.5em;
+}

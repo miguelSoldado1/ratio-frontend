@@ -1,0 +1,10 @@
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+
+.nav-arrow {
+  fill: white;
+  cursor: pointer;
+}

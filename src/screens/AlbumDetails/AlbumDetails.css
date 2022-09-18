@@ -1,0 +1,25 @@
+@media only screen and (max-width: 768px) {
+  .album-details-container {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .left {
+    width: 60%;
+  }
+
+  .right {
+    width: 40%;
+  }
+}
+
+.album-details-container {
+  display: flex;
+  gap: 2em;
+}
+
+.album-details-full-duration {
+  margin: 0.5em 2em;
+  color: var(--accent-text-color);
+}

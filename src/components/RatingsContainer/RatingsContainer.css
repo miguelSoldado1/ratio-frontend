@@ -1,0 +1,28 @@
+@media only screen and (max-width: 768px) {
+  .ratings-circles {
+    gap: 2em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .ratings-circles {
+    gap: 5em;
+  }
+}
+
+.ratings-circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+}
+
+.no-ratings-text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ratings-circles > .rating-circle-container {
+  width: 11em;
+}

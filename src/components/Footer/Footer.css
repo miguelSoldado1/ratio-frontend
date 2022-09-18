@@ -1,0 +1,17 @@
+footer {
+  display: absolute;
+  bottom: 0;
+  /* margin: 1em; */
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1em;
+}

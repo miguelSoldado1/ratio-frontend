@@ -1,0 +1,26 @@
+.nav-arrow-ratings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-arrow-ratings {
+  fill: white;
+  padding-inline: 10px;
+  cursor: pointer;
+}
+
+.true {
+  fill: white;
+}
+
+.false {
+  fill: var(--accent-text-color);
+  cursor: not-allowed;
+}
+
+.community-ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}

@@ -1,0 +1,19 @@
+.custom-button {
+  background-color: var(--button-color);
+  border: none;
+  color: white;
+  padding: 0.2em 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.3em;
+  border-radius: 0.5em;
+  align-self: center;
+  cursor: pointer;
+  margin: 1em;
+}
+
+.custom-button:hover {
+  background-color: var(--button-hover-color);
+  text-decoration: none;
+}

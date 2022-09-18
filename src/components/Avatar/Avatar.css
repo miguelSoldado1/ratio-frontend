@@ -1,0 +1,43 @@
+@media only screen and (max-width: 768px) {
+  .avatar {
+    padding: 0.25em;
+  }
+
+  .avatar-name {
+    font-size: 0;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .avatar {
+    padding: 0.35em 0.85em;
+  }
+
+  .avatar:hover {
+    background-color: var(--hover-color);
+    text-decoration: none;
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  border-radius: 20em;
+  cursor: pointer;
+  margin-left: auto;
+  text-decoration: none;
+}
+
+.avatar-image {
+  border-radius: 50%;
+  height: 1.875em;
+  aspect-ratio: 1;
+}
+
+.avatar-name {
+  padding-left: 0.7em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

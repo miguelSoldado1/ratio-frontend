@@ -1,0 +1,68 @@
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0.6em;
+  }
+
+  .container-album-name {
+    font-size: 0.6em;
+  }
+
+  .container-artist-name {
+    font-size: 0.55em;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .container {
+    padding: 1em;
+  }
+
+  .container-album-name {
+    font-size: 1em;
+  }
+
+  .container-artist-name {
+    font-size: 0.95em;
+  }
+}
+
+.container {
+  display: grid;
+  background-color: var(--background-item-color);
+  cursor: pointer;
+  border-radius: 5%;
+  gap: 0.2em;
+  box-shadow: 0px 1px 16px 4px rgba(0, 0, 0, 0.16);
+}
+
+.container:hover {
+  background-color: var(--hover-color);
+}
+
+.container > * {
+  margin: 0;
+}
+
+.container-image {
+  width: 100%;
+  justify-self: center;
+  padding: 0.75em;
+}
+
+.container > p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0;
+}
+
+.container-artist-name {
+  color: var(--accent-text-color);
+  align-items: center;
+}
+
+.spotify-logo {
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 0.3em 0 0.1em;
+}
