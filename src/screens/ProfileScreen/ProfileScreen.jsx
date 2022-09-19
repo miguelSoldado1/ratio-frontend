@@ -21,7 +21,6 @@ export const ProfileScreen = () => {
     const fetchData = async () => {
       const result = await getUserPosts(userId, page, filterActive.query);
       setRatings(page > 0 ? (oldArray) => [...oldArray, ...result?.data] : result?.data);
-      window.scrollTo({ top: 0, behavior: "smooth" });
       if (page <= 0) setRatingsCount(result?.count);
     };
 

@@ -29,7 +29,7 @@
   font-family: Helvetica;
   resize: none;
   border-radius: 0.5em;
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -48,6 +48,10 @@
   width: 6em;
 }
 
-.submit-rating > div > div:nth-child(2) > svg > svg {
+.submit-rating-cirlce > div > div:nth-child(2) > svg > svg {
   display: none !important;
+}
+
+.submit-rating-cirlce > div {
+  margin-left: 3em;
 }

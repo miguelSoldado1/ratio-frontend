@@ -52,24 +52,26 @@ export const SubmitRatingV2 = ({ albumId }) => {
         </div>
         <input className="custom-button submit" type="submit" value="Submit" disabled={submitting} />
       </form>
-      <CircularSlider
-        //hidden character because it was breaking on mobile
-        label="&#8192;"
-        width={SLIDER_WIDTH}
-        labelColor={rating >= 0 ? "white" : "gray"}
-        knobColor={rating >= 0 ? "white" : "gray"}
-        progressColorFrom={rating >= 0 ? "white" : "gray"}
-        progressColorTo={rating >= 0 ? "white" : "gray"}
-        progressSize={SLIDER_PROGRESS}
-        knobSize={SLIDER_KNOB}
-        trackSize={0}
-        min={0}
-        max={10}
-        valueFontSize={`${VALUE_SIZE}px`}
-        progressLineCap="flat"
-        knobPosition={"right"}
-        onChange={(value) => setRating(value)}
-      />
+      <div className="submit-rating-cirlce">
+        <CircularSlider
+          //hidden character because it was breaking on mobile
+          label="&#8192;"
+          width={SLIDER_WIDTH}
+          labelColor={rating >= 0 ? "white" : "gray"}
+          knobColor={rating >= 0 ? "white" : "gray"}
+          progressColorFrom={rating >= 0 ? "white" : "gray"}
+          progressColorTo={rating >= 0 ? "white" : "gray"}
+          progressSize={SLIDER_PROGRESS}
+          knobSize={SLIDER_KNOB}
+          trackSize={0}
+          min={0}
+          max={10}
+          valueFontSize={`${VALUE_SIZE}px`}
+          progressLineCap="flat"
+          knobPosition={"right"}
+          onChange={(value) => setRating(value)}
+        />
+      </div>
     </div>
   );
 };

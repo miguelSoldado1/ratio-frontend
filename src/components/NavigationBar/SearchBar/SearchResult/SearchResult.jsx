@@ -4,7 +4,7 @@ import "./SearchResult.css";
 
 export const SearchResult = ({ searchResult, clearSearchBar }) => {
   return (
-    <div className="search-result">
+    <div className="search-result" id="search-result">
       {searchResult.map((album) => (
         <SearchItem album={album} key={album.id} clearSearchBar={clearSearchBar} />
       ))}
