@@ -41,3 +41,12 @@ export const SearchBar = () => {
     </div>
   );
 };
+
+document.addEventListener("mousedown", (event) => {
+  const searchElement = document.querySelector(".search");
+  const searchResultElement = document?.querySelector(".search-result");
+  if (searchElement && searchResultElement) {
+    if (searchElement.contains(event.target)) searchResultElement.style.display = "block";
+    else searchResultElement.style.display = "none";
+  }
+});
