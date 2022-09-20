@@ -8,7 +8,7 @@ import { ReactComponent as LogOutIcon } from "../../icons/logout-icon.svg";
 import "./NavigationBar.css";
 
 export const NavigationBar = () => {
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [cookies, _setCookies, removeCookie] = useCookies();
   const navigate = useNavigate();
   const getUserData = useUserDataStore((state) => state.getUserData);
 
