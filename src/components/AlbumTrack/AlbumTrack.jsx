@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { renderArtists } from "../../scripts/scripts";
 import "./AlbumTrack.css";
 
@@ -22,13 +21,18 @@ export const AlbumTrack = ({ props, index }) => {
           </div>
         </div>
       </div>
-      <span className="album-track-duration">{moment.utc(props?.duration_ms).customFormatDuration()}</span>
+      <span className="album-track-duration">{handleTrackDuration(props?.duration_ms)}</span>
     </li>
   );
 };
 
-// probably a better way to do this but couldn't find any
-// if needed elsewhere move from this component but for now it's safe to stay
-moment.prototype.customFormatDuration = function () {
-  return this.hours() ? this.format("H:mm:ss") : this.format("m:ss");
+const handleTrackDuration = (duration) => {
+  const unformattedDuration = new Date(duration);
+  const formattedDuration = unformattedDuration.toUTCString();
+  const hours = unformattedDuration.getUTCHours();
+  const minutes = unformattedDuration.getMinutes();
+
+  if (hours) return hours > 9 ? formattedDuration.substring(17, 25) : formattedDuration.substring(18, 25);
+  if (minutes) return minutes > 9 ? formattedDuration.substring(20, 25) : formattedDuration.substring(21, 25);
+  return formattedDuration.substring(21, 25);
 };

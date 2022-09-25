@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getAverageAlbumRating, getAlbum } from "../../api";
@@ -42,7 +41,7 @@ export const ProfileRating = ({ props }) => {
             <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
             <p className="profile-rating-name">
               <span>{albumData.name}</span>
-              <span className="profile-rating-release"> ({moment(albumData.release_date).year()})</span>
+              <span className="profile-rating-release"> ({new Date(albumData.release_date).getFullYear()})</span>
             </p>
             <p className="profile-rating-artist">
               <img src={spotifyLogo} className="spotify-logo" alt="" />

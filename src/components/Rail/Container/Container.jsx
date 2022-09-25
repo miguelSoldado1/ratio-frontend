@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { getArtists } from "../../../scripts/scripts";
 import spotifyLogo from "../../../icons/spotify-logo.png";
 import "./Container.css";
@@ -18,7 +17,7 @@ export const Container = ({ props }) => {
         <li className="container" onClick={handleAlbumClick}>
           <img className="container-image" src={props.image} alt="" />
           <p className="container-album-name">
-            {props.name} ({moment(props.release_date).year()})
+            {props.name} ({new Date(props.release_date).getFullYear()})
           </p>
           <p className="container-artist-name">
             <img src={spotifyLogo} className="spotify-logo" alt="" />

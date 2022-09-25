@@ -1,13 +1,16 @@
-import moment from "moment";
 import React from "react";
 
 export const handleDate = (date) => {
-  const postDate = moment(date);
-  const monthPrior = moment().subtract(1, "month");
-  if (postDate.isSameOrAfter(monthPrior)) {
-    return postDate.fromNow();
+  const postDate = new Date(date);
+  const monthPrior = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 30);
+
+  if (postDate >= monthPrior) {
+    const formatter = new Intl.RelativeTimeFormat("EN");
+    const diff = new Date() - new Date(date);
+    return formatter.format(Math.round(-diff / (1000 * 60 * 60 * 24)), "days");
   }
-  return postDate.format("MMMM D, YYYY");
+
+  return postDate.toLocaleDateString("EN", { year: "numeric", month: "long", day: "numeric" });
 };
 
 export const getArtists = (artists) => {

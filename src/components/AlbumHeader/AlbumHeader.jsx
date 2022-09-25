@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useAlbumStore } from "../../stores";
 import { renderArtists } from "../../scripts/scripts";
@@ -33,15 +32,15 @@ export const AlbumHeader = () => {
 };
 
 const handleDatePrecision = (release_date, release_date_precision) => {
-  const momentDate = moment(release_date, "YYYY-MM-DD");
+  const unformattedDate = new Date(release_date);
   switch (release_date_precision) {
-    case "day":
-      return momentDate.format("MMMM D, YYYY");
+    case date_precision.day:
+      return new Intl.DateTimeFormat("EN", { year: "numeric", month: "long", day: "numeric" }).format(unformattedDate);
     case date_precision.month:
-      return momentDate.format("MMMM YYYY");
+      return new Intl.DateTimeFormat("EN", { year: "numeric", month: "long" }).format(unformattedDate);
+    case date_precision.year:
     default:
-    case date_precision:
-      return momentDate.format("YYYY");
+      return new Intl.DateTimeFormat("EN", { year: "numeric" }).format(unformattedDate);
   }
 };
 
