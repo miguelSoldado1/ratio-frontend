@@ -18,11 +18,10 @@ export const AlbumDetails = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
-        if (error?.response?.status === 400) {
-          return clearData();
+        // no access token sent
+        if (error?.response?.status === 401) {
+          removeCookie("access_token", { path: "/" });
         }
-        console.log(error.response.status);
-        removeCookie("access_token", { path: "/" });
       });
     return clearData();
   }, [albumId, cookies, cookies.access_token, getAlbum, clearData, removeCookie]);
