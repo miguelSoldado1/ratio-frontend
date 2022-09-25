@@ -7,7 +7,7 @@ import { useAlbumStore } from "../../stores";
 import "./AlbumDetails.css";
 
 export const AlbumDetails = () => {
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const { albumId } = useParams();
   const [album, getAlbum, clearData] = useAlbumStore((state) => [state.album, state.getAlbum, state.clearData]);
 
@@ -17,11 +17,15 @@ export const AlbumDetails = () => {
       .then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error?.response?.status === 400) {
+          return clearData();
+        }
+        console.log(error.response.status);
         removeCookie("access_token", { path: "/" });
       });
     return clearData();
-  }, [albumId, cookies, cookies.access_token, getAlbum, clearData]);
+  }, [albumId, cookies, cookies.access_token, getAlbum, clearData, removeCookie]);
 
   return (
     <>

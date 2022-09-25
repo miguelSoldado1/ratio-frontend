@@ -9,7 +9,7 @@ import "./ProfileRating.css";
 import { ProfileRatingPL } from "../../preloaders";
 
 export const ProfileRating = ({ props }) => {
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const [albumData, setAlbumData] = useState({});
   const [communityRating, setCommunityRating] = useState();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const ProfileRating = ({ props }) => {
       }
     };
     fetchData();
-  }, [props.album_id, cookies, cookies.access_token]);
+  }, [props.album_id, cookies, cookies.access_token, removeCookie]);
 
   const handleAlbumClick = () => {
     navigate(`/album/${props.album_id}`);

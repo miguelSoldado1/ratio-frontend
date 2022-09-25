@@ -18,7 +18,7 @@ const App = () => {
       setCookies("access_token", access_token, { maxAge: expires_in });
       navigate(redirect ?? "/");
     }
-  }, [setCookies]);
+  }, [setCookies, navigate]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useUserDataStore } from "../../stores";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -8,25 +8,23 @@ import { ReactComponent as LogOutIcon } from "../../icons/logout-icon.svg";
 import "./NavigationBar.css";
 
 export const NavigationBar = () => {
-  const [cookies, _setCookies, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const navigate = useNavigate();
   const getUserData = useUserDataStore((state) => state.getUserData);
+
+  const handleHome = () => navigate("/");
+
+  const handleLogOut = useCallback(() => {
+    removeCookie("access_token", { path: "/" });
+    navigate("/");
+  }, [navigate, removeCookie]);
 
   useEffect(() => {
     const accessToken = cookies?.access_token;
     if (accessToken) {
       getUserData(accessToken).catch(() => handleLogOut());
     }
-  }, [cookies.access_token, getUserData]);
-
-  const handleHome = () => {
-    navigate("/");
-  };
-
-  const handleLogOut = () => {
-    removeCookie("access_token", { path: "/" });
-    navigate("/");
-  };
+  }, [cookies.access_token, getUserData, handleLogOut]);
 
   return (
     <nav className="nav-bar">
