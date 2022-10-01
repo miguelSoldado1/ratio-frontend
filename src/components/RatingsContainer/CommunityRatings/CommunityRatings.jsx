@@ -20,6 +20,7 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
       }
     };
     fetchData();
+    return setRatings([]);
   }, [albumId, page, filterActive]);
 
   const handleNavigation = (reference) => {
@@ -35,16 +36,27 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
 
   return (
     <>
-      <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={setPage} numberOfRatings={numOfRatings} />
+      <DatabaseFilters
+        setFilterActive={setFilterActive}
+        filterActive={filterActive}
+        setPage={setPage}
+        numberOfRatings={numOfRatings}
+      />
       <ol className="community-ratings">
         {ratings?.map((item) => (
           <RatingsPosts post={item} key={item._id} />
         ))}
       </ol>
       <div className="nav-arrow-ratings-container">
-        <LeftArrow className={`nav-arrow-ratings  ${page >= 1}`} onClick={() => handleNavigation(navigationMapping.BACKWARDS)} />
+        <LeftArrow
+          className={`nav-arrow-ratings  ${page >= 1}`}
+          onClick={() => handleNavigation(navigationMapping.BACKWARDS)}
+        />
         <p style={{ padding: 0 }}>{page + 1}</p>
-        <RightArrow className={`nav-arrow-ratings ${maxNumOfPages > page + 1}`} onClick={() => handleNavigation(navigationMapping.FORWARD)} />
+        <RightArrow
+          className={`nav-arrow-ratings ${maxNumOfPages > page + 1}`}
+          onClick={() => handleNavigation(navigationMapping.FORWARD)}
+        />
       </div>
     </>
   );
