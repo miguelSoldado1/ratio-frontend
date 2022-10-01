@@ -52,7 +52,7 @@
   }
 
   .album-track-container {
-    width: 95%;
+    max-width: 95%;
   }
 }
 
