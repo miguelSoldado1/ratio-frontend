@@ -27,7 +27,7 @@ const App = () => {
           <Route element={<NavigationBar />}>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/album/:albumId" element={<AlbumDetails />} />
-            <Route path="/profile/:userId/:username" element={<ProfileScreen />} />
+            <Route path="/profile/:userId" element={<ProfileScreen />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
