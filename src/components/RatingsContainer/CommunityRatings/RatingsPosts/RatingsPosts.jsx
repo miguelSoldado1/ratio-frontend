@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useUserDataStore } from "../../../../stores";
 import { handleDate } from "../../../../scripts/scripts";
@@ -18,7 +18,6 @@ const isOverflown = (element) => {
 export const RatingsPosts = ({ post }) => {
   const { user_id, comment, rating, createdAt, _id, likes } = post;
   const [cookies] = useCookies();
-  const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
   const [show, setShow] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -45,12 +44,6 @@ export const RatingsPosts = ({ post }) => {
     fetchData();
   }, [user_id, cookies, cookies.access_token, userData, likes]);
 
-  const handleRedirect = () => {
-    if (user_id && profileData.display_name) {
-      navigate(`/profile/${user_id}/${profileData.display_name}`);
-    }
-  };
-
   const handleDelete = async () => {
     try {
       deletePost(_id, cookies.access_token).then(() => window.location.reload(true));
@@ -74,7 +67,7 @@ export const RatingsPosts = ({ post }) => {
     <>
       <li className="rating-posts-container">
         <div className="rating-posts-header">
-          <PostAvatar profileData={profileData} onClick={handleRedirect} />
+          <PostAvatar profileData={profileData} />
           <span>{handleDate(createdAt)}</span>
         </div>
         <div className="rating-posts-body">
@@ -96,7 +89,13 @@ export const RatingsPosts = ({ post }) => {
               </div>
             ) : null}
           </div>
-          {overflow ? <Arrow id="rating-posts-arrow" className={`rating-posts-arrow${expanded ? " arrow-up" : " arrow-down"}`} onClick={() => setExpanded(!expanded)} /> : null}
+          {overflow ? (
+            <Arrow
+              id="rating-posts-arrow"
+              className={`rating-posts-arrow${expanded ? " arrow-up" : " arrow-down"}`}
+              onClick={() => setExpanded(!expanded)}
+            />
+          ) : null}
         </div>
       </li>
       <Modal title="Deleting rating" onSave={handleDelete} onClose={() => setShow(false)} show={show}>
@@ -106,11 +105,11 @@ export const RatingsPosts = ({ post }) => {
   );
 };
 
-const PostAvatar = ({ profileData, onClick }) => {
+const PostAvatar = ({ profileData }) => {
   return (
-    <div className="post-avatar" onClick={onClick}>
+    <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>
       <img className="post-avatar-img" alt="" src={profileData?.image_url}></img>
       <p className="post-avatar-name">{profileData?.display_name}</p>
-    </div>
+    </Link>
   );
 };
