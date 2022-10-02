@@ -9,7 +9,7 @@ export const HomeScreen = () => {
   const [latestReviews, getLatestReviews] = useRailsStore((state) => [state.latestReviews, state.getLatestReviews]);
   const [recentlyListened, getRecentlyListened] = useRailsStore((state) => [state.recentlyListened, state.getRecentlyListened]);
   const [recentlyReleased, getRecentlyReleased] = useRailsStore((state) => [state.recentlyReleased, state.getRecentlyReleased]);
-  const [cookies, _setCookie, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
 
   useEffect(() => {
     try {

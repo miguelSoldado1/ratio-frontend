@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { getArtists } from "../../../../../scripts/scripts";
 import "./SearchItem.css";
@@ -18,7 +17,7 @@ export const SearchItem = ({ album, clearSearchBar }) => {
       <img src={image} alt="" />
       <div>
         <p className="search-album-name">
-          {name} ({moment(release_date).year()})
+          {name} ({new Date(release_date).getFullYear()})
         </p>
         <p className="search-album-artist">{getArtists(artist)}</p>
       </div>

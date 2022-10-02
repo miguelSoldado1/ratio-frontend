@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getAverageAlbumRating, getAlbum } from "../../api";
@@ -10,7 +9,7 @@ import "./ProfileRating.css";
 import { ProfileRatingPL } from "../../preloaders";
 
 export const ProfileRating = ({ props }) => {
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const [albumData, setAlbumData] = useState({});
   const [communityRating, setCommunityRating] = useState();
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ export const ProfileRating = ({ props }) => {
       }
     };
     fetchData();
-  }, [props.album_id, cookies, cookies.access_token]);
+  }, [props.album_id, cookies, cookies.access_token, removeCookie]);
 
   const handleAlbumClick = () => {
     navigate(`/album/${props.album_id}`);
@@ -42,7 +41,7 @@ export const ProfileRating = ({ props }) => {
             <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
             <p className="profile-rating-name">
               <span>{albumData.name}</span>
-              <span className="profile-rating-release"> ({moment(albumData.release_date).year()})</span>
+              <span className="profile-rating-release"> ({new Date(albumData.release_date).getFullYear()})</span>
             </p>
             <p className="profile-rating-artist">
               <img src={spotifyLogo} className="spotify-logo" alt="" />

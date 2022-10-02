@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { LandingPage, HomeScreen, AlbumDetails, ProfileScreen, NotFound } from "./screens";
 import { NavigationBar } from "./components";
 
-const urlSearchParams = new URLSearchParams(window.location.search);
+const urlSearchParams = new URLSearchParams(window?.location?.search);
 const access_token = urlSearchParams.get("access_token");
 const expires_in = urlSearchParams.get("expires_in");
 const redirect = urlSearchParams.get("redirect");
@@ -23,15 +23,14 @@ const App = () => {
   return (
     <>
       {cookies?.access_token ? (
-        <>
-          <NavigationBar />
-          <Routes>
+        <Routes>
+          <Route element={<NavigationBar />}>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/album/:albumId" element={<AlbumDetails />} />
             <Route path="/profile/:userId/:username" element={<ProfileScreen />} />
-            <Route element={<NotFound />} />
-          </Routes>
-        </>
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       ) : (
         <LandingPage />
       )}
