@@ -21,7 +21,7 @@ export const ProfileScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getUserPosts(userId, page, filterActive.query);
+      const result = await getUserPosts(userId, page, filterActive.query, NUMBER_OF_RATINGS);
       setRatings(page > 0 ? (oldArray) => [...oldArray, ...result?.data] : result?.data);
       if (page <= 0) setRatingsCount(result?.count);
     };
