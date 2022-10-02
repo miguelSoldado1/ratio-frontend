@@ -9,8 +9,10 @@ export const getAlbum = async (albumId, accessToken) => {
   return response.data;
 };
 
-export const getCommunityAlbumRating = async (album_id, page_number, order) => {
-  const response = await axios.get(`${BACK_END_URL}/getCommunityAlbumRating`, { params: { album_id, page_number, order } });
+export const getCommunityAlbumRating = async (album_id, page_number, order, page_size) => {
+  const response = await axios.get(`${BACK_END_URL}/getCommunityAlbumRating`, {
+    params: { album_id, page_number, order, page_size },
+  });
   return response.data;
 };
 
