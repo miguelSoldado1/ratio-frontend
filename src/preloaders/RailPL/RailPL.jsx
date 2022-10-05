@@ -5,7 +5,7 @@ export const RailPL = () => {
   return (
     <>
       <h1 className="grid-title">Loading...</h1>
-      <div className="preloader gradient" />
+      <div className="rail-preloader gradient" />
     </>
   );
 };

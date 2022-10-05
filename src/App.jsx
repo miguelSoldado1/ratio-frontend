@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { LandingPage, HomeScreen, AlbumDetails, ProfileScreen, NotFound } from "./screens";
+import { Footer } from "./components";
 import { NavigationBar } from "./components";
 
 const urlSearchParams = new URLSearchParams(window?.location?.search);
@@ -11,26 +12,35 @@ const redirect = urlSearchParams.get("redirect");
 
 const App = () => {
   const [cookies, setCookies] = useCookies();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
+  // DO NOT ADD NAVIGATE AS A DEPENDENCY, IT BREAKS THE PROFILE PAGE NAVIGATION
   useEffect(() => {
     if (access_token && expires_in) {
       setCookies("access_token", access_token, { maxAge: expires_in });
       navigate(redirect ?? "/");
     }
-  }, [setCookies]);
+  }, [redirect]);
 
   return (
     <>
       {cookies?.access_token ? (
-        <Routes>
-          <Route element={<NavigationBar />}>
-            <Route path="/" element={<HomeScreen />} />
-            <Route path="/album/:albumId" element={<AlbumDetails />} />
-            <Route path="/profile/:userId" element={<ProfileScreen />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <>
+          <Routes>
+            <Route
+              element={
+                <>
+                  <NavigationBar /> <Footer />
+                </>
+              }
+            >
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/album/:albumId" element={<AlbumDetails />} />
+              <Route path="/profile/:userId" element={<ProfileScreen />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </>
       ) : (
         <LandingPage />
       )}

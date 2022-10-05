@@ -29,7 +29,6 @@ export const HomeScreen = () => {
       <Rail content={latestReviews} />
       <Rail content={recentlyListened} />
       <Rail content={recentlyReleased} />
-      <div style={{ textAlign: "center", padding: "1em" }}>Copyright &copy; Ratio 2022 </div>
     </>
   );
 };

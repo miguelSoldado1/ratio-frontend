@@ -1,16 +1,16 @@
 @media only screen and (max-width: 768px) {
-  .preloader {
-    height: 8em;
+  .rail-preloader {
+    height: 9.5em;
   }
 }
 
 @media only screen and (min-width: 769px) {
-  .preloader {
-    height: 15em;
+  .rail-preloader {
+    height: 13.85em;
   }
 }
 
-.preloader {
+.rail-preloader {
   width: 100%;
   background-color: var(--background-item-color);
   cursor: pointer;
