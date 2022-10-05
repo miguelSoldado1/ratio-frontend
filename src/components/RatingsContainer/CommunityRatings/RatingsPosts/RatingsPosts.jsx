@@ -82,20 +82,20 @@ export const RatingsPosts = ({ post }) => {
               <HeartIcon />
               {likeCount === 1 ? <span>{likeCount} Like</span> : <span>{likeCount} Likes</span>}
             </div>
-            {userData.id === user_id ? (
+            {userData.id === user_id && (
               <div className="rating-posts-button" onClick={() => setShow(true)}>
                 <DeleteIcon />
                 <span>Delete</span>
               </div>
-            ) : null}
+            )}
           </div>
-          {overflow ? (
+          {overflow && (
             <Arrow
               id="rating-posts-arrow"
               className={`rating-posts-arrow${expanded ? " arrow-up" : " arrow-down"}`}
               onClick={() => setExpanded(!expanded)}
             />
-          ) : null}
+          )}
         </div>
       </li>
       <Modal title="Deleting rating" onSave={handleDelete} onClose={() => setShow(false)} show={show}>

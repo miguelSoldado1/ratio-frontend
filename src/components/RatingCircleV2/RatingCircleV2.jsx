@@ -8,7 +8,7 @@ export const RatingCircleV2 = ({ value, description }) => {
       <CircularProgressbarWithChildren value={value} maxValue={10} strokeWidth={11} styles={styles}>
         <div className="rating-circle-tag">
           <h1>{value >= 0 ? value : "-"}</h1>
-          {description ? <p>{description}</p> : null}
+          {description && <p>{description}</p>}
         </div>
       </CircularProgressbarWithChildren>
     </div>

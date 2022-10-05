@@ -26,7 +26,7 @@ export const RatingsContainer = ({ albumId }) => {
         <RatingCircleV2 value={personalRating} description={"Personal"} />
         <RatingCircleV2 value={communityRating} description={"Community"} />
       </div>
-      {personalRating < 0 ? <SubmitRatingV2 albumId={albumId} /> : null}
+      {personalRating < 0 && <SubmitRatingV2 albumId={albumId} />}
       {communityRating > 0 ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
     </div>
   );

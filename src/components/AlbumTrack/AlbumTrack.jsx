@@ -12,11 +12,11 @@ export const AlbumTrack = ({ props, index }) => {
             {props?.name}
           </a>
           <div className="album-track-artist">
-            {props?.explicit ? (
+            {props?.explicit && (
               <span className="explicit" title="Explicit">
                 E
               </span>
-            ) : null}
+            )}
             <span className="album-track-artist-names">{renderArtists(props?.artists)}</span>
           </div>
         </div>

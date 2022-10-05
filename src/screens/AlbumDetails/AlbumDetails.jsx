@@ -41,7 +41,7 @@ export const AlbumDetails = () => {
           <RatingsContainer albumId={albumId} />
         </div>
       </div>
-      {album?.relatedAlbums ? <Rail content={album.relatedAlbums} /> : null}
+      {album?.relatedAlbums && <Rail content={album.relatedAlbums} />}
     </>
   );
 };
