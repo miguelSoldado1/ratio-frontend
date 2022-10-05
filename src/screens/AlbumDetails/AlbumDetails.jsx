@@ -14,9 +14,7 @@ export const AlbumDetails = () => {
   useEffect(() => {
     const accessToken = cookies.access_token;
     getAlbum(albumId, accessToken)
-      .then(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      })
+      .then(() => window.scrollTo({ top: 0, behavior: "smooth" }))
       .catch((error) => {
         // no access token sent
         if (error?.response?.status === 401) {
@@ -32,7 +30,11 @@ export const AlbumDetails = () => {
         <div className="album-details-column left">
           <AlbumHeader />
           <ol className="album-details-tracks">
-            {album?.data?.tracks ? album?.data?.tracks?.map((track, index) => <AlbumTrack key={track.id} props={track} index={index} />) : <AlbumTracksPL />}
+            {album?.data?.tracks ? (
+              album?.data?.tracks?.map((track, index) => <AlbumTrack key={track.id} props={track} index={index} />)
+            ) : (
+              <AlbumTracksPL />
+            )}
           </ol>
         </div>
         <div className="album-details-column right">
