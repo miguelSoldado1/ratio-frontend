@@ -1,28 +1,22 @@
 import React from "react";
 
-export const handleDate = (date) => {
-  const minute = 60 * 1000;
-  const hour = 60 * minute;
-  const day = 24 * hour;
-  const month = 30 * day;
-  const postDate = new Date(date);
-  const today = new Date();
-  const diff = today - new Date(date);
-  const formatter = new Intl.RelativeTimeFormat("EN");
+const intervals = [
+  { label: "month", seconds: 2592000 },
+  { label: "day", seconds: 86400 },
+  { label: "hour", seconds: 3600 },
+  { label: "minute", seconds: 60 },
+  { label: "second", seconds: 1 },
+];
 
-  if (today - postDate < minute) {
-    return formatter.format(Math.round(-diff / 1000), "seconds");
+export const handleDate = (dateString) => {
+  const date = new Date(dateString);
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+  const interval = intervals.find((i) => i.seconds <= seconds);
+  if (interval.label === intervals[0].label) {
+    return date.toLocaleDateString("EN", { year: "numeric", month: "long", day: "numeric" });
   }
-  if (today - postDate < hour) {
-    return formatter.format(Math.round(-diff / minute), "minutes");
-  }
-  if (today - postDate < day) {
-    return formatter.format(Math.round(-diff / hour), "hours");
-  }
-  if (today - postDate < month) {
-    return formatter.format(Math.round(-diff / day), "days");
-  }
-  return postDate.toLocaleDateString("EN", { year: "numeric", month: "long", day: "numeric" });
+  const count = Math.floor(seconds / interval.seconds);
+  return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
 };
 
 export const getArtists = (artists) => {

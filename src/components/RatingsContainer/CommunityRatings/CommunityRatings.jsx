@@ -16,7 +16,7 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (albumId && filterActive?.query) {
-        setRatings(await getCommunityAlbumRating(albumId, page, filterActive.query));
+        setRatings(await getCommunityAlbumRating(albumId, page, filterActive.query, NUMBER_OF_ITEMS_SHOWN));
       }
     };
     fetchData();
