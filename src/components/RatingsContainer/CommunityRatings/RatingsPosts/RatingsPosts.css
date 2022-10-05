@@ -114,6 +114,7 @@
   border-radius: 1em;
   padding: 0.1em 0.75em 0.1em 0.4em;
   height: 2em;
+  text-decoration: none !important;
 }
 
 .post-avatar-img {
@@ -123,4 +124,5 @@
 
 .post-avatar-name {
   margin-left: 0.5em;
+  text-decoration: none;
 }
