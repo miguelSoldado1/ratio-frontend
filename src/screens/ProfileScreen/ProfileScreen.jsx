@@ -1,40 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { getUserPosts } from "../../api/profileScreen";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { ProfileRating, Button, DatabaseFilters } from "../../components";
-import { ProfileScreenPL } from "../../preloaders";
+import { getUsersProfile, getUserPosts } from "../../api";
 import "./ProfileScreen.css";
 
+const NUMBER_OF_RATINGS = 8;
+
 export const ProfileScreen = () => {
-  const { userId, username } = useParams();
-  const [ratings, setRatings] = useState();
-  const [ratingsCount, setRatingsCount] = useState();
-  const [page, setPage] = useState(0);
-  const [filterActive, setFilterActive] = useState();
+  const location = useLocation();
+  const { userId } = useParams();
+  const [cookies, , removeCookie] = useCookies();
+  const [data, setData] = useState({ rows: [], totalRows: 0, page: 0, loading: true });
+  const [filterActive, setFilterActive] = useState({ tag: undefined, query: undefined });
+  const [displayName, setDisplayName] = useState(undefined);
+
+  const updateData = (key, value) => setData((prev) => ({ ...prev, [key]: value }));
 
   useEffect(() => {
-    setPage(0);
-    setRatings([]);
-  }, [username]);
+    const display_name = location?.state?.display_name;
+    if (display_name) setDisplayName(display_name);
+    else {
+      const fetchUserData = async () => {
+        const result = await getUsersProfile(userId, cookies?.access_token);
+        setDisplayName(result?.display_name);
+      };
+      fetchUserData();
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return () => setData({ rows: [], totalRows: 0, page: 0, loading: true });
+  }, [cookies?.access_token, location?.state?.display_name, userId]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getUserPosts(userId, page, filterActive.query);
-      setRatings(page > 0 ? (oldArray) => [...oldArray, ...result?.data] : result?.data);
-      if (page <= 0) setRatingsCount(result?.count);
+      try {
+        const result = await getUserPosts(userId, data?.page, filterActive.query, NUMBER_OF_RATINGS);
+        if (data?.page > 0) setData((prev) => ({ ...prev, rows: [...prev?.rows, ...result?.data], totalRows: result?.count }));
+        else setData((prev) => ({ ...prev, rows: result?.data, totalRows: result?.count }));
+        updateData("loading", false);
+      } catch (error) {
+        removeCookie("access_token", { path: "/" });
+      }
     };
+    if (filterActive?.query) fetchData();
+  }, [data?.page, filterActive.query, removeCookie, userId]);
 
-    if (filterActive?.query) {
-      fetchData();
-    }
-  }, [userId, page, filterActive]);
+  if (!data?.loading && data?.rows?.length <= 0) {
+    return (
+      <div className="profile-screen">
+        <h1 className="profile-screen-title">User not found</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-screen">
-      <h1 className="profile-screen-title">{`${username}${username.slice(-1) !== "s" ? "'s" : "'"}`} Ratings</h1>
-      <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={setPage} numberOfRatings={ratings?.length} />
-      <ol>{ratings?.length > 0 ? ratings?.map((rating) => <ProfileRating props={rating} key={rating.id} />) : ratingsCount <= 0 && <ProfileScreenPL />}</ol>
-      {ratingsCount > 10 * (page + 1) ? <Button className="load-more-button" onPress={() => setPage(page + 1)} title="Load more" /> : null}
+      {displayName && <h1 className="profile-screen-title">{`${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`} Ratings</h1>}
+      <DatabaseFilters
+        setFilterActive={setFilterActive}
+        filterActive={filterActive}
+        setPage={(value) => updateData("page", value)}
+        numberOfRatings={data?.rows?.length}
+      />
+      <ol>{data?.rows?.length > 0 && data.rows.map((rating) => <ProfileRating props={rating} key={rating?._id} />)}</ol>
+      {data?.totalRows > NUMBER_OF_RATINGS * (data?.page + 1) && (
+        <Button className="load-more-button" onPress={() => updateData("page", data?.page + 1)} title="Load more" />
+      )}
     </div>
   );
 };
