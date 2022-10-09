@@ -14,7 +14,8 @@ export const SearchBar = () => {
     const delayDebounceFn = setTimeout(() => {
       if (searchQuery !== "" && cookies && cookies.access_token)
         axios
-          .get(`${process.env.REACT_APP_BACK_END_URL}/navigationBar/searchForAlbum?search_query=${searchQuery}`, {
+          .get(`${process.env.REACT_APP_BACK_END_URL}/navigationBar/searchForAlbum`, {
+            params: { search_query: searchQuery },
             headers: { Authorization: "Bearer " + cookies.access_token },
           })
           .then((res) => setSearchResult(res.data));
@@ -36,7 +37,14 @@ export const SearchBar = () => {
   return (
     <div className="search">
       <SearchIcon className="search-icon" />
-      <input type="search" className="search-input" autoComplete="off" placeholder="Search for Album..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+      <input
+        type="search"
+        className="search-input"
+        autoComplete="off"
+        placeholder="Search for Album..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       {searchResult.length > 0 && <SearchResult searchResult={searchResult} clearSearchBar={clearSearchBar} />}
     </div>
   );

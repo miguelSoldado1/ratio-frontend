@@ -2,8 +2,17 @@ import axios from "axios";
 
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 
-export const getAlbum = async (albumId, accessToken) => {
-  const response = await axios.get(`${BACK_END_URL}/getAlbum?album_id=${albumId}`, {
+export const getAlbum = async (album_id, accessToken) => {
+  const response = await axios.get(`${BACK_END_URL}/getAlbum`, {
+    params: { album_id },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  return response.data;
+};
+
+export const getRelatedAlbums = async (album_id, artist_id, accessToken) => {
+  const response = await axios.get(`${BACK_END_URL}/getRelatedAlbums`, {
+    params: { artist_id, album_id },
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
@@ -42,11 +51,7 @@ export const deletePost = async (ratingId, accessToken) => {
 };
 
 export const handleLikes = (ratingId, accessToken, liked) => {
-  axios.patch(
-    `${BACK_END_URL}/${ratingId}/handleLikes`,
-    { liked: liked },
-    { headers: { Authorization: `Bearer ${accessToken}` } }
-  );
+  axios.patch(`${BACK_END_URL}/${ratingId}/handleLikes`, { liked: liked }, { headers: { Authorization: `Bearer ${accessToken}` } });
 };
 
 export const createPost = async (data, accessToken) => {

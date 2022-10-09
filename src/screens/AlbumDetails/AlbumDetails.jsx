@@ -1,47 +1,61 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { RatingsContainer, AlbumHeader, AlbumTrack, Rail } from "../../components";
-import { AlbumTracksPL } from "../../preloaders";
-import { useAlbumStore } from "../../stores";
+import { AlbumDetailsPL } from "../../preloaders";
 import "./AlbumDetails.css";
+import { getAlbum, getRelatedAlbums } from "../../api";
 
 export const AlbumDetails = () => {
   const [cookies, , removeCookie] = useCookies();
+  const navigate = useNavigate();
   const { albumId } = useParams();
-  const [album, getAlbum, clearData] = useAlbumStore((state) => [state.album, state.getAlbum, state.clearData]);
+  const [data, setData] = useState({ album: {}, relatedAlbums: { data: [] }, loading: true });
+
+  const updateData = (key, value) => setData((prev) => ({ ...prev, [key]: value }));
 
   useEffect(() => {
-    const accessToken = cookies.access_token;
-    getAlbum(albumId, accessToken)
-      .then(() => window.scrollTo({ top: 0, behavior: "smooth" }))
-      .catch((error) => {
-        // no access token sent
-        if (error?.response?.status === 401) {
-          removeCookie("access_token", { path: "/" });
-        }
-      });
-    return clearData();
-  }, [albumId, cookies, cookies.access_token, getAlbum, clearData, removeCookie]);
+    const accessToken = cookies?.access_token;
+    const fetchData = async () => {
+      try {
+        const album = await getAlbum(albumId, accessToken);
+        const relatedAlbums = await getRelatedAlbums(albumId, album?.artist_id, accessToken);
+        updateData("album", album);
+        setData((prev) => ({ ...prev, relatedAlbums: { data: relatedAlbums } }));
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (error) {
+        navigate("/");
+      }
+      updateData("loading", false);
+    };
+
+    if (accessToken) {
+      fetchData();
+    }
+
+    return () => setData({ album: {}, relatedAlbums: { data: [] }, loading: true });
+  }, [albumId, cookies?.access_token, navigate, removeCookie]);
+
+  if (data.loading) {
+    return <AlbumDetailsPL />;
+  }
 
   return (
     <>
       <div className="album-details-container">
         <div className="album-details-column left">
-          <AlbumHeader />
+          <AlbumHeader data={data?.album} />
           <ol className="album-details-tracks">
-            {album?.data?.tracks ? (
-              album?.data?.tracks?.map((track, index) => <AlbumTrack key={track.id} props={track} index={index} />)
-            ) : (
-              <AlbumTracksPL />
-            )}
+            {data?.album?.tracks?.map((track, index) => (
+              <AlbumTrack key={track.id} props={track} index={index} />
+            ))}
           </ol>
         </div>
         <div className="album-details-column right">
           <RatingsContainer albumId={albumId} />
         </div>
       </div>
-      {album?.relatedAlbums && <Rail content={album.relatedAlbums} />}
+      {data?.relatedAlbums?.data?.length > 0 && <Rail content={data?.relatedAlbums} />}
     </>
   );
 };

@@ -1,12 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useAlbumStore } from "../../stores";
 import { renderArtists } from "../../scripts/scripts";
 import spotifyLogo from "../../icons/spotify-logo.png";
-import { AlbumHeaderPL } from "../../preloaders";
 import "./AlbumHeader.css";
 
-export const AlbumHeader = () => {
-  const { data } = useAlbumStore((state) => state.album);
+export const AlbumHeader = ({ data }) => {
   const { albumId } = useParams();
 
   if (data?.id === albumId) {
@@ -28,7 +25,6 @@ export const AlbumHeader = () => {
       </div>
     );
   }
-  return <AlbumHeaderPL />;
 };
 
 const handleDatePrecision = (release_date, release_date_precision) => {
