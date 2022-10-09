@@ -1,5 +1,5 @@
 import "./AlbumHeaderPL.css";
-import "../gradient.css";
+import "../../gradient.css";
 
 export const AlbumHeaderPL = () => {
   return (

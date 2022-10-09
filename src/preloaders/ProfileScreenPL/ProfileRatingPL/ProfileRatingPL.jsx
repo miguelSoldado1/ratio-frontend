@@ -1,5 +1,5 @@
 import "./ProfileRatingPL.css";
-import "../gradient.css";
+import "../../gradient.css";
 
 export const ProfileRatingPL = () => {
   return (

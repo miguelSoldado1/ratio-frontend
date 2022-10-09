@@ -3,11 +3,15 @@ import "./ProfileScreenPL.css";
 
 export const ProfileScreenPL = () => {
   return (
-    <div>
-      <span className="profile-rating-preloader-text">This user has no ratings yet...</span>
-      <ProfileRatingPL />
-      <ProfileRatingPL />
-      <ProfileRatingPL />
+    <div className="profile-screen">
+      <div style={{ height: "2.29em" }} />
+      <div className="filters" style={{ height: "3.17em" }} />
+      <ol>
+        <ProfileRatingPL />
+        <ProfileRatingPL />
+        <ProfileRatingPL />
+        <ProfileRatingPL />
+      </ol>
     </div>
   );
 };

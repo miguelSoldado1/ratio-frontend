@@ -28,7 +28,11 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
   return (
     <div className="filters">
       {Object.keys(filters).map((filter, index) => (
-        <p key={index} className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"} ${numberOfRatings <= 1 ? "single" : null}`} onClick={handleFilters}>
+        <p
+          key={index}
+          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"}${numberOfRatings <= 1 ? "single" : ""}`}
+          onClick={handleFilters}
+        >
           {filters[filter].tag}
         </p>
       ))}

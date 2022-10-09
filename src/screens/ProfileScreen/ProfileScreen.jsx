@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { ProfileRating, Button, DatabaseFilters } from "../../components";
 import { getUsersProfile, getUserPosts } from "../../api";
+import { ProfileRating, Button, DatabaseFilters } from "../../components";
+import { ProfileRatingPL, ProfileScreenPL } from "../../preloaders";
 import "./ProfileScreen.css";
 
 const NUMBER_OF_RATINGS = 8;
@@ -10,6 +11,7 @@ const NUMBER_OF_RATINGS = 8;
 export const ProfileScreen = () => {
   const location = useLocation();
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [cookies, , removeCookie] = useCookies();
   const [data, setData] = useState({ rows: [], totalRows: 0, page: 0, loading: true });
   const [filterActive, setFilterActive] = useState({ tag: undefined, query: undefined });
@@ -36,23 +38,20 @@ export const ProfileScreen = () => {
     const fetchData = async () => {
       try {
         const result = await getUserPosts(userId, data?.page, filterActive.query, NUMBER_OF_RATINGS);
-        if (data?.page > 0) setData((prev) => ({ ...prev, rows: [...prev?.rows, ...result?.data], totalRows: result?.count }));
-        else setData((prev) => ({ ...prev, rows: result?.data, totalRows: result?.count }));
+        if (data?.page > 0) {
+          setData((prev) => ({ ...prev, rows: [...prev?.rows, ...result?.data], totalRows: result?.count }));
+        } else {
+          setData((prev) => ({ ...prev, rows: result?.data, totalRows: result?.count }));
+        }
         updateData("loading", false);
       } catch (error) {
-        removeCookie("access_token", { path: "/" });
+        navigate("/");
       }
     };
-    if (filterActive?.query) fetchData();
-  }, [data?.page, filterActive.query, removeCookie, userId]);
+    fetchData();
+  }, [data?.page, filterActive.query, navigate, removeCookie, userId]);
 
-  if (!data?.loading && data?.rows?.length <= 0) {
-    return (
-      <div className="profile-screen">
-        <h1 className="profile-screen-title">User not found</h1>
-      </div>
-    );
-  }
+  if (data.loading) return <ProfileScreenPL />;
 
   return (
     <div className="profile-screen">
