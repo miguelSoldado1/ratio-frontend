@@ -27,13 +27,7 @@ const App = () => {
       {cookies?.access_token ? (
         <>
           <Routes>
-            <Route
-              element={
-                <>
-                  <NavigationBar /> <Footer />
-                </>
-              }
-            >
+            <Route element={mainRouteElement}>
               <Route path="/" element={<HomeScreen />} />
               <Route path="/album/:albumId" element={<AlbumDetails />} />
               <Route path="/profile/:userId" element={<ProfileScreen />} />
@@ -49,3 +43,10 @@ const App = () => {
 };
 
 export default App;
+
+const mainRouteElement = (
+  <>
+    <NavigationBar />
+    <Footer />
+  </>
+);
