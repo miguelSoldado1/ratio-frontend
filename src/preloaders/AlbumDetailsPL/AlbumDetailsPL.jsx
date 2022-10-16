@@ -1,5 +1,5 @@
 import React from "react";
-import { AlbumHeaderPL, AlbumTracksPL, RailPL } from "../";
+import { AlbumHeaderPL, AlbumTracksPL, RailPL, RatingsContainerPL } from "../";
 
 export const AlbumDetailsPL = () => {
   return (
@@ -9,7 +9,9 @@ export const AlbumDetailsPL = () => {
           <AlbumHeaderPL />
           <AlbumTracksPL />
         </div>
-        <div className="album-details-column right">{/* Missing ratings container preloader */}</div>
+        <div className="album-details-column right">
+          <RatingsContainerPL />
+        </div>
       </div>
       <RailPL />
     </>

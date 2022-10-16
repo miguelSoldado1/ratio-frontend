@@ -1,0 +1,7 @@
+.ratings-loader {
+  margin: 2em;
+  border-radius: 1em;
+  height: 20em;
+  padding: 1em;
+  background: linear-gradient(to bottom, var(--background-item-color) 30%, var(--background-color) 100%);
+}
