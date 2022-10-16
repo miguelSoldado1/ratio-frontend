@@ -24,11 +24,11 @@ export const LandingPage = () => {
             GitHub
           </a>
           |
-          <a href="" target="_blank" rel="noreferrer">
+          <a href="_" target="_blank" rel="noreferrer">
             Paypal
           </a>
           |
-          <a href="" target="_blank" rel="noreferrer">
+          <a href="_" target="_blank" rel="noreferrer">
             Contact us
           </a>
         </div>
