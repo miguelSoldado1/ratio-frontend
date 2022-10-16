@@ -1,19 +1,9 @@
-@media only screen and (max-width: 768px) {
-  .search {
-    max-width: 18em;
-  }
-}
-
-@media only screen and (min-width: 769px) {
-  .search {
-    width: 36em;
-  }
-}
-
 .search {
   display: flex;
   position: relative;
   align-items: center;
+  width: 100%;
+  max-width: 36em;
 }
 
 .search-icon {
@@ -31,5 +21,4 @@
   font-size: 1em;
   border-radius: 2em;
   width: 100%;
-  -webkit-appearance: none;
 }

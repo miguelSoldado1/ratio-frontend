@@ -32,7 +32,15 @@ export const ProfileRating = ({ props }) => {
     navigate(`/album/${props.album_id}`);
   };
 
-  if (props && props?.createdAt && props?.rating >= 0 && albumData?.image && albumData?.name && albumData?.release_date && albumData?.artist && communityRating >= 0)
+  if (
+    props?.createdAt &&
+    props?.rating >= 0 &&
+    albumData?.image &&
+    albumData?.name &&
+    albumData?.release_date &&
+    albumData?.artist &&
+    communityRating >= 0
+  )
     return (
       <li className="profile-rating" onClick={handleAlbumClick}>
         <div className="profile-rating-item">
@@ -41,7 +49,7 @@ export const ProfileRating = ({ props }) => {
             <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
             <p className="profile-rating-name">
               <span>{albumData.name}</span>
-              <span className="profile-rating-release"> ({new Date(albumData.release_date).getFullYear()})</span>
+              <span className="profile-rating-release"></span>
             </p>
             <p className="profile-rating-artist">
               <img src={spotifyLogo} className="spotify-logo" alt="" />

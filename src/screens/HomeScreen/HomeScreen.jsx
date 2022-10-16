@@ -7,8 +7,14 @@ import "./HomeScreen.css";
 export const HomeScreen = () => {
   const [myTopArtists, getMyTopArtists] = useRailsStore((state) => [state.myTopArtists, state.getMyTopArtists]);
   const [latestReviews, getLatestReviews] = useRailsStore((state) => [state.latestReviews, state.getLatestReviews]);
-  const [recentlyListened, getRecentlyListened] = useRailsStore((state) => [state.recentlyListened, state.getRecentlyListened]);
-  const [recentlyReleased, getRecentlyReleased] = useRailsStore((state) => [state.recentlyReleased, state.getRecentlyReleased]);
+  const [recentlyListened, getRecentlyListened] = useRailsStore((state) => [
+    state.recentlyListened,
+    state.getRecentlyListened,
+  ]);
+  const [recentlyReleased, getRecentlyReleased] = useRailsStore((state) => [
+    state.recentlyReleased,
+    state.getRecentlyReleased,
+  ]);
   const [cookies, , removeCookie] = useCookies();
 
   useEffect(() => {

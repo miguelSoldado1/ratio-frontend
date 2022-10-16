@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getUsersProfile, getUserPosts } from "../../api";
 import { ProfileRating, Button, DatabaseFilters } from "../../components";
-import { ProfileRatingPL, ProfileScreenPL } from "../../preloaders";
+import { ProfileScreenPL } from "../../preloaders";
 import "./ProfileScreen.css";
 
 const NUMBER_OF_RATINGS = 8;
@@ -55,7 +55,9 @@ export const ProfileScreen = () => {
 
   return (
     <div className="profile-screen">
-      {displayName && <h1 className="profile-screen-title">{`${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`} Ratings</h1>}
+      {displayName && (
+        <h1 className="profile-screen-title">{`${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`} Ratings</h1>
+      )}
       <DatabaseFilters
         setFilterActive={setFilterActive}
         filterActive={filterActive}

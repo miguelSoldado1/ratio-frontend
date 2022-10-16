@@ -16,9 +16,7 @@ export const Container = ({ props }) => {
       {props && props.artist && props.image && props.name && props.release_date && (
         <li className="container" onClick={handleAlbumClick}>
           <img className="container-image" src={props.image} alt="" />
-          <p className="container-album-name">
-            {props.name} ({new Date(props.release_date).getFullYear()})
-          </p>
+          <p className="container-album-name">{props.name}</p>
           <p className="container-artist-name">
             <img src={spotifyLogo} className="spotify-logo" alt="" />
             {getArtists(props.artist)}

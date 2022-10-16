@@ -8,14 +8,14 @@ import "./Rail.css";
 export const Rail = ({ content }) => {
   if (content?.data?.length > 0)
     return (
-      <>
+      <div className="grid-container">
         <h1 className="grid-title">{content.description}</h1>
         <ul className="grid">
           {content.data?.map((item, index) => (
             <Container props={item} key={index} />
           ))}
         </ul>
-      </>
+      </div>
     );
   if (!content?.error) return <RailPL />;
   return null;

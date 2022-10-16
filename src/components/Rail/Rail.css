@@ -26,6 +26,10 @@
   }
 }
 
+.grid-container {
+  margin: 1em;
+}
+
 .grid {
   /* Calculated values. */
   --gap-count: calc(var(--grid-column-count) - 1);
@@ -51,5 +55,5 @@
 .grid-title {
   color: white;
   font-family: Helvetica;
-  margin: 2vh 2vw;
+  margin: 0.5em;
 }
