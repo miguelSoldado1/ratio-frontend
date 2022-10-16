@@ -25,6 +25,7 @@ export const AlbumHeader = ({ data }) => {
       </div>
     );
   }
+  return null;
 };
 
 const handleDatePrecision = (release_date, release_date_precision) => {
