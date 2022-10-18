@@ -2,6 +2,10 @@
   .landing-page-outer {
     background-image: url("../../icons/animated-background-vertical.svg");
   }
+
+  .custom-button.landing {
+    font-size: 1em;
+  }
 }
 
 @media only screen and (min-width: 769px) {
@@ -23,6 +27,8 @@
   margin-inline: 2em;
   box-shadow: 0px 6px 46px 3px black;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .landing-page-text {
@@ -31,9 +37,8 @@
 
 .custom-button.landing {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.35em;
+  gap: 0.25em;
 }
 
 .landing-page-footer {
@@ -41,6 +46,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1em;
-  margin-block: 2em 1em;
+  gap: 0.75em;
+  margin-block: 2em;
 }

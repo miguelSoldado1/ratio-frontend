@@ -1,6 +1,6 @@
-@media only screen and (max-width: 768px) {
+/* For extremely small screen devices (595px and below) */
+@media only screen and (max-width: 595px) {
   .grid {
-    --grid-layout-gap: 1.5vw;
     --grid-column-count: 3;
     --grid-item--max-width: calc((84% - var(--total-gap-width)) / var(--grid-column-count));
   }
@@ -10,10 +10,38 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+/* Small screen devices (600px and above) */
+@media only screen and (min-width: 596px) {
   .grid {
-    --grid-layout-gap: 1.5vw;
-    --grid-column-count: 7;
+    --grid-column-count: 5;
+    --grid-item--max-width: calc((90% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.4em;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .grid {
+    --grid-column-count: 6;
+    --grid-item--max-width: calc((92% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.5em;
+  }
+
+  .grid:hover::-webkit-scrollbar-thumb {
+    background-color: var(--accent-text-color) !important;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .grid {
+    --grid-column-count: 8;
     --grid-item--max-width: calc((94% - var(--total-gap-width)) / var(--grid-column-count));
   }
 
@@ -26,11 +54,8 @@
   }
 }
 
-.grid-container {
-  margin: 1em;
-}
-
 .grid {
+  --grid-layout-gap: 1.5vw;
   /* Calculated values. */
   --gap-count: calc(var(--grid-column-count) - 1);
   --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
@@ -56,4 +81,7 @@
   color: white;
   font-family: Helvetica;
   margin: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
