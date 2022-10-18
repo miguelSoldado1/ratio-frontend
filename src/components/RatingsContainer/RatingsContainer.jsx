@@ -7,8 +7,8 @@ import { RatingsContainerPL } from "../../preloaders";
 
 export const RatingsContainer = ({ albumId }) => {
   const id = useUserDataStore((state) => state.userData.id);
-  const [communityRating, setCommunityRating] = useState();
-  const [personalRating, setPersonalRating] = useState();
+  const [communityRating, setCommunityRating] = useState(-1);
+  const [personalRating, setPersonalRating] = useState(-1);
   const [numOfRatings, setNumOfRatings] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -21,24 +21,25 @@ export const RatingsContainer = ({ albumId }) => {
     };
     fetchData().then(() => setLoading(false));
     return () => {
-      setCommunityRating();
-      setPersonalRating();
+      setCommunityRating(-1);
+      setPersonalRating(-1);
       setNumOfRatings(0);
       setLoading(true);
     };
   }, []);
 
-  if (!loading) {
-    return (
-      <div className="ratings-container">
-        <div className="ratings-circles">
-          <RatingCircleV2 value={personalRating} description={"Personal"} />
-          <RatingCircleV2 value={communityRating} description={"Community"} />
-        </div>
-        {personalRating < 0 && <SubmitRatingV2 albumId={albumId} />}
-        {communityRating > 0 ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
+  return (
+    <div className="ratings-container">
+      <div className="ratings-circles">
+        <RatingCircleV2 value={personalRating} description={"Personal"} />
+        <RatingCircleV2 value={communityRating} description={"Community"} />
       </div>
-    );
-  }
-  return <RatingsContainerPL />;
+      {personalRating < 0 && !loading && <SubmitRatingV2 albumId={albumId} />}
+      {communityRating > 0 && !loading ? (
+        <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} />
+      ) : (
+        <NoRatingsContainer />
+      )}
+    </div>
+  );
 };
