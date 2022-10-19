@@ -37,7 +37,7 @@ export const RatingsContainer = ({ albumId }) => {
       {communityRating > 0 && !loading ? (
         <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} />
       ) : (
-        <NoRatingsContainer />
+        !loading && <NoRatingsContainer />
       )}
     </div>
   );
