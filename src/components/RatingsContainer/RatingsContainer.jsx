@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUserDataStore } from "../../stores";
 import { getMyAlbumRating, getAverageAlbumRating } from "../../api/albumDetails";
 import { SubmitRatingV2, CommunityRatings, NoRatingsContainer, RatingCircleV2 } from "../";
+import { RatingsContainerPL } from "../../preloaders";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
@@ -27,18 +28,17 @@ export const RatingsContainer = ({ albumId }) => {
     };
   }, []);
 
-  return (
-    <div className="ratings-container">
-      <div className="ratings-circles">
-        <RatingCircleV2 value={personalRating} description={"Personal"} />
-        <RatingCircleV2 value={communityRating} description={"Community"} />
+  if (!loading) {
+    return (
+      <div className="ratings-container">
+        <div className="ratings-circles">
+          <RatingCircleV2 value={personalRating} description={"Personal"} />
+          <RatingCircleV2 value={communityRating} description={"Community"} />
+        </div>
+        {personalRating < 0 && <SubmitRatingV2 albumId={albumId} />}
+        {communityRating > 0 ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
       </div>
-      {personalRating < 0 && !loading && <SubmitRatingV2 albumId={albumId} />}
-      {communityRating > 0 && !loading ? (
-        <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} />
-      ) : (
-        !loading && <NoRatingsContainer />
-      )}
-    </div>
-  );
+    );
+  }
+  return <RatingsContainerPL />;
 };
