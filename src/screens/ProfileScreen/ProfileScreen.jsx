@@ -66,7 +66,7 @@ export const ProfileScreen = () => {
       />
       <ol>{data?.rows?.length > 0 && data.rows.map((rating) => <ProfileRating props={rating} key={rating?._id} />)}</ol>
       {data?.totalRows > NUMBER_OF_RATINGS * (data?.page + 1) && (
-        <Button className="load-more-button" onPress={() => updateData("page", data?.page + 1)} title="Load more" />
+        <Button onClick={() => updateData("page", data?.page + 1)}>Load more</Button>
       )}
     </div>
   );

@@ -1,17 +1,19 @@
 .custom-button {
-  background-color: var(--button-color);
-  border: none;
-  color: white;
-  padding: 0.2em 1em;
-  text-decoration: none;
-  font-size: 1.3em;
-  border-radius: 0.5em;
-  align-self: center;
+  background: var(--button-color);
+  color: var(--button-text-color);
+  font-size: 1.2em;
+  padding: 0.5em 2em;
+  border-radius: 10000px;
+  border: 0;
+  min-width: 5em;
+  /* margin-inline: 1em; */
   cursor: pointer;
-  margin: 1em;
+  box-shadow: 0 0.5em 1em 0 var(--hover-shadow-color);
+  transition: background-color 200ms linear;
+  transition: box-shadow 200ms linear;
 }
 
 .custom-button:hover {
-  background-color: var(--button-hover-color);
-  text-decoration: none;
+  background: var(--button-hover-color);
+  box-shadow: 0 0.25em 0.5em 0 var(--hover-shadow-color);
 }

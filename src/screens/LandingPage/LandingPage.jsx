@@ -1,38 +1,31 @@
 import React from "react";
 import { ReactComponent as RatioLogo } from "../../icons/ratio-logo.svg";
+import { Button } from "../../components";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./LandingPage.css";
 
 const LOGIN_URL = `${process.env.REACT_APP_BACK_END_URL}/login?pathname=${window.location.pathname}`;
 const HEADER_TEXT = "Welcome to Ratio!";
-const GET_STARTED_TEXT = "Get started by logging into your Spotify account!";
 
 export const LandingPage = () => {
   return (
     <div className="landing-page-outer">
-      <div className="landing-page-inner">
-        <div className="landing-page-header">
-          <RatioLogo />
-          <h1>{HEADER_TEXT}</h1>
+      <div className="login-container">
+        <RatioLogo />
+        <h1 className="login-header-text">{HEADER_TEXT}</h1>
+        <span className="login-content-text">
+          Rate your favourite albums <br /> and discover new ones!
+        </span>
+        <Button>
+          <a className="login-button" href={LOGIN_URL}>
+            Login to Spotify
+            <img className="spotify-logo" src={spotifyLogo} alt="spotify" />
+          </a>
+        </Button>
+        <div className="login-footer">
+          <a href="/">GitHub</a>|<a href="/">PayPal</a>|<a href="/">Contact us</a>
         </div>
-        <span className="landing-page-text">{GET_STARTED_TEXT}</span>
-        <a className="custom-button landing" href={LOGIN_URL}>
-          Log in to Spotify <img src={spotifyLogo} alt="spotify" style={{ width: ".8em", height: ".8em" }} />
-        </a>
-        <div className="landing-page-footer">
-          <a href="https://github.com/miguelSoldado1" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          |
-          <a href="_" target="_blank" rel="noreferrer">
-            Paypal
-          </a>
-          |
-          <a href="_" target="_blank" rel="noreferrer">
-            Contact us
-          </a>
-        </div>
-        <span>Copyright &copy; Ratio 2022</span>
+        <span className="login-copyright">Copyright &copy; Ratio 2022</span>
       </div>
     </div>
   );

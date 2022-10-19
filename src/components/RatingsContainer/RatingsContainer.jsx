@@ -3,7 +3,6 @@ import { useUserDataStore } from "../../stores";
 import { getMyAlbumRating, getAverageAlbumRating } from "../../api/albumDetails";
 import { SubmitRatingV2, CommunityRatings, NoRatingsContainer, RatingCircleV2 } from "../";
 import "./RatingsContainer.css";
-import { RatingsContainerPL } from "../../preloaders";
 
 export const RatingsContainer = ({ albumId }) => {
   const id = useUserDataStore((state) => state.userData.id);

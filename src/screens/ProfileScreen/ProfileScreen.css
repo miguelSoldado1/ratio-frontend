@@ -15,6 +15,11 @@
   flex-direction: column;
 }
 
+.profile-screen > .custom-button {
+  align-self: center;
+  padding-inline: 2.5em;
+}
+
 .profile-screen-title {
   align-self: center;
 }

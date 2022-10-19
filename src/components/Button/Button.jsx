@@ -1,10 +1,9 @@
-import React from "react";
 import "./Button.css";
 
-export const Button = ({ title, onPress }) => {
+export const Button = ({ children, onClick }) => {
   return (
-    <button className="custom-button" onClick={onPress}>
-      {title}
+    <button className="custom-button" onClick={onClick}>
+      {children}
     </button>
   );
 };

@@ -45,7 +45,7 @@
 }
 
 .submit {
-  width: 6em;
+  padding: 0.25em;
 }
 
 .submit-rating-cirlce > div > div:nth-child(2) > svg > svg {
