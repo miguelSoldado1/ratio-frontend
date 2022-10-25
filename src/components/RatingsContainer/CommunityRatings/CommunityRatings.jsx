@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getCommunityAlbumRating } from "../../../api/albumDetails";
-import { ReactComponent as RightArrow } from "../../../icons/right-arrow.svg";
-import { ReactComponent as LeftArrow } from "../../../icons/left-arrow.svg";
+import { ReactComponent as Arrow } from "../../../icons/arrow.svg";
 import { RatingsPosts, DatabaseFilters } from "../../.";
 import "./CommunityRatings.css";
 
@@ -48,14 +47,16 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
         ))}
       </ol>
       <div className="nav-arrow-ratings-container">
-        <LeftArrow
+        <Arrow
           className={`nav-arrow-ratings  ${page >= 1}`}
           onClick={() => handleNavigation(navigationMapping.BACKWARDS)}
+          style={{ rotate: "-90deg" }}
         />
         <p style={{ padding: 0 }}>{page + 1}</p>
-        <RightArrow
+        <Arrow
           className={`nav-arrow-ratings ${maxNumOfPages > page + 1}`}
           onClick={() => handleNavigation(navigationMapping.FORWARD)}
+          style={{ rotate: "90deg" }}
         />
       </div>
     </>

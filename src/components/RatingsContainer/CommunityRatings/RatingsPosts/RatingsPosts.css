@@ -90,11 +90,7 @@
 }
 
 .arrow-down {
-  transform: rotate(-90deg);
-}
-
-.arrow-up {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
 }
 
 .rating-posts-body > .rating-circle-container {

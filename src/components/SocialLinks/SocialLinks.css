@@ -1,9 +1,0 @@
-.social-components {
-  display: flex;
-  justify-content: space-between;
-  gap: 2em;
-}
-
-.social-components-logo {
-  fill: white;
-}

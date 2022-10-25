@@ -8,7 +8,7 @@ import { RatingCircleV2 } from "../../../RatingCircleV2/RatingCircleV2";
 import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
-import { ReactComponent as Arrow } from "../../../../icons/left-arrow.svg";
+import { ReactComponent as Arrow } from "../../../../icons/arrow.svg";
 import "./RatingsPosts.css";
 
 const isOverflown = (element) => {
@@ -71,7 +71,11 @@ export const RatingsPosts = ({ post }) => {
           <span>{handleDate(createdAt)}</span>
         </div>
         <div className="rating-posts-body">
-          <div className={`rating-posts-content${expanded ? " expanded" : ""}`} ref={ref} onClick={() => setExpanded(!expanded)}>
+          <div
+            className={`rating-posts-content${expanded ? " expanded" : ""}`}
+            ref={ref}
+            onClick={() => setExpanded(!expanded)}
+          >
             {comment}
           </div>
           <RatingCircleV2 value={rating} />
