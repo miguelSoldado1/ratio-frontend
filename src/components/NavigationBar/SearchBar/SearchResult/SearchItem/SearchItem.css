@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .search-album-item {
     padding: 0.2em;
   }
@@ -20,7 +20,7 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .search-album-item {
     padding: 0.7em;
   }

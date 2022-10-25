@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .avatar {
     padding: 0.25em;
   }
@@ -8,7 +8,7 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .avatar {
     padding: 0.35em 0.85em;
   }

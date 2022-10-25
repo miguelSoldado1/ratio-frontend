@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .profile-rating {
     border-bottom: 0.1px solid var(--accent-text-color);
   }
@@ -54,7 +54,7 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .profile-rating-img {
     height: 7.5em;
     margin: 0.5em 0.7em;

@@ -1,10 +1,10 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .album-details-preloader-title {
     height: 1.2em;
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .album-details-preloader-title {
     height: 2.25em;
   }

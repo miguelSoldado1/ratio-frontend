@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .album-header {
     flex-direction: column;
   }
@@ -28,7 +28,7 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .album-header-image {
     width: 20em;
   }

@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .album-track-outter {
     border-bottom: 0.1px solid var(--accent-text-color);
     margin-inline: 0.5em;
@@ -27,7 +27,7 @@
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .album-track-outter {
     padding-inline: 0.5em 1.5em;
   }

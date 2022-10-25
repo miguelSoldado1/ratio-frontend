@@ -1,10 +1,10 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1025px) {
   .rail-preloader {
     height: 9.5em;
   }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1026px) {
   .rail-preloader {
     height: 13.85em;
   }

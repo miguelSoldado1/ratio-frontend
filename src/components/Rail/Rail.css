@@ -1,45 +1,10 @@
-/* For extremely small screen devices (595px and below) */
-@media only screen and (max-width: 595px) {
-  .grid {
-    --grid-column-count: 3;
-    --grid-item--max-width: calc((84% - var(--total-gap-width)) / var(--grid-column-count));
-  }
-
-  .grid-title {
-    font-size: 1.3em;
-  }
-}
-
-/* Small screen devices (600px and above) */
-@media only screen and (min-width: 596px) {
-  .grid {
-    --grid-column-count: 5;
-    --grid-item--max-width: calc((90% - var(--total-gap-width)) / var(--grid-column-count));
-  }
-
-  .grid-title {
-    font-size: 1.4em;
-  }
-}
-
-/* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) {
-  .grid {
-    --grid-column-count: 6;
-    --grid-item--max-width: calc((92% - var(--total-gap-width)) / var(--grid-column-count));
-  }
-
-  .grid-title {
-    font-size: 1.5em;
-  }
-
+@media (hover: hover) {
   .grid:hover::-webkit-scrollbar-thumb {
     background-color: var(--accent-text-color) !important;
   }
 }
 
-/* Extra big screen devices (1200px and above) */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1442px) {
   .grid {
     --grid-column-count: 8;
     --grid-item--max-width: calc((94% - var(--total-gap-width)) / var(--grid-column-count));
@@ -48,9 +13,49 @@
   .grid-title {
     font-size: 1.8em;
   }
+}
 
-  .grid:hover::-webkit-scrollbar-thumb {
-    background-color: var(--accent-text-color) !important;
+@media only screen and (max-width: 1441px) {
+  .grid {
+    --grid-column-count: 7;
+    --grid-item--max-width: calc((92% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.8em;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .grid {
+    --grid-column-count: 6;
+    --grid-item--max-width: calc((90% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.7em;
+  }
+}
+
+@media only screen and (max-width: 852px) {
+  .grid {
+    --grid-column-count: 5;
+    --grid-item--max-width: calc((90% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.6em;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .grid {
+    --grid-column-count: 3;
+    --grid-item--max-width: calc((84% - var(--total-gap-width)) / var(--grid-column-count));
+  }
+
+  .grid-title {
+    font-size: 1.3em;
   }
 }
 
