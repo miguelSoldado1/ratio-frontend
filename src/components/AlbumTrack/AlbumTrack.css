@@ -13,10 +13,6 @@
     overflow-x: auto;
   }
 
-  .album-track-detail::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-
   .album-track-detail > * {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -43,12 +39,6 @@
   .album-track-duration {
     opacity: 0;
     transition: visibility 0s, opacity 0.5s linear;
-  }
-
-  .album-track-detail > * {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .album-track-container {
@@ -78,8 +68,11 @@
   overflow-x: auto;
 }
 
-.album-track-detail::-webkit-scrollbar-thumb {
-  background-color: transparent;
+.album-track-name,
+.album-track-artist-names {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .album-track-number {
