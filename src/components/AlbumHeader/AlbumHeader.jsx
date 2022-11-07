@@ -5,13 +5,13 @@ import "./AlbumHeader.css";
 export const AlbumHeader = ({ data }) => {
   return (
     <div className="album-header">
-      <img className="album-header-image" src={data?.image} alt="" />
+      <img className="album-header-image" src={data?.image} alt="" loading="lazy" />
       <div className="album-details-details">
         <h1>
           <a href={data?.album_uri}>{data?.name}</a>
         </h1>
         <span className="album-details-line">
-          <img src={spotifyLogo} className="spotify-logo" alt="" />
+          <img src={spotifyLogo} className="spotify-logo" alt="" loading="lazy" />
           {renderArtists(data?.artist)}
         </span>
         <p className="album-details-line">

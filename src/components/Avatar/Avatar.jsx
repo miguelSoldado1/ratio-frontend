@@ -9,7 +9,7 @@ export const Avatar = () => {
 
   return (
     <Link className="avatar" to={`/profile/${userData?.id}`} state={{ display_name: userData?.display_name }}>
-      <img className="avatar-image" src={userData?.image_url ?? avatarPlacehoder} alt="" />
+      <img className="avatar-image" src={userData?.image_url ?? avatarPlacehoder} alt="" loading="lazy" />
       <p className="avatar-name">{userData?.display_name}</p>
     </Link>
   );
