@@ -82,10 +82,10 @@
 }
 
 .grid::-webkit-scrollbar-thumb {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .grid:hover::-webkit-scrollbar-thumb {
     background-color: var(--accent-text-color) !important;
   }
