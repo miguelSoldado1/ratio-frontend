@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./RatingCircleV2.css";
@@ -8,7 +7,7 @@ export const RatingCircleV2 = ({ value, description }) => {
   const [renderValue, setRenderValue] = useState(-1);
 
   useEffect(() => {
-    setRenderValue(value);
+    setTimeout(() => setRenderValue(value), 250);
     return () => setRenderValue(-1);
   }, [value]);
 
