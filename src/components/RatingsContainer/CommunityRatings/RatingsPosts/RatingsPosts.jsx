@@ -9,6 +9,7 @@ import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
 import { ReactComponent as Arrow } from "../../../../icons/arrow.svg";
+import avatarPlacehoder from "../../../../icons/avatar-placeholder.svg";
 import "./RatingsPosts.css";
 
 const isOverflown = (element) => {
@@ -112,7 +113,7 @@ export const RatingsPosts = ({ post }) => {
 const PostAvatar = ({ profileData }) => {
   return (
     <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>
-      <img className="post-avatar-img" alt="" src={profileData?.image_url} loading="lazy" />
+      <img className="post-avatar-img" alt="" src={profileData?.image_url ?? avatarPlacehoder} loading="lazy" />
       <p className="post-avatar-name">{profileData?.display_name}</p>
     </Link>
   );

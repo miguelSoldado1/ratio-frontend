@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUserDataStore } from "../../stores";
-import avatarPlacehoder from "../../icons/avatar-placeholder.png";
+import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./Avatar.css";
 
 export const Avatar = () => {
