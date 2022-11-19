@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { createPost } from "../../../api";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import { useCookies } from "react-cookie";
 import "./SubmitRatingV2.css";
+import { useRatingsStore } from "../../../stores";
 
 const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;
 const SLIDER_PROGRESS = window.innerWidth > window.innerHeight ? window.innerWidth / 100 : window.innerHeight / 50;
@@ -12,6 +12,7 @@ const MAX_CHARS = 300;
 const MIN_CHARS = 3;
 
 export const SubmitRatingV2 = ({ albumId }) => {
+  const createRating = useRatingsStore((state) => state.createRating);
   const [cookies] = useCookies();
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(-1);
@@ -31,7 +32,7 @@ export const SubmitRatingV2 = ({ albumId }) => {
     if (!submitting) {
       setErrorMessage(null);
       setSubmitting(true);
-      createPost({ album_id: albumId, rating: rating, comment: description }, cookies.access_token).then(() => window.location.reload(true));
+      createRating({ album_id: albumId, rating: rating, comment: description }, cookies.access_token);
     }
   };
 

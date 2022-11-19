@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { RatingsContainer, AlbumHeader, AlbumTrack, Rail } from "../../components";
+import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
 import "./AlbumDetails.css";
 import { getAlbum, getRelatedAlbums } from "../../api";
+import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
 
 export const AlbumDetails = () => {
   const [cookies, , removeCookie] = useCookies();

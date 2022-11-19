@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { useUserDataStore } from "../../../../stores";
+import { useRatingsStore, useUserDataStore } from "../../../../stores";
 import { handleDate } from "../../../../scripts/scripts";
-import { getUsersProfile, deletePost, handleLikes } from "../../../../api";
+import { getUsersProfile, handleLikes } from "../../../../api";
 import { RatingCircleV2 } from "../../../RatingCircleV2/RatingCircleV2";
 import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
@@ -17,7 +17,8 @@ const isOverflown = (element) => {
 };
 
 export const RatingsPosts = ({ post }) => {
-  const { user_id, comment, rating, createdAt, _id, likes } = post;
+  const { user_id, comment, rating, createdAt, _id, likes, album_id } = post;
+  const deleteRating = useRatingsStore((state) => state.deleteRating);
   const [cookies] = useCookies();
   const [profileData, setProfileData] = useState();
   const [show, setShow] = useState(false);
@@ -45,13 +46,7 @@ export const RatingsPosts = ({ post }) => {
     fetchData();
   }, [user_id, cookies, cookies.access_token, userData, likes]);
 
-  const handleDelete = async () => {
-    try {
-      deletePost(_id, cookies.access_token).then(() => window.location.reload(true));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleDelete = () => deleteRating(_id, cookies.access_token, album_id);
 
   const handleLike = () => {
     try {

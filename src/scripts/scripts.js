@@ -10,13 +10,16 @@ const intervals = [
 
 export const handleDate = (dateString) => {
   const date = new Date(dateString);
-  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000) || 1;
   const interval = intervals.find((i) => i.seconds <= seconds);
-  if (interval.label === intervals[0].label) {
+  if (interval?.label === intervals[0]?.label) {
     return date.toLocaleDateString("EN", { year: "numeric", month: "long", day: "numeric" });
   }
-  const count = Math.floor(seconds / interval.seconds);
-  return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
+  if (seconds && interval?.seconds && interval.label) {
+    const count = Math.floor(seconds / interval.seconds);
+    return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
+  }
+  return "";
 };
 
 export const getArtists = (artists) => {

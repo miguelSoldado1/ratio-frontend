@@ -7,9 +7,9 @@ export const RatingCircleV2 = ({ value, description }) => {
   const [renderValue, setRenderValue] = useState(-1);
 
   useEffect(() => {
-    setTimeout(() => setRenderValue(value), 250);
+    if (value) renderValue <= 0 ? setTimeout(() => setRenderValue(value), 250) : setRenderValue(value);
     return () => setRenderValue(-1);
-  }, [value]);
+  }, [value, renderValue]);
 
   return (
     <div className="rating-circle-container">

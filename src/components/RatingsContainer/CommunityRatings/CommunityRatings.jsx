@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { getCommunityAlbumRating } from "../../../api/albumDetails";
+import { useEffect } from "react";
+import { useRatingsStore } from "../../../stores";
+import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { ReactComponent as Arrow } from "../../../icons/arrow.svg";
-import { RatingsPosts, DatabaseFilters } from "../../.";
+import "./CommunityRatings.css";
+import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import "./CommunityRatings.css";
 
-const NUMBER_OF_ITEMS_SHOWN = 6;
+const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const [ratings, setRatings] = useState([]);
-  const [page, setPage] = useState(0);
-  const [filterActive, setFilterActive] = useState();
-  const maxNumOfPages = Math.ceil(numOfRatings / NUMBER_OF_ITEMS_SHOWN);
+  const [getAllRatings, ratings] = useRatingsStore((state) => [state.getAllRatings, state.ratings]);
+  const [page, incrementPage, decrementPage, setPage] = useRatingsStore((state) => [
+    state.page,
+    state.incrementPage,
+    state.decrementPage,
+    state.setPage,
+  ]);
+  const [filterActive, setFilterActive] = useRatingsStore((state) => [state.filterActive, state.setFilterActive]);
+  const maxNumOfPages = Math.ceil(numOfRatings / PAGE_SIZE);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (albumId && filterActive?.query) {
-        setRatings(await getCommunityAlbumRating(albumId, page, filterActive.query, NUMBER_OF_ITEMS_SHOWN));
-      }
-    };
-    fetchData();
-    return setRatings([]);
-  }, [albumId, page, filterActive]);
+    if (albumId && page >= 0 && filterActive?.query) {
+      getAllRatings(albumId, page, filterActive.query, PAGE_SIZE);
+    }
+  }, [albumId, page, filterActive, getAllRatings]);
 
   const handleNavigation = (reference) => {
-    if (reference === navigationMapping.FORWARD && maxNumOfPages > page + 1) {
-      setPage(page + 1);
-      return;
-    }
-    if (reference === navigationMapping.BACKWARDS && page > 0) {
-      setPage(page - 1);
-      return;
-    }
+    if (reference === navigationMapping.FORWARD && maxNumOfPages > page + 1) return incrementPage();
+    if (reference === navigationMapping.BACKWARDS && page > 0) return decrementPage();
   };
 
   return (

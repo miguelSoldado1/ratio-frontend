@@ -30,7 +30,9 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
       {Object.keys(filters).map((filter, index) => (
         <p
           key={index}
-          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"}${numberOfRatings <= 1 ? "single" : ""}`}
+          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"}${
+            numberOfRatings <= 1 ? "single" : ""
+          }`}
           onClick={handleFilters}
         >
           {filters[filter].tag}
@@ -40,7 +42,7 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
   );
 };
 
-const filters = {
+export const filters = {
   LATEST: { tag: "Latest", query: "latest" },
   OLDEST: { tag: "Oldest", query: "oldest" },
   TOP_RATED: { tag: "Top Rated", query: "top_rated" },

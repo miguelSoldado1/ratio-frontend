@@ -1,44 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { useUserDataStore } from "../../stores";
-import { getMyAlbumRating, getAverageAlbumRating } from "../../api/albumDetails";
-import { SubmitRatingV2, CommunityRatings, NoRatingsContainer, RatingCircleV2 } from "../";
+import React from "react";
+import { useEffect } from "react";
 import { RatingsContainerPL } from "../../preloaders";
+import { useRatingsStore, useUserDataStore } from "../../stores";
+import { RatingCircleV2 } from "../RatingCircleV2/RatingCircleV2";
+import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
+import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
+import { SubmitRatingV2 } from "./SubmitRatingV2/SubmitRatingV2";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
   const id = useUserDataStore((state) => state.userData.id);
-  const [communityRating, setCommunityRating] = useState(-1);
-  const [personalRating, setPersonalRating] = useState(-1);
-  const [numOfRatings, setNumOfRatings] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [ratings, clearAllRatings] = useRatingsStore((state) => [state.ratings, state.clearAllRatings]);
+  const [getCircleRatings, personalRating, averageRating, numOfRatings] = useRatingsStore((state) => [
+    state.getCircleRatings,
+    state.personalRating,
+    state.averageRating,
+    state.numOfRatings,
+  ]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { rating, sum } = await getAverageAlbumRating(albumId);
-      setCommunityRating(rating);
-      setNumOfRatings(sum);
-      setPersonalRating(await getMyAlbumRating(albumId, id));
-    };
-    fetchData().then(() => setLoading(false));
-    return () => {
-      setCommunityRating(-1);
-      setPersonalRating(-1);
-      setNumOfRatings(0);
-      setLoading(true);
-    };
-  }, []);
-
-  if (!loading) {
-    return (
-      <div className="ratings-container">
-        <div className="ratings-circles">
-          <RatingCircleV2 value={personalRating} description={"Personal"} />
-          <RatingCircleV2 value={communityRating} description={"Community"} />
-        </div>
-        {personalRating < 0 && <SubmitRatingV2 albumId={albumId} />}
-        {communityRating > 0 ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
-      </div>
-    );
+    if (albumId && id) getCircleRatings(albumId, id);
+    return () => clearAllRatings();
+  }, [getCircleRatings, clearAllRatings, albumId, id]);
+  if (!ratings) {
+    return <RatingsContainerPL />;
   }
-  return <RatingsContainerPL />;
+
+  return (
+    <div className="ratings-container">
+      <div className="ratings-circles">
+        <RatingCircleV2 value={personalRating} description={"Personal"} />
+        <RatingCircleV2 value={averageRating} description={"Community"} />
+      </div>
+      {!personalRating && <SubmitRatingV2 albumId={albumId} />}
+      {!!averageRating ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
+    </div>
+  );
 };
