@@ -9,10 +9,6 @@
     border-bottom: none;
   }
 
-  .album-track-detail {
-    overflow-x: auto;
-  }
-
   .album-track-detail > * {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -65,7 +61,6 @@
   width: 100%;
   gap: 0.2em;
   padding: 0.5em;
-  overflow-x: auto;
 }
 
 .album-track-name,
