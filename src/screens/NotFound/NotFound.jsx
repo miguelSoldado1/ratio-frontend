@@ -1,7 +1,7 @@
 import React from "react";
 import "./NotFound.css";
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <div className="not-found-container">
       <div className="not-found-text">
@@ -14,5 +14,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;
