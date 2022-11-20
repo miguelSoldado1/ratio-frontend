@@ -1,14 +1,9 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Footer } from "./components";
 import { NavigationBar } from "./components";
-
-const HomeScreen = lazy(() => import("./screens/HomeScreen/HomeScreen"));
-const AlbumDetails = lazy(() => import("./screens/AlbumDetails/AlbumDetails"));
-const ProfileScreen = lazy(() => import("./screens/ProfileScreen/ProfileScreen"));
-const NotFound = lazy(() => import("./screens/NotFound/NotFound"));
-const LandingPage = lazy(() => import("./screens/LandingPage/LandingPage"));
+import { HomeScreen, LandingPage, ProfileScreen, NotFound, AlbumDetails } from "./screens";
 
 const urlSearchParams = new URLSearchParams(window?.location?.search);
 const access_token = urlSearchParams.get("access_token");
@@ -29,22 +24,20 @@ const App = () => {
 
   return (
     <>
-      <Suspense fallback={null}>
-        {cookies?.access_token ? (
-          <>
-            <Routes>
-              <Route element={mainRouteElement}>
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/album/:albumId" element={<AlbumDetails />} />
-                <Route path="/profile/:userId" element={<ProfileScreen />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </>
-        ) : (
-          <LandingPage />
-        )}
-      </Suspense>
+      {cookies?.access_token ? (
+        <>
+          <Routes>
+            <Route element={mainRouteElement}>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/album/:albumId" element={<AlbumDetails />} />
+              <Route path="/profile/:userId" element={<ProfileScreen />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </>
+      ) : (
+        <LandingPage />
+      )}
     </>
   );
 };

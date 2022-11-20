@@ -8,7 +8,7 @@ import "./ProfileScreen.css";
 
 const NUMBER_OF_RATINGS = 8;
 
-const ProfileScreen = () => {
+export const ProfileScreen = () => {
   const location = useLocation();
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -71,5 +71,3 @@ const ProfileScreen = () => {
     </div>
   );
 };
-
-export default ProfileScreen;
