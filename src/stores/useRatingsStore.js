@@ -6,8 +6,11 @@ const BACK_END_URL = `${import.meta.env.VITE_BACK_END_URL}/albumDetails`;
 
 let ratingsStore = (set, get) => ({
   ratings: [],
+  personalRating: null,
+  averageRating: null,
   numOfRatings: 0,
   page: 0,
+
   filterActive: {},
   // HANDLE RATINGS POSTS
   getAllRatings: async (album_id, page_number, order, page_size) => {

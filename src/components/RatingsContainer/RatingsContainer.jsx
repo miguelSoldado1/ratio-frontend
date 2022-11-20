@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
+import { SubmitRatingV2 } from "..";
 import { RatingsContainerPL } from "../../preloaders";
 import { useRatingsStore, useUserDataStore } from "../../stores";
 import { RatingCircleV2 } from "../RatingCircleV2/RatingCircleV2";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
-import { SubmitRatingV2 } from "./SubmitRatingV2/SubmitRatingV2";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {

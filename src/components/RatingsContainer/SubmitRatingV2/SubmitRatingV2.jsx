@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import CircularSlider from "@fseehawer/react-circular-slider";
 import { useCookies } from "react-cookie";
 import "./SubmitRatingV2.css";
+import CS from "@fseehawer/react-circular-slider";
 import { useRatingsStore } from "../../../stores";
+const CircularSlider = CS.default ? CS.default : CS;
 
 const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;
 const SLIDER_PROGRESS = window.innerWidth > window.innerHeight ? window.innerWidth / 100 : window.innerHeight / 50;
