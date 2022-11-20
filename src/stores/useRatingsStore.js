@@ -2,7 +2,7 @@ import create from "zustand";
 import axios from "axios";
 import { filters } from "../components/DatabaseFilters/DatabaseFilters";
 
-const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
+const BACK_END_URL = `${import.meta.env.VITE_BACK_END_URL}/albumDetails`;
 
 let ratingsStore = (set, get) => ({
   ratings: [],

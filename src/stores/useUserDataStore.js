@@ -2,7 +2,7 @@ import create from "zustand";
 import axios from "axios";
 import { persist } from "zustand/middleware";
 
-const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/navigationBar`;
+const BACK_END_URL = `${import.meta.env.VITE_BACK_END_URL}/navigationBar`;
 
 let userDataStore = (set, get) => ({
   userData: {},

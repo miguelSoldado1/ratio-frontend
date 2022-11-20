@@ -46,6 +46,7 @@
 .ratio-logo {
   cursor: pointer;
   padding: 0 0.25em;
+  width: 100% !important;
 }
 
 .nav-bar-container {
