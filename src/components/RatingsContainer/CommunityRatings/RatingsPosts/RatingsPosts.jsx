@@ -8,7 +8,6 @@ import { RatingCircleV2 } from "../../../RatingCircleV2/RatingCircleV2";
 import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
-import { ReactComponent as Arrow } from "../../../../icons/arrow.svg";
 import avatarPlacehoder from "../../../../icons/avatar-placeholder.svg";
 import "./RatingsPosts.css";
 
@@ -16,6 +15,7 @@ const isOverflown = (element) => {
   return element?.clientWidth < element?.scrollWidth || element?.clientHeight < element?.scrollHeight;
 };
 
+// TODO When .has() CSS selector is more widely supported replace the expanded state
 export const RatingsPosts = ({ post }) => {
   const { user_id, comment, rating, createdAt, _id, likes, album_id } = post;
   const deleteRating = useRatingsStore((state) => state.deleteRating);
@@ -90,11 +90,7 @@ export const RatingsPosts = ({ post }) => {
             )}
           </div>
           {overflow && (
-            <Arrow
-              id="rating-posts-arrow"
-              className={`rating-posts-arrow${expanded ? " arrow-up" : " arrow-down"}`}
-              onClick={() => setExpanded(!expanded)}
-            />
+            <div className={`arrow${expanded ? " arrow-up" : " arrow-down"}`} onClick={() => setExpanded(!expanded)} />
           )}
         </div>
       </li>

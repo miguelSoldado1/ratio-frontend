@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRatingsStore } from "../../../stores";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
-import { ReactComponent as Arrow } from "../../../icons/arrow.svg";
 import "./CommunityRatings.css";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import "./CommunityRatings.css";
@@ -44,16 +43,16 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
         ))}
       </ol>
       <div className="nav-arrow-ratings-container">
-        <Arrow
-          className={`nav-arrow-ratings  ${page >= 1}`}
+        <div
+          className={`arrow  ${page < 1 && " disabled"}`}
           onClick={() => handleNavigation(navigationMapping.BACKWARDS)}
-          style={{ rotate: "-90deg" }}
+          style={{ rotate: "135deg" }}
         />
         <p style={{ padding: 0 }}>{page + 1}</p>
-        <Arrow
-          className={`nav-arrow-ratings ${maxNumOfPages > page + 1}`}
+        <div
+          className={`arrow  ${maxNumOfPages <= page + 1 && " disabled"}`}
           onClick={() => handleNavigation(navigationMapping.FORWARD)}
-          style={{ rotate: "90deg" }}
+          style={{ rotate: "-45deg" }}
         />
       </div>
     </>

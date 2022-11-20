@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5em;
 }
 
 .nav-arrow-ratings {
@@ -10,13 +11,9 @@
   cursor: pointer;
 }
 
-.true {
-  fill: white;
-}
-
-.false {
-  fill: var(--accent-text-color);
+.arrow.disabled {
   cursor: not-allowed;
+  border: solid var(--accent-text-color);
 }
 
 .community-ratings {

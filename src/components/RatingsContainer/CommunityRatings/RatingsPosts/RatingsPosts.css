@@ -84,13 +84,15 @@
   fill: white;
 }
 
-.rating-posts-arrow {
-  fill: white;
-  cursor: pointer;
+.arrow.arrow-down {
+  transform: rotate(45deg);
+  margin-block: 0 calc(5 * var(--arrow-width));
 }
 
-.arrow-down {
-  transform: rotate(180deg);
+.arrow.arrow-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin-block: calc(5 * var(--arrow-width)) 0;
 }
 
 .rating-posts-body > .rating-circle-container {
