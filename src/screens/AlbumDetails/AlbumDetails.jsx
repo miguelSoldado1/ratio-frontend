@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
-import "./AlbumDetails.css";
 import { getAlbum, getRelatedAlbums } from "../../api";
 import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
+import "./AlbumDetails.css";
 
 const AlbumDetails = () => {
   const [cookies, , removeCookie] = useCookies();
