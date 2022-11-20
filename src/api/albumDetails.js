@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACK_END_URL = `${import.meta.env.VITE_BACK_END_URL}/albumDetails`;
+const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 
 export const getAlbum = async (album_id, accessToken) => {
   const response = await axios.get(`${BACK_END_URL}/getAlbum`, {

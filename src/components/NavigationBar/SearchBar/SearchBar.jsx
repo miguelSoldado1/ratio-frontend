@@ -14,7 +14,7 @@ export const SearchBar = () => {
     const delayDebounceFn = setTimeout(() => {
       if (searchQuery !== "" && cookies && cookies.access_token)
         axios
-          .get(`${import.meta.env.VITE_BACK_END_URL}/navigationBar/searchForAlbum`, {
+          .get(`${process.env.REACT_APP_BACK_END_URL}/navigationBar/searchForAlbum`, {
             params: { search_query: searchQuery },
             headers: { Authorization: "Bearer " + cookies.access_token },
           })

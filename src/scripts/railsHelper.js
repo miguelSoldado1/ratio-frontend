@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const HOMESCREEN_URL = `${import.meta.env.VITE_BACK_END_URL}/homeScreen`;
+const HOMESCREEN_URL = `${process.env.REACT_APP_BACK_END_URL}/homeScreen`;
 
 const addMinutes = (minutes) => new Date(new Date().getTime() + minutes * 60000);
 const isBeforeNow = (expiryDate) => new Date(expiryDate) < new Date();
