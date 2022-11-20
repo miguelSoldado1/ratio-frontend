@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <Suspense fallback={null}>
+      <Suspense fallback={<></>}>
         {cookies?.access_token ? (
           <>
             <Routes>
