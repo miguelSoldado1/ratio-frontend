@@ -7,7 +7,7 @@ import "./LandingPage.css";
 const LOGIN_URL = `${process.env.REACT_APP_BACK_END_URL}/login?pathname=${window.location.pathname}`;
 const HEADER_TEXT = "Welcome to Ratio!";
 
-export const LandingPage = () => {
+const LandingPage = () => {
   return (
     <div className="landing-page-outer">
       <div className="login-container">
@@ -30,3 +30,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default LandingPage;

@@ -7,7 +7,7 @@ import "./AlbumDetails.css";
 import { getAlbum, getRelatedAlbums } from "../../api";
 import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
 
-export const AlbumDetails = () => {
+const AlbumDetails = () => {
   const [cookies, , removeCookie] = useCookies();
   const navigate = useNavigate();
   const { albumId } = useParams();
@@ -62,3 +62,5 @@ export const AlbumDetails = () => {
     </>
   );
 };
+
+export default AlbumDetails;

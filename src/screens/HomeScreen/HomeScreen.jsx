@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { useRailsStore } from "../../stores";
 import "./HomeScreen.css";
 
-export const HomeScreen = () => {
+const HomeScreen = () => {
   const [myTopArtists, getMyTopArtists] = useRailsStore((state) => [state.myTopArtists, state.getMyTopArtists]);
   const [latestReviews, getLatestReviews] = useRailsStore((state) => [state.latestReviews, state.getLatestReviews]);
   const [recentlyListened, getRecentlyListened] = useRailsStore((state) => [
@@ -38,3 +38,5 @@ export const HomeScreen = () => {
     </>
   );
 };
+
+export default HomeScreen;
