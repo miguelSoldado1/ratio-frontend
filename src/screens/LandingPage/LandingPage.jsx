@@ -19,7 +19,7 @@ export const LandingPage = () => {
         <Button>
           <a className="login-button" href={LOGIN_URL}>
             Login to Spotify
-            <img className="spotify-logo" src={spotifyLogo} alt="spotify" loading="lazy" />
+            <img className="spotify-logo" src={spotifyLogo} alt="spotify" />
           </a>
         </Button>
         <div className="login-footer">

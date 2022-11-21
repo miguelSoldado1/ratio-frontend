@@ -104,7 +104,12 @@ export const RatingsPosts = ({ post }) => {
 const PostAvatar = ({ profileData }) => {
   return (
     <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>
-      <img className="post-avatar-img" alt="" src={profileData?.image_url ?? avatarPlaceholder} loading="lazy" />
+      <img
+        className="post-avatar-img"
+        alt={profileData?.display_name}
+        src={profileData?.image_url ?? avatarPlaceholder}
+        loading="lazy"
+      />
       <p className="post-avatar-name">{profileData?.display_name}</p>
     </Link>
   );

@@ -15,10 +15,10 @@ export const Container = ({ props }) => {
     <>
       {props && props.artist && props.image && props.name && props.release_date && (
         <li className="container" onClick={handleAlbumClick}>
-          <img className="container-image" src={props.image} alt="" loading="lazy" />
+          <img className="container-image" src={props.image} alt={props.name} loading="lazy" />
           <p className="container-album-name">{props.name}</p>
           <p className="container-artist-name">
-            <img src={spotifyLogo} className="spotify-logo" alt="" loading="lazy" />
+            <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
             {getArtists(props.artist)}
           </p>
         </li>

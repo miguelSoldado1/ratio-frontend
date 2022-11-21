@@ -44,7 +44,7 @@ export const ProfileRating = ({ props }) => {
     return (
       <li className="profile-rating" onClick={handleAlbumClick}>
         <div className="profile-rating-item">
-          <img className="profile-rating-img" src={albumData.image} alt="" loading="lazy" />
+          <img className="profile-rating-img" src={albumData.image} alt={albumData.name} loading="lazy" />
           <div className="profile-rating-text">
             <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
             <p className="profile-rating-name">
@@ -52,7 +52,7 @@ export const ProfileRating = ({ props }) => {
               <span className="profile-rating-release"></span>
             </p>
             <p className="profile-rating-artist">
-              <img src={spotifyLogo} className="spotify-logo" alt="" loading="lazy" />
+              <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
               {getArtists(albumData.artist)}
             </p>
           </div>

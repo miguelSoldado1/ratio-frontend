@@ -44,7 +44,8 @@
 }
 
 .container-image {
-  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 1;
   justify-self: center;
   padding: 0.75em;
 }
