@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Footer } from "./components";
-import { NavigationBar } from "./components";
+import { Helmet } from "react-helmet";
+import { NavigationBar, Footer } from "./components";
 import { HomeScreen, LandingPage, ProfileScreen, NotFound, AlbumDetails } from "./screens";
 
 const urlSearchParams = new URLSearchParams(window?.location?.search);
@@ -24,6 +24,9 @@ const App = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Ratio</title>
+      </Helmet>
       {cookies?.access_token ? (
         <>
           <Routes>

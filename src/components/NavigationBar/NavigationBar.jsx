@@ -28,7 +28,7 @@ export const NavigationBar = () => {
     <>
       <nav className="nav-bar">
         <div className="nav-bar-container left-nav">
-          <Link to="/">
+          <Link to="/" title="Home">
             <RatioLogo className="ratio-logo" />
           </Link>
           <SearchBar />

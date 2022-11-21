@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Helmet } from "react-helmet";
 import { getUsersProfile, getUserPosts } from "../../api";
 import { ProfileRating, Button, DatabaseFilters } from "../../components";
 import { ProfileScreenPL } from "../../preloaders";
@@ -51,23 +52,30 @@ export const ProfileScreen = () => {
     fetchData();
   }, [data?.page, filterActive.query, navigate, removeCookie, userId]);
 
-  if (data.loading) return <ProfileScreenPL />;
+  if (data.loading) {
+    return <ProfileScreenPL />;
+  }
+
+  const apostropheName = `${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`;
 
   return (
-    <div className="profile-screen">
-      {displayName && (
-        <h1 className="profile-screen-title">{`${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`} Ratings</h1>
-      )}
-      <DatabaseFilters
-        setFilterActive={setFilterActive}
-        filterActive={filterActive}
-        setPage={(value) => updateData("page", value)}
-        numberOfRatings={data?.rows?.length}
-      />
-      <ol>{data?.rows?.length > 0 && data.rows.map((rating) => <ProfileRating props={rating} key={rating?._id} />)}</ol>
-      {data?.totalRows > NUMBER_OF_RATINGS * (data?.page + 1) && (
-        <Button onClick={() => updateData("page", data?.page + 1)}>Load more</Button>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>{apostropheName} Ratings</title>
+      </Helmet>
+      <div className="profile-screen">
+        {displayName && <h1 className="profile-screen-title">{apostropheName} Ratings</h1>}
+        <DatabaseFilters
+          setFilterActive={setFilterActive}
+          filterActive={filterActive}
+          setPage={(value) => updateData("page", value)}
+          numberOfRatings={data?.rows?.length}
+        />
+        <ol>{data?.rows?.length > 0 && data.rows.map((rating) => <ProfileRating props={rating} key={rating?._id} />)}</ol>
+        {data?.totalRows > NUMBER_OF_RATINGS * (data?.page + 1) && (
+          <Button onClick={() => updateData("page", data?.page + 1)}>Load more</Button>
+        )}
+      </div>
+    </>
   );
 };

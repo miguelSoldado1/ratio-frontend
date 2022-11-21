@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Helmet } from "react-helmet";
 import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
 import { getAlbum, getRelatedAlbums } from "../../api";
@@ -43,6 +44,11 @@ export const AlbumDetails = () => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {data?.album?.artist?.map((artist) => artist?.name).join(", ")} | {data?.album?.name}
+        </title>
+      </Helmet>
       <div className="album-details-container">
         <div className="album-details-column left">
           <AlbumHeader data={data?.album} />
