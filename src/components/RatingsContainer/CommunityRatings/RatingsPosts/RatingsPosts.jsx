@@ -8,7 +8,7 @@ import { RatingCircleV2 } from "../../../RatingCircleV2/RatingCircleV2";
 import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
-import avatarPlacehoder from "../../../../icons/avatar-placeholder.svg";
+import avatarPlaceholder from "../../../../icons/avatar-placeholder.svg";
 import "./RatingsPosts.css";
 
 const isOverflown = (element) => {
@@ -104,7 +104,7 @@ export const RatingsPosts = ({ post }) => {
 const PostAvatar = ({ profileData }) => {
   return (
     <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>
-      <img className="post-avatar-img" alt="" src={profileData?.image_url ?? avatarPlacehoder} loading="lazy" />
+      <img className="post-avatar-img" alt="" src={profileData?.image_url ?? avatarPlaceholder} loading="lazy" />
       <p className="post-avatar-name">{profileData?.display_name}</p>
     </Link>
   );
