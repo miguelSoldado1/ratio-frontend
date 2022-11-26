@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import { SubmitRatingV2 } from "..";
+import { SubmitRating } from "..";
 import { RatingsContainerPL } from "../../preloaders";
 import { useRatingsStore, useUserDataStore } from "../../stores";
-import { RatingCircleV2 } from "../RatingCircleV2/RatingCircleV2";
+import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
 import "./RatingsContainer.css";
@@ -29,10 +29,10 @@ export const RatingsContainer = ({ albumId }) => {
   return (
     <div className="ratings-container">
       <div className="ratings-circles">
-        <RatingCircleV2 value={personalRating} description={"Personal"} />
-        <RatingCircleV2 value={averageRating} description={"Community"} />
+        <RatingCircle value={personalRating} description={"Personal"} />
+        <RatingCircle value={averageRating} description={"Community"} />
       </div>
-      {!personalRating && <SubmitRatingV2 albumId={albumId} />}
+      {!personalRating && <SubmitRating albumId={albumId} />}
       {!!averageRating ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
     </div>
   );

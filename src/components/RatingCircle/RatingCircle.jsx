@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import "./RatingCircleV2.css";
+import "./RatingCircle.css";
 
-export const RatingCircleV2 = ({ value, description }) => {
+export const RatingCircle = ({ value, description }) => {
   const [renderValue, setRenderValue] = useState(-1);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ export const RatingCircleV2 = ({ value, description }) => {
 const styles = {
   path: {
     strokeLinecap: "butt",
-    transform: "rotate(0.25turn)",
     transformOrigin: "center center",
     stroke: "white",
     transition: "stroke-dashoffset 0.75s ease 0s",

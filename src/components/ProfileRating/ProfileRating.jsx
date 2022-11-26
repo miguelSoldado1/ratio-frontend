@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getAverageAlbumRating, getAlbum } from "../../api";
-import { RatingCircleV2 } from "../RatingCircleV2/RatingCircleV2";
+import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./ProfileRating.css";
@@ -58,8 +58,8 @@ export const ProfileRating = ({ props }) => {
           </div>
         </div>
         <div className="profile-ratings-circles">
-          <RatingCircleV2 value={props.rating} description={"Personal"} />
-          <RatingCircleV2 value={communityRating} description={"Community"} />
+          <RatingCircle value={props.rating} description={"Personal"} />
+          <RatingCircle value={communityRating} description={"Community"} />
         </div>
       </li>
     );

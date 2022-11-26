@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { useRatingsStore, useUserDataStore } from "../../../../stores";
 import { handleDate } from "../../../../scripts/scripts";
 import { getUsersProfile, handleLikes } from "../../../../api";
-import { RatingCircleV2 } from "../../../RatingCircleV2/RatingCircleV2";
+import { RatingCircle } from "../../../RatingCircle/RatingCircle";
 import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
@@ -74,7 +74,7 @@ export const RatingsPosts = ({ post }) => {
           >
             {comment}
           </div>
-          <RatingCircleV2 value={rating} />
+          <RatingCircle value={rating} />
         </div>
         <div className="rating-posts-footer">
           <div>
@@ -110,7 +110,7 @@ const PostAvatar = ({ profileData }) => {
         src={profileData?.image_url ?? avatarPlaceholder}
         loading="lazy"
       />
-      <p className="post-avatar-name">{profileData?.display_name}</p>
+      <p className="post-avatabr-name">{profileData?.display_name}</p>
     </Link>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
-import "./SubmitRatingV2.css";
-import CS from "@fseehawer/react-circular-slider";
+import CircularSlider from "@fseehawer/react-circular-slider";
 import { useRatingsStore } from "../../../stores";
-const CircularSlider = CS.default ? CS.default : CS;
+import "./SubmitRating.css";
 
 const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;
 const SLIDER_PROGRESS = window.innerWidth > window.innerHeight ? window.innerWidth / 100 : window.innerHeight / 50;
@@ -12,7 +11,7 @@ const VALUE_SIZE = window.innerWidth > window.innerHeight ? window.innerWidth / 
 const MAX_CHARS = 300;
 const MIN_CHARS = 3;
 
-export const SubmitRatingV2 = ({ albumId }) => {
+export const SubmitRating = ({ albumId }) => {
   const createRating = useRatingsStore((state) => state.createRating);
   const [cookies] = useCookies();
   const [description, setDescription] = useState("");
@@ -70,7 +69,7 @@ export const SubmitRatingV2 = ({ albumId }) => {
           max={10}
           valueFontSize={`${VALUE_SIZE}px`}
           progressLineCap="flat"
-          knobPosition={"right"}
+          knobPosition="top"
           onChange={(value) => setRating(value)}
         />
       </div>
