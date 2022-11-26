@@ -24,13 +24,12 @@ export const AlbumDetails = () => {
         const relatedAlbums = await getRelatedAlbums(albumId, album?.artist_id, accessToken);
         updateData("album", album);
         setData((prev) => ({ ...prev, relatedAlbums: { data: relatedAlbums } }));
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
         navigate("/");
       }
       updateData("loading", false);
     };
-
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (accessToken) {
       fetchData();
     }
