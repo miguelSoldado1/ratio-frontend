@@ -8,7 +8,12 @@ export const Avatar = () => {
   const userData = useUserDataStore((state) => state.userData);
 
   return (
-    <Link className="avatar" to={`/profile/${userData?.id}`} state={{ display_name: userData?.display_name }}>
+    <Link
+      className="avatar"
+      to={`/profile/${userData?.id}`}
+      state={{ display_name: userData?.display_name }}
+      title="My profile"
+    >
       <img className="avatar-image" src={userData?.image_url ?? avatarPlacehoder} alt={userData?.display_name} />
       <p className="avatar-name">{userData?.display_name}</p>
     </Link>
