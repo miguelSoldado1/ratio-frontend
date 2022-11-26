@@ -9,11 +9,6 @@
     border-bottom: none;
   }
 
-  .album-track-detail > * {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
   .album-track-container {
     width: 85%;
   }
@@ -38,7 +33,7 @@
   }
 
   .album-track-container {
-    max-width: 95%;
+    width: 95%;
   }
 }
 
@@ -58,7 +53,7 @@
 .album-track-detail {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: inherit;
   gap: 0.2em;
   padding: 0.5em;
 }
@@ -81,6 +76,7 @@
   gap: 0.25em;
 }
 
+.album-track-artist-names,
 .album-track-artist-names > * {
   color: var(--accent-text-color);
 }

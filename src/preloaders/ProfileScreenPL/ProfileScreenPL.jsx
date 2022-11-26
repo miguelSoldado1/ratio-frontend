@@ -7,10 +7,9 @@ export const ProfileScreenPL = () => {
       <div style={{ height: "2.29em" }} />
       <div className="filters" style={{ height: "3.17em" }} />
       <ol>
-        <ProfileRatingPL />
-        <ProfileRatingPL />
-        <ProfileRatingPL />
-        <ProfileRatingPL />
+        {[...Array(4)].map((_, index) => (
+          <ProfileRatingPL key={index} />
+        ))}
       </ol>
     </div>
   );
