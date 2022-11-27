@@ -4,7 +4,7 @@ import { filters } from "../components/DatabaseFilters/DatabaseFilters";
 
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 
-let ratingsStore = (set, get) => ({
+const ratingsStore = (set, get) => ({
   ratings: [],
   personalRating: null,
   averageRating: null,

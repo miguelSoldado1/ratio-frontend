@@ -1,6 +1,5 @@
-import React from "react";
 import { ReactComponent as RatioLogo } from "../../icons/ratio-logo.svg";
-import { Button } from "../../components";
+import { Button, SocialLogos } from "../../components";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./LandingPage.css";
 
@@ -23,7 +22,7 @@ export const LandingPage = () => {
           </a>
         </Button>
         <div className="login-footer">
-          <a href="/">GitHub</a>|<a href="/">PayPal</a>|<a href="/">Contact us</a>
+          <SocialLogos />
         </div>
         <span className="login-copyright">Copyright &copy; Ratio 2022</span>
       </div>

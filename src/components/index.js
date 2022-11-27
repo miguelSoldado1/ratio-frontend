@@ -17,3 +17,4 @@ export * from "./RatingsContainer/SubmitRating/SubmitRating";
 export * from "./RatingsContainer/NoRatingsContainer/NoRatingsContainer";
 export * from "./RatingCircle/RatingCircle";
 export * from "./Footer/Footer";
+export * from "./SocialLogos/SocialLogos";

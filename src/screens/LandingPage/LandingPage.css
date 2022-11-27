@@ -1,6 +1,6 @@
 @media (orientation: portrait) {
   .landing-page-outer {
-    background-image: url("../../icons/animated-background-vertical.svg");
+    background-image: url("../../icons/background-vertical.svg");
   }
 
   .custom-button.landing {
@@ -10,7 +10,7 @@
 
 @media (orientation: landscape) {
   .landing-page-outer {
-    background-image: url("../../icons/animated-background-horizontal.svg");
+    background-image: url("../../icons/background-horizontal.svg");
   }
 }
 
@@ -21,6 +21,11 @@
   gap: 0.75em;
   align-items: center;
   justify-content: center;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .login-container {
@@ -38,7 +43,7 @@
 .login-header-text {
   font-weight: bold;
   font-size: 1.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.75em;
 }
 
 .login-content-text {
@@ -56,8 +61,14 @@
 
 .login-footer {
   display: flex;
-  gap: 0.25em;
-  margin-top: 1em;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.25em;
+}
+
+.login-footer > .logo {
+  fill: white;
 }
 
 .login-copyright {
