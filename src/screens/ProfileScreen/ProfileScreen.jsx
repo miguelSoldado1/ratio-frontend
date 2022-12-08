@@ -40,7 +40,7 @@ export const ProfileScreen = () => {
       try {
         const result = await getUserPosts(userId, data?.page, filterActive.query, NUMBER_OF_RATINGS);
         if (data?.page > 0) {
-          setData((prev) => ({ ...prev, rows: [...prev?.rows, ...result?.data], totalRows: result?.count }));
+          setData((prev) => ({ ...prev, rows: [...(prev.rows || 0), ...(result.data || [])], totalRows: result?.count }));
         } else {
           setData((prev) => ({ ...prev, rows: result?.data, totalRows: result?.count }));
         }

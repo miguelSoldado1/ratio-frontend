@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import React from "react";
 import { useEffect } from "react";
 import { SubmitRating } from "..";

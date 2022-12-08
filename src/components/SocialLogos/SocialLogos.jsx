@@ -11,8 +11,7 @@ export const SocialLogos = () => {
         target="_blank"
         rel="noreferrer"
         title="GitHub"
-        className="logo"
-      >
+        className="logo">
         <GitHubLogo />
       </a>
       <a href="https://twitter.com/ratiomusic_" target="_blank" rel="noreferrer" title="Twitter" className="logo">
@@ -23,8 +22,7 @@ export const SocialLogos = () => {
         target="_blank"
         rel="noreferrer"
         title="Paypal <3"
-        className="logo"
-      >
+        className="logo">
         <PayPalLogo />
       </a>
     </>
