@@ -10,6 +10,7 @@ const SLIDER_KNOB = window.innerWidth > window.innerHeight ? window.innerWidth /
 const VALUE_SIZE = window.innerWidth > window.innerHeight ? window.innerWidth / 38 : window.innerWidth / 13;
 const MAX_CHARS = 300;
 const MIN_CHARS = 3;
+const MAX_NUM_OF_LINES = 12;
 
 export const SubmitRating = ({ albumId }) => {
   const createRating = useRatingsStore((state) => state.createRating);
@@ -17,11 +18,12 @@ export const SubmitRating = ({ albumId }) => {
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(-1);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [numOfLines, setNumOfLines] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (description.length < MIN_CHARS) {
+    if (description.replace(/ /g, "").length < MIN_CHARS) {
       setErrorMessage("Make it longer...");
       return;
     }
@@ -29,11 +31,26 @@ export const SubmitRating = ({ albumId }) => {
       setErrorMessage("Give your ratio a rating!");
       return;
     }
+    if (numOfLines >= MAX_NUM_OF_LINES) {
+      setErrorMessage("Way too many lines...");
+      return;
+    }
     if (!submitting) {
       setErrorMessage(null);
       setSubmitting(true);
       createRating({ album_id: albumId, rating: rating, comment: description }, cookies.access_token);
     }
+  };
+
+  const handleOnChange = (e) => {
+    const inputValue = e.target.value;
+    setDescription(inputValue);
+    setNumOfLines(inputValue.split(/\r\n|\r|\n/).length);
+    if (numOfLines >= MAX_NUM_OF_LINES) {
+      setErrorMessage("Way too many lines...");
+      return;
+    }
+    setErrorMessage(null);
   };
 
   return (
@@ -46,7 +63,7 @@ export const SubmitRating = ({ albumId }) => {
             placeholder="Leave a comment..."
             value={description}
             maxLength={MAX_CHARS}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleOnChange}
             rows={3}
           />
           <span className="submit-rating-form-error">{errorMessage}</span>

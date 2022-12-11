@@ -54,8 +54,8 @@
 }
 
 .expanded {
-  -webkit-line-clamp: 10;
-  line-clamp: 10;
+  -webkit-line-clamp: 15;
+  line-clamp: 15;
 }
 
 .rating-posts-footer {

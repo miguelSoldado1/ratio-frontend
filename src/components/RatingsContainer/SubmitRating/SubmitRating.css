@@ -45,7 +45,13 @@
 }
 
 .submit {
+  margin-top: 0.5em;
   padding: 0.25em;
+}
+
+.submit:disabled,
+.submit[disabled] {
+  background-color: hsl(141, 40%, 42%);
 }
 
 .submit-rating-cirlce > div > div:nth-child(2) > svg > svg {
