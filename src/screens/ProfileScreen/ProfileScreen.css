@@ -27,3 +27,7 @@
 .profile-screen-title {
   margin: 0;
 }
+
+.profile-screen > .custom-button {
+  margin-top: 1em;
+}
