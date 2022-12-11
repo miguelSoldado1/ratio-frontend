@@ -33,6 +33,7 @@
   padding: 0 0.5em;
   gap: 0.5em;
   min-height: 2em;
+  white-space: pre;
 }
 
 .rating-posts-content {
