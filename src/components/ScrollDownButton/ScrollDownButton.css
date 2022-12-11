@@ -1,0 +1,13 @@
+.scroll-down-button {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+@media only screen and (max-width: 1025px) {
+  .scroll-down-button {
+    opacity: 1;
+  }
+}
