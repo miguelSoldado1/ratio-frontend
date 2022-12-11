@@ -6,11 +6,10 @@ const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 
 const ratingsStore = (set, get) => ({
   ratings: [],
-  personalRating: null,
-  averageRating: null,
+  personalRating: undefined,
+  averageRating: undefined,
   numOfRatings: 0,
   page: 0,
-
   filterActive: {},
   // HANDLE RATINGS POSTS
   getAllRatings: async (album_id, page_number, order, page_size) => {

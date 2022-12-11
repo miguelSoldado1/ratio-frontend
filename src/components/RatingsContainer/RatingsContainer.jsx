@@ -33,8 +33,8 @@ export const RatingsContainer = ({ albumId }) => {
         <RatingCircle value={personalRating} description={"Personal"} />
         <RatingCircle value={averageRating} description={"Community"} />
       </div>
-      {!personalRating && <SubmitRating albumId={albumId} />}
-      {!!averageRating ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
+      {personalRating === null && <SubmitRating albumId={albumId} />}
+      {averageRating !== null ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
     </div>
   );
 };
