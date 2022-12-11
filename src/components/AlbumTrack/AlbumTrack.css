@@ -3,6 +3,7 @@
     border-bottom: 0.1px solid var(--accent-text-color);
     margin-inline: 0.5em;
     padding-inline: 0.5em;
+    --track-number-size: 1.5em;
   }
 
   .album-track-outter:last-child {
@@ -10,13 +11,14 @@
   }
 
   .album-track-container {
-    width: calc(100% - var(--track-number-size));
+    width: calc(95% - var(--track-number-size));
   }
 }
 
 @media only screen and (min-width: 1026px) {
   .album-track-outter {
     padding-inline: 0.5em 1.5em;
+    --track-number-size: 2em;
   }
 
   .album-track-outter:hover {
@@ -39,10 +41,9 @@
 
 .album-track-outter {
   display: flex;
-  justify-content: space-between;
+  justify-content: space;
   align-items: center;
   gap: 0.5em;
-  --track-number-size: 2.5em;
 }
 
 .album-track-container {
@@ -68,7 +69,7 @@
 
 .album-track-number {
   width: var(--track-number-size);
-  text-align: right;
+  text-align: center;
 }
 
 .album-track-artist {
