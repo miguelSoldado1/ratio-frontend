@@ -1,7 +1,7 @@
 # Ratio Frontend
 
 - A music rating and discovery web app using the spotify API.
-https://ratiomusic.site
+- https://ratiomusic.site
 
 ## About the project
 
