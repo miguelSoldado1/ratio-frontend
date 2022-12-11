@@ -1,2 +1,2 @@
 # ratio-frontend
-[<img src="public/favicon.svg" width="25%">](https://ratiomusic.site)
+[<img src="public/favicon.svg" width="10%">](https://ratiomusic.site)
