@@ -34,10 +34,10 @@ const ratingsStore = (set, get) => ({
     const result = { ratings: ratings, personalRating: null };
     if (ratings) get().getAverageRating(albumId);
     else result.averageRating = null;
-    set({ ratings: response.data, personalRating: null, page: 0, filterActive: filters.LATEST });
+    set({ ratings: response.data, personalRating: undefined, page: 0, filterActive: filters.LATEST });
   },
   clearAllRatings: () => {
-    set({ ratings: [], averageRating: null, personalRating: null, numOfRatings: 0, page: 0, filterActive: {} });
+    set({ ratings: [], averageRating: undefined, personalRating: undefined, numOfRatings: 0, page: 0, filterActive: {} });
   },
   // HANDLE RATING VALUES
   getAverageRating: async (album_id) => {
