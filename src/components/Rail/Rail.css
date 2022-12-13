@@ -81,10 +81,12 @@
   text-overflow: ellipsis;
 }
 
+/* scrollbar never appears when on mobile */
 .grid::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
+/* scrollbar appears on hover when on desktop */
 @media (hover: hover) and (pointer: fine) {
   .grid:hover::-webkit-scrollbar-thumb {
     background-color: var(--accent-text-color) !important;
