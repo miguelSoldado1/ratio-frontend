@@ -6,6 +6,11 @@
   opacity: 0;
 }
 
+.scroll-down-button > .custom-button {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 @media only screen and (max-width: 1025px) {
   .scroll-down-button {
     opacity: 1;
