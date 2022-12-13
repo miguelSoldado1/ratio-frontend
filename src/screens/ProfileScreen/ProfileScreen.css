@@ -22,10 +22,12 @@
 
 .profile-screen-title {
   align-self: center;
+  margin: 0;
 }
 
-.profile-screen-title {
-  margin: 0;
+.profile-screen-no-ratings {
+  align-self: center;
+  font-size: 1.25em;
 }
 
 .profile-screen > .custom-button {

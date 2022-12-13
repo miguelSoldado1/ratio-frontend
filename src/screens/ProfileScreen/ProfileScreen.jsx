@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { getUsersProfile, getUserPosts } from "../../api";
 import { ProfileRating, Button, DatabaseFilters } from "../../components";
-import { ProfileScreenPL } from "../../preloaders";
+import { ProfileScreenPL, ProfileRatingPL } from "../../preloaders";
 import "./ProfileScreen.css";
 
 const NUMBER_OF_RATINGS = 8;
@@ -15,7 +15,7 @@ export const ProfileScreen = () => {
   const navigate = useNavigate();
   const [cookies, , removeCookie] = useCookies();
   const [data, setData] = useState({ rows: [], totalRows: 0, page: 0, loading: true });
-  const [filterActive, setFilterActive] = useState({ tag: undefined, query: undefined });
+  const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
   const [displayName, setDisplayName] = useState(undefined);
 
   const updateData = (key, value) => setData((prev) => ({ ...prev, [key]: value }));
@@ -32,7 +32,11 @@ export const ProfileScreen = () => {
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-    return () => setData({ rows: [], totalRows: 0, page: 0, loading: true });
+    return () => {
+      setData({ rows: [], totalRows: 0, page: 0, loading: true });
+      setFilterActive({ tag: "Latest", query: "latest" });
+      setDisplayName(undefined);
+    };
   }, [cookies?.access_token, location?.state?.display_name, userId]);
 
   useEffect(() => {
@@ -50,7 +54,7 @@ export const ProfileScreen = () => {
       }
     };
     fetchData();
-  }, [data?.page, filterActive.query, navigate, removeCookie, userId]);
+  }, [data?.page, filterActive?.query, navigate, removeCookie, userId]);
 
   if (data.loading) {
     return <ProfileScreenPL />;
@@ -71,7 +75,20 @@ export const ProfileScreen = () => {
           setPage={(value) => updateData("page", value)}
           numberOfRatings={data?.rows?.length}
         />
-        <ol>{data?.rows?.length > 0 && data.rows.map((rating) => <ProfileRating props={rating} key={rating?._id} />)}</ol>
+        {data?.rows?.length > 0 ? (
+          <ol>
+            {data.rows.map((rating) => (
+              <ProfileRating props={rating} key={rating?._id} />
+            ))}
+          </ol>
+        ) : (
+          <>
+            <h3 className="profile-screen-no-ratings">No personal ratings yet...</h3>
+            <ProfileRatingPL />
+            <ProfileRatingPL />
+            <ProfileRatingPL />
+          </>
+        )}
         {data?.totalRows > NUMBER_OF_RATINGS * (data?.page + 1) && (
           <Button onClick={() => updateData("page", data?.page + 1)}>Load more</Button>
         )}

@@ -28,15 +28,16 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
   return (
     <div className="filters">
       {Object.keys(filters).map((filter, index) => (
-        <p
+        <button
+          disabled={numberOfRatings <= 1}
           key={index}
-          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"}${
+          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"} ${
             numberOfRatings <= 1 ? "single" : ""
           }`}
           onClick={handleFilters}
         >
           {filters[filter].tag}
-        </p>
+        </button>
       ))}
     </div>
   );

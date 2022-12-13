@@ -6,8 +6,14 @@
 }
 
 .filters > .filter {
+  display: block;
   cursor: pointer;
   color: var(--accent-text-color);
+  background-color: transparent;
+  margin-block: 1em;
+  border: 0;
+  font-size: 1em;
+  padding: 0;
 }
 
 .filters > .enabled {
