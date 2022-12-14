@@ -6,12 +6,7 @@ import { ReactComponent as PayPalLogo } from "../../icons/paypal-logo.svg";
 export const SocialLogos = () => {
   return (
     <>
-      <a
-        href="https://github.com/miguelSoldado1?tab=repositories"
-        target="_blank"
-        rel="noreferrer"
-        title="GitHub"
-        className="logo">
+      <a href="https://github.com/miguelSoldado1" target="_blank" rel="noreferrer" title="GitHub" className="logo">
         <GitHubLogo />
       </a>
       <a href="https://twitter.com/ratiomusic_" target="_blank" rel="noreferrer" title="Twitter" className="logo">
@@ -22,7 +17,8 @@ export const SocialLogos = () => {
         target="_blank"
         rel="noreferrer"
         title="Paypal <3"
-        className="logo">
+        className="logo"
+      >
         <PayPalLogo />
       </a>
     </>
