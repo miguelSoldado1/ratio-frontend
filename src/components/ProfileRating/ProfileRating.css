@@ -45,7 +45,7 @@
   }
 
   .profile-ratings-circles::-webkit-scrollbar-thumb {
-    width: 55% !important;
+    width: 3em;
     background-color: var(--accent-text-color) !important;
   }
 
