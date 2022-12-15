@@ -1,6 +1,7 @@
 import create from "zustand";
 import axios from "axios";
 import { filters } from "../components/DatabaseFilters/DatabaseFilters";
+import { devtools } from "zustand/middleware";
 
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 
@@ -30,11 +31,8 @@ const ratingsStore = (set, get) => ({
       headers: { Authorization: `Bearer ${accessToken}` },
       data: { album_id: albumId, _id: ratingId },
     });
-    const ratings = response.data;
-    const result = { ratings: ratings, personalRating: null };
-    if (ratings) get().getAverageRating(albumId);
-    else result.averageRating = null;
-    set({ ratings: response.data, personalRating: undefined, page: 0, filterActive: filters.LATEST });
+    get().getAverageRating(albumId);
+    set({ ratings: response.data, personalRating: null, page: 0, filterActive: filters.LATEST });
   },
   clearAllRatings: () => {
     set({ ratings: [], averageRating: undefined, personalRating: undefined, numOfRatings: 0, page: 0, filterActive: {} });
@@ -61,4 +59,4 @@ const ratingsStore = (set, get) => ({
   setFilterActive: (filter) => set({ filterActive: filter }),
 });
 
-export const useRatingsStore = create(ratingsStore);
+export const useRatingsStore = create(devtools(ratingsStore));
