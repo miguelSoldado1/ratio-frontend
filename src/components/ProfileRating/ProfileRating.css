@@ -13,7 +13,7 @@
   }
 
   .profile-ratings-circles {
-    overflow-x: auto;
+    overflow-x: scroll;
     scroll-snap-type: inline mandatory;
     margin-right: 1em;
     padding-bottom: 0.5em;
