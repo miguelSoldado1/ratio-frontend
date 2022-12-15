@@ -44,13 +44,14 @@
     display: none;
   }
 
-  .profile-ratings-circles::-webkit-scrollbar-thumb {
-    width: 3em;
-    background-color: var(--accent-text-color) !important;
+  .profile-ratings-circles::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
   }
 
-  .profile-ratings-circles::-webkit-scrollbar-track {
-    border-radius: 1em !important;
+  .profile-ratings-circles::-webkit-scrollbar-thumb {
+    width: 55%;
+    background-color: var(--accent-text-color) !important;
   }
 }
 
