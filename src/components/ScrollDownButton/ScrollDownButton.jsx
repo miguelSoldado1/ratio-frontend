@@ -9,12 +9,12 @@ export const ScrollDownButton = ({ textAreaRef }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 700) setClicked(true);
+      if (window.scrollY > 600) setClicked(true);
     });
 
     return () => {
       window.removeEventListener("scroll", () => {
-        if (window.scrollY > 200) setClicked(false);
+        if (window.scrollY > 600) setClicked(false);
       });
     };
   }, []);
