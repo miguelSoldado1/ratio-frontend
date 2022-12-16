@@ -1,10 +1,23 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "..";
 import "./ScrollDownButton.css";
 
 export const ScrollDownButton = ({ textAreaRef }) => {
   const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 700) setClicked(true);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", () => {
+        if (window.scrollY > 200) setClicked(false);
+      });
+    };
+  }, []);
 
   const handleClick = () => {
     setClicked(true);
