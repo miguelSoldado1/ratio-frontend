@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Rail } from "../../components";
+import { Rail, Walkthrough } from "../../components";
 import { useCookies } from "react-cookie";
 import { useRailsStore } from "../../stores";
 import "./HomeScreen.css";
@@ -35,6 +35,7 @@ export const HomeScreen = () => {
       <Rail content={latestReviews} />
       <Rail content={recentlyListened} />
       <Rail content={recentlyReleased} />
+      {/* <Walkthrough /> */}
     </>
   );
 };

@@ -1,0 +1,46 @@
+.walkthrough-modal {
+  background-color: var(--background-color);
+  width: 75%;
+  height: 75%;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
+  border: 1px solid var(--hover-color);
+  box-shadow: 0 0.75em 1.5em 0 var(--hover-shadow-color);
+  justify-content: space-between;
+}
+
+.walkthrough-modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.walkthrough-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.walkthrough-modal-footer button {
+  cursor: pointer;
+  color: white;
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+  padding: 0;
+}
+
+.walkthrough-modal-navigation {
+  display: flex;
+  gap: 1em;
+}
+
+.walkthrough-modal-navigation > .disabled {
+  color: var(--accent-text-color);
+  cursor: not-allowed;
+  pointer-events: none;
+}
