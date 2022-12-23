@@ -31,7 +31,11 @@
 .avatar-image {
   border-radius: 50%;
   height: 1.875em;
-  aspect-ratio: 1;
+  width: 1.875em;
+}
+
+.avatar-image[src$=".svg"] {
+  height: 2em;
 }
 
 .avatar-name {
