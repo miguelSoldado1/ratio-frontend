@@ -36,6 +36,6 @@ let railsStore = (set, get) => ({
   },
 });
 
-railsStore = persist(railsStore, { name: "home_screen_rails", getStorage: () => sessionStorage });
+railsStore = persist(railsStore, { name: "home_screen_rails", getStorage: () => localStorage });
 
 export const useRailsStore = create(railsStore);
