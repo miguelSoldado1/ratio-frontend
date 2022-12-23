@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useRatingsStore, useUserDataStore } from "../../../../stores";
 import { handleDate } from "../../../../scripts/scripts";
+import { DeleteModal, RatingCircle } from "../../..";
 import { getUsersProfile, handleLikes } from "../../../../api";
-import { RatingCircle } from "../../../RatingCircle/RatingCircle";
-import { Modal } from "../../../Modal/Modal";
 import { ReactComponent as DeleteIcon } from "../../../../icons/delete-icon.svg";
 import { ReactComponent as HeartIcon } from "../../../../icons/heart-icon.svg";
 import avatarPlaceholder from "../../../../icons/avatar-placeholder.svg";
@@ -94,9 +93,7 @@ export const RatingsPosts = ({ post }) => {
           )}
         </div>
       </li>
-      <Modal title="Deleting rating" onSave={handleDelete} onClose={() => setShow(false)} show={show}>
-        <p>Are you sure you want to delete this rating?</p>
-      </Modal>
+      <DeleteModal show={show} handleDelete={handleDelete} onClose={() => setShow(false)} />
     </>
   );
 };
