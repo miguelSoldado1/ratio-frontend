@@ -6,17 +6,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 1.5em;
   border: 1px solid var(--hover-color);
   box-shadow: 0 0.75em 1.5em 0 var(--hover-shadow-color);
-  justify-content: space-between;
 }
 
-.walkthrough-modal-header {
+.walkthrough-modal-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
+  height: 100%;
   gap: 1em;
+  margin: 2em;
+}
+
+.walkthrough-image {
+  height: inherit;
+  width: inherit;
+  background-size: cover;
+}
+
+.walkthrough-description {
+  text-align: start;
+  width: inherit;
+  margin-left: 0.25em;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
 
 .walkthrough-modal-footer {
