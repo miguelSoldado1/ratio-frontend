@@ -24,7 +24,7 @@ export const LandingPage = () => {
         <div className="login-footer">
           <SocialLogos />
         </div>
-        <span className="login-copyright">Copyright &copy; Ratio 2022</span>
+        <span className="login-copyright">Copyright &copy; Ratio {new Date().getFullYear()}</span>
       </div>
     </div>
   );
