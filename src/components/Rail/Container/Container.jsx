@@ -3,12 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { getArtists } from "../../../scripts/scripts";
 import spotifyLogo from "../../../icons/spotify-logo.png";
 import "./Container.css";
+import { useContext } from "react";
+import { ShepherdTourContext } from "react-shepherd";
 
 export const Container = ({ props }) => {
   const navigate = useNavigate();
+  const tour = useContext(ShepherdTourContext);
 
   const handleAlbumClick = () => {
     navigate(`/album/${props.id}`);
+    if (tour.isActive()) tour.next();
   };
 
   return (
