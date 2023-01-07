@@ -1,35 +1,39 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import { handleRailRequests } from "../scripts/railsHelper";
+import { handleRailRequests, railNames } from "../scripts/railsHelper";
 
 let railsStore = (set, get) => ({
   myTopArtists: {},
+  latestReviews: {},
+  recentlyListened: {},
+  recentlyReleased: {},
+  getAllRails: async (accessToken) => {
+    const getter = get();
+    getter.getMyTopArtists(accessToken);
+    getter.getLatestReviews(accessToken);
+    getter.getRecentlyListened(accessToken);
+    getter.getRecentlyReleased(accessToken);
+  },
   getMyTopArtists: async (accessToken) => {
-    const response = await handleRailRequests(get, "myTopArtists", accessToken);
+    const response = await handleRailRequests(get, railNames[0], accessToken);
     if (response?.data || response?.error) {
       set({ myTopArtists: response });
     }
   },
-
-  latestReviews: {},
   getLatestReviews: async (accessToken) => {
-    const response = await handleRailRequests(get, "latestReviews", accessToken);
+    const response = await handleRailRequests(get, railNames[1], accessToken);
     if (response?.data || response?.error) {
       set({ latestReviews: response });
     }
   },
-
-  recentlyListened: {},
   getRecentlyListened: async (accessToken) => {
-    const response = await handleRailRequests(get, "recentlyListened", accessToken);
+    const response = await handleRailRequests(get, railNames[2], accessToken);
     if (response?.data || response?.error) {
       set({ recentlyListened: response });
     }
   },
-
-  recentlyReleased: {},
   getRecentlyReleased: async (accessToken) => {
-    const response = await handleRailRequests(get, "recentlyReleased", accessToken);
+    const response = await handleRailRequests(get, railNames[3], accessToken);
     if (response?.data || response?.error) {
       set({ recentlyReleased: response });
     }

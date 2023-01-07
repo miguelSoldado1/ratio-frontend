@@ -48,12 +48,7 @@ const steps = [
   },
 ];
 const tourOptions = {
-  defaultStepOptions: {
-    cancelIcon: {
-      enabled: true,
-    },
-    scrollTo: { block: "end", inline: "end" },
-  },
+  defaultStepOptions: { scrollTo: { block: "end", inline: "end" } },
   useModalOverlay: true,
 };
 
