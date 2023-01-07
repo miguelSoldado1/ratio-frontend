@@ -26,8 +26,6 @@ export const handleRailRequests = async (get, mapping, accessToken, userId = "nu
   }
 };
 
-export const railNames = { 0: "myTopArtists", 1: "latestReviews", 2: "recentlyListened", 3: "recentlyReleased" };
-
 const railMapping = {
   myTopArtists: {
     description: "From your favourite artists",
