@@ -13,7 +13,6 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "react-shepherd": "^4.1.0",
     "react-transition-group": "^4.4.5",
     "web-vitals": "^2.1.4",
     "zustand": "^4.0.0-rc.1"

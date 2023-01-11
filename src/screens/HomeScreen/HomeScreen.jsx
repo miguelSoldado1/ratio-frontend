@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Rail } from "../../components";
 import { useCookies } from "react-cookie";
 import { useRailsStore } from "../../stores";
 import "./HomeScreen.css";
-import { ShepherdTourContext } from "react-shepherd";
 
 export const HomeScreen = () => {
   const getAllRails = useRailsStore((state) => state.getAllRails);
@@ -14,8 +13,6 @@ export const HomeScreen = () => {
     state.recentlyListened,
   ]);
   const [cookies, , removeCookie] = useCookies();
-  const tour = useContext(ShepherdTourContext);
-  const tourDisplayed = localStorage.getItem("tourDisplayed");
 
   useEffect(() => {
     try {
@@ -24,13 +21,6 @@ export const HomeScreen = () => {
       removeCookie("access_token", { path: "/" });
     }
   }, [cookies?.access_token, getAllRails, removeCookie]);
-
-  useEffect(() => {
-    if (!tourDisplayed) {
-      // tour.start();
-      // localStorage.setItem("tourDisplayed", true);
-    }
-  }, [tour, tourDisplayed]);
 
   return (
     <div className="rails-container">

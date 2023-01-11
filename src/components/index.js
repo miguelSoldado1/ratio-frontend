@@ -21,4 +21,3 @@ export * from "./SocialLogos/SocialLogos";
 export * from "./ScrollDownButton/ScrollDownButton";
 export * from "./Modal/Modal";
 export * from "./DeleteModal/DeleteModal";
-export * from "./Walkthrough/Walkthrough";
