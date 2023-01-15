@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
-import { DeleteModal } from "../../../../DeleteModal/DeleteModal";
+import { DeleteModal } from "./DeleteModal/DeleteModal";
 import { ReactComponent as DeleteIcon } from "../../../../../icons/delete-icon.svg";
 import { useRatingsStore } from "../../../../../stores";
 

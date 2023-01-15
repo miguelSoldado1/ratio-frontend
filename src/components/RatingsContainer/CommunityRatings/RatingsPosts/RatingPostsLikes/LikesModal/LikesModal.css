@@ -1,0 +1,45 @@
+.likes-modal-content {
+  background-color: var(--background-color);
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0.75em 1.5em 0 var(--hover-shadow-color);
+}
+
+.likes-users-list {
+}
+
+.likes-avatar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  height: 2em;
+  text-decoration: none !important;
+  gap: 0.35em;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+.likes-avatar:hover {
+  background-color: var(--hover-color);
+  text-decoration: none;
+}
+
+.likes-avatar-img {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+}
+
+.likes-avatar-img[src$=".svg"] {
+  height: 2em;
+}
+
+.likes-avatar-name {
+  margin-left: 0.25em;
+  text-decoration: none;
+}

@@ -20,4 +20,4 @@ export * from "./Footer/Footer";
 export * from "./SocialLogos/SocialLogos";
 export * from "./ScrollDownButton/ScrollDownButton";
 export * from "./Modal/Modal";
-export * from "./DeleteModal/DeleteModal";
+export * from "./LongPressButton/LongPressButton";

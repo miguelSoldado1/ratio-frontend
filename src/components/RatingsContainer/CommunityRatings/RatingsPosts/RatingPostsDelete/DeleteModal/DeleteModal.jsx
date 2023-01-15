@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as RatioLogo } from "../../icons/ratio-logo.svg";
-import { Button, Modal } from "../../components";
+import { ReactComponent as RatioLogo } from "../../../../../../icons/ratio-logo.svg";
+import { Button, Modal } from "../../../../..";
 import "./DeleteModal.css";
 
 export const DeleteModal = ({ handleDelete, onClose, show }) => {

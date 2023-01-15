@@ -38,3 +38,11 @@ export const handleLikes = (ratingId, accessToken, liked) => {
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
 };
+
+export const getPostLikes = async (post_id, accessToken) => {
+  const response = await axios.get(`${BACK_END_URL}/getPostLikes`, {
+    params: { post_id },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  return response.data;
+};

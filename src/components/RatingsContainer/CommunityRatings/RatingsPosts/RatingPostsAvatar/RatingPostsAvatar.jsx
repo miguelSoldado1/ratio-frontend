@@ -36,7 +36,7 @@ export const RatingPostsAvatar = ({ userId }) => {
         src={profileData?.image_url ?? avatarPlaceholder}
         loading="lazy"
       />
-      <p className="post-avatabr-name">{profileData?.display_name}</p>
+      <p className="post-avatar-name">{profileData?.display_name}</p>
     </Link>
   );
 };
