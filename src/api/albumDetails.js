@@ -33,8 +33,8 @@ export const getUsersProfile = async (user_id, accessToken) => {
 
 export const handleLikes = (ratingId, accessToken, liked) => {
   axios.patch(
-    `${BACK_END_URL}/${ratingId}/handleLikes`,
-    { liked: liked },
+    `${BACK_END_URL}/handleLikes`,
+    { liked: liked, ratingId: ratingId },
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
 };
