@@ -12,7 +12,7 @@
 }
 
 .likes-users-list {
-  height: calc(5 * 3em);
+  max-height: calc(5 * 3em);
 }
 
 .likes-avatar {

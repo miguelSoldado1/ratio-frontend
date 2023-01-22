@@ -11,8 +11,9 @@ import "./LikesModal.css";
 export const LikesModal = ({ onClose, show, ratingId }) => {
   const [cookies, , removeCookie] = useCookies();
   const contentRef = useRef(null);
-  useInfiniteScroller(loadMoreData, contentRef, show);
   const [userProfiles, setUserProfiles] = useState({ users: [], cursor: undefined, count: undefined });
+  const stopFetching = userProfiles.count >= userProfiles.users.length || userProfiles.cursor !== undefined || !show;
+  useInfiniteScroller(loadMoreData, contentRef, stopFetching);
 
   useEffect(() => {
     if (show) {
