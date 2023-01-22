@@ -1,30 +1,43 @@
 import React, { useEffect } from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { Modal } from "../../../../..";
 import { getPostLikes } from "../../../../../../api";
+import { useInfiniteScroller } from "../../../../../../hooks/useInfiniteScroller";
 import avatarPlaceholder from "../../../../../../icons/avatar-placeholder.svg";
 import "./LikesModal.css";
 
 export const LikesModal = ({ onClose, show, ratingId }) => {
-  const [cookies] = useCookies();
-  const [userProfiles, setUserProfiles] = useState([]);
+  const [cookies, , removeCookie] = useCookies();
+  const contentRef = useRef(null);
+  useInfiniteScroller(loadMoreData, contentRef, show);
+  const [userProfiles, setUserProfiles] = useState({ users: [], cursor: undefined, count: undefined });
 
   useEffect(() => {
     if (show) {
-      (async () => {
-        const { postLikes } = await getPostLikes(ratingId, cookies.access_token);
-        setUserProfiles(postLikes);
-      })();
+      loadMoreData();
+    } else {
+      setUserProfiles({ users: [], cursor: undefined, count: undefined });
     }
-  }, [cookies.access_token, ratingId, show]);
+  }, [show]);
+
+  // I do prefer arrow functions but this needs to be hoisted at the top.
+  async function loadMoreData() {
+    try {
+      const { postLikes, count, cursor } = await getPostLikes(ratingId, cookies.access_token, userProfiles.cursor);
+      setUserProfiles((oldData) => ({ cursor: cursor, users: [...oldData.users, ...postLikes], count: count }));
+    } catch (error) {
+      removeCookie("access_token", { path: "/" });
+    }
+  }
 
   return (
     <Modal show={show} onClose={onClose}>
-      <div className="likes-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="likes-modal-content" onClick={(e) => e.stopPropagation()} ref={contentRef}>
         <ol className="likes-users-list">
-          {userProfiles.map((user) => (
-            <LikesAvatar user={user} key={user.id} />
+          {userProfiles.users.map((user) => (
+            <LikesAvatar user={user} key={user?.id} />
           ))}
         </ol>
       </div>
