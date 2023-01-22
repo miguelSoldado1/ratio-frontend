@@ -12,7 +12,7 @@ const isOverflown = (element) => {
 };
 
 // TODO When .has() CSS selector is more widely supported replace the expanded state
-export const RatingsPosts = ({ post: { user_id, comment, rating, createdAt, _id, likes, album_id } }) => {
+export const RatingsPosts = ({ post: { user_id, comment, rating, createdAt, _id, likes, album_id, liked_by_user } }) => {
   const { id: userDataId } = useUserDataStore((state) => state.userData);
   const [overflow, setOverflow] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -38,7 +38,7 @@ export const RatingsPosts = ({ post: { user_id, comment, rating, createdAt, _id,
       </div>
       <div className="rating-posts-footer">
         <div>
-          <RatingPostsLikes likes={likes} ratingId={_id} userDataId={userDataId} />
+          <RatingPostsLikes likes={likes} ratingId={_id} likedByUser={liked_by_user} />
           {userDataId === user_id && <RatingPostsDelete ratingId={_id} albumId={album_id} />}
         </div>
         {overflow && (

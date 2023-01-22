@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { handleLikes } from "../../../../../api";
 import { ReactComponent as HeartIcon } from "../../../../../icons/heart-icon.svg";
@@ -7,16 +7,12 @@ import { LikesModal } from "./LikesModal/LikesModal";
 
 const numberFormatter = Intl.NumberFormat("en", { notation: "compact" });
 
-export const RatingPostsLikes = ({ likes, ratingId, userDataId }) => {
-  const [likeCount, setLikeCount] = useState(likes.length);
-  const [liked, setLiked] = useState(false);
+export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
+  const [likeCount, setLikeCount] = useState(likes);
+  const [liked, setLiked] = useState(likedByUser);
   const [show, setShow] = useState(false);
   const [cookies] = useCookies();
   const likeAddOnText = likeCount === 1 ? "Like" : "Likes";
-
-  useEffect(() => {
-    if (likes.findIndex((element) => element === userDataId) >= 0) setLiked(true);
-  }, [likes, userDataId]);
 
   const handleLike = () => {
     try {
