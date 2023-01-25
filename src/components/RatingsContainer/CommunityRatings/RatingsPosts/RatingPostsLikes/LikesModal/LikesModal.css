@@ -1,45 +1,24 @@
 .likes-modal-content {
   background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-inline: 2em;
   border: 1px solid var(--hover-color);
   border-radius: 1em;
   box-shadow: 0 0.75em 1.5em 0 var(--hover-shadow-color);
-  overflow: auto;
-}
-
-.likes-users-list {
-  max-height: calc(5 * 3em);
-}
-
-.likes-avatar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0.5em 1em;
-  height: 2em;
-  text-decoration: none !important;
-  gap: 0.35em;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
 }
 
-.likes-avatar-img {
-  width: 1.8em;
-  height: 1.8em;
-  border-radius: 50%;
+.likes-modal-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(5 * 3em);
+  padding-inline: 1em;
+  padding-block: 0.5em;
+  width: 15em;
 }
 
-.likes-avatar-img[src$=".svg"] {
-  height: 2em;
-}
-
-.likes-avatar-name {
-  margin-left: 0.25em;
-  text-decoration: none;
+.likes-modal-title {
+  margin: 1em;
+  opacity: 0.1em;
 }

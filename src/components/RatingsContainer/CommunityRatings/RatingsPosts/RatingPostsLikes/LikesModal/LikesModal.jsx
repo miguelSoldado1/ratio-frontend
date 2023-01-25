@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { Modal } from "../../../../..";
+import { Loading, Modal } from "../../../../..";
 import { getPostLikes } from "../../../../../../api";
 import { useInfiniteScroller } from "../../../../../../hooks/useInfiniteScroller";
-import avatarPlaceholder from "../../../../../../icons/avatar-placeholder.svg";
+import { LikesAvatar } from "./LikesAvatar/LikesAvatar";
 import "./LikesModal.css";
 
 export const LikesModal = ({ onClose, show, ratingId }) => {
   const [cookies, , removeCookie] = useCookies();
   const contentRef = useRef(null);
+  const [loading, setLoading] = useState(true);
   const [userProfiles, setUserProfiles] = useState({ users: [], cursor: undefined, count: undefined });
   const stopFetching = userProfiles.count >= userProfiles.users.length || userProfiles.cursor !== undefined || !show;
   useInfiniteScroller(loadMoreData, contentRef, stopFetching);
@@ -27,6 +28,7 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
   async function loadMoreData() {
     try {
       const { postLikes, count, cursor } = await getPostLikes(ratingId, cookies.access_token, userProfiles.cursor);
+      setLoading(cursor !== null);
       setUserProfiles((oldData) => ({ cursor: cursor, users: [...oldData.users, ...postLikes], count: count }));
     } catch (error) {
       removeCookie("access_token", { path: "/" });
@@ -35,22 +37,19 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
 
   return (
     <Modal show={show} onClose={onClose}>
-      <div className="likes-modal-content" onClick={(e) => e.stopPropagation()} ref={contentRef}>
-        <ol className="likes-users-list">
-          {userProfiles.users.map((user) => (
-            <LikesAvatar user={user} key={user?.id} />
-          ))}
-        </ol>
-      </div>
+      {userProfiles.users.length > 0 && (
+        <div className="likes-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="likes-modal-title">
+            <h2>Liked by</h2>
+          </div>
+          <div className="likes-modal-list" ref={contentRef}>
+            {userProfiles.users.map((user) => (
+              <LikesAvatar user={user} key={user?.id} />
+            ))}
+            {loading && <Loading />}
+          </div>
+        </div>
+      )}
     </Modal>
-  );
-};
-
-const LikesAvatar = ({ user }) => {
-  return (
-    <li className="likes-avatar" to={`/profile/${user?.id}`} state={{ display_name: user?.display_name }}>
-      <img className="likes-avatar-img" alt={user?.display_name} src={user?.image_url ?? avatarPlaceholder} loading="lazy" />
-      <p className="likes-avatar-name">{user?.display_name}</p>
-    </li>
   );
 };
