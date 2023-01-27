@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 
 export const useInfiniteScroller = (callback, ref, stopFetching = false) => {
   const handleScroll = useCallback(() => {
-    if (ref.current.scrollHeight - ref.current.scrollTop === ref.current.clientHeight) {
+    if (Math.round(ref.current.scrollHeight - ref.current.scrollTop) === ref.current.clientHeight) {
       callback();
     }
   }, [callback, ref]);

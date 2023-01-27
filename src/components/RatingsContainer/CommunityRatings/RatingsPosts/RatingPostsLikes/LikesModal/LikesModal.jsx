@@ -11,25 +11,24 @@ import "./LikesModal.css";
 export const LikesModal = ({ onClose, show, ratingId }) => {
   const [cookies, , removeCookie] = useCookies();
   const contentRef = useRef(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [userProfiles, setUserProfiles] = useState({ users: [], cursor: undefined, count: undefined });
-  const stopFetching = userProfiles.count >= userProfiles.users.length || userProfiles.cursor !== undefined || !show;
-  useInfiniteScroller(loadMoreData, contentRef, stopFetching);
+  useInfiniteScroller(loadMoreData, contentRef, show);
 
   useEffect(() => {
-    if (show) {
-      loadMoreData();
-    } else {
-      setUserProfiles({ users: [], cursor: undefined, count: undefined });
-    }
+    if (show && userProfiles.users.length <= 0) loadMoreData();
   }, [show]);
 
   // I do prefer arrow functions but this needs to be hoisted at the top.
   async function loadMoreData() {
     try {
-      const { postLikes, count, cursor } = await getPostLikes(ratingId, cookies.access_token, userProfiles.cursor);
-      setLoading(cursor !== null);
-      setUserProfiles((oldData) => ({ cursor: cursor, users: [...oldData.users, ...postLikes], count: count }));
+      console.log("here");
+      if (!loading && userProfiles.cursor !== null) {
+        setLoading(true);
+        const { postLikes, count, cursor } = await getPostLikes(ratingId, cookies.access_token, userProfiles.cursor);
+        setUserProfiles((oldData) => ({ cursor: cursor, users: [...oldData.users, ...postLikes], count: count }));
+        setLoading(false);
+      }
     } catch (error) {
       removeCookie("access_token", { path: "/" });
     }
