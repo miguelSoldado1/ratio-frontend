@@ -33,12 +33,13 @@ export const handleDate = (dateString, currentTime = Date.now()) => {
 };
 
 export const getArtists = (artists) => {
-  const names = artists.map((item) => item.name);
+  const names = artists?.map((item) => item.name);
   return names.join(", ");
 };
 
 export const renderArtists = (artists) => {
-  return artists?.map((item, index) => (
+  if (!artists) return null;
+  return artists.map((item, index) => (
     <React.Fragment key={item.id}>
       <a href={item.uri}>{item.name}</a>
       {artists.length - 1 > index && <span>, </span>}
