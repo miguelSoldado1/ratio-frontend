@@ -1,0 +1,30 @@
+.loading-carousel {
+  display: flex;
+  justify-content: center;
+}
+
+.dot-carousel {
+  --color: white;
+  position: relative;
+  left: -624.9375em;
+  width: 0.625em;
+  height: 0.625em;
+  border-radius: 0.3125em;
+  margin: 0.25em;
+  background-color: var(--color);
+  color: var(--color);
+  box-shadow: 624em 0 0 0 var(--color), 624.9375em 0 0 0 var(--color), 625.875em 0 0 0 var(--color);
+  animation: dot-carousel 1.5s infinite linear;
+}
+
+@keyframes dot-carousel {
+  0% {
+    box-shadow: 624em 0 0 -0.0625em var(--color), 624.9375em 0 0 0.0625em var(--color), 625.875em 0 0 -0.0625em var(--color);
+  }
+  50% {
+    box-shadow: 625.875em 0 0 -0.0625em var(--color), 624em 0 0 -0.0625em var(--color), 624.9375em 0 0 0.0625em var(--color);
+  }
+  100% {
+    box-shadow: 624.9375em 0 0 0.0625em var(--color), 625.875em 0 0 -0.0625em var(--color), 624em 0 0 -0.0625em var(--color);
+  }
+}
