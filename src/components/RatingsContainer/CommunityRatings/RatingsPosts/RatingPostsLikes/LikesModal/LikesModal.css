@@ -12,6 +12,7 @@
 .likes-modal-list {
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: 3em;
   max-height: calc(5 * 3em);
   padding-inline: 1em;
   padding-block: 0.5em;
