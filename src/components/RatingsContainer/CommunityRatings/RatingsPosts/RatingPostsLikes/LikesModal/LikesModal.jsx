@@ -43,7 +43,7 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
         </div>
         <div className="likes-modal-list" ref={contentRef}>
           {userProfiles.users.map((user) => (
-            <LikesAvatar user={user} key={user?.id} />
+            <LikesAvatar user={user} key={user.like_id} />
           ))}
           {loading && <Loading />}
         </div>
