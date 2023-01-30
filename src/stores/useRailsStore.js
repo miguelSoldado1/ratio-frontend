@@ -2,34 +2,48 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import { handleRailRequests } from "../scripts/railsHelper";
 
+const railNames = {
+  myTopArtists: 0,
+  latestReviews: 1,
+  recentlyListened: 2,
+  recentlyReleased: 3,
+};
+
+const railNamesKeys = Object.keys(railNames);
+
 let railsStore = (set, get) => ({
   myTopArtists: {},
+  latestReviews: {},
+  recentlyListened: {},
+  recentlyReleased: {},
+
+  getAllRails: async (accessToken) => {
+    const getter = get();
+    getter.getMyTopArtists(accessToken);
+    getter.getLatestReviews(accessToken);
+    getter.getRecentlyListened(accessToken);
+    getter.getRecentlyReleased(accessToken);
+  },
   getMyTopArtists: async (accessToken) => {
-    const response = await handleRailRequests(get, "myTopArtists", accessToken);
+    const response = await handleRailRequests(get, railNamesKeys[railNames.myTopArtists], accessToken);
     if (response?.data || response?.error) {
       set({ myTopArtists: response });
     }
   },
-
-  latestReviews: {},
   getLatestReviews: async (accessToken) => {
-    const response = await handleRailRequests(get, "latestReviews", accessToken);
+    const response = await handleRailRequests(get, railNamesKeys[railNames.latestReviews], accessToken);
     if (response?.data || response?.error) {
       set({ latestReviews: response });
     }
   },
-
-  recentlyListened: {},
   getRecentlyListened: async (accessToken) => {
-    const response = await handleRailRequests(get, "recentlyListened", accessToken);
+    const response = await handleRailRequests(get, railNamesKeys[railNames.recentlyListened], accessToken);
     if (response?.data || response?.error) {
       set({ recentlyListened: response });
     }
   },
-
-  recentlyReleased: {},
   getRecentlyReleased: async (accessToken) => {
-    const response = await handleRailRequests(get, "recentlyReleased", accessToken);
+    const response = await handleRailRequests(get, railNamesKeys[railNames.recentlyReleased], accessToken);
     if (response?.data || response?.error) {
       set({ recentlyReleased: response });
     }

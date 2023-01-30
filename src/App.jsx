@@ -14,7 +14,7 @@ const App = () => {
   const [cookies, setCookies] = useCookies();
   const navigate = useNavigate();
 
-  // DO NOT ADD NAVIGATE AS A DEPENDENCY, IT BREAKS THE PROFILE PAGE NAVIGATION
+  // DO NOT ADD NAVIGATE AS A DEPENDENCY, IT BREAKS THE PROFILE PAGE NAVIGATION.
   useEffect(() => {
     if (access_token && expires_in) {
       setCookies("access_token", access_token, { maxAge: expires_in });

@@ -13,9 +13,9 @@ const ratingsStore = (set, get) => ({
   page: 0,
   filterActive: {},
   // HANDLE RATINGS POSTS
-  getAllRatings: async (album_id, page_number, order, page_size) => {
+  getAllRatings: async (album_id, page_number, order, page_size, user_id) => {
     const response = await axios.get(`${BACK_END_URL}/getCommunityAlbumRating`, {
-      params: { album_id, page_number, order, page_size },
+      params: { album_id, page_number, order, page_size, user_id },
     });
     set({ ratings: response.data });
   },

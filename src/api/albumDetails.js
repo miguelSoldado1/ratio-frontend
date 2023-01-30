@@ -33,8 +33,16 @@ export const getUsersProfile = async (user_id, accessToken) => {
 
 export const handleLikes = (ratingId, accessToken, liked) => {
   axios.patch(
-    `${BACK_END_URL}/${ratingId}/handleLikes`,
-    { liked: liked },
+    `${BACK_END_URL}/handleLikes`,
+    { liked: liked, ratingId: ratingId },
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
+};
+
+export const getPostLikes = async (post_id, accessToken, cursor, page_size) => {
+  const response = await axios.get(`${BACK_END_URL}/getPostLikes`, {
+    params: { post_id, cursor, page_size },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  return response.data;
 };

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRatingsStore } from "../../../stores";
+import { useRatingsStore, useUserDataStore } from "../../../stores";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import "./CommunityRatings.css";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
@@ -15,14 +15,15 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
     state.decrementPage,
     state.setPage,
   ]);
+  const id = useUserDataStore((state) => state.userData.id);
   const [filterActive, setFilterActive] = useRatingsStore((state) => [state.filterActive, state.setFilterActive]);
   const maxNumOfPages = Math.ceil(numOfRatings / PAGE_SIZE);
 
   useEffect(() => {
     if (albumId && page >= 0 && filterActive?.query) {
-      getAllRatings(albumId, page, filterActive.query, PAGE_SIZE);
+      getAllRatings(albumId, page, filterActive.query, PAGE_SIZE, id);
     }
-  }, [albumId, page, filterActive, getAllRatings]);
+  }, [albumId, page, filterActive, getAllRatings, id]);
 
   const handleNavigation = (reference) => {
     if (reference === navigationMapping.FORWARD && maxNumOfPages > page + 1) return incrementPage();

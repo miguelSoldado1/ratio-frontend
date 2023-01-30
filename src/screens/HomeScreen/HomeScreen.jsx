@@ -5,36 +5,29 @@ import { useRailsStore } from "../../stores";
 import "./HomeScreen.css";
 
 export const HomeScreen = () => {
-  const [myTopArtists, getMyTopArtists] = useRailsStore((state) => [state.myTopArtists, state.getMyTopArtists]);
-  const [latestReviews, getLatestReviews] = useRailsStore((state) => [state.latestReviews, state.getLatestReviews]);
-  const [recentlyListened, getRecentlyListened] = useRailsStore((state) => [
-    state.recentlyListened,
-    state.getRecentlyListened,
-  ]);
-  const [recentlyReleased, getRecentlyReleased] = useRailsStore((state) => [
+  const getAllRails = useRailsStore((state) => state.getAllRails);
+  const [myTopArtists, recentlyReleased, latestReviews, recentlyListened] = useRailsStore((state) => [
+    state.myTopArtists,
     state.recentlyReleased,
-    state.getRecentlyReleased,
+    state.latestReviews,
+    state.recentlyListened,
   ]);
   const [cookies, , removeCookie] = useCookies();
 
   useEffect(() => {
     try {
-      const access_token = cookies?.access_token;
-      getMyTopArtists(access_token);
-      getLatestReviews(access_token);
-      getRecentlyListened(access_token);
-      getRecentlyReleased(access_token);
+      getAllRails(cookies?.access_token);
     } catch (error) {
       removeCookie("access_token", { path: "/" });
     }
-  }, [getMyTopArtists, getLatestReviews, getRecentlyListened, getRecentlyReleased, cookies.access_token, removeCookie]);
+  }, [cookies?.access_token, getAllRails, removeCookie]);
 
   return (
-    <>
+    <div className="rails-container">
       <Rail content={myTopArtists} />
       <Rail content={latestReviews} />
       <Rail content={recentlyListened} />
       <Rail content={recentlyReleased} />
-    </>
+    </div>
   );
 };

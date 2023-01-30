@@ -1,0 +1,44 @@
+.likes-avatar-container {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  height: 2em;
+  gap: 1em;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.likes-avatar-container:hover {
+  text-decoration: none;
+  background-color: var(--hover-color);
+}
+
+.likes-avatar-img {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+}
+
+.likes-avatar-img[src$=".svg"] {
+  height: 2em;
+}
+
+.likes-avatar-text {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: flex-start;
+  gap: 0.15em;
+}
+
+.likes-avatar-text > * {
+  margin: 0;
+}
+
+.likes-avatar-date {
+  font-size: 0.75em;
+  color: var(--accent-text-color);
+}

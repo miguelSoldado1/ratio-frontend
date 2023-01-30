@@ -75,6 +75,11 @@
   padding: 0.3em 0.6em;
   font-size: 1em;
   min-width: 4.65em;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .heart > * {
@@ -104,27 +109,4 @@
 
 .rating-posts-body > .rating-circle-container > * {
   font-size: 0.35em;
-}
-
-/* AVATAR */
-
-.post-avatar {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 1em;
-  padding: 0.1em 0.75em 0.1em 0.4em;
-  height: 2em;
-  text-decoration: none !important;
-  gap: 0.35em;
-}
-
-.post-avatar-img {
-  width: 1.8em;
-  border-radius: 50%;
-}
-
-.post-avatar-name {
-  margin-left: 0.5em;
-  text-decoration: none;
 }

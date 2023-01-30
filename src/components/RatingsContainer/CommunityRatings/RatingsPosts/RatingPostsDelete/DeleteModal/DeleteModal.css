@@ -1,0 +1,34 @@
+.delete-modal-content {
+  background-color: var(--background-color);
+  transition: all 0.3s ease-in-out;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  margin-inline: 2em;
+  border: 1px solid var(--hover-color);
+  border-radius: 1em;
+  box-shadow: 0 0.75em 1.5em 0 var(--hover-shadow-color);
+}
+
+.delete-modal-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.delete-modal-text {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.delete-modal-buttons {
+  display: flex;
+  gap: 1em;
+}
+
+.delete-modal-buttons > .custom-button {
+  padding: 0.25em 1em;
+}

@@ -1,19 +1,25 @@
 import React, { useEffect, useCallback } from "react";
+import { useRef } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import { ReactComponent as RatioLogo } from "../../icons/ratio-logo.svg";
-import { Button } from "../../components";
 import "./Modal.css";
 
-export const Modal = (props) => {
+export const Modal = ({ onClose, show, children }) => {
+  const nodeRef = useRef(null);
+
   const closeOnEscapeKeyDown = useCallback(
     (e) => {
       if ((e.charCode || e.keyCode) === 27) {
-        props.onClose();
+        onClose();
       }
     },
-    [props]
+    [onClose]
   );
+
+  useEffect(() => {
+    if (show) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+  }, [show]);
 
   useEffect(() => {
     document.body.addEventListener("keydown", closeOnEscapeKeyDown);
@@ -23,20 +29,9 @@ export const Modal = (props) => {
   }, [closeOnEscapeKeyDown]);
 
   return ReactDOM.createPortal(
-    <CSSTransition in={props.show} unmountOnExit timeout={{ enter: 0, exit: 300 }}>
-      <div className="modal" onClick={props.onClose}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-title">
-            <RatioLogo title="Ratio" />
-            <span className="modal-text">Are you sure you want to delete this rating?</span>
-          </div>
-          <div className="modal-buttons">
-            <Button onClick={props.onSave}>Delete</Button>
-            <Button className="cancel-button" onClick={props.onClose}>
-              Cancel
-            </Button>
-          </div>
-        </div>
+    <CSSTransition in={show} unmountOnExit timeout={{ enter: 0, exit: 300 }} nodeRef={nodeRef}>
+      <div className="modal" onClick={onClose} ref={nodeRef}>
+        {children}
       </div>
     </CSSTransition>,
     document.getElementById("root")
