@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useUserDataStore } from "../../../../stores";
 import { handleDate } from "../../../../scripts/scripts";
 import { RatingCircle } from "../../..";
-import { RatingPostsDelete } from "./RatingPostsDelete/RatingPostsDelete";
 import { RatingPostsLikes } from "./RatingPostsLikes/RatingPostsLikes";
 import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";
 import "./RatingsPosts.css";
@@ -12,8 +10,8 @@ const isOverflown = (element) => {
 };
 
 // TODO When .has() CSS selector is more widely supported replace the expanded state
-export const RatingsPosts = ({ post: { user_id, comment, rating, createdAt, _id, likes, album_id, liked_by_user } }) => {
-  const { id: userDataId } = useUserDataStore((state) => state.userData);
+export const RatingsPosts = ({ post, children }) => {
+  const { user_id, comment, rating, createdAt, _id, likes, liked_by_user } = post;
   const [overflow, setOverflow] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const ref = useRef(null);
@@ -39,7 +37,7 @@ export const RatingsPosts = ({ post: { user_id, comment, rating, createdAt, _id,
       <div className="rating-posts-footer">
         <div>
           <RatingPostsLikes likes={likes} ratingId={_id} likedByUser={liked_by_user} />
-          {userDataId === user_id && <RatingPostsDelete ratingId={_id} albumId={album_id} />}
+          {children}
         </div>
         {overflow && (
           <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={() => setExpanded(!expanded)} />

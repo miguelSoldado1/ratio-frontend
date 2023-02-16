@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 import CircularSlider from "@fseehawer/react-circular-slider";
-import { useRatingsStore } from "../../../stores";
-import "./SubmitRating.css";
-import { useRef } from "react";
 import { ScrollDownButton } from "../../../components";
+import { createRating } from "../../../api";
+import "./SubmitRating.css";
 
 const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;
 const SLIDER_PROGRESS = window.innerWidth > window.innerHeight ? window.innerWidth / 100 : window.innerHeight / 50;
@@ -15,14 +15,21 @@ const MIN_CHARS = 3;
 const MAX_NUM_OF_LINES = 12;
 
 export const SubmitRating = ({ albumId }) => {
-  const [createRating, personalRating] = useRatingsStore((state) => [state.createRating, state.personalRating]);
-  const [cookies] = useCookies();
-  // const [description, setDescription] = useState("");
+  const queryClient = useQueryClient();
+  const [{ access_token }] = useCookies();
   const [rating, setRating] = useState(-1);
   const [errorMessage, setErrorMessage] = useState(null);
   const [numOfLines, setNumOfLines] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
   const textAreaRef = useRef(null);
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: createRating,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["ratings"]);
+      queryClient.invalidateQueries(["personalRating"]);
+      queryClient.invalidateQueries(["averageRating"]);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,10 +45,9 @@ export const SubmitRating = ({ albumId }) => {
       setErrorMessage("Way too many lines...");
       return;
     }
-    if (!submitting) {
+    if (!isLoading) {
       setErrorMessage(null);
-      setSubmitting(true);
-      createRating({ album_id: albumId, rating: rating, comment: textAreaRef.current.value }, cookies.access_token);
+      mutate({ data: { album_id: albumId, rating: rating, comment: textAreaRef.current.value }, access_token });
     }
   };
 
@@ -71,7 +77,7 @@ export const SubmitRating = ({ albumId }) => {
             />
             <span className="submit-rating-form-error">{errorMessage}</span>
           </div>
-          <input className="custom-button submit" type="submit" value="Submit" disabled={submitting} />
+          <input className="custom-button submit" type="submit" value="Submit" disabled={isLoading} />
         </form>
         <div className="submit-rating-cirlce">
           <CircularSlider
@@ -95,7 +101,7 @@ export const SubmitRating = ({ albumId }) => {
           />
         </div>
       </div>
-      {textAreaRef && personalRating === null && <ScrollDownButton textAreaRef={textAreaRef} />}
+      {textAreaRef && <ScrollDownButton textAreaRef={textAreaRef} />}
     </>
   );
 };

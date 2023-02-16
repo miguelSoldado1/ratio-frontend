@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useCookies } from "react-cookie";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getUsersProfile } from "../../../../../api";
 import { useUserDataStore } from "../../../../../stores";
@@ -7,26 +8,18 @@ import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
 import "./RatingPostsAvatar.css";
 
 export const RatingPostsAvatar = ({ userId }) => {
-  const [profileData, setProfileData] = useState();
   const userData = useUserDataStore((state) => state.userData);
-  const [cookies] = useCookies();
+  const [{ access_token }] = useCookies();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (userData.id === userId) {
-          setProfileData(userData);
-        } else {
-          const userData = await getUsersProfile(userId, cookies.access_token);
-          setProfileData(userData);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-    return () => setProfileData();
-  }, [cookies.access_token, userData, userId]);
+  const { data: profileData } = useQuery({
+    queryKey: ["profile", userId, access_token],
+    queryFn: () => handleUserProfile(userId, access_token),
+  });
+
+  const handleUserProfile = async (userId, accessToken) => {
+    if (userData.id === userId) return userData;
+    return await getUsersProfile(userId, accessToken);
+  };
 
   return (
     <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>

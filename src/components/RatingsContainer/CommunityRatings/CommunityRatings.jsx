@@ -1,34 +1,40 @@
-import { useEffect } from "react";
-import { useRatingsStore, useUserDataStore } from "../../../stores";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useUserDataStore } from "../../../stores";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
-import "./CommunityRatings.css";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
+import { getAllRatings } from "../../../api";
+import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
 import "./CommunityRatings.css";
 
 const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const [getAllRatings, ratings] = useRatingsStore((state) => [state.getAllRatings, state.ratings]);
-  const [page, incrementPage, decrementPage, setPage] = useRatingsStore((state) => [
-    state.page,
-    state.incrementPage,
-    state.decrementPage,
-    state.setPage,
-  ]);
   const id = useUserDataStore((state) => state.userData.id);
-  const [filterActive, setFilterActive] = useRatingsStore((state) => [state.filterActive, state.setFilterActive]);
+  const [page, setPage] = useState(0);
+  const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
   const maxNumOfPages = Math.ceil(numOfRatings / PAGE_SIZE);
 
-  useEffect(() => {
-    if (albumId && page >= 0 && filterActive?.query) {
-      getAllRatings(albumId, page, filterActive.query, PAGE_SIZE, id);
-    }
-  }, [albumId, page, filterActive, getAllRatings, id]);
+  const { data: ratingsData, isLoading } = useQuery({
+    queryKey: ["ratings", albumId, page, filterActive.query],
+    queryFn: () => getAllRatings(albumId, page, filterActive.query, PAGE_SIZE, id),
+    keepPreviousData: true,
+    staleTime: 300000,
+  });
 
   const handleNavigation = (reference) => {
-    if (reference === navigationMapping.FORWARD && maxNumOfPages > page + 1) return incrementPage();
-    if (reference === navigationMapping.BACKWARDS && page > 0) return decrementPage();
+    if (reference === navigationMapping.FORWARD && maxNumOfPages > page + 1) return setPage(page + 1);
+    if (reference === navigationMapping.BACKWARDS && page > 0) return setPage(page - 1);
   };
+
+  const resetPagination = () => {
+    setPage(0);
+    setFilterActive({ tag: "Latest", query: "latest" });
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -39,8 +45,12 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
         numberOfRatings={numOfRatings}
       />
       <ol className="community-ratings">
-        {ratings?.map((item) => (
-          <RatingsPosts post={item} key={item._id} />
+        {ratingsData.ratings.map((item) => (
+          <RatingsPosts post={item} key={item._id}>
+            {id === item.user_id && (
+              <RatingPostsDelete ratingId={item._id} albumId={item.album_id} resetPagination={resetPagination} />
+            )}
+          </RatingsPosts>
         ))}
       </ol>
       <div className="nav-arrow-ratings-container">
@@ -60,7 +70,4 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
   );
 };
 
-const navigationMapping = {
-  BACKWARDS: 0,
-  FORWARD: 1,
-};
+const navigationMapping = { BACKWARDS: 0, FORWARD: 1 };

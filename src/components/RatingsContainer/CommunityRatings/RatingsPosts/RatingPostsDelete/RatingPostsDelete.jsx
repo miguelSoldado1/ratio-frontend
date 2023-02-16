@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { DeleteModal } from "./DeleteModal/DeleteModal";
+import { deleteRating } from "../../../../../api";
 import { ReactComponent as DeleteIcon } from "../../../../../icons/delete-icon.svg";
-import { useRatingsStore } from "../../../../../stores";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const RatingPostsDelete = ({ ratingId, albumId }) => {
+export const RatingPostsDelete = ({ ratingId, albumId, resetPagination }) => {
+  const queryClient = useQueryClient();
+  const [{ access_token }] = useCookies();
   const [show, setShow] = useState(false);
-  const deleteRating = useRatingsStore((state) => state.deleteRating);
-  const [cookies] = useCookies();
+  const { mutate } = useMutation({
+    mutationFn: deleteRating,
+    onSuccess: () => {
+      resetPagination();
+      queryClient.invalidateQueries(["ratings"]);
+      queryClient.invalidateQueries(["personalRating"]);
+      queryClient.invalidateQueries(["averageRating"]);
+    },
+  });
 
-  const handleDelete = () => deleteRating(ratingId, cookies.access_token, albumId);
+  const handleDelete = () => {
+    mutate({ albumId, ratingId, access_token });
+  };
 
   return (
     <>
