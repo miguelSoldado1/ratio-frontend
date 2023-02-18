@@ -33,23 +33,16 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div className="ratings-loader" />;
   }
 
   return (
     <>
-      <DatabaseFilters
-        setFilterActive={setFilterActive}
-        filterActive={filterActive}
-        setPage={setPage}
-        numberOfRatings={numOfRatings}
-      />
+      <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={setPage} numberOfRatings={numOfRatings} />
       <ol className="community-ratings">
         {ratingsData.ratings.map((item) => (
           <RatingsPosts post={item} key={item._id}>
-            {id === item.user_id && (
-              <RatingPostsDelete ratingId={item._id} albumId={item.album_id} resetPagination={resetPagination} />
-            )}
+            {id === item.user_id && <RatingPostsDelete ratingId={item._id} albumId={item.album_id} resetPagination={resetPagination} />}
           </RatingsPosts>
         ))}
       </ol>

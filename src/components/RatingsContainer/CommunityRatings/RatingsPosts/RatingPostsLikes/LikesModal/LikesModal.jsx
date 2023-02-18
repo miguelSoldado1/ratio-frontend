@@ -13,7 +13,7 @@ const LikesModal = ({ onClose, show, ratingId }) => {
   const [{ access_token }] = useCookies();
   const { ref, inView } = useInView();
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
     queryKey: ["likesProfiles", ratingId, access_token],
     queryFn: ({ pageParam = undefined }) => getPostLikes(ratingId, access_token, pageParam, PAGE_SIZE),
     getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
@@ -30,16 +30,22 @@ const LikesModal = ({ onClose, show, ratingId }) => {
         <div className="likes-modal-title">
           <h2>Liked by</h2>
         </div>
-        <div className="likes-modal-list">
-          {data?.pages.map((page) => (
-            <React.Fragment key={page.cursor}>
-              {page?.postLikes?.map((user) => (
-                <LikesAvatar user={user} key={user.like_id} />
-              ))}
-            </React.Fragment>
-          ))}
-          {hasNextPage && <Loading loadingRef={ref} />}
-        </div>
+        {isInitialLoading ? (
+          <div className="likes-modal-list">
+            <Loading />
+          </div>
+        ) : (
+          <div className="likes-modal-list">
+            {data?.pages.map((page) => (
+              <React.Fragment key={page.cursor}>
+                {page.postLikes.map((user) => (
+                  <LikesAvatar user={user} key={user.like_id} />
+                ))}
+              </React.Fragment>
+            ))}
+            {hasNextPage && <Loading loadingRef={ref} />}
+          </div>
+        )}
       </div>
     </Modal>
   );
