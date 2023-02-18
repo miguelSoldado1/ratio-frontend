@@ -54,12 +54,7 @@ export const getPostLikes = async (post_id, accessToken, cursor, page_size) => {
 };
 
 export const createLike = async ({ ratingId, access_token }) => {
-  console.log(ratingId);
-  const response = await api.post(
-    "createLike",
-    { rating_id: ratingId },
-    { headers: { Authorization: `Bearer ${access_token}` } }
-  );
+  const response = await api.post("createLike", { rating_id: ratingId }, { headers: { Authorization: `Bearer ${access_token}` } });
   return response.data;
 };
 

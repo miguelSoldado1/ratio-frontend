@@ -17,10 +17,8 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
       {Object.keys(filters).map((filter) => (
         <button
           disabled={numberOfRatings <= 1}
-          key={filter.query}
-          className={`filter ${filterActive.query === filters[filter].query ? "enabled" : "disabled"} ${
-            numberOfRatings <= 1 ? "single" : ""
-          }`}
+          key={filters[filter].query}
+          className={`filter ${filterActive.query === filters[filter].query ? "enabled" : "disabled"} ${numberOfRatings <= 1 ? "single" : ""}`}
           onClick={handleFilters}
         >
           {filters[filter].tag}
