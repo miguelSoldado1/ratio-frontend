@@ -34,7 +34,7 @@ export const handleDate = (dateString, currentTime = Date.now()) => {
 
 export const getArtists = (artists) => {
   const names = artists?.map((item) => item.name);
-  return names.join(", ");
+  return names?.join(", ");
 };
 
 export const renderArtists = (artists) => {

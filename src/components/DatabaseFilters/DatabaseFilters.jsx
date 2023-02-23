@@ -1,7 +1,7 @@
 import React from "react";
 import "./DatabaseFilters.css";
 
-export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, numberOfRatings }) => {
+export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, numberOfRatings = 2 }) => {
   const handleFilters = (e) => {
     const value = e.target.innerHTML;
     if (value === filterActive.tag) return;

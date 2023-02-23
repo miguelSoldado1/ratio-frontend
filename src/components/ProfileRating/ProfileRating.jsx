@@ -32,36 +32,27 @@ export const ProfileRating = ({ props }) => {
     navigate(`/album/${props.album_id}`);
   };
 
-  if (
-    props?.createdAt &&
-    props?.rating >= 0 &&
-    albumData?.image &&
-    albumData?.name &&
-    albumData?.release_date &&
-    albumData?.artist &&
-    communityRating >= 0
-  )
-    return (
-      <li className="profile-rating" onClick={handleAlbumClick}>
-        <div className="profile-rating-item">
-          <img className="profile-rating-img" src={albumData.image} alt={albumData.name} loading="lazy" />
-          <div className="profile-rating-text">
-            <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
-            <p className="profile-rating-name">
-              <span>{albumData.name}</span>
-              <span className="profile-rating-release"></span>
-            </p>
-            <p className="profile-rating-artist">
-              <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
-              {getArtists(albumData.artist)}
-            </p>
-          </div>
+  return (
+    <li className="profile-rating" onClick={handleAlbumClick}>
+      <div className="profile-rating-item">
+        <img className="profile-rating-img" src={albumData.image} alt={albumData.name} loading="lazy" />
+        <div className="profile-rating-text">
+          <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
+          <p className="profile-rating-name">
+            <span>{albumData.name}</span>
+            <span className="profile-rating-release"></span>
+          </p>
+          <p className="profile-rating-artist">
+            <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
+            {getArtists(albumData.artist)}
+          </p>
         </div>
-        <div className="profile-ratings-circles">
-          <RatingCircle value={props.rating} description={"Personal"} />
-          <RatingCircle value={communityRating} description={"Community"} />
-        </div>
-      </li>
-    );
+      </div>
+      <div className="profile-ratings-circles">
+        <RatingCircle value={props.rating} description={"Personal"} />
+        <RatingCircle value={communityRating} description={"Community"} />
+      </div>
+    </li>
+  );
   return <ProfileRatingPL />;
 };
