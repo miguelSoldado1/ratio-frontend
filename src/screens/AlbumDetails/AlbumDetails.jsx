@@ -53,7 +53,7 @@ export const AlbumDetails = () => {
           <RatingsContainer albumId={album_id} />
         </div>
       </div>
-      {!relatedAlbumsLoading && <Rail content={{ data: relatedAlbumsData, description: "Related albums" }} />}
+      <Rail content={{ data: { data: relatedAlbumsData, description: "Related albums" }, isLoading: relatedAlbumsLoading }} />
     </>
   );
 };
