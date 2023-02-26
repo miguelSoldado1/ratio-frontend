@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -50,11 +50,9 @@ export const ProfileScreen = () => {
       <div className="profile-screen">
         <h1 className="profile-screen-title">{title}</h1>
         <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage({ pageParam: 0 })} />
-        {data.pages.map((page) => (
-          <Fragment key={page.nextPage}>
-            {page.data.length > 0 ? page.data.map((rating) => <ProfileRating props={rating} key={rating?._id} />) : <NoRatingsYet />}
-          </Fragment>
-        ))}
+        {data.pages.map((page) =>
+          page.data.length > 0 ? page.data.map((rating) => <ProfileRating props={rating} key={rating?._id} />) : <NoRatingsYet />
+        )}
         {hasNextPage && <Button onClick={fetchNextPage}>Load more</Button>}
       </div>
     </>

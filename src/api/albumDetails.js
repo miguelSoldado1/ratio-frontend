@@ -3,7 +3,7 @@ import axios from "axios";
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 const api = axios.create({ baseURL: BACK_END_URL });
 
-export const getAlbum = async (album_id, access_token) => {
+export const getAlbum = async ({ album_id, access_token }) => {
   const response = await api.get("getAlbum", { params: { album_id }, headers: { Authorization: `Bearer ${access_token}` } });
   return response.data;
 };
@@ -16,7 +16,7 @@ export const getRelatedAlbums = async (album_id, artist_id, access_token) => {
   return response.data;
 };
 
-export const getAverageAlbumRating = async (album_id) => {
+export const getAverageAlbumRating = async ({ album_id }) => {
   const response = await api.get("getAverageAlbumRating", { params: { album_id } });
   return response.data;
 };
@@ -40,10 +40,6 @@ export const getUsersProfile = async (user_id, accessToken) => {
   });
   return response.data;
 };
-
-// export const handleLikes = (ratingId, accessToken, liked) => {
-//   api.patch(`handleLikes`, { liked: liked, ratingId: ratingId }, { headers: { Authorization: `Bearer ${accessToken}` } });
-// };
 
 export const getPostLikes = async (post_id, accessToken, cursor, page_size) => {
   const response = await api.get("getPostLikes", {

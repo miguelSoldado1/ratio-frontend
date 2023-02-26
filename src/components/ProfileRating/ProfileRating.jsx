@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getAverageAlbumRating, getAlbum } from "../../api";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
 import spotifyLogo from "../../icons/spotify-logo.png";
-import "./ProfileRating.css";
 import { ProfileRatingPL } from "../../preloaders";
+import "./ProfileRating.css";
 
 export const ProfileRating = ({ props }) => {
-  const [cookies, , removeCookie] = useCookies();
-  const [albumData, setAlbumData] = useState({});
-  const [communityRating, setCommunityRating] = useState();
+  const { album_id, createdAt, rating } = props;
+  const [{ access_token }] = useCookies();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const albumId = props.album_id;
-        setAlbumData(await getAlbum(albumId, cookies?.access_token));
-        const { rating } = await getAverageAlbumRating(albumId);
-        setCommunityRating(rating);
-      } catch (error) {
-        removeCookie("access_token", { path: "/" });
-      }
-    };
-    fetchData();
-  }, [props.album_id, cookies, cookies.access_token, removeCookie]);
+  const { data: albumData, isLoading } = useQuery({
+    queryKey: ["albumData", album_id],
+    queryFn: () => getAlbum({ album_id, access_token }),
+    enabled: !!album_id,
+    onError: () => navigate("/"),
+  });
 
-  const handleAlbumClick = () => {
-    navigate(`/album/${props.album_id}`);
-  };
+  const { data: averageRatingData } = useQuery({
+    queryKey: ["communityRating", album_id],
+    queryFn: () => getAverageAlbumRating({ album_id }),
+    enabled: !!album_id,
+    onError: () => navigate("/"),
+  });
+
+  if (isLoading) {
+    return <ProfileRatingPL />;
+  }
 
   return (
-    <li className="profile-rating" onClick={handleAlbumClick}>
+    <Link to={`/album/${album_id}`} className="profile-rating">
       <div className="profile-rating-item">
         <img className="profile-rating-img" src={albumData.image} alt={albumData.name} loading="lazy" />
         <div className="profile-rating-text">
-          <p className="profile-rating-date">{handleDate(props.createdAt)}</p>
+          <p className="profile-rating-date">{handleDate(createdAt)}</p>
           <p className="profile-rating-name">
             <span>{albumData.name}</span>
             <span className="profile-rating-release"></span>
@@ -49,10 +49,9 @@ export const ProfileRating = ({ props }) => {
         </div>
       </div>
       <div className="profile-ratings-circles">
-        <RatingCircle value={props.rating} description={"Personal"} />
-        <RatingCircle value={communityRating} description={"Community"} />
+        <RatingCircle value={rating} description={"Personal"} />
+        <RatingCircle value={averageRatingData.averageRating} description={"Community"} />
       </div>
-    </li>
+    </Link>
   );
-  return <ProfileRatingPL />;
 };
