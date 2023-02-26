@@ -15,6 +15,7 @@ export const SearchBar = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["search", debouncedSearchQuery],
     queryFn: () => debouncedSearchQuery.trim() && searchForAlbum({ access_token, search_query: debouncedSearchQuery }),
+    keepPreviousData: true,
   });
 
   return (
