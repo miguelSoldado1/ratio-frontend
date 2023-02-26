@@ -50,7 +50,7 @@ export const ProfileRating = ({ props }) => {
       </div>
       <div className="profile-ratings-circles">
         <RatingCircle value={rating} description={"Personal"} />
-        <RatingCircle value={averageRatingData.averageRating} description={"Community"} />
+        <RatingCircle value={averageRatingData?.averageRating} description={"Community"} />
       </div>
     </Link>
   );
