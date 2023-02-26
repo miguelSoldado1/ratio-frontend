@@ -13,7 +13,7 @@ export const RatingsContainer = ({ albumId }) => {
   const id = useUserDataStore((state) => state.userData.id);
   const { data: averageData, isLoading: averageLoading } = useQuery({
     queryKey: ["averageRating", albumId],
-    queryFn: () => getAverageAlbumRating(albumId),
+    queryFn: () => getAverageAlbumRating({ album_id: albumId }),
   });
 
   const { data: personalRating, isLoading: personalLoading } = useQuery({
