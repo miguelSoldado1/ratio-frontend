@@ -7,3 +7,11 @@ export const getMe = async ({ access_token }) => {
   const response = await api.get("getMe", { headers: { Authorization: `Bearer ${access_token}` } });
   return response.data;
 };
+
+export const searchForAlbum = async ({ access_token, search_query }) => {
+  const response = await api.get("searchForAlbum", {
+    headers: { Authorization: `Bearer ${access_token}` },
+    params: { search_query: search_query.trim() },
+  });
+  return response.data;
+};
