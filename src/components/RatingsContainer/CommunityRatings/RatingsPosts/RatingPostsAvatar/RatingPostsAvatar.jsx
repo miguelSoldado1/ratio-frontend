@@ -3,13 +3,12 @@ import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getUsersProfile } from "../../../../../api/albumDetails";
-import { useUserDataStore } from "../../../../../stores";
 import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
 import "./RatingPostsAvatar.css";
 
 export const RatingPostsAvatar = ({ userId }) => {
-  const userData = useUserDataStore((state) => state.userData);
   const [{ access_token }] = useCookies();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", access_token], staleTime: 60 * 6000 });
 
   const { data: profileData } = useQuery({
     queryKey: ["profile", userId, access_token],

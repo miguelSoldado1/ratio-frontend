@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useUserDataStore } from "../../../stores";
+import { useCookies } from "react-cookie";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getAllRatings } from "../../../api/albumDetails";
@@ -10,8 +10,11 @@ import "./CommunityRatings.css";
 const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const id = useUserDataStore((state) => state.userData.id);
+  const [{ access_token }] = useCookies();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", access_token], staleTime: 60 * 6000 });
+  const { id } = userData;
   const [page, setPage] = useState(0);
+
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
   const maxNumOfPages = Math.ceil(numOfRatings / PAGE_SIZE);
 
