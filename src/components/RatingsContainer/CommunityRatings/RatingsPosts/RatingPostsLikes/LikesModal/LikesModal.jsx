@@ -15,7 +15,7 @@ const LikesModal = ({ onClose, show, ratingId }) => {
 
   const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
     queryKey: ["likesProfiles", ratingId, access_token],
-    queryFn: ({ pageParam = undefined }) => getPostLikes(ratingId, access_token, pageParam, PAGE_SIZE),
+    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, access_token, cursor: pageParam, page_size: PAGE_SIZE }),
     getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
     enabled: show,
   });

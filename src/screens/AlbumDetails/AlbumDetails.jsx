@@ -24,7 +24,7 @@ export const AlbumDetails = () => {
   const artist_id = albumData?.artist_id;
   const { data: relatedAlbumsData, isLoading: relatedAlbumsLoading } = useQuery({
     queryKey: ["relatedAlbums", album_id, artist_id, access_token],
-    queryFn: () => getRelatedAlbums(album_id, artist_id, access_token),
+    queryFn: () => getRelatedAlbums({ album_id, artist_id, access_token }),
     enabled: !!artist_id,
     onError: () => navigate("/"),
   });

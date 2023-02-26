@@ -21,7 +21,7 @@ export const RatingsContainer = ({ albumId }) => {
 
   const { data: personalRating, isLoading: personalLoading } = useQuery({
     queryKey: ["personalRating", albumId, id],
-    queryFn: () => getPersonalRating(albumId, id),
+    queryFn: () => getPersonalRating({ album_id: albumId, user_id: id }),
   });
 
   if (averageLoading || personalLoading) {

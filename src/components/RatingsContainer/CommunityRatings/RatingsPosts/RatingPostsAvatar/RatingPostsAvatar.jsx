@@ -17,7 +17,7 @@ export const RatingPostsAvatar = ({ userId }) => {
 
   const handleUserProfile = async (userId, accessToken) => {
     if (userData.id === userId) return userData;
-    return await getUsersProfile(userId, accessToken);
+    return await getUsersProfile({ user_id: userId, access_token: accessToken });
   };
 
   return (

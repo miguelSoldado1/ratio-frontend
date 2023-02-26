@@ -20,7 +20,7 @@ export const CommunityRatings = ({ albumId, numOfRatings }) => {
 
   const { data: ratingsData, isLoading } = useQuery({
     queryKey: ["ratings", albumId, page, filterActive.query],
-    queryFn: () => getAllRatings(albumId, page, filterActive.query, PAGE_SIZE, id),
+    queryFn: () => getAllRatings({ album_id: albumId, page_number: page, order: filterActive.query, page_size: PAGE_SIZE, user_id: id }),
     keepPreviousData: true,
     staleTime: 300000,
   });
