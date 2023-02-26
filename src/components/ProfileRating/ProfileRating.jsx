@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { getAverageAlbumRating, getAlbum } from "../../api";
+import { getAverageAlbumRating, getAlbum } from "../../api/albumDetails";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
 import spotifyLogo from "../../icons/spotify-logo.png";

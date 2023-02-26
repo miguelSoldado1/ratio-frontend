@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { DeleteModal } from "./DeleteModal/DeleteModal";
-import { deleteRating } from "../../../../../api";
+import { deleteRating } from "../../../../../api/albumDetails";
 import { ReactComponent as DeleteIcon } from "../../../../../icons/delete-icon.svg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

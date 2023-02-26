@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import { getPostLikes } from "../../../../../../api";
+import { getPostLikes } from "../../../../../../api/albumDetails";
 import { Loading, Modal } from "../../../../..";
 import { LikesAvatar } from "./LikesAvatar/LikesAvatar";
 import "./LikesModal.css";

@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import { ScrollDownButton } from "../../../components";
-import { createRating } from "../../../api";
+import { createRating } from "../../../api/albumDetails";
 import "./SubmitRating.css";
 
 const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;

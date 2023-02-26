@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useUserDataStore } from "../../../stores";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
-import { getAllRatings } from "../../../api";
+import { getAllRatings } from "../../../api/albumDetails";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
 import "./CommunityRatings.css";
 

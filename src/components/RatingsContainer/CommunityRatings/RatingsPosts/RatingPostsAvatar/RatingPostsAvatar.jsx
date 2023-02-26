@@ -2,7 +2,7 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { getUsersProfile } from "../../../../../api";
+import { getUsersProfile } from "../../../../../api/albumDetails";
 import { useUserDataStore } from "../../../../../stores";
 import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
 import "./RatingPostsAvatar.css";
@@ -23,12 +23,7 @@ export const RatingPostsAvatar = ({ userId }) => {
 
   return (
     <Link className="post-avatar" to={`/profile/${profileData?.id}`} state={{ display_name: profileData?.display_name }}>
-      <img
-        className="post-avatar-img"
-        alt={profileData?.display_name}
-        src={profileData?.image_url ?? avatarPlaceholder}
-        loading="lazy"
-      />
+      <img className="post-avatar-img" alt={profileData?.display_name} src={profileData?.image_url ?? avatarPlaceholder} loading="lazy" />
       <p className="post-avatar-name">{profileData?.display_name}</p>
     </Link>
   );

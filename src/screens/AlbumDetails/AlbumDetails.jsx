@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
-import { getAlbum, getRelatedAlbums } from "../../api";
+import { getAlbum, getRelatedAlbums } from "../../api/albumDetails";
 import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
 import "./AlbumDetails.css";
 
