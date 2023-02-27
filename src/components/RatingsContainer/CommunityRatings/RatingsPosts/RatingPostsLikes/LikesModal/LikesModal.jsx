@@ -36,13 +36,7 @@ const LikesModal = ({ onClose, show, ratingId }) => {
           </div>
         ) : (
           <div className="likes-modal-list">
-            {data?.pages.map((page) => (
-              <React.Fragment key={page.cursor}>
-                {page.postLikes.map((user) => (
-                  <LikesAvatar user={user} key={user.like_id} />
-                ))}
-              </React.Fragment>
-            ))}
+            {data?.pages.map((page) => page.postLikes.map((user) => <LikesAvatar user={user} key={user.like_id} />))}
             {hasNextPage && <Loading loadingRef={ref} />}
           </div>
         )}
