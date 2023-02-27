@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
-import { ProfileRating, DatabaseFilters, Button } from "../../components";
+import { useInView } from "react-intersection-observer";
+import { ProfileRating, DatabaseFilters } from "../../components";
+import { Loading } from "../../components/Loading/Loading";
 import { ProfileScreenPL, ProfileRatingPL } from "../../preloaders";
 import { getUserDisplayName, getUserPosts } from "../../api/profileScreen";
 import "./ProfileScreen.css";
 
-const NUMBER_OF_RATINGS = 8;
+const NUMBER_OF_RATINGS = 6;
 
 const getPageTitle = (displayName) => {
   const formattedName = `${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`;
@@ -19,6 +21,7 @@ export const ProfileScreen = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
   const [{ access_token }] = useCookies();
+  const { ref, inView } = useInView();
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
@@ -35,6 +38,10 @@ export const ProfileScreen = () => {
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => navigate("/"),
   });
+
+  useEffect(() => {
+    if (inView) fetchNextPage();
+  }, [fetchNextPage, inView]);
 
   const title = !displayNameLoading ? getPageTitle(displayNameData?.displayName) : "";
 
@@ -53,7 +60,7 @@ export const ProfileScreen = () => {
         {data.pages.map((page) =>
           page.data.length > 0 ? page.data.map((rating) => <ProfileRating props={rating} key={rating?._id} />) : <NoRatingsYet />
         )}
-        {hasNextPage && <Button onClick={fetchNextPage}>Load more</Button>}
+        {hasNextPage && <Loading loadingRef={ref} />}
       </div>
     </>
   );
