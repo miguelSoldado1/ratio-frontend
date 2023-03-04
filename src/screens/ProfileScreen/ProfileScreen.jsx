@@ -56,9 +56,11 @@ export const ProfileScreen = () => {
       <div className="profile-screen">
         <h1 className="profile-screen-title">{title}</h1>
         <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage({ pageParam: 0 })} />
-        {data.pages.map((page) =>
-          page.data.length > 0 ? page.data.map((rating) => <ProfileRating props={rating} key={rating?._id} />) : <NoRatingsYet />
-        )}
+        <div className="profile-ratings-container">
+          {data.pages.map((page) =>
+            page.data.length > 0 ? page.data.map((rating) => <ProfileRating props={rating} key={rating?._id} />) : <NoRatingsYet />
+          )}
+        </div>
         {hasNextPage && <Loading loadingRef={ref} />}
       </div>
     </>
