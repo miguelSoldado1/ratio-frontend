@@ -3,15 +3,15 @@ import axios from "axios";
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/albumDetails`;
 const api = axios.create({ baseURL: BACK_END_URL });
 
-export const getAlbum = async ({ album_id, access_token }) => {
-  const response = await api.get("getAlbum", { params: { album_id }, headers: { Authorization: `Bearer ${access_token}` } });
+export const getAlbum = async ({ album_id, accessToken }) => {
+  const response = await api.get("getAlbum", { params: { album_id }, headers: { Authorization: `Bearer ${accessToken}` } });
   return response.data;
 };
 
-export const getRelatedAlbums = async ({ album_id, artist_id, access_token }) => {
+export const getRelatedAlbums = async ({ album_id, artist_id, accessToken }) => {
   const response = await api.get("getRelatedAlbums", {
     params: { artist_id, album_id },
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
 };
@@ -33,44 +33,44 @@ export const getAllRatings = async ({ album_id, page_number, order, page_size, u
   return response.data;
 };
 
-export const getUsersProfile = async ({ user_id, access_token }) => {
+export const getUsersProfile = async ({ user_id, accessToken }) => {
   const response = await api.get("getUsersProfile", {
     params: { user_id },
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
 };
 
-export const getPostLikes = async ({ post_id, access_token, cursor, page_size }) => {
+export const getPostLikes = async ({ post_id, accessToken, cursor, page_size }) => {
   const response = await api.get("getPostLikes", {
     params: { post_id, cursor, page_size },
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
 };
 
-export const createLike = async ({ ratingId, access_token }) => {
-  const response = await api.post("createLike", { rating_id: ratingId }, { headers: { Authorization: `Bearer ${access_token}` } });
+export const createLike = async ({ ratingId, accessToken }) => {
+  const response = await api.post("createLike", { rating_id: ratingId }, { headers: { Authorization: `Bearer ${accessToken}` } });
   return response.data;
 };
 
-export const deleteLike = async ({ ratingId, access_token }) => {
+export const deleteLike = async ({ ratingId, accessToken }) => {
   const response = await api.delete("deleteLike", {
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
     data: { rating_id: ratingId },
   });
   return response.data;
 };
 
-export const deleteRating = async ({ albumId, ratingId, access_token }) => {
+export const deleteRating = async ({ albumId, ratingId, accessToken }) => {
   const response = await api.delete("deletePost", {
-    headers: { Authorization: `Bearer ${access_token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
     data: { album_id: albumId, _id: ratingId },
   });
   return response.data;
 };
 
-export const createRating = async ({ data, access_token }) => {
-  const response = await api.post("createPost", data, { headers: { Authorization: `Bearer ${access_token}` } });
+export const createRating = async ({ data, accessToken }) => {
+  const response = await api.post("createPost", data, { headers: { Authorization: `Bearer ${accessToken}` } });
   return response.data;
 };

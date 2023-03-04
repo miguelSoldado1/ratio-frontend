@@ -3,9 +3,9 @@ import axios from "axios";
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/homeScreen`;
 const api = axios.create({ baseURL: BACK_END_URL });
 
-export const getRails = async ({ railKey, access_token }) => {
+export const getRails = async ({ railKey, accessToken }) => {
   const description = railTitles[railKey];
-  const response = await api.get(railKey, { headers: { Authorization: `Bearer ${access_token}` } });
+  const response = await api.get(railKey, { headers: { Authorization: `Bearer ${accessToken}` } });
   return { data: response.data, description };
 };
 

@@ -1,23 +1,23 @@
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useAccessToken from "../../../../../hooks/useAccessToken";
 import { getUsersProfile } from "../../../../../api/albumDetails";
 import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
 import "./RatingPostsAvatar.css";
 
 export const RatingPostsAvatar = ({ userId }) => {
-  const [{ access_token }] = useCookies();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", access_token], staleTime: 60 * 6000 });
+  const [accessToken] = useAccessToken();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000 });
 
   const { data: profileData } = useQuery({
-    queryKey: ["profile", userId, access_token],
-    queryFn: () => handleUserProfile(userId, access_token),
+    queryKey: ["profile", userId, accessToken],
+    queryFn: () => handleUserProfile(userId, accessToken),
   });
 
   const handleUserProfile = async (userId, accessToken) => {
     if (userData.id === userId) return userData;
-    return await getUsersProfile({ user_id: userId, access_token: accessToken });
+    return await getUsersProfile({ user_id: userId, accessToken });
   };
 
   return (

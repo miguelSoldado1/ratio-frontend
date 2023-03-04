@@ -1,55 +1,38 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { NavigationBar, Footer } from "./components";
 import { HomeScreen, LandingPage, ProfileScreen, NotFound, AlbumDetails } from "./screens";
+import useAccessToken from "./hooks/useAccessToken";
 
-const urlSearchParams = new URLSearchParams(window?.location?.search);
-const access_token = urlSearchParams.get("access_token");
-const expires_in = urlSearchParams.get("expires_in");
-const redirect = urlSearchParams.get("redirect");
+const mainRouteElement = (
+  <>
+    <NavigationBar />
+    <Routes>
+      <Route path="/" element={<HomeScreen />} />
+      <Route path="/album/:album_id" element={<AlbumDetails />} />
+      <Route path="/profile/:userId" element={<ProfileScreen />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+    <Footer />
+  </>
+);
 
 const App = () => {
-  const [cookies, setCookies] = useCookies();
-  const navigate = useNavigate();
+  const [accessToken, , setAccessToken] = useAccessToken();
 
-  // DO NOT ADD NAVIGATE AS A DEPENDENCY, IT BREAKS THE PROFILE PAGE NAVIGATION.
   useEffect(() => {
-    if (access_token && expires_in) {
-      setCookies("access_token", access_token, { maxAge: expires_in });
-      navigate(redirect ?? "/");
-    }
-  }, [redirect]);
+    setAccessToken();
+  }, [setAccessToken]);
 
   return (
     <>
       <Helmet>
         <title>Ratio</title>
       </Helmet>
-      {cookies?.access_token ? (
-        <>
-          <Routes>
-            <Route element={mainRouteElement}>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/album/:album_id" element={<AlbumDetails />} />
-              <Route path="/profile/:userId" element={<ProfileScreen />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </>
-      ) : (
-        <LandingPage />
-      )}
+      {accessToken ? mainRouteElement : <LandingPage />}
     </>
   );
 };
 
 export default App;
-
-const mainRouteElement = (
-  <>
-    <NavigationBar />
-    <Footer />
-  </>
-);

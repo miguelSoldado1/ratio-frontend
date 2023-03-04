@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { useParams, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useInView } from "react-intersection-observer";
+import useAccessToken from "../../hooks/useAccessToken";
 import { ProfileRating, DatabaseFilters } from "../../components";
 import { Loading } from "../../components/Loading/Loading";
 import { ProfileScreenPL, ProfileRatingPL } from "../../preloaders";
@@ -18,25 +18,24 @@ const getPageTitle = (displayName) => {
 };
 
 export const ProfileScreen = () => {
-  const navigate = useNavigate();
   const { userId } = useParams();
-  const [{ access_token }] = useCookies();
+  const [accessToken, removeAccessToken] = useAccessToken();
   const { ref, inView } = useInView();
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["profilePosts", userId, filterActive.query, access_token],
+    queryKey: ["profilePosts", userId, filterActive.query, accessToken],
     queryFn: ({ pageParam = 0 }) =>
-      getUserPosts({ userId, pageParam, order: filterActive.query, pageSize: NUMBER_OF_RATINGS, accessToken: access_token }),
+      getUserPosts({ userId, pageParam, order: filterActive.query, pageSize: NUMBER_OF_RATINGS, accessToken: accessToken }),
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   const { data: displayNameData, isLoading: displayNameLoading } = useQuery({
-    queryKey: ["displayName", userId, access_token],
-    queryFn: () => getUserDisplayName({ userId, accessToken: access_token }),
+    queryKey: ["displayName", userId, accessToken],
+    queryFn: () => getUserDisplayName({ userId, accessToken: accessToken }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "react-cookie";
 import { SubmitRating } from "..";
 import { RatingsContainerPL } from "../../preloaders";
+import useAccessToken from "../../hooks/useAccessToken";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
@@ -10,8 +10,8 @@ import { getAverageAlbumRating, getPersonalRating } from "../../api/albumDetails
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
-  const [{ access_token }] = useCookies();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", access_token], staleTime: 60 * 6000 });
+  const [accessToken] = useAccessToken();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000 });
   const { id } = userData;
 
   const { data: averageData, isLoading: averageLoading } = useQuery({

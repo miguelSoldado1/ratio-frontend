@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useCookies } from "react-cookie";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import useAccessToken from "../../../../../../hooks/useAccessToken";
 import { getPostLikes } from "../../../../../../api/albumDetails";
 import { Loading, Modal } from "../../../../..";
 import { LikesAvatar } from "./LikesAvatar/LikesAvatar";
@@ -10,12 +10,12 @@ import "./LikesModal.css";
 const PAGE_SIZE = 8;
 
 const LikesModal = ({ onClose, show, ratingId }) => {
-  const [{ access_token }] = useCookies();
+  const [accessToken] = useAccessToken();
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
-    queryKey: ["likesProfiles", ratingId, access_token],
-    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, access_token, cursor: pageParam, page_size: PAGE_SIZE }),
+    queryKey: ["likesProfiles", ratingId, accessToken],
+    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, accessToken, cursor: pageParam, page_size: PAGE_SIZE }),
     getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
     enabled: show,
   });

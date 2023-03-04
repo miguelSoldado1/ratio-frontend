@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import useDebounce from "../../../hooks/useDebounce";
 import { searchForAlbum } from "../../../api/navigationBar";
+import useAccessToken from "../../../hooks/useAccessToken";
 import { ReactComponent as SearchIcon } from "../../../icons/search-icon.svg";
 import { SearchResult } from "../../";
 import "./SearchBar.css";
 
 export const SearchBar = () => {
-  const [{ access_token }] = useCookies();
+  const [accessToken] = useAccessToken();
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   const { data, isLoading } = useQuery({
     queryKey: ["search", debouncedSearchQuery],
-    queryFn: () => debouncedSearchQuery.trim() && searchForAlbum({ access_token, search_query: debouncedSearchQuery }),
+    queryFn: () => debouncedSearchQuery.trim() && searchForAlbum({ accessToken, search_query: debouncedSearchQuery }),
     keepPreviousData: true,
   });
 

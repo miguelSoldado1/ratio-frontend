@@ -1,25 +1,23 @@
 import React, { useCallback } from "react";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "react-cookie";
 import { getMe } from "../../api/navigationBar";
+import useAccessToken from "../../hooks/useAccessToken";
 import { SearchBar, Avatar } from "../";
 import { ReactComponent as RatioLogo } from "../../icons/ratio-logo.svg";
 import { ReactComponent as LogOutIcon } from "../../icons/logout-icon.svg";
 import "./NavigationBar.css";
 
 export const NavigationBar = () => {
-  const [{ access_token }, , removeCookie] = useCookies();
-  const navigate = useNavigate();
+  const [accessToken, removeAccessToken] = useAccessToken();
 
   const handleLogOut = useCallback(() => {
-    removeCookie("access_token", { path: "/" });
-    navigate("/");
-  }, [navigate, removeCookie]);
+    removeAccessToken();
+  }, [removeAccessToken]);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["userInfo", access_token],
-    queryFn: () => getMe({ access_token }),
+    queryKey: ["userInfo", accessToken],
+    queryFn: () => getMe({ accessToken }),
     staleTime: 60 * 6000,
     onError: handleLogOut,
   });

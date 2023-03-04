@@ -1,31 +1,30 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { getAverageAlbumRating, getAlbum } from "../../api/albumDetails";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
-import spotifyLogo from "../../icons/spotify-logo.png";
+import useAccessToken from "../../hooks/useAccessToken";
 import { ProfileRatingPL } from "../../preloaders";
+import spotifyLogo from "../../icons/spotify-logo.png";
 import "./ProfileRating.css";
 
 export const ProfileRating = ({ props }) => {
   const { album_id, createdAt, rating } = props;
-  const [{ access_token }] = useCookies();
-  const navigate = useNavigate();
+  const [accessToken, removeAccessToken] = useAccessToken();
 
   const { data: albumData, isLoading } = useQuery({
     queryKey: ["albumData", album_id],
-    queryFn: () => getAlbum({ album_id, access_token }),
+    queryFn: () => getAlbum({ album_id, accessToken }),
     enabled: !!album_id,
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   const { data: averageRatingData } = useQuery({
     queryKey: ["communityRating", album_id],
     queryFn: () => getAverageAlbumRating({ album_id }),
     enabled: !!album_id,
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   if (isLoading) {

@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
+import useAccessToken from "../../hooks/useAccessToken";
 import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
 import { getAlbum, getRelatedAlbums } from "../../api/albumDetails";
@@ -10,23 +10,22 @@ import { RatingsContainer } from "../../components/RatingsContainer/RatingsConta
 import "./AlbumDetails.css";
 
 export const AlbumDetails = () => {
-  const [{ access_token }] = useCookies();
-  const navigate = useNavigate();
+  const [accessToken, removeAccessToken] = useAccessToken();
   const { album_id } = useParams();
 
   const { data: albumData, isLoading: albumLoading } = useQuery({
-    queryKey: ["albums", album_id, access_token],
-    queryFn: () => getAlbum({ album_id, access_token }),
+    queryKey: ["albums", album_id, accessToken],
+    queryFn: () => getAlbum({ album_id, accessToken }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   const artist_id = albumData?.artist_id;
   const { data: relatedAlbumsData, isLoading: relatedAlbumsLoading } = useQuery({
-    queryKey: ["relatedAlbums", album_id, artist_id, access_token],
-    queryFn: () => getRelatedAlbums({ album_id, artist_id, access_token }),
+    queryKey: ["relatedAlbums", album_id, artist_id, accessToken],
+    queryFn: () => getRelatedAlbums({ album_id, artist_id, accessToken }),
     enabled: !!artist_id,
-    onError: () => navigate("/"),
+    onError: () => removeAccessToken(),
   });
 
   if (albumLoading) {
