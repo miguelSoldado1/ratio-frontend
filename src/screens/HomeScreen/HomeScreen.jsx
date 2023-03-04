@@ -8,10 +8,10 @@ export const HomeScreen = () => {
   const [accessToken] = useAccessToken();
   const results = useQueries({
     queries: [
-      { queryKey: ["getMyTopArtists"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 60 * 60000 },
+      { queryKey: ["getMyTopArtists"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 4 * 60 * 60000 },
       { queryKey: ["getLatestPosts"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 5 * 60000 },
       { queryKey: ["getRecentlyListened"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 5 * 60000 },
-      { queryKey: ["getMyReleaseRadar"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 60 * 60000 },
+      { queryKey: ["getMyReleaseRadar"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 4 * 60 * 60000 },
     ],
   });
 

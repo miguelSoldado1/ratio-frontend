@@ -11,7 +11,7 @@ import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
   const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000 });
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
   const { id } = userData;
 
   const { data: averageData, isLoading: averageLoading } = useQuery({

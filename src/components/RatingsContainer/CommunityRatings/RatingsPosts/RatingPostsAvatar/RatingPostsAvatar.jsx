@@ -8,7 +8,7 @@ import "./RatingPostsAvatar.css";
 
 export const RatingPostsAvatar = ({ userId }) => {
   const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000 });
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
 
   const { data: profileData } = useQuery({
     queryKey: ["profile", userId, accessToken],

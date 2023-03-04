@@ -11,7 +11,7 @@ const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
   const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000 });
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
   const { id } = userData;
   const [page, setPage] = useState(0);
 
