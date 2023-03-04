@@ -1,39 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./DatabaseFilters.css";
 
-export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, numberOfRatings }) => {
-  useEffect(() => {
-    setFilterActive(filters.LATEST);
-  }, [setFilterActive]);
-
+export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, numberOfRatings = 2 }) => {
   const handleFilters = (e) => {
     const value = e.target.innerHTML;
-    if (value !== filterActive.tag) {
-      switch (value) {
-        case filters.LATEST.tag:
-        default:
-          setFilterActive(filters.LATEST);
-          break;
-        case filters.TOP_RATED.tag:
-          setFilterActive(filters.TOP_RATED);
-          break;
-        case filters.OLDEST.tag:
-          setFilterActive(filters.OLDEST);
-          break;
-      }
-      setPage(0);
-    }
+    if (value === filterActive.tag) return;
+
+    const newFilter = Object.values(filters).find((filter) => filter.tag === value);
+
+    setFilterActive(newFilter || filters.LATEST);
+    setPage(0);
   };
 
   return (
     <div className="filters">
-      {Object.keys(filters).map((filter, index) => (
+      {Object.keys(filters).map((filter) => (
         <button
           disabled={numberOfRatings <= 1}
-          key={index}
-          className={`filter ${filterActive === filters[filter] ? "enabled" : "disabled"} ${
-            numberOfRatings <= 1 ? "single" : ""
-          }`}
+          key={filters[filter].query}
+          className={`filter ${filterActive.query === filters[filter].query ? "enabled" : "disabled"} ${numberOfRatings <= 1 ? "single" : ""}`}
           onClick={handleFilters}
         >
           {filters[filter].tag}

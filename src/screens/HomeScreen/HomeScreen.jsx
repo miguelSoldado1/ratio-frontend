@@ -1,33 +1,26 @@
-import React, { useEffect } from "react";
+import { useQueries } from "@tanstack/react-query";
+import useAccessToken from "../../hooks/useAccessToken";
+import { getRails } from "../../api/homeScreen";
 import { Rail } from "../../components";
-import { useCookies } from "react-cookie";
-import { useRailsStore } from "../../stores";
 import "./HomeScreen.css";
 
 export const HomeScreen = () => {
-  const getAllRails = useRailsStore((state) => state.getAllRails);
-  const [myTopArtists, recentlyReleased, latestReviews, recentlyListened] = useRailsStore((state) => [
-    state.myTopArtists,
-    state.recentlyReleased,
-    state.latestReviews,
-    state.recentlyListened,
-  ]);
-  const [cookies, , removeCookie] = useCookies();
-
-  useEffect(() => {
-    try {
-      getAllRails(cookies?.access_token);
-    } catch (error) {
-      removeCookie("access_token", { path: "/" });
-    }
-  }, [cookies?.access_token, getAllRails, removeCookie]);
+  const [accessToken] = useAccessToken();
+  const results = useQueries({
+    queries: [
+      { queryKey: ["getMyTopArtists"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 4 * 60 * 60000 },
+      { queryKey: ["getLatestPosts"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 5 * 60000 },
+      { queryKey: ["getRecentlyListened"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 5 * 60000 },
+      { queryKey: ["getMyReleaseRadar"], queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0], accessToken }), staleTime: 4 * 60 * 60000 },
+    ],
+  });
 
   return (
     <div className="rails-container">
-      <Rail content={myTopArtists} />
-      <Rail content={latestReviews} />
-      <Rail content={recentlyListened} />
-      <Rail content={recentlyReleased} />
+      {results.map((rail, idx) => (
+        // I hate having index as key but it doesn't really matter in here
+        <Rail content={rail} key={idx} />
+      ))}
     </div>
   );
 };

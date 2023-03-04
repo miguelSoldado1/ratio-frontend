@@ -4,25 +4,27 @@
   "private": true,
   "dependencies": {
     "@fseehawer/react-circular-slider": "^2.5.16",
+    "@tanstack/query-sync-storage-persister": "^4.24.10",
+    "@tanstack/react-query": "^4.24.10",
+    "@tanstack/react-query-persist-client": "^4.24.10",
     "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-intersection-observer": "^9.4.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "react-transition-group": "^4.4.5",
-    "web-vitals": "^2.1.4",
-    "zustand": "^4.0.0-rc.1"
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0",
+    "@tanstack/react-query-devtools": "^4.24.4",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.4"
   },
   "scripts": {
     "start": "react-scripts start",

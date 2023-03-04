@@ -7,6 +7,7 @@
   --button-hover-color: #1bc559;
   --button-text-color: white;
   --hover-shadow-color: #0b0b0b;
+  --loader-scale: 1;
 }
 
 html,
@@ -44,7 +45,7 @@ Scrollbar for Firefox :root {
 
 a {
   color: white;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover {

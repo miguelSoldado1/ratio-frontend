@@ -1,39 +1,28 @@
 import React, { useEffect } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
+import useAccessToken from "../../../../../../hooks/useAccessToken";
+import { getPostLikes } from "../../../../../../api/albumDetails";
 import { Loading, Modal } from "../../../../..";
-import { getPostLikes } from "../../../../../../api";
-import { useInfiniteScroller } from "../../../../../../hooks/useInfiniteScroller";
 import { LikesAvatar } from "./LikesAvatar/LikesAvatar";
 import "./LikesModal.css";
 
 const PAGE_SIZE = 8;
 
-export const LikesModal = ({ onClose, show, ratingId }) => {
-  const [cookies, , removeCookie] = useCookies();
-  const contentRef = useRef(null);
-  const [loading, setLoading] = useState(false);
-  const [userProfiles, setUserProfiles] = useState({ users: [], cursor: undefined });
-  useInfiniteScroller(loadMoreData, contentRef, show);
+const LikesModal = ({ onClose, show, ratingId }) => {
+  const [accessToken] = useAccessToken();
+  const { ref, inView } = useInView();
+
+  const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
+    queryKey: ["likesProfiles", ratingId, accessToken],
+    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, accessToken, cursor: pageParam, page_size: PAGE_SIZE }),
+    getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
+    enabled: show,
+  });
 
   useEffect(() => {
-    if (show && userProfiles.users.length <= 0) loadMoreData();
-  }, [show]);
-
-  // I do prefer arrow functions but this needs to be hoisted at the top.
-  async function loadMoreData() {
-    try {
-      if (!loading && userProfiles.cursor !== null) {
-        setLoading(true);
-        const { postLikes, cursor } = await getPostLikes(ratingId, cookies.access_token, userProfiles.cursor, PAGE_SIZE);
-        setUserProfiles((oldData) => ({ cursor: cursor, users: [...oldData.users, ...postLikes] }));
-        setLoading(false);
-      }
-    } catch (error) {
-      removeCookie("access_token", { path: "/" });
-    }
-  }
+    if (inView) fetchNextPage();
+  }, [fetchNextPage, inView]);
 
   return (
     <Modal show={show} onClose={onClose}>
@@ -41,13 +30,19 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
         <div className="likes-modal-title">
           <h2>Liked by</h2>
         </div>
-        <div className="likes-modal-list" ref={contentRef}>
-          {userProfiles.users.map((user) => (
-            <LikesAvatar user={user} key={user.like_id} />
-          ))}
-          {loading && <Loading />}
-        </div>
+        {isInitialLoading ? (
+          <div className="likes-modal-list">
+            <Loading />
+          </div>
+        ) : (
+          <div className="likes-modal-list">
+            {data?.pages.map((page) => page.postLikes.map((user) => <LikesAvatar user={user} key={user.like_id} />))}
+            {hasNextPage && <Loading loadingRef={ref} />}
+          </div>
+        )}
       </div>
     </Modal>
   );
 };
+
+export default LikesModal;

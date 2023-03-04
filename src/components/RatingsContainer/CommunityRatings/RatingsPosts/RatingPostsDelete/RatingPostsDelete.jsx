@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import useAccessToken from "../../../../../hooks/useAccessToken";
 import { DeleteModal } from "./DeleteModal/DeleteModal";
+import { deleteRating } from "../../../../../api/albumDetails";
 import { ReactComponent as DeleteIcon } from "../../../../../icons/delete-icon.svg";
-import { useRatingsStore } from "../../../../../stores";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const RatingPostsDelete = ({ ratingId, albumId }) => {
+export const RatingPostsDelete = ({ ratingId, albumId, resetPagination }) => {
+  const queryClient = useQueryClient();
+  const [accessToken] = useAccessToken();
   const [show, setShow] = useState(false);
-  const deleteRating = useRatingsStore((state) => state.deleteRating);
-  const [cookies] = useCookies();
+  const { mutate } = useMutation({
+    mutationFn: deleteRating,
+    onSuccess: () => {
+      resetPagination();
+      queryClient.invalidateQueries(["ratings"]);
+      queryClient.invalidateQueries(["personalRating"]);
+      queryClient.invalidateQueries(["averageRating"]);
+    },
+  });
 
-  const handleDelete = () => deleteRating(ratingId, cookies.access_token, albumId);
+  const handleDelete = () => {
+    setShow(false);
+    mutate({ albumId, ratingId, accessToken });
+  };
 
   return (
     <>

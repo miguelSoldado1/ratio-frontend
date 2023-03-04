@@ -5,26 +5,34 @@
 
 .dot-carousel {
   --color: white;
+
   position: relative;
-  left: -624.9375em;
-  width: 0.625em;
-  height: 0.625em;
-  border-radius: 0.3125em;
-  margin: 0.25em;
+  left: calc(-624.9375em * var(--loader-scale));
+  width: calc(0.625em * var(--loader-scale));
+  height: calc(0.625em * var(--loader-scale));
+  border-radius: calc(0.3125em * var(--loader-scale));
+  margin: calc(0.25em * var(--loader-scale));
   background-color: var(--color);
   color: var(--color);
-  box-shadow: 624em 0 0 0 var(--color), 624.9375em 0 0 0 var(--color), 625.875em 0 0 0 var(--color);
+  box-shadow: calc(624em * var(--loader-scale)) 0 0 0 var(--color), calc(624.9375em * var(--loader-scale)) 0 0 0 var(--color),
+    calc(625.875em * var(--loader-scale)) 0 0 0 var(--color);
   animation: dot-carousel 1.5s infinite linear;
 }
 
 @keyframes dot-carousel {
   0% {
-    box-shadow: 624em 0 0 -0.0625em var(--color), 624.9375em 0 0 0.0625em var(--color), 625.875em 0 0 -0.0625em var(--color);
+    box-shadow: calc(624em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color),
+      calc(624.9375em * var(--loader-scale)) 0 0 calc(0.0625em * var(--loader-scale)) var(--color),
+      calc(625.875em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color);
   }
   50% {
-    box-shadow: 625.875em 0 0 -0.0625em var(--color), 624em 0 0 -0.0625em var(--color), 624.9375em 0 0 0.0625em var(--color);
+    box-shadow: calc(625.875em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color),
+      calc(624em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color),
+      calc(624.9375em * var(--loader-scale)) 0 0 calc(0.0625em * var(--loader-scale)) var(--color);
   }
   100% {
-    box-shadow: 624.9375em 0 0 0.0625em var(--color), 625.875em 0 0 -0.0625em var(--color), 624em 0 0 -0.0625em var(--color);
+    box-shadow: calc(624.9375em * var(--loader-scale)) 0 0 calc(0.0625em * var(--loader-scale)) var(--color),
+      calc(625.875em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color),
+      calc(624em * var(--loader-scale)) 0 0 calc(-0.0625em * var(--loader-scale)) var(--color);
   }
 }

@@ -1,32 +1,34 @@
-/* eslint-disable no-extra-boolean-cast */
 import React from "react";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { SubmitRating } from "..";
 import { RatingsContainerPL } from "../../preloaders";
-import { useRatingsStore, useUserDataStore } from "../../stores";
+import useAccessToken from "../../hooks/useAccessToken";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
+import { getAverageAlbumRating, getPersonalRating } from "../../api/albumDetails";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
-  const id = useUserDataStore((state) => state.userData.id);
-  const [ratings, clearAllRatings] = useRatingsStore((state) => [state.ratings, state.clearAllRatings]);
-  const [getCircleRatings, personalRating, averageRating, numOfRatings] = useRatingsStore((state) => [
-    state.getCircleRatings,
-    state.personalRating,
-    state.averageRating,
-    state.numOfRatings,
-  ]);
+  const [accessToken] = useAccessToken();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const { id } = userData;
 
-  useEffect(() => {
-    if (albumId && id) getCircleRatings(albumId, id);
-    return () => clearAllRatings();
-  }, [getCircleRatings, clearAllRatings, albumId, id]);
-  if (!ratings) {
+  const { data: averageData, isLoading: averageLoading } = useQuery({
+    queryKey: ["averageRating", albumId],
+    queryFn: () => getAverageAlbumRating({ album_id: albumId }),
+  });
+
+  const { data: personalRating, isLoading: personalLoading } = useQuery({
+    queryKey: ["personalRating", albumId, id],
+    queryFn: () => getPersonalRating({ album_id: albumId, user_id: id }),
+  });
+
+  if (averageLoading || personalLoading) {
     return <RatingsContainerPL />;
   }
 
+  const { averageRating, numRatings } = averageData;
   return (
     <div className="ratings-container">
       <div className="ratings-circles">
@@ -34,7 +36,7 @@ export const RatingsContainer = ({ albumId }) => {
         <RatingCircle value={averageRating} description={"Community"} />
       </div>
       {personalRating === null && <SubmitRating albumId={albumId} />}
-      {averageRating !== null ? <CommunityRatings albumId={albumId} numOfRatings={numOfRatings} /> : <NoRatingsContainer />}
+      {averageRating !== null ? <CommunityRatings albumId={albumId} numOfRatings={numRatings} /> : <NoRatingsContainer />}
     </div>
   );
 };

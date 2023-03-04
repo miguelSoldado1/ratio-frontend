@@ -33,3 +33,8 @@
 .profile-screen > .custom-button {
   margin-top: 1em;
 }
+
+.profile-screen > .loading-carousel {
+  margin-top: 0.75em;
+  --loader-scale: 1.25;
+}
