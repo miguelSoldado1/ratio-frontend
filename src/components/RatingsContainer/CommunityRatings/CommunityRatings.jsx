@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAccessToken from "../../../hooks/useAccessToken";
+import useAccessToken from "../../../hooks/useAuthentication";
+import { getMe } from "../../../api/navigationBar";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getAllRatings } from "../../../api/albumDetails";
@@ -10,8 +11,8 @@ import "./CommunityRatings.css";
 const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const { accessToken } = useAccessToken();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
   const { id } = userData;
   const [page, setPage] = useState(0);
 

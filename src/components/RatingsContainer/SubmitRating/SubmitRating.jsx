@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAccessToken from "../../../hooks/useAccessToken";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import { ScrollDownButton } from "../../../components";
 import { createRating } from "../../../api/albumDetails";
@@ -16,7 +15,6 @@ const MAX_NUM_OF_LINES = 12;
 
 export const SubmitRating = ({ albumId }) => {
   const queryClient = useQueryClient();
-  const [accessToken] = useAccessToken();
   const [rating, setRating] = useState(-1);
   const [errorMessage, setErrorMessage] = useState(null);
   const [numOfLines, setNumOfLines] = useState(0);
@@ -47,7 +45,7 @@ export const SubmitRating = ({ albumId }) => {
     }
     if (!isLoading) {
       setErrorMessage(null);
-      mutate({ data: { album_id: albumId, rating: rating, comment: textAreaRef.current.value }, accessToken });
+      mutate({ data: { album_id: albumId, rating: rating, comment: textAreaRef.current.value } });
     }
   };
 

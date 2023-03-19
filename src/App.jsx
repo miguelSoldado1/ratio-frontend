@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { NavigationBar, Footer } from "./components";
 import { HomeScreen, LandingPage, ProfileScreen, NotFound, AlbumDetails } from "./screens";
-import useAccessToken from "./hooks/useAccessToken";
+import useAccessToken from "./hooks/useAuthentication";
 
 const mainRouteElement = (
   <>
@@ -19,11 +19,11 @@ const mainRouteElement = (
 );
 
 const App = () => {
-  const [accessToken, , setAccessToken] = useAccessToken();
+  const { accessToken, getAccessToken } = useAccessToken();
 
   useEffect(() => {
-    setAccessToken();
-  }, [setAccessToken]);
+    getAccessToken();
+  }, [getAccessToken]);
 
   return (
     <>

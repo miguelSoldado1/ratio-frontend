@@ -3,7 +3,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useInView } from "react-intersection-observer";
-import useAccessToken from "../../hooks/useAccessToken";
+import useAccessToken from "../../hooks/useAuthentication";
 import { ProfileRating, DatabaseFilters } from "../../components";
 import { Loading } from "../../components/Loading/Loading";
 import { ProfileScreenPL, ProfileRatingPL } from "../../preloaders";
@@ -19,21 +19,20 @@ const getPageTitle = (displayName) => {
 
 export const ProfileScreen = () => {
   const { userId } = useParams();
-  const [accessToken, removeAccessToken] = useAccessToken();
+  const { removeAccessToken } = useAccessToken();
   const { ref, inView } = useInView();
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["profilePosts", userId, filterActive.query, accessToken],
-    queryFn: ({ pageParam = 0 }) =>
-      getUserPosts({ userId, pageParam, order: filterActive.query, pageSize: NUMBER_OF_RATINGS, accessToken: accessToken }),
+    queryKey: ["profilePosts", userId, filterActive.query],
+    queryFn: ({ pageParam = 0 }) => getUserPosts({ userId, pageParam, order: filterActive.query, pageSize: NUMBER_OF_RATINGS }),
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
     onError: () => removeAccessToken(),
   });
 
   const { data: displayNameData, isLoading: displayNameLoading } = useQuery({
-    queryKey: ["displayName", userId, accessToken],
-    queryFn: () => getUserDisplayName({ userId, accessToken: accessToken }),
+    queryKey: ["displayName", userId],
+    queryFn: () => getUserDisplayName({ userId }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });

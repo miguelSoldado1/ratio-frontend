@@ -1,23 +1,24 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import useAccessToken from "../../../../../hooks/useAccessToken";
 import { getUsersProfile } from "../../../../../api/albumDetails";
+import { getMe } from "../../../../../api/navigationBar";
 import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
 import "./RatingPostsAvatar.css";
+import useAccessToken from "../../../../../hooks/useAuthentication";
 
 export const RatingPostsAvatar = ({ userId }) => {
-  const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const { accessToken } = useAccessToken();
+  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
 
   const { data: profileData } = useQuery({
-    queryKey: ["profile", userId, accessToken],
-    queryFn: () => handleUserProfile(userId, accessToken),
+    queryKey: ["profile", userId],
+    queryFn: () => handleUserProfile(userId),
   });
 
-  const handleUserProfile = async (userId, accessToken) => {
+  const handleUserProfile = async (userId) => {
     if (userData.id === userId) return userData;
-    return await getUsersProfile({ user_id: userId, accessToken });
+    return await getUsersProfile({ user_id: userId });
   };
 
   return (

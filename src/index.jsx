@@ -5,7 +5,6 @@ import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { CookiesProvider } from "react-cookie";
 import App from "./App";
 import "./index.css";
 
@@ -19,9 +18,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
-        <CookiesProvider>
-          <App />
-        </CookiesProvider>
+        <App />
         <ReactQueryDevtools />
       </PersistQueryClientProvider>
     </BrowserRouter>
