@@ -45,7 +45,7 @@ const hasTokenExpired = () => {
 
 const getExpiresIn = (expiresIn) => {
   const current = new Date().getTime();
-  const secondsBeforeRefresh = 5 * 60;
+  const secondsBeforeRefresh = 60;
   return new Date(current + (Number(expiresIn) - secondsBeforeRefresh) * 1000).getTime();
 };
 
