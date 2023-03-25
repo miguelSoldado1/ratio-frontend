@@ -9,14 +9,14 @@ import { ReactComponent as LogOutIcon } from "../../icons/logout-icon.svg";
 import "./NavigationBar.css";
 
 export const NavigationBar = () => {
-  const { accessToken, removeAccessToken } = useAccessToken();
+  const { removeAccessToken } = useAccessToken();
 
   const handleLogOut = useCallback(() => {
     removeAccessToken();
   }, [removeAccessToken]);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["userInfo", accessToken],
+    queryKey: ["userInfo"],
     queryFn: getMe,
     staleTime: 60 * 6000,
     onError: handleLogOut,

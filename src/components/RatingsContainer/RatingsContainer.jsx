@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SubmitRating } from "..";
 import { RatingsContainerPL } from "../../preloaders";
-import useAccessToken from "../../hooks/useAuthentication";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
@@ -11,9 +10,8 @@ import { getMe } from "../../api/navigationBar";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
-  const { accessToken } = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
-  const { id } = userData;
+  const { data: userData } = useQuery({ queryKey: ["userInfo"], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const id = userData?.id;
 
   const { data: averageData, isLoading: averageLoading } = useQuery({
     queryKey: ["averageRating", albumId],
