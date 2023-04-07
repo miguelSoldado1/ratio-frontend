@@ -1,37 +1,11 @@
-@media only screen and (max-width: 1025px) {
-  .profile-screen-title {
-    font-size: 1.4em;
-  }
-}
-
-@media only screen and (min-width: 1026px) {
-  .profile-screen-title {
-    font-size: 2em;
-  }
-}
-
 .profile-screen {
   display: flex;
   flex-direction: column;
 }
 
-.profile-screen > .custom-button {
-  align-self: center;
-  padding-inline: 2.5em;
-}
-
-.profile-screen-title {
-  align-self: center;
-  margin: 0;
-}
-
 .profile-screen-no-ratings {
   align-self: center;
   font-size: 1.25em;
-}
-
-.profile-screen > .custom-button {
-  margin-top: 1em;
 }
 
 .profile-screen > .loading-carousel {

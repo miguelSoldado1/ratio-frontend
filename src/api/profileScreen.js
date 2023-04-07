@@ -13,3 +13,8 @@ export const getUserDisplayName = async ({ userId }) => {
   const response = await axios.get(`${BACK_END_URL}/getUserDisplayName`, { params: { user_id: userId } });
   return response.data;
 };
+
+export const getUserProfile = async ({ userId }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserProfile`, { params: { user_id: userId } });
+  return response.data;
+};

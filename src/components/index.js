@@ -22,3 +22,5 @@ export * from "./ScrollDownButton/ScrollDownButton";
 export * from "./Modal/Modal";
 export * from "./LongPressButton/LongPressButton";
 export * from "./Loading/Loading";
+export * from "./ProfileScreenHeader/ProfileScreenHeader";
+export * from "./ProfileScreenRatings/ProfileScreenRatings";
