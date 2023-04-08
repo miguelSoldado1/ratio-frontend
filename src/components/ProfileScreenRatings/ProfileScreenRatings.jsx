@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { ProfileRatingPL } from "../../preloaders";
 import { useInView } from "react-intersection-observer";
 import { ProfileRating } from "../ProfileRating/ProfileRating";
-import { Loading } from "../Loading/Loading";
+import { Loading, ProfileRatingV2 } from "../../components";
+
 import "./ProfileScreenRatings.css";
 
 export const ProfileScreenRatings = ({ userPosts, fetchNextPage, hasNextPage }) => {
@@ -18,7 +19,7 @@ export const ProfileScreenRatings = ({ userPosts, fetchNextPage, hasNextPage }) 
         <>
           <div className="profile-ratings-container">
             {userPosts.map((rating) => (
-              <ProfileRating props={rating} key={rating?._id} />
+              <ProfileRatingV2 profileRating={rating} key={rating?._id} />
             ))}
           </div>
           {hasNextPage && <Loading loadingRef={ref} />}
