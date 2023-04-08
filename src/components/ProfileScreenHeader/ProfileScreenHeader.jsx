@@ -17,13 +17,15 @@ export const ProfileScreenHeader = ({ numOfRatings }) => {
   const { removeAccessToken } = useAccessToken();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["displayName", userId],
+    queryKey: ["userProfile", userId],
     queryFn: () => getUserProfile({ userId }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });
 
   const title = !isLoading ? getPageTitle(data?.displayName) : "";
+
+  if (isLoading) return null;
 
   return (
     <>
