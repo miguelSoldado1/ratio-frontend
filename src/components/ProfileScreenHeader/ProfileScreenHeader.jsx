@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { getUserProfile } from "../../api/profileScreen";
 import useAccessToken from "../../hooks/useAuthentication";
+import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./ProfileScreenHeader.css";
 
 const getPageTitle = (displayName) => {
@@ -24,19 +25,15 @@ export const ProfileScreenHeader = ({ numOfRatings }) => {
 
   const title = !isLoading ? getPageTitle(data?.displayName) : "";
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
       <Helmet>
         <title>{title}</title>
       </Helmet>
       <div className="profile-screen-header">
-        <img className="profile-screen-header-image" src={data.imageUrl} alt={data.displayName} />
+        <img className="profile-screen-header-image" src={data?.imageUrl ?? avatarPlacehoder} alt={data.displayName} />
         <div>
-          <h1 className="profile-screen-header-name">{data.displayName}</h1>
+          <h1 className="profile-screen-header-name">{data?.displayName}</h1>
           <h2 className="profile-screen-header-num-ratings">{numOfRatings} Ratings</h2>
         </div>
       </div>
