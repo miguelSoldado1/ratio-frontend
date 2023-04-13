@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { ProfileRatingPL } from "../../preloaders";
 import { useInView } from "react-intersection-observer";
-import { ProfileRating } from "../ProfileRating/ProfileRating";
 import { Loading, ProfileRatingV2 } from "../../components";
 
 import "./ProfileScreenRatings.css";
