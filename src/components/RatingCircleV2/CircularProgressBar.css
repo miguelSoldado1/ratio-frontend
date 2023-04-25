@@ -1,0 +1,49 @@
+.circular-progress-bar.s {
+  --size: 34px;
+}
+
+.circular-progress-bar.m {
+  --size: 88px;
+}
+
+.circular-progress-bar.l {
+  --size: 176px;
+}
+
+.circular-progress-bar {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  margin: 0;
+  text-align: center;
+}
+
+.circular-progress-bar-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-progress-bar-foreground {
+  fill: none;
+  stroke: white;
+  stroke-width: calc(var(--size) * 0.11);
+  transition: stroke-dashoffset 0.3s ease-in-out;
+}
+
+.circular-progress-bar-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--size) * 0.15);
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

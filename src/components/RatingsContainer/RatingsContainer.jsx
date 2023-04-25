@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SubmitRating } from "..";
 import { RatingsContainerPL } from "../../preloaders";
-import { RatingCircle } from "../RatingCircle/RatingCircle";
+import { RatingCircle } from "../RatingCircleV2/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
 import { getAverageAlbumRating, getPersonalRating } from "../../api/albumDetails";

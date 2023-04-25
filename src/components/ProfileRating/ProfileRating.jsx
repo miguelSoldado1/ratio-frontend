@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getAverageAlbumRating, getAlbum } from "../../api/albumDetails";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
+import { RatingCircle as RatingCircleV2 } from "../RatingCircleV2/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
 import useAccessToken from "../../hooks/useAuthentication";
 import { ProfileRatingPL } from "../../preloaders";
@@ -48,8 +49,8 @@ export const ProfileRating = ({ userPost }) => {
         </div>
       </div>
       <div className="profile-ratings-circles">
-        <RatingCircle value={rating} description={"Personal"} />
-        <RatingCircle value={averageRatingData?.averageRating} description={"Community"} />
+        <RatingCircleV2 value={rating} description={"Personal"} variant="m" />
+        <RatingCircleV2 value={averageRatingData?.averageRating} description={"Community"} variant="m" />
       </div>
     </Link>
   );

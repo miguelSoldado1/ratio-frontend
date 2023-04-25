@@ -102,11 +102,3 @@
   margin-block: calc(5 * var(--arrow-width)) 0;
   transition: all 0.5s ease;
 }
-
-.rating-posts-body > .rating-circle-container {
-  width: 2.5em;
-}
-
-.rating-posts-body > .rating-circle-container > * {
-  font-size: 0.35em;
-}

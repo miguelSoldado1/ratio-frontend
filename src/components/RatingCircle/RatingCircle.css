@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  gap: 0.5em;
+  gap: 0.6em;
 }
 
 .rating-circle-tag > * {

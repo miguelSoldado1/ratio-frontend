@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { handleDate } from "../../../../scripts/scripts";
-import { RatingCircle } from "../../..";
+import { RatingCircle } from "../../../RatingCircleV2/RatingCircle";
 import { RatingPostsLikes } from "./RatingPostsLikes/RatingPostsLikes";
 import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";
 import "./RatingsPosts.css";
@@ -25,23 +25,17 @@ export const RatingsPosts = ({ post, children }) => {
         <span>{handleDate(createdAt)}</span>
       </div>
       <div className="rating-posts-body">
-        <div
-          className={`rating-posts-content${expanded ? " expanded" : ""}`}
-          ref={ref}
-          onClick={() => setExpanded(!expanded)}
-        >
+        <div className={`rating-posts-content${expanded ? " expanded" : ""}`} ref={ref} onClick={() => setExpanded(!expanded)}>
           {comment}
         </div>
-        <RatingCircle value={rating} />
+        <RatingCircle value={rating} variant={"s"} />
       </div>
       <div className="rating-posts-footer">
         <div>
           <RatingPostsLikes likes={likes} ratingId={_id} likedByUser={liked_by_user} />
           {children}
         </div>
-        {overflow && (
-          <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={() => setExpanded(!expanded)} />
-        )}
+        {overflow && <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={() => setExpanded(!expanded)} />}
       </div>
     </li>
   );

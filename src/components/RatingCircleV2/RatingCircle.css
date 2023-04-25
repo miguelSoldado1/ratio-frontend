@@ -1,0 +1,32 @@
+.rating-circle-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: calc(var(--size) * 0.045);
+}
+
+.rating-circle-wrapper > * {
+  margin: 0;
+}
+
+.circular-progress-bar.s > .circular-progress-bar-value > .rating-circle-wrapper > h1 {
+  font-size: 2em;
+}
+
+.circular-progress-bar.m > .circular-progress-bar-value > .rating-circle-wrapper > h1 {
+  font-size: 1.45em;
+}
+
+.circular-progress-bar.m > .circular-progress-bar-value > .rating-circle-wrapper > p {
+  font-size: 0.725em;
+}
+
+.circular-progress-bar.l > .circular-progress-bar-value > .rating-circle-wrapper > h1 {
+  font-size: 1.2em;
+}
+
+.circular-progress-bar.l > .circular-progress-bar-value > .rating-circle-wrapper > p {
+  font-size: 0.6em;
+}
