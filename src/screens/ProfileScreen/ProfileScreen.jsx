@@ -15,7 +15,7 @@ export const ProfileScreen = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ["profilePosts", userId, filterActive.query],
-    queryFn: ({ pageParam = 0 }) => getUserPosts({ userId, pageParam, order: filterActive.query, pageSize: NUMBER_OF_RATINGS }),
+    queryFn: ({ pageParam = 0 }) => getUserPosts({ userId, pageParam: pageParam ?? 0, order: filterActive.query, pageSize: NUMBER_OF_RATINGS }),
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
     onError: () => removeAccessToken(),
   });

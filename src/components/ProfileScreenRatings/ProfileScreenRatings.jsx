@@ -1,32 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ProfileRatingPL } from "../../preloaders";
-import { useInView } from "react-intersection-observer";
 import { ProfileRating } from "../ProfileRating/ProfileRating";
-import { Loading, ProfileRatingV2 } from "../../components";
-
+import { Loading } from "../../components";
 import "./ProfileScreenRatings.css";
 
 export const ProfileScreenRatings = ({ userPosts, fetchNextPage, hasNextPage }) => {
-  const { ref, inView } = useInView();
-
-  useEffect(() => {
-    if (inView) fetchNextPage();
-  }, [fetchNextPage, inView]);
+  if (userPosts.length <= 0) {
+    return <NoRatingsYet />;
+  }
 
   return (
     <>
-      {userPosts.length > 0 ? (
-        <>
-          <div className="profile-ratings-container">
-            {userPosts.map((rating) => (
-              <ProfileRatingV2 profileRating={rating} key={rating?._id} />
-            ))}
-          </div>
-          {hasNextPage && <Loading loadingRef={ref} />}
-        </>
-      ) : (
-        <NoRatingsYet />
-      )}
+      <div className="profile-ratings-container">
+        {userPosts.map((rating) => (
+          <ProfileRating userPost={rating} key={rating?._id} />
+        ))}
+      </div>
+      {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
     </>
   );
 };

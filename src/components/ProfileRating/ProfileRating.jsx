@@ -9,8 +9,8 @@ import { ProfileRatingPL } from "../../preloaders";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./ProfileRating.css";
 
-export const ProfileRating = ({ props }) => {
-  const { album_id, createdAt, rating } = props;
+export const ProfileRating = ({ userPost }) => {
+  const { album_id, createdAt, rating } = userPost || {};
   const { accessToken, removeAccessToken } = useAccessToken();
 
   const { data: albumData, isLoading } = useQuery({
