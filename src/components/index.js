@@ -7,7 +7,6 @@ export * from "./NavigationBar/NavigationBar";
 export * from "./NavigationBar/SearchBar/SearchBar";
 export * from "./NavigationBar/SearchBar/SearchResult/SearchResult";
 export * from "./NavigationBar/SearchBar/SearchResult/SearchItem/SearchItem";
-export * from "./ProfileRating/ProfileRating";
 export * from "./Rail/Rail";
 export * from "./Rail/Container/Container";
 export * from "./RatingsContainer/RatingsContainer";
