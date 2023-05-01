@@ -6,7 +6,6 @@
   border-radius: 10000px;
   border: 0;
   min-width: 5em;
-  /* margin-inline: 1em; */
   cursor: pointer;
   box-shadow: 0 0.5em 1em 0 var(--hover-shadow-color);
   transition: background-color 200ms linear;

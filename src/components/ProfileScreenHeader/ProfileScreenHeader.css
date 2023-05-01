@@ -1,0 +1,41 @@
+@media only screen and (max-width: 1025px) {
+  .profile-screen-header {
+    margin: 1em;
+  }
+
+  .profile-screen-header-image {
+    width: 35%;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .profile-screen-header {
+    margin: 1em 2em;
+  }
+
+  .profile-screen-header-image {
+    width: 15%;
+  }
+}
+
+.profile-screen-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.profile-screen-header-image {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.profile-screen-header-name {
+  margin: 0;
+  font-size: 1.75em;
+}
+
+.profile-screen-header-num-ratings {
+  margin-top: 0.25em;
+  font-size: 1em;
+  color: var(--accent-text-color);
+}

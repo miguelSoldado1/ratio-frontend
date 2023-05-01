@@ -1,0 +1,20 @@
+@media only screen and (max-width: 1025px) {
+  .profile-screen-header-name.preloader {
+    width: 7em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .profile-screen-header-name.preloader {
+    width: 10em;
+  }
+}
+
+.profile-screen-header-name.preloader {
+  height: 1em;
+}
+
+.profile-screen-header-num-ratings.preloader {
+  width: 50%;
+  height: 1em;
+}

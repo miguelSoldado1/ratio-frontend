@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import useAccessToken from "../../../../../hooks/useAccessToken";
 import { createLike, deleteLike } from "../../../../../api/albumDetails";
 import { LongPressButton } from "../../../../LongPressButton/LongPressButton";
 import LikesModal from "./LikesModal/LikesModal";
@@ -12,7 +11,6 @@ export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
   const [likeCount, setLikeCount] = useState(likes);
   const [liked, setLiked] = useState(likedByUser);
   const [show, setShow] = useState(false);
-  const [accessToken] = useAccessToken();
 
   const likeOnSuccess = ({ numberOfLikes }) => setLikeCount(numberOfLikes);
 
@@ -31,8 +29,8 @@ export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
   const handleLike = () => {
     if (isCreating || isDeleting) return;
     setLiked((oldStatus) => !oldStatus);
-    if (liked) return deleteMutation({ ratingId, accessToken });
-    return createMutation({ ratingId, accessToken });
+    if (liked) return deleteMutation({ ratingId });
+    return createMutation({ ratingId });
   };
 
   return (

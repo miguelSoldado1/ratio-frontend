@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useDebounce from "../../../hooks/useDebounce";
 import { searchForAlbum } from "../../../api/navigationBar";
-import useAccessToken from "../../../hooks/useAccessToken";
+import useAccessToken from "../../../hooks/useAuthentication";
 import { ReactComponent as SearchIcon } from "../../../icons/search-icon.svg";
 import { SearchResult } from "../../";
 import "./SearchBar.css";
 
 export const SearchBar = () => {
-  const [accessToken] = useAccessToken();
+  const { accessToken } = useAccessToken();
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 

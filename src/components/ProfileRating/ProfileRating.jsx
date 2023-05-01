@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { getAverageAlbumRating, getAlbum } from "../../api/albumDetails";
 import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { handleDate, getArtists } from "../../scripts/scripts";
-import useAccessToken from "../../hooks/useAccessToken";
+import useAccessToken from "../../hooks/useAuthentication";
 import { ProfileRatingPL } from "../../preloaders";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./ProfileRating.css";
 
-export const ProfileRating = ({ props }) => {
-  const { album_id, createdAt, rating } = props;
-  const [accessToken, removeAccessToken] = useAccessToken();
+export const ProfileRating = ({ userPost }) => {
+  const { album_id, createdAt, rating } = userPost || {};
+  const { accessToken, removeAccessToken } = useAccessToken();
 
   const { data: albumData, isLoading } = useQuery({
     queryKey: ["albumData", album_id],

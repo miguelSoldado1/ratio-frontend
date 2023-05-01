@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAccessToken from "../../../hooks/useAccessToken";
+import { getMe } from "../../../api/navigationBar";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getAllRatings } from "../../../api/albumDetails";
@@ -10,9 +10,8 @@ import "./CommunityRatings.css";
 const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const [accessToken] = useAccessToken();
-  const { data: userData } = useQuery({ queryKey: ["userInfo", accessToken], staleTime: 60 * 6000, cacheTime: 60 * 6000 });
-  const { id } = userData;
+  const { data: userData } = useQuery({ queryKey: ["userInfo"], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const id = userData?.id;
   const [page, setPage] = useState(0);
 
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });

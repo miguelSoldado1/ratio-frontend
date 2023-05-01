@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useAccessToken from "../../../../../hooks/useAccessToken";
 import { DeleteModal } from "./DeleteModal/DeleteModal";
 import { deleteRating } from "../../../../../api/albumDetails";
 import { ReactComponent as DeleteIcon } from "../../../../../icons/delete-icon.svg";
@@ -7,7 +6,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const RatingPostsDelete = ({ ratingId, albumId, resetPagination }) => {
   const queryClient = useQueryClient();
-  const [accessToken] = useAccessToken();
   const [show, setShow] = useState(false);
   const { mutate } = useMutation({
     mutationFn: deleteRating,
@@ -21,7 +19,7 @@ export const RatingPostsDelete = ({ ratingId, albumId, resetPagination }) => {
 
   const handleDelete = () => {
     setShow(false);
-    mutate({ albumId, ratingId, accessToken });
+    mutate({ albumId, ratingId });
   };
 
   return (

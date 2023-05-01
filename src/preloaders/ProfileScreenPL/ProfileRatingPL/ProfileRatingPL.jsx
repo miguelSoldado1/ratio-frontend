@@ -1,6 +1,5 @@
 import "./ProfileRatingPL.css";
 import "../../gradient.css";
-
 export const ProfileRatingPL = () => {
   return (
     <div className="profile-rating">

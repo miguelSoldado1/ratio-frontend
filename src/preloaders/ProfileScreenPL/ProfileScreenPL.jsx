@@ -1,10 +1,11 @@
 import { ProfileRatingPL } from "../index";
+import { ProfileScreenHeaderPL } from "./ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import "./ProfileScreenPL.css";
 
 export const ProfileScreenPL = () => {
   return (
     <div className="profile-screen">
-      <div style={{ height: "2.29em" }} />
+      <ProfileScreenHeaderPL />
       <div className="filters" style={{ height: "3.17em" }} />
       <ol>
         {[...Array(4)].map((_, index) => (
