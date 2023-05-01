@@ -5,6 +5,7 @@ import { DatabaseFilters, ProfileScreenHeader, ProfileScreenRatings } from "../.
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserPosts } from "../../api/profileScreen";
 import "./ProfileScreen.css";
+import { ProfileScreenPL } from "../../preloaders";
 
 const NUMBER_OF_RATINGS = 6;
 
@@ -19,6 +20,8 @@ export const ProfileScreen = () => {
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
     onError: () => removeAccessToken(),
   });
+
+  if (isLoading) return <ProfileScreenPL />;
 
   return (
     <div className="profile-screen">

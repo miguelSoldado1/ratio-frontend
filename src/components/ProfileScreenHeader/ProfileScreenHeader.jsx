@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { getUserProfile } from "../../api/profileScreen";
+import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import useAccessToken from "../../hooks/useAuthentication";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./ProfileScreenHeader.css";
@@ -25,7 +26,7 @@ export const ProfileScreenHeader = ({ numOfRatings }) => {
 
   const title = !isLoading ? getPageTitle(data?.displayName) : "";
 
-  if (isLoading) return null;
+  if (isLoading) return <ProfileScreenHeaderPL />;
 
   return (
     <>

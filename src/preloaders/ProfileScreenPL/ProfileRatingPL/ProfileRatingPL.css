@@ -1,25 +1,49 @@
 @media only screen and (max-width: 1025px) {
-  .profile-ratings-content-album-preloader-name {
-    width: 7em;
+  .profile-rating {
+    padding: 1em 0;
+  }
+
+  .profile-rating-preloader-album {
+    width: 10em;
+    height: 1.6em;
+  }
+
+  .profile-rating-preloader-artist {
+    width: 7.5em;
   }
 }
 
 @media only screen and (min-width: 1026px) {
-  .profile-ratings-content-album-preloader-name {
-    width: 9em;
+  .profile-rating-preloader-album {
+    width: 15em;
+    height: 1.2em;
+  }
+
+  .profile-rating-preloader-artist {
+    width: 10em;
   }
 }
 
-.profile-rating-avatar-preloader-name {
-  width: 10em;
-  height: 1.5em;
+.preloader-profile-rating-container {
+  display: flex;
+  align-items: center;
+  padding-right: 1em;
 }
 
-.profile-ratings-content-album-preloader-name {
-  height: 0.75em;
+.profile-rating-img {
+  aspect-ratio: 1;
+  box-shadow: 0px 2px 12px 2px rgba(0, 0, 0, 0.16);
 }
 
-.profile-ratings-content-album-preloader-artist {
+.profile-rating-text > div {
+  box-shadow: 0px 2px 12px 2px rgba(0, 0, 0, 0.16);
+}
+
+.profile-rating-preloader-date {
   width: 5em;
-  height: 0.75em;
+  height: 0.8em;
+}
+
+.profile-rating-preloader-artist {
+  height: 1em;
 }
