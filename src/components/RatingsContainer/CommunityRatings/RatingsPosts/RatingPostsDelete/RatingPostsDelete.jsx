@@ -19,7 +19,7 @@ export const RatingPostsDelete = ({ ratingId, albumId, resetPagination }) => {
 
   const handleDelete = () => {
     setShow(false);
-    mutate({ albumId, ratingId });
+    mutate({ ratingId });
   };
 
   return (
