@@ -57,9 +57,9 @@ export const deleteLike = async ({ ratingId }) => {
   return response.data;
 };
 
-export const deleteRating = async ({ albumId, ratingId }) => {
+export const deleteRating = async ({ ratingId }) => {
   const response = await axios.delete(`${BACK_END_URL}/deletePost`, {
-    data: { album_id: albumId, _id: ratingId },
+    data: { _id: ratingId },
   });
   return response.data;
 };
