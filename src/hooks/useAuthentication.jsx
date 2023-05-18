@@ -9,80 +9,82 @@ const LOCAL_STORAGE_KEYS = {
 };
 
 const REFRESH_TOKEN_URL = `${process.env.REACT_APP_BACK_END_URL}/refresh`;
+const SECONDS_BEFORE_REFRESH_TOKEN = 60;
 
-const refreshToken = async () => {
+const clearAuthStorage = () => {
+  for (const key of Object.keys(LOCAL_STORAGE_KEYS)) {
+    localStorage.removeItem(LOCAL_STORAGE_KEYS[key]);
+  }
+};
+
+const refreshAccessToken = async () => {
   try {
-    const refresh_token = localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
-    if (!refresh_token) {
-      console.error("No refresh token available");
-      for (const key of Object.keys(LOCAL_STORAGE_KEYS)) {
-        localStorage.removeItem(LOCAL_STORAGE_KEYS[key]);
-      }
+    const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+    if (!refreshToken) {
+      clearAuthStorage();
+      throw Error("No refresh token available");
     }
 
-    const response = await axios.get(REFRESH_TOKEN_URL, { params: { refresh_token } });
-    const { expires_in, access_token } = response.data;
+    const response = await axios.get(REFRESH_TOKEN_URL, { params: { refresh_token: refreshToken } });
+    const { expires_in: expiresIn, access_token: accessToken } = response.data;
 
-    if (expires_in && access_token) {
-      const expires_in_date = getExpiresIn(expires_in);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, access_token);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.EXPIRES_IN, expires_in_date);
-      axios.defaults.headers.common = { Authorization: `Bearer ${access_token}` };
+    if (expiresIn && accessToken) {
+      const expiresInDate = getExpiresIn(expiresIn);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.EXPIRES_IN, expiresInDate);
+      return accessToken;
     }
+    return null;
   } catch (error) {
     console.error(error);
   }
 };
 
 const hasTokenExpired = () => {
-  const access_token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-  const expires_in = localStorage.getItem(LOCAL_STORAGE_KEYS.EXPIRES_IN);
-  if (!expires_in || !access_token) return false;
+  const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+  const expiresIn = localStorage.getItem(LOCAL_STORAGE_KEYS.EXPIRES_IN);
+  if (!expiresIn || !accessToken) return false;
 
-  const current = new Date().getTime();
-  return current > Number(expires_in);
+  return new Date().getTime() > Number(expiresIn);
 };
 
 const getExpiresIn = (expiresIn) => {
   const current = new Date().getTime();
-  const secondsBeforeRefresh = 60;
-  return new Date(current + (Number(expiresIn) - secondsBeforeRefresh) * 1000).getTime();
+  return new Date(current + (Number(expiresIn) - SECONDS_BEFORE_REFRESH_TOKEN) * 1000).getTime();
 };
 
 const useAccessToken = () => {
   const navigate = useNavigate();
 
-  const getAccessToken = () => {
+  const getAccessToken = async () => {
     const urlSearchParams = new URLSearchParams(window?.location?.search);
-    const params_access_token = urlSearchParams.get(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-    const params_expires_in = urlSearchParams.get(LOCAL_STORAGE_KEYS.EXPIRES_IN);
-    const params_refresh_token = urlSearchParams.get(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
-    const params_redirect = urlSearchParams.get(LOCAL_STORAGE_KEYS.REDIRECT);
+    const paramsAccessToken = urlSearchParams.get(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    const paramsExpiresIn = urlSearchParams.get(LOCAL_STORAGE_KEYS.EXPIRES_IN);
+    const paramsRefreshToken = urlSearchParams.get(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+    const paramsRedirect = urlSearchParams.get(LOCAL_STORAGE_KEYS.REDIRECT);
 
-    const storage_access_token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    let accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
 
-    if (hasTokenExpired() || storage_access_token === "undefined") {
-      refreshToken();
+    if (hasTokenExpired() || accessToken === "undefined") {
+      accessToken = await refreshAccessToken();
     }
 
-    if (storage_access_token && !storage_access_token !== "undefined") {
-      axios.defaults.headers.common = { Authorization: `Bearer ${storage_access_token}` };
+    if (accessToken) {
+      axios.defaults.headers.common = { Authorization: `Bearer ${accessToken}` };
     }
 
-    if (params_access_token && params_expires_in && params_refresh_token && params_redirect) {
-      const expires_in_date = getExpiresIn(params_expires_in);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, params_access_token);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, params_refresh_token);
+    if (paramsAccessToken && paramsExpiresIn && paramsRefreshToken && paramsRedirect) {
+      const expires_in_date = getExpiresIn(paramsExpiresIn);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, paramsAccessToken);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, paramsRefreshToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.EXPIRES_IN, expires_in_date);
-      axios.defaults.headers.common = { Authorization: `Bearer ${params_access_token}` };
-      navigate(params_redirect || "/");
+      axios.defaults.headers.common = { Authorization: `Bearer ${paramsAccessToken}` };
+      navigate(paramsRedirect || "/");
     }
   };
 
   const removeAccessToken = () => {
-    for (const key of Object.keys(LOCAL_STORAGE_KEYS)) {
-      localStorage.removeItem(LOCAL_STORAGE_KEYS[key]);
-    }
+    clearAuthStorage();
     delete axios.defaults.headers.common["Authorization"];
     navigate("/");
   };
