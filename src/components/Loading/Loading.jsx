@@ -6,7 +6,7 @@ export const Loading = ({ fetchNextPage }) => {
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (inView) {
+    if (inView && fetchNextPage) {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
