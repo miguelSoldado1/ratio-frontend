@@ -7,7 +7,7 @@ const LOCAL_STORAGE_KEYS = {
   REDIRECT: "redirect",
 };
 
-const REFRESH_TOKEN_URL = `${process.env.REACT_APP_BACK_END_URL}/refresh`;
+const REFRESH_TOKEN_URL = `${process.env.REACT_APP_BACK_END_URL}/auth/refresh`;
 
 export const logout = () => {
   for (const key of Object.keys(LOCAL_STORAGE_KEYS)) {

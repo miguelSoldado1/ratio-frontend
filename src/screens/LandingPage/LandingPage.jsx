@@ -3,7 +3,7 @@ import { Button, SocialLogos } from "../../components";
 import spotifyLogo from "../../icons/spotify-logo.png";
 import "./LandingPage.css";
 
-const LOGIN_URL = `${process.env.REACT_APP_BACK_END_URL}/login?pathname=${window.location.pathname}`;
+const LOGIN_URL = `${process.env.REACT_APP_BACK_END_URL}/auth/login?pathname=${window.location.pathname}`;
 const HEADER_TEXT = "Welcome to Ratio!";
 
 export const LandingPage = () => {
