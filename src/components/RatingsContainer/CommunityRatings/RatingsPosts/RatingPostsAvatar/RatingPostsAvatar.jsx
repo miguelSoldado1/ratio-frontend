@@ -2,12 +2,12 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getUsersProfile } from "../../../../../api/albumDetails";
-import { getMe } from "../../../../../api/navigationBar";
 import avatarPlaceholder from "../../../../../icons/avatar-placeholder.svg";
+import useUserInfo from "../../../../../hooks/useUserInfo";
 import "./RatingPostsAvatar.css";
 
 export const RatingPostsAvatar = ({ userId }) => {
-  const { data: userData } = useQuery({ queryKey: ["userInfo"], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const { data: userData } = useUserInfo();
 
   const { data: profileData } = useQuery({
     queryKey: ["profile", userId],

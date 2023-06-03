@@ -6,12 +6,12 @@ import { RatingCircle } from "../RatingCircle/RatingCircle";
 import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
 import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
 import { getAverageAlbumRating, getPersonalRating } from "../../api/albumDetails";
-import { getMe } from "../../api/navigationBar";
+import useUserInfo from "../../hooks/useUserInfo";
 import "./RatingsContainer.css";
 
 export const RatingsContainer = ({ albumId }) => {
-  const { data: userData } = useQuery({ queryKey: ["userInfo"], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
-  const id = userData?.id;
+  const { data: userData } = useUserInfo();
+  const userId = userData?.id;
 
   const { data: averageData, isLoading: averageLoading } = useQuery({
     queryKey: ["averageRating", albumId],
@@ -19,8 +19,8 @@ export const RatingsContainer = ({ albumId }) => {
   });
 
   const { data: personalRating, isLoading: personalLoading } = useQuery({
-    queryKey: ["personalRating", albumId, id],
-    queryFn: () => getPersonalRating({ album_id: albumId, user_id: id }),
+    queryKey: ["personalRating", albumId, userId],
+    queryFn: () => getPersonalRating({ album_id: albumId, user_id: userId }),
   });
 
   if (averageLoading || personalLoading) {

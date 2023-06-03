@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getMe } from "../../../api/navigationBar";
 import { RatingsPosts } from "./RatingsPosts/RatingsPosts";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getAllRatings } from "../../../api/albumDetails";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
+import useUserInfo from "../../../hooks/useUserInfo";
 import "./CommunityRatings.css";
 
 const PAGE_SIZE = 6;
 
 export const CommunityRatings = ({ albumId, numOfRatings }) => {
-  const { data: userData } = useQuery({ queryKey: ["userInfo"], queryFn: getMe, staleTime: 60 * 6000, cacheTime: 60 * 6000 });
+  const { data: userData } = useUserInfo();
+
   const id = userData?.id;
   const [page, setPage] = useState(0);
 
