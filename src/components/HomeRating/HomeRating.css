@@ -1,0 +1,99 @@
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background: hsla(0, 0%, 15%, 0.302);
+  border-radius: 1em;
+}
+
+.rating-container:hover {
+  background: hsla(0, 0%, 15%, 0.604);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25em;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.avatar-container > img {
+  width: 2em;
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
+
+.avatar-container > a {
+  all: unset;
+  font-size: 1em;
+}
+
+.avatar-container > a:hover {
+  text-decoration: underline;
+}
+
+.album-container {
+  display: flex;
+  margin-left: 1.5em;
+  align-items: center;
+  gap: 1em;
+}
+
+.album-container > img {
+  width: 5em;
+}
+
+.album-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-author {
+  font-size: 0.9em;
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.album-release-date {
+  font-size: 0.8em;
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.post-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.created-date {
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.like-button-container {
+  all: unset;
+  display: flex;
+  gap: 0.25em;
+}
+
+.post-container > .rating-circle-container {
+  width: 3em;
+  flex-shrink: 0;
+}
+
+.post-container > .rating-circle-container > * {
+  font-size: 0.4em;
+}

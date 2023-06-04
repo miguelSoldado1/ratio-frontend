@@ -46,3 +46,5 @@ export const renderArtists = (artists) => {
     </React.Fragment>
   ));
 };
+
+export const numberFormatter = Intl.NumberFormat("en", { notation: "compact" });

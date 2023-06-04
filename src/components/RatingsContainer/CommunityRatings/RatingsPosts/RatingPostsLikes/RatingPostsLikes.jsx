@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { createLike, deleteLike } from "../../../../../api/albumDetails";
 import { LongPressButton } from "../../../../LongPressButton/LongPressButton";
 import LikesModal from "./LikesModal/LikesModal";
+import { numberFormatter } from "../../../../../scripts/scripts";
 import { ReactComponent as HeartIcon } from "../../../../../icons/heart-icon.svg";
-
-const numberFormatter = Intl.NumberFormat("en", { notation: "compact" });
 
 export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
   const [likeCount, setLikeCount] = useState(likes);
