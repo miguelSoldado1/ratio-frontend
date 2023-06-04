@@ -5,10 +5,8 @@ import { useParams } from "react-router-dom";
 import { getUserProfile } from "../../api/profileScreen";
 import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import useAccessToken from "../../hooks/useAuthentication";
-import useUserInfo from "../../hooks/useUserInfo";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import FollowButton from "../FollowButton/FollowButton";
-import { numberFormatter } from "../../scripts/scripts";
 import "./ProfileScreenHeader.css";
 
 const getPageTitle = (displayName) => {
@@ -18,7 +16,6 @@ const getPageTitle = (displayName) => {
 
 export const ProfileScreenHeader = () => {
   const { userId } = useParams();
-  const { data: userData } = useUserInfo();
   const { removeAccessToken } = useAccessToken();
 
   const { data, isLoading } = useQuery({
@@ -41,10 +38,7 @@ export const ProfileScreenHeader = () => {
         <img className="profile-screen-header-image" src={data?.imageUrl ?? avatarPlacehoder} alt={data.displayName} />
         <div className="profile-screen-header-info">
           <h1 className="profile-screen-header-name">{data?.displayName}</h1>
-          <h1 className="profile-screen-header-num-followers">
-            {numberFormatter.format(data.followers)} {data.followers === 1 ? "Follower" : "Followers"}
-          </h1>
-          {userData.id !== userId && <FollowButton userId={userId} isFollowing={data.isFollowing} />}
+          <FollowButton userId={userId} />
         </div>
       </div>
     </>

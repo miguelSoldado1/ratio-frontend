@@ -28,3 +28,8 @@ export const unfollowUser = async ({ followingId }) => {
   const response = await axios.get(`${BACK_END_URL}/unfollowUser`, { params: { following_id: followingId } });
   return response.data;
 };
+
+export const getFollowingInfo = async ({ followingId }) => {
+  const response = await axios.get(`${BACK_END_URL}/getFollowingInfo`, { params: { following_id: followingId } });
+  return response.data;
+};

@@ -7,7 +7,8 @@ export const ProfileScreenHeaderPL = () => {
       <div className="profile-screen-header-image gradient" />
       <div>
         <div className="profile-screen-header-name preloader gradient" />
-        <div className="profile-screen-header-num-ratings preloader gradient" />
+        <div className="profile-screen-header-num-followers preloader gradient" />
+        <div />
       </div>
     </div>
   );
