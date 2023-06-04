@@ -4,8 +4,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { DatabaseFilters, ProfileScreenHeader, ProfileScreenRatings } from "../../components";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserPosts } from "../../api/profileScreen";
-import "./ProfileScreen.css";
 import { ProfileScreenPL } from "../../preloaders";
+import "./ProfileScreen.css";
 
 const NUMBER_OF_RATINGS = 6;
 
@@ -25,7 +25,7 @@ export const ProfileScreen = () => {
 
   return (
     <div className="profile-screen">
-      <ProfileScreenHeader numOfRatings={data?.pages[0]?.total ?? "--"} />
+      <ProfileScreenHeader />
       <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage({ pageParam: 0 })} />
       {!isLoading && (
         <ProfileScreenRatings userPosts={data?.pages?.flatMap((page) => page?.data)} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />

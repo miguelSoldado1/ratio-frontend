@@ -16,7 +16,7 @@ const getPageTitle = (displayName) => {
   return `${formattedName} Ratings`;
 };
 
-export const ProfileScreenHeader = ({ numOfRatings }) => {
+export const ProfileScreenHeader = () => {
   const { userId } = useParams();
   const { data: userData } = useUserInfo();
   const { removeAccessToken } = useAccessToken();
