@@ -1,9 +1,9 @@
-import { useQueries } from "@tanstack/react-query";
-import { getRails } from "../../api/homeScreen";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { getRails, getFollowingRatings } from "../../api/homeScreen";
 import { Rail } from "../../components";
 import useUserInfo from "../../hooks/useUserInfo";
-import "./HomeScreen.css";
 import HomeRating from "../../components/HomeRating/HomeRating";
+import "./HomeScreen.css";
 
 const mockList = [
   {
@@ -77,6 +77,10 @@ export const HomeScreen = () => {
       // },
     ],
   });
+
+  const { data } = useQuery({ queryKey: ["getFollowingRatings", userId], queryFn: getFollowingRatings });
+
+  console.log(data);
 
   return (
     <div className="rails-container">

@@ -2,6 +2,11 @@ import axios from "axios";
 
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/homeScreen`;
 
+export const getFollowingRatings = async () => {
+  const response = await axios.get(`${BACK_END_URL}/getFollowingRatings`);
+  return response.data;
+};
+
 export const getRails = async ({ railKey }) => {
   const description = railTitles[railKey];
   const response = await axios.get(`${BACK_END_URL}/${railKey}`);
