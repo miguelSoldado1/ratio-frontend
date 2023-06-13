@@ -8,10 +8,6 @@
   border-radius: 1em;
 }
 
-.rating-container:hover {
-  background: hsla(0, 0%, 15%, 0.604);
-}
-
 .post-container {
   display: flex;
   align-items: center;
