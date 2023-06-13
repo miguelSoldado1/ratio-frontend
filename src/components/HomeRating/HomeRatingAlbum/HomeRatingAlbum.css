@@ -1,0 +1,25 @@
+.album-container {
+  display: flex;
+  margin-left: 1.5em;
+  align-items: center;
+  gap: 1em;
+}
+
+.album-container > img {
+  width: 5em;
+}
+
+.album-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-author {
+  font-size: 0.9em;
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.album-release-date {
+  font-size: 0.8em;
+  color: hsla(0, 0%, 100%, 0.6);
+}

@@ -1,0 +1,27 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25em;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.avatar-container > img {
+  width: 2em;
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
+
+.avatar-container > a {
+  all: unset;
+  font-size: 1em;
+}
+
+.avatar-container > a:hover {
+  text-decoration: underline;
+}
