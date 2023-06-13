@@ -60,13 +60,6 @@
   padding: 0.5em;
 }
 
-.album-track-name,
-.album-track-artist-names {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .album-track-number {
   width: var(--track-number-size);
   text-align: center;

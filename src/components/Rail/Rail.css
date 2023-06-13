@@ -76,9 +76,6 @@
   color: white;
   font-family: Helvetica;
   margin: 0.5em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* scrollbar never appears when on mobile */

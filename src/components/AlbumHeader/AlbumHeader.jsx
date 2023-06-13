@@ -10,11 +10,11 @@ export const AlbumHeader = ({ data }) => {
         <h1>
           <a href={data?.album_uri}>{data?.name}</a>
         </h1>
-        <span className="album-details-line">
+        <span className="album-details-line overflow-ellipsis">
           <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
           {renderArtists(data?.artist)}
         </span>
-        <p className="album-details-line">
+        <p className="album-details-line overflow-ellipsis">
           {handleDatePrecision(data?.release_date, data?.release_date_precision)} | {data?.tracks?.length} tracks
         </p>
       </div>

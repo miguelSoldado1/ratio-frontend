@@ -8,7 +8,7 @@ export const AlbumTrack = ({ props, index }) => {
       <div className="album-track-container">
         <span className="album-track-number">{index + 1}</span>
         <div className="album-track-detail">
-          <a className="album-track-name" href={props?.track_url}>
+          <a className="album-track-name overflow-ellipsis" href={props?.track_url}>
             {props?.name}
           </a>
           <div className="album-track-artist">
@@ -17,7 +17,7 @@ export const AlbumTrack = ({ props, index }) => {
                 E
               </span>
             )}
-            <span className="album-track-artist-names">{renderArtists(props?.artists)}</span>
+            <span className="album-track-artist-names overflow-ellipsis">{renderArtists(props?.artists)}</span>
           </div>
         </div>
       </div>

@@ -45,8 +45,6 @@
   padding: 0 0.75em;
   margin: 0 0.5em;
   border-radius: 0.5em;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   line-clamp: 2;

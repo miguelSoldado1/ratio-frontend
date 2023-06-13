@@ -8,7 +8,7 @@ export const Avatar = ({ userData, userLoading }) => {
     return (
       <div className="avatar">
         <img className="avatar-image" src={avatarPlacehoder} alt="" />
-        <p className="avatar-name">{"           "}</p>
+        <p className="avatar-name overflow-ellipsis">{"           "}</p>
       </div>
     );
   }
@@ -16,7 +16,7 @@ export const Avatar = ({ userData, userLoading }) => {
   return (
     <Link className="avatar" to={`/profile/${userData.id}`}>
       <img className="avatar-image" src={userData?.imageUrl ?? avatarPlacehoder} alt={userData.displayName} />
-      <p className="avatar-name">{userData.displayName}</p>
+      <p className="avatar-name overflow-ellipsis">{userData.displayName}</p>
     </Link>
   );
 };

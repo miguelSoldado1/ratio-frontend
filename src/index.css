@@ -69,3 +69,9 @@ ol {
   padding: var(--arrow-size);
   cursor: pointer;
 }
+
+.overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

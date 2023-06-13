@@ -12,8 +12,8 @@ export const Container = ({ props }) => {
       {props && props.artist && props.image && props.name && props.release_date && (
         <li className="container" onClick={() => navigate(`/album/${props.id}`)}>
           <img className="container-image" src={props.image} alt={props.name} loading="lazy" />
-          <p className="container-album-name">{props.name}</p>
-          <p className="container-artist-name">
+          <p className="container-album-name overflow-ellipsis">{props.name}</p>
+          <p className="container-artist-name overflow-ellipsis">
             <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
             {getArtists(props.artist)}
           </p>

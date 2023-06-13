@@ -41,7 +41,4 @@
 .avatar-name {
   padding-left: 0.7em;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
