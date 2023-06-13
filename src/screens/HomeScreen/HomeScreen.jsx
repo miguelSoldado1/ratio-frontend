@@ -39,12 +39,14 @@ export const HomeScreen = () => {
   });
 
   return (
-    <div className="rails-container">
-      {results.map((rail, idx) => (
-        // I hate having index as key but it doesn't really matter in here
-        <Rail content={rail} key={idx} />
-      ))}
+    <>
+      <div className="rails-container">
+        {results.map((rail, idx) => (
+          // I hate having index as key but it doesn't really matter in here
+          <Rail content={rail} key={idx} />
+        ))}
+      </div>
       <PostsFeed userId={userId} />
-    </div>
+    </>
   );
 };

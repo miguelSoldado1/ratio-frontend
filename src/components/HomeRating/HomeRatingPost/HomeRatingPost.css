@@ -1,0 +1,15 @@
+.post-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.post-container > .rating-circle-container {
+  width: calc(3em * 1);
+  flex-shrink: 0;
+}
+
+.post-container > .rating-circle-container > * {
+  font-size: calc(0.4em * 1);
+}

@@ -5,12 +5,15 @@ import { numberFormatter } from "../../../scripts/scripts";
 import { ReactComponent as HeartIcon } from "../../../icons/heart-icon.svg";
 import "./HomeRatingLikes.css";
 import useUserInfo from "../../../hooks/useUserInfo";
+import { LongPressButton } from "../../LongPressButton/LongPressButton";
+import LikesModal from "../../RatingsContainer/CommunityRatings/RatingsPosts/RatingPostsLikes/LikesModal/LikesModal";
 
 export const HomeRatingLikes = ({ likes = 0, ratingId, likedByUser }) => {
   const { data: userData } = useUserInfo();
   const queryClient = useQueryClient();
   const [likeCount, setLikeCount] = useState(likes);
   const [liked, setLiked] = useState(likedByUser);
+  const [show, setShow] = useState(false);
 
   const likeOnSuccess = ({ numberOfLikes }) => {
     queryClient.invalidateQueries(["getFollowingRatings", userData?.id]);
@@ -37,11 +40,18 @@ export const HomeRatingLikes = ({ likes = 0, ratingId, likedByUser }) => {
   };
 
   return (
-    <button className={`home-rating-posts-button heart${liked ? " liked" : ""}`} onClick={handleLike}>
-      <HeartIcon />
-      <span>
-        {numberFormatter.format(likeCount)} {likeCount === 1 ? "Like" : "Likes"}
-      </span>
-    </button>
+    <div>
+      <LongPressButton
+        className={`home-rating-posts-button heart${liked ? " liked" : ""}`}
+        onClick={handleLike}
+        onLongPress={() => likeCount > 0 && setShow(true)}
+      >
+        <HeartIcon />
+        <span>
+          {numberFormatter.format(likeCount)} {likeCount === 1 ? "Like" : "Likes"}
+        </span>
+      </LongPressButton>
+      <LikesModal show={show} onClose={() => setShow(false)} ratingId={ratingId} />
+    </div>
   );
 };

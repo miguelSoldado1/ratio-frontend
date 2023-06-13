@@ -8,13 +8,6 @@
   border-radius: 1em;
 }
 
-.post-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2em;
-}
-
 .created-date {
   color: hsla(0, 0%, 100%, 0.6);
 }
@@ -23,13 +16,4 @@
   all: unset;
   display: flex;
   gap: 0.25em;
-}
-
-.post-container > .rating-circle-container {
-  width: 3em;
-  flex-shrink: 0;
-}
-
-.post-container > .rating-circle-container > * {
-  font-size: 0.4em;
 }
