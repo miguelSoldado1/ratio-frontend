@@ -1,4 +1,3 @@
-import { HomeRatingLikes } from "./HomeRatingLikes/HomeRatingLikes";
 import { HomeRatingAlbum } from "./HomeRatingAlbum/HomeRatingAlbum";
 import { HomeRatingAvatar } from "./HomeRatingAvatar/HomeRatingAvatar";
 import { HomeRatingPost } from "./HomeRatingPost/HomeRatingPost";
@@ -13,7 +12,6 @@ const HomeRating = (post) => {
       </HomeRatingAvatar>
       <HomeRatingAlbum album={post.album} />
       <HomeRatingPost post={post} />
-      <HomeRatingLikes likes={post.likes} ratingId={post._id} likedByUser={post.liked_by_user} />
     </div>
   );
 };

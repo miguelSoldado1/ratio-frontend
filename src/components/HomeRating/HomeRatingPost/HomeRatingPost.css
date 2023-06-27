@@ -5,6 +5,17 @@
   gap: 2em;
 }
 
+.post-container-content {
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  margin-inline-start: 0.75em;
+}
+
 .post-container > .rating-circle-container {
   width: calc(3em * 1);
   flex-shrink: 0;
@@ -12,4 +23,9 @@
 
 .post-container > .rating-circle-container > * {
   font-size: calc(0.4em * 1);
+}
+
+.expanded {
+  -webkit-line-clamp: 15;
+  line-clamp: 15;
 }
