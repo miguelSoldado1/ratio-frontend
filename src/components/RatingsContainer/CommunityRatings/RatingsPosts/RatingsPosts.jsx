@@ -1,22 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
+import useOverflow from "../../../../hooks/useOverflow";
 import { handleDate } from "../../../../scripts/scripts";
 import { RatingCircle } from "../../..";
 import { RatingPostsLikes } from "./RatingPostsLikes/RatingPostsLikes";
 import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";
 import "./RatingsPosts.css";
 
-const isOverflown = (element) => {
-  return element?.clientWidth < element?.scrollWidth || element?.clientHeight < element?.scrollHeight;
-};
-
-// TODO When .has() CSS selector is more widely supported replace the expanded state
 export const RatingsPosts = ({ post, children }) => {
   const { user_id, comment, rating, createdAt, _id, likes, liked_by_user } = post;
-  const [overflow, setOverflow] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => setOverflow(isOverflown(ref.current)), []);
+  const { ref, overflow, expanded, handleToggleExpanded } = useOverflow();
 
   return (
     <li className="rating-posts-container">
@@ -25,11 +17,7 @@ export const RatingsPosts = ({ post, children }) => {
         <span>{handleDate(createdAt)}</span>
       </div>
       <div className="rating-posts-body">
-        <div
-          className={`rating-posts-content${expanded ? " expanded" : ""}`}
-          ref={ref}
-          onClick={() => setExpanded(!expanded)}
-        >
+        <div className={`rating-posts-content${expanded ? " expanded" : ""}`} ref={ref} onClick={handleToggleExpanded}>
           {comment}
         </div>
         <RatingCircle value={rating} />
@@ -39,9 +27,7 @@ export const RatingsPosts = ({ post, children }) => {
           <RatingPostsLikes likes={likes} ratingId={_id} likedByUser={liked_by_user} />
           {children}
         </div>
-        {overflow && (
-          <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={() => setExpanded(!expanded)} />
-        )}
+        {overflow && <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={handleToggleExpanded} />}
       </div>
     </li>
   );
