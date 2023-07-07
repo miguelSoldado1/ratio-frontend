@@ -21,7 +21,11 @@ export const AlbumDetails = () => {
   });
 
   const artist_id = albumData?.artist_id;
-  const { data: relatedAlbumsData, isLoading: relatedAlbumsLoading } = useQuery({
+  const {
+    data: relatedAlbumsData,
+    isLoading: relatedAlbumsLoading,
+    isError: relatedAlbumsError,
+  } = useQuery({
     queryKey: ["relatedAlbums", album_id, artist_id],
     queryFn: () => getRelatedAlbums({ album_id, artist_id }),
     enabled: !!artist_id,
@@ -52,7 +56,7 @@ export const AlbumDetails = () => {
           <RatingsContainer albumId={album_id} />
         </div>
       </div>
-      <Rail content={{ data: { data: relatedAlbumsData, description: "Related albums" }, isLoading: relatedAlbumsLoading }} />
+      <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsLoading} isError={relatedAlbumsError} />
     </>
   );
 };
