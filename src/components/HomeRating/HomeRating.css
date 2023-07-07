@@ -1,7 +1,7 @@
 .rating-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.125em;
   padding: 0.5em 1em;
   cursor: pointer;
   background: hsla(0, 0%, 15%, 0.302);
@@ -17,7 +17,7 @@
 }
 
 .created-date {
-  color: hsla(0, 0%, 100%, 0.6);
+  color: var(--accent-text-color);
 }
 
 .like-button-container {

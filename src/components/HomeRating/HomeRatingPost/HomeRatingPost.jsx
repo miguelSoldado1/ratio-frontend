@@ -10,7 +10,7 @@ export const HomeRatingPost = ({ post }) => {
   return (
     <>
       <div className="post-container">
-        <span className={`post-container-content ${expanded ? " expanded" : ""}`} ref={ref} onClick={handleToggleExpanded}>
+        <span className={`post-container-content${expanded ? " expanded" : ""}`} ref={ref} onClick={handleToggleExpanded}>
           {post.comment}
         </span>
         <RatingCircle value={post.rating} />

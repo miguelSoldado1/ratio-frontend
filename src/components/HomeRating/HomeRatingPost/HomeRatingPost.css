@@ -1,8 +1,8 @@
 .post-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 2em;
+  margin-left: 1em;
 }
 
 .post-container-content {
@@ -10,10 +10,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* number of lines to show */
-  line-clamp: 5;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
-  margin-inline-start: 0.75em;
+  margin-top: 0.75em;
 }
 
 .post-container > .rating-circle-container {

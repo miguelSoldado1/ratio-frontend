@@ -1,12 +1,20 @@
+@media only screen and (max-width: 1025px) {
+  .album-container > img {
+    width: 4em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .album-container > img {
+    width: 5em;
+  }
+}
+
 .album-container {
   display: flex;
   margin-left: 1.5em;
   align-items: center;
   gap: 1em;
-}
-
-.album-container > img {
-  width: 5em;
 }
 
 .album-text {
