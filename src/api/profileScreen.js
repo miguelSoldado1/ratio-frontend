@@ -33,3 +33,8 @@ export const getFollowingInfo = async ({ followingId }) => {
   const response = await axios.get(`${BACK_END_URL}/getFollowingInfo`, { params: { following_id: followingId } });
   return response.data;
 };
+
+export const getUserRatings = async ({ userId, cursor, filter }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserRatings`, { params: { user_id: userId, cursor: cursor, filter: filter } });
+  return response.data;
+};
