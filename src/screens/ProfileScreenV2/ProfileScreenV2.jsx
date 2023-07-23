@@ -6,6 +6,7 @@ import { getUserProfile, getUserRatings } from "../../api/profileScreen";
 import { DatabaseFilters, Loading, ProfileScreenHeader } from "../../components";
 import PostRating from "../../components/PostRating/PostRating";
 import "./ProfileScreenV2.css";
+import PostRatingPL from "../../preloaders/PostRatingPL/PostRatingPL";
 
 const ProfileScreenV2 = () => {
   const { userId } = useParams();
@@ -36,7 +37,9 @@ const ProfileScreenV2 = () => {
       <ProfileScreenHeader />
       <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
       <div className="profile-screen-container">
-        {posts ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={post._id} />)) : <div></div>}
+        {posts
+          ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={post._id} />))
+          : [...Array(4)].map((_, index) => <PostRatingPL key={index} />)}
         {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
       </div>
     </div>

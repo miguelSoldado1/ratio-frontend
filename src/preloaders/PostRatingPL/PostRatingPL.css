@@ -1,0 +1,68 @@
+.post-rating-avatar-preloader {
+  width: 2em;
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
+
+.post-rating-name-preloader {
+  width: 9em;
+  height: 1.25em;
+}
+
+.created-date-preloader {
+  width: 8em;
+  height: 1em;
+}
+
+.album-text-preloader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.album-name-preloader {
+  width: 8em;
+  height: 1em;
+}
+
+.album-author-preloader {
+  width: 7em;
+  height: 0.9em;
+}
+
+.post-lines-preloader {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.75em;
+  gap: 0.2em;
+  width: 100%;
+}
+
+.post-line-preloader {
+  height: 1em;
+}
+
+.post-line-preloader.w80 {
+  width: 80%;
+}
+
+.post-line-preloader.w70 {
+  width: 70%;
+}
+
+.post-line-preloader.w60 {
+  width: 60%;
+}
+
+.likes-container-preloader {
+  width: 6em;
+  height: 1em;
+  margin: 0.25em 0.5em;
+}
+
+.rating-circle-container-preloader {
+  width: 3em;
+  height: 3em;
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
