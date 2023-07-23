@@ -1,8 +1,8 @@
 import React from "react";
-import "./HomeRatingAlbum.css";
 import { Link } from "react-router-dom";
+import "./PostRatingAlbum.css";
 
-export const HomeRatingAlbum = ({ album }) => {
+export const PostRatingAlbum = ({ album }) => {
   return (
     <Link to={`/album/${album.id}`} className="album-container">
       <img src={album.image} alt={album.name} />

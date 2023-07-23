@@ -6,9 +6,9 @@ import useUserInfo from "../../../hooks/useUserInfo";
 import { LongPressButton } from "../../LongPressButton/LongPressButton";
 import LikesModal from "../../RatingsContainer/CommunityRatings/RatingsPosts/RatingPostsLikes/LikesModal/LikesModal";
 import { ReactComponent as HeartIcon } from "../../../icons/heart-icon.svg";
-import "./HomeRatingLikes.css";
+import "./PostRatingLikes.css";
 
-export const HomeRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) => {
+export const PostRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) => {
   const { data: userData } = useUserInfo();
   const queryClient = useQueryClient();
   const [likeCount, setLikeCount] = useState(likes);

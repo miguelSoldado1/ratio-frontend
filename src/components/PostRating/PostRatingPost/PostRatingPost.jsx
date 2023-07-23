@@ -1,10 +1,10 @@
 import React from "react";
 import useOverflow from "../../../hooks/useOverflow";
 import { RatingCircle } from "../../RatingCircle/RatingCircle";
-import { HomeRatingLikes } from "../HomeRatingLikes/HomeRatingLikes";
-import "./HomeRatingPost.css";
+import { PostRatingLikes } from "../PostRatingLikes/PostRatingLikes";
+import "./PostRatingPost.css";
 
-export const HomeRatingPost = ({ post }) => {
+export const PostRatingPost = ({ post }) => {
   const { ref, overflow, expanded, handleToggleExpanded } = useOverflow();
 
   return (
@@ -15,9 +15,9 @@ export const HomeRatingPost = ({ post }) => {
         </span>
         <RatingCircle value={post.rating} />
       </div>
-      <HomeRatingLikes likes={post.likes} ratingId={post._id} likedByUser={post.liked_by_user}>
+      <PostRatingLikes likes={post.likes} ratingId={post._id} likedByUser={post.liked_by_user}>
         {overflow && <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={handleToggleExpanded} />}
-      </HomeRatingLikes>
+      </PostRatingLikes>
     </>
   );
 };

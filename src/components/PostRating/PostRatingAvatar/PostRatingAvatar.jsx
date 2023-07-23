@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import avatarPlacehoder from "../../../icons/avatar-placeholder.svg";
+import "./PostRatingAvatar.css";
 
-import "./HomeRatingAvatar.css";
-
-export const HomeRatingAvatar = ({ user, children }) => {
+export const PostRatingAvatar = ({ user, children }) => {
   return (
     <div className="header-container">
       <div className="avatar-container">
