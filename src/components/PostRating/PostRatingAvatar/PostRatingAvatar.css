@@ -1,3 +1,15 @@
+@media only screen and (max-width: 1025px) {
+  .avatar-container > img {
+    width: 1.75em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .avatar-container > img {
+    width: 2em;
+  }
+}
+
 .header-container {
   display: flex;
   align-items: center;
@@ -14,7 +26,6 @@
 }
 
 .avatar-container > img {
-  width: 2em;
   aspect-ratio: 1;
   border-radius: 100%;
 }
