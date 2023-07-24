@@ -3,12 +3,11 @@ import { useParams } from "react-router";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "../../api/profileScreen";
-import { DatabaseFilters, Loading, ProfileScreenHeader } from "../../components";
-import PostRating from "../../components/PostRating/PostRating";
+import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
+import { PostRatingPL } from "../../preloaders";
 import "./ProfileScreenV2.css";
-import PostRatingPL from "../../preloaders/PostRatingPL/PostRatingPL";
 
-const ProfileScreenV2 = () => {
+export const ProfileScreenV2 = () => {
   const { userId } = useParams();
   const { removeAccessToken } = useAccessToken();
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
@@ -45,5 +44,3 @@ const ProfileScreenV2 = () => {
     </div>
   );
 };
-
-export default ProfileScreenV2;

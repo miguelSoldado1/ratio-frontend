@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { NavigationBar, Footer } from "./components";
-import { HomeScreen, LandingPage, ProfileScreen, NotFound, AlbumDetails } from "./screens";
+import { HomeScreen, LandingPage, NotFound, AlbumDetails, ProfileScreenV2 } from "./screens";
 import useAccessToken from "./hooks/useAuthentication";
-import ProfileScreenV2 from "./screens/ProfileScreenV2/ProfileScreenV2";
 
 const mainRouteElement = (
   <>
@@ -12,8 +11,7 @@ const mainRouteElement = (
     <Routes>
       <Route path="/" element={<HomeScreen />} />
       <Route path="/album/:album_id" element={<AlbumDetails />} />
-      <Route path="/profile/:userId" element={<ProfileScreen />} />
-      <Route path="/profileV2/:userId" element={<ProfileScreenV2 />} />
+      <Route path="/profile/:userId" element={<ProfileScreenV2 />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />
