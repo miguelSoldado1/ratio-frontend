@@ -1,7 +1,7 @@
 import React from "react";
 import "./PostRatingPL.css";
 
-const PostRatingPL = () => {
+export const PostRatingPL = () => {
   return (
     <div className="rating-container">
       <div className="header-container">
@@ -32,5 +32,3 @@ const PostRatingPL = () => {
     </div>
   );
 };
-
-export default PostRatingPL;

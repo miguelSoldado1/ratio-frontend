@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { createLike, deleteLike } from "../../../../../api/albumDetails";
 import { LongPressButton } from "../../../../LongPressButton/LongPressButton";
-import LikesModal from "./LikesModal/LikesModal";
+import { LikesModal } from "./LikesModal/LikesModal";
 import { numberFormatter } from "../../../../../scripts/scripts";
 import { ReactComponent as HeartIcon } from "../../../../../icons/heart-icon.svg";
 

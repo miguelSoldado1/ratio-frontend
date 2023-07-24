@@ -4,7 +4,7 @@ import { PostRatingPost } from "./PostRatingPost/PostRatingPost";
 import { handleDate } from "../../scripts/scripts";
 import "./PostRating.css";
 
-const PostRating = (post) => {
+export const PostRating = (post) => {
   return (
     <div className="rating-container">
       <PostRatingAvatar user={post.user}>
@@ -15,5 +15,3 @@ const PostRating = (post) => {
     </div>
   );
 };
-
-export default PostRating;

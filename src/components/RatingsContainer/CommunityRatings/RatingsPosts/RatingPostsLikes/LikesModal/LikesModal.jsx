@@ -6,7 +6,7 @@ import "./LikesModal.css";
 
 const PAGE_SIZE = 8;
 
-const LikesModal = ({ onClose, show, ratingId }) => {
+export const LikesModal = ({ onClose, show, ratingId }) => {
   const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
     queryKey: ["likesProfiles", ratingId],
     queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, cursor: pageParam, page_size: PAGE_SIZE }),
@@ -34,5 +34,3 @@ const LikesModal = ({ onClose, show, ratingId }) => {
     </Modal>
   );
 };
-
-export default LikesModal;

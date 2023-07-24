@@ -5,7 +5,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 import { numberFormatter } from "../../scripts/scripts";
 import "./FollowButton.css";
 
-const FollowButton = ({ userId }) => {
+export const FollowButton = ({ userId }) => {
   const [following, setFollowing] = useState(null);
   const [followers, setFollowers] = useState(null);
   const { data: userData } = useUserInfo();
@@ -51,5 +51,3 @@ const FollowButton = ({ userId }) => {
     </>
   );
 };
-
-export default FollowButton;

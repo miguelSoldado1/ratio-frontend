@@ -1,11 +1,10 @@
 import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getFollowingRatings } from "../../api/homeScreen";
-import { Loading } from "../Loading/Loading";
+import { PostRating, Loading } from "../../components";
 import "./PostsFeed.css";
-import PostRating from "../PostRating/PostRating";
 
-const PostsFeed = ({ userId }) => {
+export const PostsFeed = ({ userId }) => {
   const {
     data: posts,
     isInitialLoading,
@@ -29,5 +28,3 @@ const PostsFeed = ({ userId }) => {
     </div>
   );
 };
-
-export default PostsFeed;

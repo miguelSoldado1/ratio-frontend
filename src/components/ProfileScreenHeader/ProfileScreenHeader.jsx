@@ -2,11 +2,11 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
+import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile } from "../../api/profileScreen";
 import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
-import useAccessToken from "../../hooks/useAuthentication";
+import { FollowButton } from "../FollowButton/FollowButton";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
-import FollowButton from "../FollowButton/FollowButton";
 import "./ProfileScreenHeader.css";
 
 const getPageTitle = (displayName) => {

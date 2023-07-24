@@ -1,8 +1,7 @@
 import { useQueries } from "@tanstack/react-query";
 import { getRails } from "../../api/homeScreen";
-import { Rail } from "../../components";
 import useUserInfo from "../../hooks/useUserInfo";
-import PostsFeed from "../../components/PostsFeed/PostsFeed";
+import { Rail, PostsFeed } from "../../components";
 import "./HomeScreen.css";
 
 export const HomeScreen = () => {

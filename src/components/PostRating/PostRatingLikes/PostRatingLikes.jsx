@@ -4,7 +4,7 @@ import { createLike, deleteLike } from "../../../api/albumDetails";
 import { numberFormatter } from "../../../scripts/scripts";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { LongPressButton } from "../../LongPressButton/LongPressButton";
-import LikesModal from "../../RatingsContainer/CommunityRatings/RatingsPosts/RatingPostsLikes/LikesModal/LikesModal";
+import { LikesModal } from "../../RatingsContainer/CommunityRatings/RatingsPosts/RatingPostsLikes/LikesModal/LikesModal";
 import { ReactComponent as HeartIcon } from "../../../icons/heart-icon.svg";
 import "./PostRatingLikes.css";
 
