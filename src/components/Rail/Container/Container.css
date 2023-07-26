@@ -59,7 +59,7 @@
   align-items: center;
 }
 
-.spotify-logo {
+.container-artist-name > .spotify-logo {
   width: 0.8em;
   height: 0.8em;
   margin: 0 0.3em 0 0.1em;

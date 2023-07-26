@@ -28,10 +28,16 @@
 
 .album-author {
   font-size: 0.9em;
-  color: hsla(0, 0%, 100%, 0.6);
+  color: var(--accent-text-color);
+}
+
+.album-author > .spotify-logo {
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.2em;
 }
 
 .album-release-date {
   font-size: 0.8em;
-  color: hsla(0, 0%, 100%, 0.6);
+  color: var(--accent-text-color);
 }
