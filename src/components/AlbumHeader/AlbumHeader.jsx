@@ -8,7 +8,9 @@ export const AlbumHeader = ({ data }) => {
       <img className="album-header-image" src={data?.image} alt={data?.name} loading="lazy" />
       <div className="album-details-details">
         <h1>
-          <a href={data?.album_uri}>{data?.name}</a>
+          <a href={data?.album_uri} className="underline">
+            {data?.name}
+          </a>
         </h1>
         <span className="album-details-line overflow-ellipsis">
           <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />

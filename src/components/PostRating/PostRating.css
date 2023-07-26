@@ -4,7 +4,7 @@
   gap: 0.125em;
   padding: 0.5em 1em;
   cursor: pointer;
-  background: hsla(0, 0%, 15%, 0.302);
+  background: var(--background-item-color);
   border-radius: 1em;
 
   -webkit-tap-highlight-color: transparent;

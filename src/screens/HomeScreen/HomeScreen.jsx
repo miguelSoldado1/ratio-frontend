@@ -17,23 +17,11 @@ export const HomeScreen = () => {
         enabled: !!userId,
       },
       {
-        queryKey: ["getLatestPosts", userId],
-        queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0] }),
-        staleTime: 5 * 60000,
-        enabled: !!userId,
-      },
-      {
         queryKey: ["getRecentlyListened", userId],
         queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0] }),
         staleTime: 5 * 60000,
         enabled: !!userId,
       },
-      // {
-      //   queryKey: ["getMyReleaseRadar", userId],
-      //   queryFn: ({ queryKey }) => getRails({ railKey: queryKey[0] }),
-      //   staleTime: 4 * 60 * 60000,
-      //   enabled: !!userId,
-      // },
     ],
   });
 

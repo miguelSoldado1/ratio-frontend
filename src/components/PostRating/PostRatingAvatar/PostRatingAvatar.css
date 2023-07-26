@@ -34,11 +34,3 @@
   all: unset;
   font-size: 1em;
 }
-
-.avatar-container > a:hover {
-  text-decoration: underline;
-}
-
-.avatar-container:hover {
-  background-color: var(--hover-color);
-}

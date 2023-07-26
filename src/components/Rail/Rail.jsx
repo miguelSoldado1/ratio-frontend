@@ -6,7 +6,7 @@ export const Rail = ({ isLoading, isError, data }) => {
   if (isLoading) return <RailPL />;
   if (isError) return null;
 
-  if (data.data.length > 2) {
+  if (data.data) {
     return (
       <div className="grid-container">
         <h1 className="grid-title overflow-ellipsis">{data.description}</h1>

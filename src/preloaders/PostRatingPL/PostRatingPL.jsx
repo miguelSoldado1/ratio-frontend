@@ -5,7 +5,7 @@ export const PostRatingPL = () => {
   return (
     <div className="rating-container">
       <div className="header-container">
-        <div className="avatar-container">
+        <div className="avatar-container preloader">
           <div className="post-rating-avatar-preloader gradient" />
           <div className="post-rating-name-preloader gradient" />
         </div>

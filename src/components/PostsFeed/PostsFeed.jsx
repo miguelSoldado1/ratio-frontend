@@ -2,6 +2,7 @@ import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getFollowingRatings } from "../../api/homeScreen";
 import { PostRating, Loading } from "../../components";
+import { PostRatingPL } from "../../preloaders";
 import "./PostsFeed.css";
 
 export const PostsFeed = ({ userId }) => {
@@ -23,7 +24,9 @@ export const PostsFeed = ({ userId }) => {
 
   return (
     <div className="posts-feed-container">
-      {posts.pages.map((page) => page.data.map((post) => <PostRating {...post} key={post._id} />))}
+      {posts
+        ? posts.pages.map((page) => page.data.map((post) => <PostRating {...post} key={post._id} />))
+        : [...Array(4)].map((_, index) => <PostRatingPL key={index} />)}
       {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
     </div>
   );

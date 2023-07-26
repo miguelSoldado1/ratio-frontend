@@ -41,7 +41,9 @@ export const renderArtists = (artists) => {
   if (!artists) return null;
   return artists.map((item, index) => (
     <React.Fragment key={item.id}>
-      <a href={item.uri}>{item.name}</a>
+      <a href={item.uri} className="underline">
+        {item.name}
+      </a>
       {artists.length - 1 > index && <span>, </span>}
     </React.Fragment>
   ));

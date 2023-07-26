@@ -1,3 +1,7 @@
+.avatar-container.preloader:hover {
+  background-color: initial;
+}
+
 .post-rating-avatar-preloader {
   width: 2em;
   aspect-ratio: 1;
