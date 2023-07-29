@@ -43,6 +43,19 @@ export const AlbumDetails = () => {
           {albumData.artist?.map((artist) => artist?.name).join(", ")} | {albumData.name}
         </title>
       </Helmet>
+      <div>
+        <iframe
+          title={albumData.name}
+          style={{ borderRadius: "1em" }}
+          src={`https://open.spotify.com/embed/album/${album_id}?utm_source=generator&theme=0`}
+          width="100%"
+          height="152"
+          frameBorder="0"
+          allowFullScreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        />
+      </div>
       <div className="album-details-container">
         <div className="album-details-column left">
           <AlbumHeader data={albumData} />
