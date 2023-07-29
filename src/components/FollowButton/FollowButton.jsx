@@ -10,7 +10,7 @@ export const FollowButton = ({ userId }) => {
   const [followers, setFollowers] = useState(null);
   const { data: userData } = useUserInfo();
 
-  const { isLoading } = useQuery({
+  useQuery({
     queryKey: ["getFollowingInfo", userId],
     queryFn: () => getFollowingInfo({ followingId: userId }),
     onSuccess: (data) => {
@@ -19,32 +19,24 @@ export const FollowButton = ({ userId }) => {
     },
   });
 
-  const { mutate: follow, isLoading: loadingFollow } = useMutation({
-    mutationFn: followUser,
-    onSuccess: (data) => setFollowers(data.numberOfFollowers),
-    onError: () => setFollowing(!following),
-  });
-
-  const { mutate: unfollow, isLoading: loadingUnfollow } = useMutation({
-    mutationFn: unfollowUser,
+  const { mutate: changeFollowStatus, isLoading } = useMutation({
+    mutationFn: following ? unfollowUser : followUser,
     onSuccess: (data) => setFollowers(data.numberOfFollowers),
     onError: () => setFollowing(!following),
   });
 
   const handleClick = () => {
-    following ? unfollow({ followingId: userId }) : follow({ followingId: userId });
+    changeFollowStatus({ followingId: userId });
     setFollowing(!following);
   };
-
-  if (isLoading || following === null || followers === null) return null;
 
   return (
     <>
       <h1 className="profile-screen-header-num-followers">
-        {numberFormatter.format(followers)} {followers === 1 ? "Follower" : "Followers"}
+        {!!followers ? `${numberFormatter.format(followers)} ${followers === 1 ? "Follower" : "Followers"}` : ""}
       </h1>
       {userData.id !== userId && (
-        <button className={`follow-button ${following ? "following" : ""}`} onClick={handleClick} disabled={loadingFollow || loadingUnfollow}>
+        <button className={`follow-button ${following ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
           <span className="text">{following ? "Following" : "Follow"}</span>
         </button>
       )}
