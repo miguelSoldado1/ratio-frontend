@@ -18,3 +18,8 @@
   width: 50%;
   height: 1em;
 }
+
+.profile-screen-header-button-spacer {
+  height: 2.75em;
+  margin-top: 0.5em;
+}

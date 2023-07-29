@@ -1,45 +1,33 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { followUser, getFollowingInfo, unfollowUser } from "../../api/profileScreen";
+import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useUserInfo from "../../hooks/useUserInfo";
+import { followUser, unfollowUser } from "../../api/profileScreen";
 import { numberFormatter } from "../../scripts/scripts";
 import "./FollowButton.css";
 
-export const FollowButton = ({ userId }) => {
-  const [following, setFollowing] = useState(null);
-  const [followers, setFollowers] = useState(null);
+export const FollowButton = ({ followingInfo, userId }) => {
+  const queryClient = useQueryClient();
   const { data: userData } = useUserInfo();
 
-  useQuery({
-    queryKey: ["getFollowingInfo", userId],
-    queryFn: () => getFollowingInfo({ followingId: userId }),
-    onSuccess: (data) => {
-      setFollowers(data.followers);
-      setFollowing(data.following);
-    },
-  });
-
   const { mutate: changeFollowStatus, isLoading } = useMutation({
-    mutationFn: following ? unfollowUser : followUser,
-    onSuccess: (data) => setFollowers(data.numberOfFollowers),
-    onError: () => setFollowing(!following),
+    mutationFn: followingInfo?.following ? unfollowUser : followUser,
+    onSuccess: (data) => queryClient.setQueryData(["getFollowingInfo", userId], data),
   });
 
-  const handleClick = () => {
-    changeFollowStatus({ followingId: userId });
-    setFollowing(!following);
-  };
+  const handleClick = () => changeFollowStatus({ followingId: userId });
 
   return (
     <>
       <h1 className="profile-screen-header-num-followers">
-        {!!followers ? `${numberFormatter.format(followers)} ${followers === 1 ? "Follower" : "Followers"}` : ""}
+        {numberFormatter.format(followingInfo.followers)} {followingInfo.followers === 1 ? "Follower" : "Followers"}
       </h1>
-      {userData.id !== userId && (
-        <button className={`follow-button ${following ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
-          <span className="text">{following ? "Following" : "Follow"}</span>
-        </button>
-      )}
+      <div className="following-button-container">
+        {userData.id !== userId && (
+          <button className={`follow-button ${followingInfo.following ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
+            <span className="text">{followingInfo.following ? "Following" : "Follow"}</span>
+          </button>
+        )}
+      </div>
     </>
   );
 };

@@ -8,7 +8,7 @@ export const ProfileScreenHeaderPL = () => {
       <div>
         <div className="profile-screen-header-name preloader gradient" />
         <div className="profile-screen-header-num-followers preloader gradient" />
-        <div />
+        <div className="profile-screen-header-button-spacer" />
       </div>
     </div>
   );

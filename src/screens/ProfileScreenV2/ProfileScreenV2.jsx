@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "../../api/profileScreen";
 import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
-import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import { PostRatingPL } from "../../preloaders";
 import "./ProfileScreenV2.css";
 
@@ -46,7 +45,7 @@ export const ProfileScreenV2 = () => {
         <title>{title}</title>
       </Helmet>
       <div>
-        {user ? <ProfileScreenHeader user={user} /> : <ProfileScreenHeaderPL />}
+        <ProfileScreenHeader />
         <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
         <div className="profile-screen-container">
           {posts && user
