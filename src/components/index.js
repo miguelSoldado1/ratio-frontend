@@ -26,3 +26,4 @@ export * from "./ProfileScreenHeader/ProfileScreenHeader";
 export * from "./ProfileScreenRatings/ProfileScreenRatings";
 export * from "./PostRating/PostRating";
 export * from "./PostsFeed/PostsFeed";
+export * from "./AlbumEmbed/AlbumEmbed";

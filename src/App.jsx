@@ -10,7 +10,7 @@ const mainRouteElement = (
     <NavigationBar />
     <Routes>
       <Route path="/" element={<HomeScreen />} />
-      <Route path="/album/:album_id" element={<AlbumDetails />} />
+      <Route path="/album/:albumId" element={<AlbumDetails />} />
       <Route path="/profile/:userId" element={<ProfileScreenV2 />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

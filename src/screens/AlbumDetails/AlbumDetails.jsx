@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import useAccessToken from "../../hooks/useAuthentication";
-import { AlbumHeader, AlbumTrack, Rail } from "../../components";
+import { AlbumEmbed, AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
 import { getAlbum, getRelatedAlbums } from "../../api/albumDetails";
 import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
@@ -11,11 +11,11 @@ import "./AlbumDetails.css";
 
 export const AlbumDetails = () => {
   const { removeAccessToken } = useAccessToken();
-  const { album_id } = useParams();
+  const { albumId } = useParams();
 
   const { data: albumData, isLoading: albumLoading } = useQuery({
-    queryKey: ["albums", album_id],
-    queryFn: () => getAlbum({ album_id }),
+    queryKey: ["albums", albumId],
+    queryFn: () => getAlbum({ album_id: albumId }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });
@@ -26,8 +26,8 @@ export const AlbumDetails = () => {
     isLoading: relatedAlbumsLoading,
     isError: relatedAlbumsError,
   } = useQuery({
-    queryKey: ["relatedAlbums", album_id, artist_id],
-    queryFn: () => getRelatedAlbums({ album_id, artist_id }),
+    queryKey: ["relatedAlbums", albumId, artist_id],
+    queryFn: () => getRelatedAlbums({ album_id: albumId, artist_id }),
     enabled: !!artist_id,
     onError: () => removeAccessToken(),
   });
@@ -43,19 +43,7 @@ export const AlbumDetails = () => {
           {albumData.artist?.map((artist) => artist?.name).join(", ")} | {albumData.name}
         </title>
       </Helmet>
-      <div>
-        <iframe
-          title={albumData.name}
-          style={{ borderRadius: "1em" }}
-          src={`https://open.spotify.com/embed/album/${album_id}?utm_source=generator&theme=0`}
-          width="100%"
-          height="152"
-          frameBorder="0"
-          allowFullScreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-        />
-      </div>
+      <AlbumEmbed albumId={albumId} name={albumData.name} />
       <div className="album-details-container">
         <div className="album-details-column left">
           <AlbumHeader data={albumData} />
@@ -66,7 +54,7 @@ export const AlbumDetails = () => {
           </ol>
         </div>
         <div className="album-details-column right">
-          <RatingsContainer albumId={album_id} />
+          <RatingsContainer albumId={albumId} />
         </div>
       </div>
       <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsLoading} isError={relatedAlbumsError} />
