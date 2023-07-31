@@ -32,32 +32,37 @@ export const AlbumDetails = () => {
     onError: () => removeAccessToken(),
   });
 
-  if (albumLoading) {
-    return <AlbumDetailsPL />;
-  }
-
   return (
     <>
       <Helmet>
-        <title>
-          {albumData.artist?.map((artist) => artist?.name).join(", ")} | {albumData.name}
-        </title>
+        {!albumLoading && (
+          <title>
+            {albumData.artist?.map((artist) => artist?.name).join(", ")} | {albumData.name}
+          </title>
+        )}
       </Helmet>
-      <AlbumEmbed albumId={albumId} name={albumData.name} />
-      <div className="album-details-container">
-        <div className="album-details-column left">
-          <AlbumHeader data={albumData} />
-          <ol className="album-details-tracks">
-            {albumData.tracks?.map((track, index) => (
-              <AlbumTrack key={track.id} props={track} index={index} />
-            ))}
-          </ol>
-        </div>
-        <div className="album-details-column right">
-          <RatingsContainer albumId={albumId} />
-        </div>
-      </div>
-      <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsLoading} isError={relatedAlbumsError} />
+      <AlbumEmbed albumId={albumId} />
+      {albumLoading ? (
+        <AlbumDetailsPL />
+      ) : (
+        <>
+          <div className="album-details-container">
+            <div className="album-details-column left">
+              <AlbumHeader data={albumData} />
+              <ol className="album-details-tracks">
+                {albumData.tracks?.map((track, index) => (
+                  <AlbumTrack key={track.id} props={track} index={index} />
+                ))}
+              </ol>
+            </div>
+
+            <div className="album-details-column right">
+              <RatingsContainer albumId={albumId} />
+            </div>
+          </div>
+          <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsLoading} isError={relatedAlbumsError} />
+        </>
+      )}
     </>
   );
 };
