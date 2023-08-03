@@ -41,7 +41,7 @@ export const AlbumDetails = () => {
           </title>
         )}
       </Helmet>
-      <AlbumEmbed albumId={albumId} />
+      {/* <AlbumEmbed albumId={albumId} /> */}
       {albumLoading ? (
         <AlbumDetailsPL />
       ) : (

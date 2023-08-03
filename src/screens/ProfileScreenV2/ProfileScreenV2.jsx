@@ -41,9 +41,11 @@ export const ProfileScreenV2 = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      {user?.displayName && (
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+      )}
       <div>
         <ProfileScreenHeader />
         <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
