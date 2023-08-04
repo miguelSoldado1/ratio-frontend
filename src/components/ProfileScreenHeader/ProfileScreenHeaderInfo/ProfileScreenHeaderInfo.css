@@ -1,0 +1,11 @@
+.profile-screen-header-follow-info {
+  display: flex;
+  gap: 0.1em;
+}
+
+.profile-screen-header-follow-info > span {
+  cursor: pointer;
+  color: var(--accent-text-color);
+  font-weight: bold;
+  padding: 0.2em;
+}

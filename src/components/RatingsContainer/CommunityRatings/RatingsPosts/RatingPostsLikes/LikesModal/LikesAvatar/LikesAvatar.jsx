@@ -9,7 +9,7 @@ export const LikesAvatar = ({ user }) => {
       <img className="likes-avatar-img" alt="" src={user?.imageUrl ?? avatarPlaceholder} loading="lazy" />
       <div className="likes-avatar-text">
         <p className="likes-avatar-name">{user?.displayName}</p>
-        <span className="likes-avatar-date">{handleDate(user.createdAt)}</span>
+        {user.createdAt && <span className="likes-avatar-date">{handleDate(user.createdAt)}</span>}
       </div>
     </Link>
   );

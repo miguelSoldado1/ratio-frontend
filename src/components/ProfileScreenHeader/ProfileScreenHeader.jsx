@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getFollowingInfo, getUserProfile } from "../../api/profileScreen";
-import { FollowButton } from "../FollowButton/FollowButton";
+import { ProfileScreenHeaderInfo } from "./ProfileScreenHeaderInfo/ProfileScreenHeaderInfo";
 import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./ProfileScreenHeader.css";
@@ -30,10 +30,10 @@ export const ProfileScreenHeader = () => {
 
   return (
     <div className="profile-screen-header">
-      <img className="profile-screen-header-image" src={user?.imageUrl ?? avatarPlacehoder} alt={user.displayName} />
+      <img className="profile-screen-header-image" src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} />
       <div className="profile-screen-header-info">
         <h1 className="profile-screen-header-name">{user?.displayName}</h1>
-        <FollowButton followingInfo={followingInfo} userId={userId} />
+        <ProfileScreenHeaderInfo {...followingInfo} />
       </div>
     </div>
   );

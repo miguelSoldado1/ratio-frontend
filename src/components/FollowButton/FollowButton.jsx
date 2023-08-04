@@ -10,7 +10,7 @@ export const FollowButton = ({ followingInfo, userId }) => {
   const { data: userData } = useUserInfo();
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
-    mutationFn: followingInfo?.following ? unfollowUser : followUser,
+    mutationFn: followingInfo?.isFollowing ? unfollowUser : followUser,
     onSuccess: (data) => queryClient.setQueryData(["getFollowingInfo", userId], data),
   });
 
@@ -23,8 +23,8 @@ export const FollowButton = ({ followingInfo, userId }) => {
       </h1>
       <div className="following-button-container">
         {userData.id !== userId && (
-          <button className={`follow-button ${followingInfo.following ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
-            <span className="text">{followingInfo.following ? "Following" : "Follow"}</span>
+          <button className={`follow-button ${followingInfo.isFollowing ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
+            <span className="text">{followingInfo.isFollowing ? "Following" : "Follow"}</span>
           </button>
         )}
       </div>
