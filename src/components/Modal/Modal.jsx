@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import "./Modal.css";
 
-export const Modal = ({ onClose, show, children, title }) => {
+export const Modal = ({ onClose, show, children }) => {
   const nodeRef = useRef(null);
 
   const closeOnEscapeKeyDown = useCallback(
@@ -34,12 +34,7 @@ export const Modal = ({ onClose, show, children, title }) => {
   return ReactDOM.createPortal(
     <CSSTransition in={show} unmountOnExit timeout={{ enter: 0, exit: 300 }} nodeRef={nodeRef}>
       <div className="modal" onClick={onClose} ref={nodeRef}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-title">
-            <h2>{title}</h2>
-          </div>
-          {children}
-        </div>
+        {children}
       </div>
     </CSSTransition>,
     document.getElementById("root")

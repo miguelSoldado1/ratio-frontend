@@ -29,6 +29,12 @@
   aspect-ratio: 1;
 }
 
+.profile-screen-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
 .profile-screen-header-name {
   margin: 0;
   font-size: 1.75em;

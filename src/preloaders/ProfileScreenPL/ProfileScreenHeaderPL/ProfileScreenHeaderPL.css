@@ -11,15 +11,15 @@
 }
 
 .profile-screen-header-name.preloader {
+  height: 1.15em;
+}
+
+.profile-screen-header-follow-info.preloader > .follow-info.preloader {
+  width: 12em;
   height: 1em;
 }
 
-.profile-screen-header-num-followers.preloader {
-  width: 50%;
+.profile-screen-posts-number.preloader {
+  width: 10em;
   height: 1em;
-}
-
-.profile-screen-header-button-spacer {
-  height: 2.75em;
-  margin-top: 0.5em;
 }

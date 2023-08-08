@@ -15,16 +15,21 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
   });
 
   return (
-    <Modal show={show} onClose={onClose} title="Liked by">
-      <div className="likes-modal-list">
-        {!isInitialLoading ? (
-          <>
-            {data?.pages.map((page) => page.postLikes.map((user) => <LikesAvatar user={user} key={user.like_id} />))}
-            {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
-          </>
-        ) : (
-          <Loading />
-        )}
+    <Modal show={show} onClose={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-title">
+          <h2>Liked by</h2>
+        </div>
+        <div className="likes-modal-list">
+          {!isInitialLoading ? (
+            <>
+              {data?.pages.map((page) => page.postLikes.map((user) => <LikesAvatar user={user} key={user.like_id} />))}
+              {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
+            </>
+          ) : (
+            <Loading />
+          )}
+        </div>
       </div>
     </Modal>
   );

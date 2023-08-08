@@ -2,7 +2,6 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useUserInfo from "../../hooks/useUserInfo";
 import { followUser, unfollowUser } from "../../api/profileScreen";
-import { numberFormatter } from "../../scripts/scripts";
 import "./FollowButton.css";
 
 export const FollowButton = ({ followingInfo, userId }) => {
@@ -17,17 +16,12 @@ export const FollowButton = ({ followingInfo, userId }) => {
   const handleClick = () => changeFollowStatus({ followingId: userId });
 
   return (
-    <>
-      <h1 className="profile-screen-header-num-followers">
-        {numberFormatter.format(followingInfo.followers)} {followingInfo.followers === 1 ? "Follower" : "Followers"}
-      </h1>
-      <div className="following-button-container">
-        {userData.id !== userId && (
-          <button className={`follow-button ${followingInfo.isFollowing ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
-            <span className="text">{followingInfo.isFollowing ? "Following" : "Follow"}</span>
-          </button>
-        )}
-      </div>
-    </>
+    <div className="following-button-container">
+      {userData.id !== userId && (
+        <button className={`follow-button ${followingInfo.isFollowing ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
+          <span className="text">{followingInfo.isFollowing ? "Following" : "Follow"}</span>
+        </button>
+      )}
+    </div>
   );
 };

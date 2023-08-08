@@ -6,8 +6,8 @@ import "./DeleteModal.css";
 export const DeleteModal = ({ handleDelete, onClose, show }) => {
   return (
     <Modal show={show} onClose={onClose}>
-      <div className="delete-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="delete-modal-title">
+      <div className="modal-content delete-modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-title delete-modal-title">
           <RatioLogo title="Ratio" />
           <span className="delete-modal-text">Are you sure you want to delete this rating?</span>
         </div>
