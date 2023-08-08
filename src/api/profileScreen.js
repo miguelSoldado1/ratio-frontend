@@ -39,12 +39,12 @@ export const getUserRatings = async ({ userId, cursor, filter }) => {
   return response.data;
 };
 
-export const getUserFollowing = async ({ userId }) => {
-  const response = await axios.get(`${BACK_END_URL}/getUserFollowing`, { params: { user_id: userId } });
+export const getUserFollowing = async ({ userId, cursor }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserFollowing`, { params: { user_id: userId, cursor: cursor } });
   return response.data;
 };
 
-export const getUserFollowers = async ({ userId }) => {
-  const response = await axios.get(`${BACK_END_URL}/getUserFollowers`, { params: { user_id: userId } });
+export const getUserFollowers = async ({ userId, cursor }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserFollowers`, { params: { user_id: userId, cursor: cursor } });
   return response.data;
 };
