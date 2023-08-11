@@ -20,7 +20,7 @@ export const LikesModal = ({ onClose, show, ratingId }) => {
         <div className="modal-title">
           <h2>Liked by</h2>
         </div>
-        <div className="likes-modal-list">
+        <div className="avatar-modal-list">
           {!isInitialLoading ? (
             <>
               {data?.pages.map((page) => page.postLikes.map((user) => <LikesAvatar user={user} key={user.like_id} />))}
