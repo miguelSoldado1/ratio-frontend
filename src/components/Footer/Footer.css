@@ -1,19 +1,19 @@
-@media (orientation: portrait) {
+@media only screen and (max-width: 1025px) {
   .footer-text {
     margin-inline: 5%;
   }
 
-  .footer-plugs > .logo:focus {
+  .footer-plugs > .logo:focus > svg {
     fill: white;
   }
 }
 
-@media (orientation: landscape) {
+@media only screen and (min-width: 1026px) {
   .footer-text {
     margin-inline: 10%;
   }
 
-  .footer-plugs > .logo:hover {
+  .footer-plugs > .logo:hover > svg {
     fill: white;
   }
 }
