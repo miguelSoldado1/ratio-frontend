@@ -2,11 +2,19 @@
   .profile-screen-header-name.preloader {
     width: 7em;
   }
+
+  .profile-screen-header-follow-info.preloader > .follow-info.preloader {
+    width: 10em;
+  }
 }
 
 @media only screen and (min-width: 1026px) {
   .profile-screen-header-name.preloader {
     width: 10em;
+  }
+
+  .profile-screen-header-follow-info.preloader > .follow-info.preloader {
+    width: 12em;
   }
 }
 
@@ -15,11 +23,10 @@
 }
 
 .profile-screen-header-follow-info.preloader > .follow-info.preloader {
-  width: 12em;
   height: 1em;
 }
 
 .profile-screen-posts-number.preloader {
-  width: 10em;
+  width: 8em;
   height: 1em;
 }
