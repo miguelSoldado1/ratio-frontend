@@ -7,6 +7,7 @@ import { ProfileScreenHeaderInfo } from "./ProfileScreenHeaderInfo/ProfileScreen
 import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./ProfileScreenHeader.css";
+import { FollowButton } from "../FollowButton/FollowButton";
 
 export const ProfileScreenHeader = () => {
   const { userId } = useParams();
@@ -30,7 +31,7 @@ export const ProfileScreenHeader = () => {
   }
 
   return (
-    <>
+    <div className="profile-screen-header-wrapper">
       <div className="profile-screen-header">
         <img className="profile-screen-header-image" src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} />
         <div className="profile-screen-header-info">
@@ -38,6 +39,7 @@ export const ProfileScreenHeader = () => {
           <ProfileScreenHeaderInfo {...followingInfo} />
         </div>
       </div>
-    </>
+      <FollowButton isFollowing={followingInfo.isFollowing} profileId={userId} />
+    </div>
   );
 };

@@ -23,10 +23,13 @@ export const FollowButton = ({ isFollowing, profileId }) => {
 
   const handleClick = () => changeFollowStatus({ followingId: profileId });
 
-  if (userData.id === profileId) return null;
-
   return (
-    <button className={`new-follow-button ${followStatus ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
+    <button
+      className={`follow-button ${followStatus ? "following" : ""}`}
+      onClick={handleClick}
+      disabled={isLoading}
+      style={{ visibility: userData?.id === profileId ? "hidden" : "visible" }}
+    >
       {followStatus ? "Following" : "Follow"}
     </button>
   );
