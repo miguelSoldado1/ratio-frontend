@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding: 0.5em 0.25em;
   height: 2em;
+  gap: 0.25em;
 
   user-select: none;
   -moz-user-select: none;
@@ -21,6 +22,7 @@
   display: flex;
   align-items: center;
   gap: 0.75em;
+  flex: 1;
 }
 
 .follow-avatar-img {
