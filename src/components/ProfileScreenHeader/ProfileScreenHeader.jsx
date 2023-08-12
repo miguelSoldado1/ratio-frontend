@@ -7,7 +7,6 @@ import { ProfileScreenHeaderInfo } from "./ProfileScreenHeaderInfo/ProfileScreen
 import { ProfileScreenHeaderPL } from "../../preloaders/ProfileScreenPL/ProfileScreenHeaderPL/ProfileScreenHeaderPL";
 import avatarPlacehoder from "../../icons/avatar-placeholder.svg";
 import "./ProfileScreenHeader.css";
-import { FollowButton } from "../FollowButton/FollowButton";
 
 export const ProfileScreenHeader = () => {
   const { userId } = useParams();
@@ -23,6 +22,7 @@ export const ProfileScreenHeader = () => {
   const { data: followingInfo, isLoading: infoLoading } = useQuery({
     queryKey: ["getFollowingInfo", userId],
     queryFn: () => getFollowingInfo({ followingId: userId }),
+    onError: () => removeAccessToken(),
   });
 
   if (userLoading || infoLoading) {

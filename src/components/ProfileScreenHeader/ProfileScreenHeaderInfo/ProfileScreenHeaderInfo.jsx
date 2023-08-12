@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { getUserFollowers, getUserFollowing } from "../../../api/profileScreen";
 import { FollowListModal } from "../FollowListModal/FollowListModal";
-import "./ProfileScreenHeaderInfo.css";
 import { numberFormatter } from "../../../scripts/scripts";
+import "./ProfileScreenHeaderInfo.css";
 
 export const ProfileScreenHeaderInfo = (followingInfo) => {
   const [showModal, setShowModal] = useState({ following: false, followers: false });

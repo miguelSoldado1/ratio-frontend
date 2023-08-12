@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import useAccessToken from "../../hooks/useAuthentication";
-import { AlbumEmbed, AlbumHeader, AlbumTrack, Rail } from "../../components";
+import { AlbumHeader, AlbumTrack, Rail } from "../../components";
 import { AlbumDetailsPL } from "../../preloaders";
 import { getAlbum, getRelatedAlbums } from "../../api/albumDetails";
 import { RatingsContainer } from "../../components/RatingsContainer/RatingsContainer";
@@ -41,7 +41,6 @@ export const AlbumDetails = () => {
           </title>
         )}
       </Helmet>
-      {/* <AlbumEmbed albumId={albumId} /> */}
       {albumLoading ? (
         <AlbumDetailsPL />
       ) : (

@@ -1,27 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAccessToken from "../../hooks/useAuthentication";
 import useUserInfo from "../../hooks/useUserInfo";
 import { followUser, unfollowUser } from "../../api/profileScreen";
 import "./FollowButton.css";
 
-export const FollowButton = ({ followingInfo, userId }) => {
-  const queryClient = useQueryClient();
+export const FollowButton = ({ isFollowing, profileId }) => {
+  // const queryClient = useQueryClient();
+  const [followStatus, setFollowingStatus] = useState(isFollowing);
   const { data: userData } = useUserInfo();
+  const { removeAccessToken } = useAccessToken();
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
-    mutationFn: followingInfo?.isFollowing ? unfollowUser : followUser,
-    onSuccess: (data) => queryClient.setQueryData(["getFollowingInfo", userId], data),
+    mutationFn: followStatus ? unfollowUser : followUser,
+    onMutate: () => setFollowingStatus(!followStatus),
+    onSuccess: (data) => {
+      setFollowingStatus(data.isFollowing);
+    },
+    onError: () => removeAccessToken(),
+    // onSuccess: ({ message, ...data }) => queryClient.setQueryData(["getFollowingInfo", userId], (oldData) => ({ ...oldData, ...data })),
   });
 
-  const handleClick = () => changeFollowStatus({ followingId: userId });
+  const handleClick = () => changeFollowStatus({ followingId: profileId });
+
+  if (userData.id === profileId) return null;
 
   return (
-    <div className="following-button-container">
-      {userData.id !== userId && (
-        <button className={`follow-button ${followingInfo.isFollowing ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
-          <span className="text">{followingInfo.isFollowing ? "Following" : "Follow"}</span>
-        </button>
-      )}
-    </div>
+    <button className={`new-follow-button ${followStatus ? "following" : ""}`} onClick={handleClick} disabled={isLoading}>
+      {followStatus ? "Following" : "Follow"}
+    </button>
   );
 };

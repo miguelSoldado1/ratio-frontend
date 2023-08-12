@@ -1,42 +1,13 @@
-@media only screen and (max-width: 1025px) {
-  .following-button-container {
-    height: 2.5em;
-  }
-}
-
-@media only screen and (min-width: 1026px) {
-  .following-button-container {
-    height: 2.75em;
-    margin-top: 0.5em;
-  }
-}
-
-.follow-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 8em;
-  height: 100%;
-  background-color: white;
-  outline: 0.1em white solid;
-  outline-offset: -0.25em;
+.new-follow-button {
+  background: var(--button-color);
+  border: 1px solid;
   border-radius: 0.3em;
-  border: none;
+  padding-block: 0.25em;
+  width: 6em;
   cursor: pointer;
-  transition: 400ms;
 }
 
-.follow-button .text {
-  color: var(--background-color);
-  font-weight: 700;
-  font-size: 1em;
-  transition: 400ms;
-}
-
-.follow-button.following {
-  background-color: transparent;
-}
-
-.follow-button.following .text {
-  color: white;
+.new-follow-button.following {
+  background: var(--background-color);
+  color: var(--button-text-color);
 }
