@@ -4,8 +4,8 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "../../api/profileScreen";
-import { PostRatingPL } from "../../preloaders";
 import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
+import { PostRatingPL } from "../../preloaders";
 import "./ProfileScreenV2.css";
 
 const getPageTitle = (displayName) => {
@@ -44,12 +44,14 @@ export const ProfileScreenV2 = () => {
       </Helmet>
       <div>
         <ProfileScreenHeader />
-        <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
         <div className="profile-screen-container">
-          {posts && user
-            ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={post._id} />))
-            : [...Array(4)].map((_, index) => <PostRatingPL key={index} />)}
-          {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
+          <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
+          <div className="profile-screen-container-posts">
+            {posts && user
+              ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={post._id} />))
+              : [...Array(4)].map((_, index) => <PostRatingPL key={index} />)}
+            {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
+          </div>
         </div>
       </div>
     </>
