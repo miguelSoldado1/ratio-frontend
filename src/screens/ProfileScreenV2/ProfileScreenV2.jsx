@@ -4,8 +4,8 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "../../api/profileScreen";
-import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
 import { PostRatingPL } from "../../preloaders";
+import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
 import "./ProfileScreenV2.css";
 
 const getPageTitle = (displayName) => {
@@ -25,8 +25,6 @@ export const ProfileScreenV2 = () => {
     onError: () => removeAccessToken(),
   });
 
-  const title = getPageTitle(user?.displayName);
-
   const {
     data: posts,
     hasNextPage,
@@ -41,11 +39,9 @@ export const ProfileScreenV2 = () => {
 
   return (
     <>
-      {user?.displayName && (
-        <Helmet>
-          <title>{title}</title>
-        </Helmet>
-      )}
+      <Helmet>
+        <title>{user?.displayName ? getPageTitle(user.displayName) : "Ratio"}</title>
+      </Helmet>
       <div>
         <ProfileScreenHeader />
         <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
