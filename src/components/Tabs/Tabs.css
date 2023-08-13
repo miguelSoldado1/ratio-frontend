@@ -1,0 +1,19 @@
+.tabs-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.tabs-container > .tab {
+  all: unset;
+  color: var(--accent-text-color);
+  cursor: pointer;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.tabs-container > .tab.selected {
+  color: inherit;
+}

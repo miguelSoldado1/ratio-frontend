@@ -34,8 +34,8 @@ export const ProfileScreenHeader = () => {
     <div className="profile-screen-header-wrapper">
       <div className="profile-screen-header">
         <img className="profile-screen-header-image" src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} />
-        <div className="profile-screen-header-info">
-          <h1 className="profile-screen-header-name">{user?.displayName}</h1>
+        <div className="profile-screen-header-info overflow-ellipsis">
+          <h1 className="profile-screen-header-name overflow-ellipsis">{user?.displayName}</h1>
           <ProfileScreenHeaderInfo {...followingInfo} />
         </div>
       </div>

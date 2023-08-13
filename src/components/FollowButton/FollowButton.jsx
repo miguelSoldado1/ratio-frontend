@@ -11,7 +11,7 @@ export const FollowButton = ({ isFollowing, profileId }) => {
   const [followingStatus, setFollowingStatus] = useState(isFollowing);
   const { data: userData } = useUserInfo();
 
-  const ownProfile = userData?.id === profileId;
+  const ownProfile = !userData?.id || userData?.id === profileId;
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
     mutationFn: followingStatus ? unfollowUser : followUser,
