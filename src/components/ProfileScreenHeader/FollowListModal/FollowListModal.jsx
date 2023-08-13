@@ -25,7 +25,9 @@ export const FollowListModal = ({ show, onClose, title, queryKey, queryFn }) => 
         <div className="avatar-modal-list" style={{ width: OVERRIDE_WIDTH }}>
           {!isInitialLoading && data?.pages ? (
             <>
-              {data.pages.map((page) => page.users?.map((user) => <FollowListAvatar {...user} key={user.profile.id} onClose={onClose} />))}
+              {data.pages.map((page) =>
+                page.users?.map((user) => <FollowListAvatar {...user} key={`${user.profile.id} ${user.isFollowing}`} onClose={onClose} />)
+              )}
               {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
             </>
           ) : (

@@ -1,36 +1,50 @@
 import React, { useState } from "react";
+import { useParams } from "react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAccessToken from "../../hooks/useAuthentication";
 import useUserInfo from "../../hooks/useUserInfo";
 import { followUser, unfollowUser } from "../../api/profileScreen";
 import "./FollowButton.css";
 
 export const FollowButton = ({ isFollowing, profileId }) => {
-  // const queryClient = useQueryClient();
-  const [followStatus, setFollowingStatus] = useState(isFollowing);
+  const { userId } = useParams();
+  const queryClient = useQueryClient();
+  const [followingStatus, setFollowingStatus] = useState(isFollowing);
   const { data: userData } = useUserInfo();
-  const { removeAccessToken } = useAccessToken();
+
+  const ownProfile = userData?.id === profileId;
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
-    mutationFn: followStatus ? unfollowUser : followUser,
-    onMutate: () => setFollowingStatus(!followStatus),
+    mutationFn: followingStatus ? unfollowUser : followUser,
+    onMutate: () => setFollowingStatus(!followingStatus),
     onSuccess: (data) => {
       setFollowingStatus(data.isFollowing);
+
+      const isMyUser = userId === userData?.id;
+      if (isMyUser || profileId === userId)
+        queryClient.setQueryData(["getFollowingInfo", userId], (oldData) => {
+          const increment = followingStatus ? -1 : 1;
+          return {
+            ...oldData,
+            followers: isMyUser ? oldData.followers : oldData.followers + increment,
+            following: isMyUser ? oldData.following + increment : oldData.following,
+          };
+        });
     },
-    onError: () => removeAccessToken(),
-    // onSuccess: ({ message, ...data }) => queryClient.setQueryData(["getFollowingInfo", userId], (oldData) => ({ ...oldData, ...data })),
   });
 
-  const handleClick = () => changeFollowStatus({ followingId: profileId });
+  if (ownProfile) {
+    return <div className="follow-button-container" />;
+  }
 
   return (
-    <button
-      className={`follow-button ${followStatus ? "following" : ""}`}
-      onClick={handleClick}
-      disabled={isLoading}
-      style={{ visibility: userData?.id === profileId ? "hidden" : "visible" }}
-    >
-      {followStatus ? "Following" : "Follow"}
-    </button>
+    <div className="follow-button-container">
+      <button
+        className={`follow-button ${followingStatus ? "following" : ""}`}
+        onClick={() => changeFollowStatus({ followingId: profileId })}
+        disabled={isLoading || followingStatus === null}
+      >
+        {followingStatus ? "Following" : "Follow"}
+      </button>
+    </div>
   );
 };
