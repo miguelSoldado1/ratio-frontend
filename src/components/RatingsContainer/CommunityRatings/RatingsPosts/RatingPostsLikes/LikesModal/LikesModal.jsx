@@ -4,12 +4,10 @@ import { Loading, Modal } from "../../../../..";
 import { LikesAvatar } from "./LikesAvatar/LikesAvatar";
 import "./LikesModal.css";
 
-const PAGE_SIZE = 8;
-
 export const LikesModal = ({ onClose, show, ratingId }) => {
   const { data, fetchNextPage, hasNextPage, isInitialLoading } = useInfiniteQuery({
     queryKey: ["likesProfiles", ratingId],
-    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, cursor: pageParam, page_size: PAGE_SIZE }),
+    queryFn: ({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, cursor: pageParam }),
     getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
     enabled: show,
   });
