@@ -15,12 +15,11 @@ export const FollowButton = ({ isFollowing, profileId }) => {
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
     mutationFn: followingStatus ? unfollowUser : followUser,
-    onMutate: () => setFollowingStatus(!followingStatus),
     onSuccess: (data) => {
       setFollowingStatus(data.isFollowing);
-
       const isMyUser = userId === userData?.id;
-      if (isMyUser || profileId === userId)
+
+      if (isMyUser || profileId === userId) {
         queryClient.setQueryData(["getFollowingInfo", userId], (oldData) => {
           const increment = followingStatus ? -1 : 1;
           return {
@@ -29,6 +28,7 @@ export const FollowButton = ({ isFollowing, profileId }) => {
             following: isMyUser ? oldData.following + increment : oldData.following,
           };
         });
+      }
     },
   });
 
