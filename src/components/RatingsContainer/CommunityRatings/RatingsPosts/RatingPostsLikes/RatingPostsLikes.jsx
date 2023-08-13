@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { createLike, deleteLike } from "../../../../../api/albumDetails";
-import { LongPressButton } from "../../../../LongPressButton/LongPressButton";
-import { LikesModal } from "./LikesModal/LikesModal";
+import { createLike, deleteLike, getPostLikes } from "../../../../../api/albumDetails";
 import { numberFormatter } from "../../../../../scripts/scripts";
+import { LongPressButton } from "../../../../LongPressButton/LongPressButton";
+import { FollowListModal } from "../../../../ProfileScreenHeader/FollowListModal/FollowListModal";
 import { ReactComponent as HeartIcon } from "../../../../../icons/heart-icon.svg";
 
 export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
@@ -44,7 +44,13 @@ export const RatingPostsLikes = ({ likes = 0, ratingId, likedByUser }) => {
           {numberFormatter.format(likeCount)} {likeCount === 1 ? "Like" : "Likes"}
         </span>
       </LongPressButton>
-      <LikesModal show={show} onClose={() => setShow(false)} ratingId={ratingId} />
+      <FollowListModal
+        show={show}
+        onClose={() => setShow(false)}
+        title="Likes"
+        queryKey={["likesProfiles", ratingId]}
+        queryFn={({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, cursor: pageParam })}
+      />
     </>
   );
 };

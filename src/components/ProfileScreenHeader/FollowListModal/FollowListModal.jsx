@@ -1,17 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
 import { Modal } from "../../Modal/Modal";
 import { Loading } from "../../Loading/Loading";
 import { FollowListAvatar } from "./FollowListAvatar/FollowListAvatar";
 
-const OVERRIDE_WIDTH = "17em";
-
 export const FollowListModal = ({ show, onClose, title, queryKey, queryFn }) => {
-  const { userId } = useParams();
-
   const { data, isInitialLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: [queryKey, userId],
-    queryFn: ({ pageParam = undefined }) => queryFn({ userId, cursor: pageParam }),
+    queryKey: queryKey,
+    queryFn: queryFn,
     getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
     enabled: show,
   });
@@ -22,7 +17,7 @@ export const FollowListModal = ({ show, onClose, title, queryKey, queryFn }) => 
         <div className="modal-title">
           <h2>{title}</h2>
         </div>
-        <div className="avatar-modal-list" style={{ width: OVERRIDE_WIDTH }}>
+        <div className="avatar-modal-list">
           {!isInitialLoading && data?.pages ? (
             <>
               {data.pages.map((page) =>
