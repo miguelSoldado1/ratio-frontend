@@ -48,7 +48,7 @@ export const ProfileScreenV2 = () => {
           <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
           <div className="profile-screen-container-posts">
             {posts && user
-              ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={post._id} />))
+              ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={`${post._id}-${post.liked_by_user}`} />))
               : [...Array(4)].map((_, index) => <PostRatingPL key={index} />)}
             {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
           </div>

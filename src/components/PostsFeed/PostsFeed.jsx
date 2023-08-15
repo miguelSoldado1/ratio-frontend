@@ -22,7 +22,7 @@ export const PostsFeed = ({ userId }) => {
     <div className="posts-feed-container">
       {!posts || isInitialLoading
         ? [...Array(4)].map((_, index) => <PostRatingPL key={index} />)
-        : posts.pages.map((page) => page.data.map((post) => <PostRating {...post} key={post._id} />))}
+        : posts.pages.map((page) => page.data.map((post) => <PostRating {...post} key={`${post._id}-${post.liked_by_user}`} />))}
       {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
     </div>
   );
