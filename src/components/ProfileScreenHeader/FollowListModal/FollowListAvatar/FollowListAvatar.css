@@ -1,3 +1,9 @@
+@media only screen and (min-width: 1026px) {
+  .follow-avatar-container:hover {
+    background-color: var(--hover-color);
+  }
+}
+
 .follow-avatar-container {
   display: flex;
   align-items: center;
