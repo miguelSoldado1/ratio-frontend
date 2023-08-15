@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useUserInfo from "../../../hooks/useUserInfo";
+import { useMutation } from "@tanstack/react-query";
 import { createLike, deleteLike, getPostLikes } from "../../../api/albumDetails";
 import { numberFormatter } from "../../../scripts/scripts";
 import { LongPressButton } from "../../LongPressButton/LongPressButton";
@@ -9,14 +8,11 @@ import { ReactComponent as HeartIcon } from "../../../icons/heart-icon.svg";
 import "./PostRatingLikes.css";
 
 export const PostRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) => {
-  const { data: userData } = useUserInfo();
-  const queryClient = useQueryClient();
   const [likeCount, setLikeCount] = useState(likes);
   const [liked, setLiked] = useState(likedByUser);
   const [show, setShow] = useState(false);
 
   const likeOnSuccess = ({ numberOfLikes }) => {
-    queryClient.invalidateQueries(["getFollowingRatings", userData?.id]);
     setLikeCount(numberOfLikes);
   };
 
