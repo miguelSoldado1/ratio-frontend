@@ -20,23 +20,17 @@ export const PostRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) 
     setLikeCount(numberOfLikes);
   };
 
-  const { mutate: createMutation, isLoading: isCreating } = useMutation({
-    mutationFn: createLike,
+  const { mutate: likeMutation, isLoading } = useMutation({
+    mutationFn: liked ? deleteLike : createLike,
+    onMutate: () => setLikeCount(liked ? likeCount - 1 : likeCount + 1),
     onSuccess: likeOnSuccess,
-    onMutate: () => setLikeCount((currCount) => currCount + 1),
-  });
-
-  const { mutate: deleteMutation, isLoading: isDeleting } = useMutation({
-    mutationFn: deleteLike,
-    onSuccess: likeOnSuccess,
-    onMutate: () => setLikeCount((currCount) => currCount - 1),
   });
 
   const handleLike = () => {
-    if (isCreating || isDeleting) return;
-    setLiked((oldStatus) => !oldStatus);
-    if (liked) return deleteMutation({ ratingId });
-    return createMutation({ ratingId });
+    if (!isLoading) {
+      setLiked((oldStatus) => !oldStatus);
+      likeMutation({ ratingId });
+    }
   };
 
   return (
@@ -44,6 +38,7 @@ export const PostRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) 
       <LongPressButton
         className={`home-rating-posts-button heart${liked ? " liked" : ""}`}
         onClick={handleLike}
+        disabled={isLoading}
         onLongPress={() => likeCount > 0 && setShow(true)}
       >
         <HeartIcon />
