@@ -8,7 +8,7 @@ import { ReactComponent as SearchIcon } from "../../../icons/search-icon.svg";
 import "./SearchBar.css";
 
 export const SearchBar = () => {
-  const { accessToken } = useAccessToken();
+  const { accessToken, removeAccessToken } = useAccessToken();
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
@@ -22,10 +22,11 @@ export const SearchBar = () => {
     };
   }, []);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["search", debouncedSearchQuery],
     queryFn: () => debouncedSearchQuery.trim() && searchForAlbum({ accessToken, search_query: debouncedSearchQuery }),
     keepPreviousData: true,
+    onError: () => removeAccessToken(),
   });
 
   return (
@@ -40,7 +41,7 @@ export const SearchBar = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      {!isLoading && data.length > 0 && <SearchResult searchResult={data} clearSearchBar={() => setSearchQuery("")} />}
+      {!isLoading && !isError && data?.length > 0 && <SearchResult searchResult={data} clearSearchBar={() => setSearchQuery("")} />}
     </div>
   );
 };
