@@ -105,10 +105,11 @@ ol {
 }
 
 .avatar-modal-list {
+  --avatar-height: 2em;
   overflow-y: auto;
   overflow-x: hidden;
-  min-height: 3em;
-  max-height: calc(5 * 3em);
+  min-height: var(--avatar-height);
+  max-height: calc(6 * var(--avatar-height) + var(--avatar-height) / 2);
   padding-inline: 1em;
   padding-block: 0.5em;
   width: 17em;
