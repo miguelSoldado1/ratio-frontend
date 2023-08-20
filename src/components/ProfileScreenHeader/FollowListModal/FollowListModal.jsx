@@ -7,7 +7,7 @@ export const FollowListModal = ({ show, onClose, title, queryKey, queryFn }) => 
   const { data, isInitialLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: queryKey,
     queryFn: queryFn,
-    getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
     enabled: show,
   });
 

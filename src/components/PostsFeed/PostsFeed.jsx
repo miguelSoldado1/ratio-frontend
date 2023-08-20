@@ -13,8 +13,8 @@ export const PostsFeed = ({ userId }) => {
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["followingRatings", userId],
-    queryFn: ({ pageParam = undefined }) => getFollowingRatings({ cursor: pageParam }),
-    getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
+    queryFn: ({ pageParam = undefined }) => getFollowingRatings({ next: pageParam }),
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
     enabled: !!userId,
   });
 

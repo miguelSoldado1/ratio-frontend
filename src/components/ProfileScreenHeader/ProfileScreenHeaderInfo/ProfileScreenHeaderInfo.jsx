@@ -26,14 +26,14 @@ export const ProfileScreenHeaderInfo = (followingInfo) => {
         onClose={closeModals}
         title="Following"
         queryKey={["following", userId]}
-        queryFn={({ pageParam = undefined }) => getUserFollowing({ cursor: pageParam, userId })}
+        queryFn={({ pageParam = undefined }) => getUserFollowing({ next: pageParam, userId })}
       />
       <FollowListModal
         show={showModal.followers}
         onClose={closeModals}
         title="Followers"
         queryKey={["followers", userId]}
-        queryFn={({ pageParam = undefined }) => getUserFollowers({ cursor: pageParam, userId })}
+        queryFn={({ pageParam = undefined }) => getUserFollowers({ next: pageParam, userId })}
       />
     </>
   );

@@ -47,7 +47,7 @@ export const PostRatingLikes = ({ likes = 0, ratingId, likedByUser, children }) 
         onClose={() => setShow(false)}
         title="Likes"
         queryKey={["likesProfiles", ratingId]}
-        queryFn={({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, cursor: pageParam })}
+        queryFn={({ pageParam = undefined }) => getPostLikes({ post_id: ratingId, next: pageParam })}
       />
       {children}
     </div>

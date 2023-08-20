@@ -34,17 +34,17 @@ export const getFollowingInfo = async ({ followingId }) => {
   return response.data;
 };
 
-export const getUserRatings = async ({ userId, cursor, filter }) => {
-  const response = await axios.get(`${BACK_END_URL}/getUserRatings`, { params: { user_id: userId, cursor: cursor, filter: filter } });
+export const getUserRatings = async ({ userId, next, filter }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserRatings`, { params: { user_id: userId, next: next, filter: filter } });
   return response.data;
 };
 
-export const getUserFollowing = async ({ userId, cursor }) => {
-  const response = await axios.get(`${BACK_END_URL}/getUserFollowing`, { params: { user_id: userId, cursor: cursor } });
+export const getUserFollowing = async ({ userId, next }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserFollowing`, { params: { user_id: userId, next: next } });
   return response.data;
 };
 
-export const getUserFollowers = async ({ userId, cursor }) => {
-  const response = await axios.get(`${BACK_END_URL}/getUserFollowers`, { params: { user_id: userId, cursor: cursor } });
+export const getUserFollowers = async ({ userId, next }) => {
+  const response = await axios.get(`${BACK_END_URL}/getUserFollowers`, { params: { user_id: userId, next: next } });
   return response.data;
 };

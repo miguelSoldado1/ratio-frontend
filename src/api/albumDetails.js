@@ -38,9 +38,9 @@ export const getUsersProfile = async ({ user_id }) => {
   return response.data;
 };
 
-export const getPostLikes = async ({ post_id, cursor }) => {
+export const getPostLikes = async ({ post_id, next }) => {
   const response = await axios.get(`${BACK_END_URL}/getPostLikes`, {
-    params: { post_id, cursor },
+    params: { post_id, next },
   });
   return response.data;
 };

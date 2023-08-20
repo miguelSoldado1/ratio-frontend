@@ -31,8 +31,8 @@ export const ProfileScreenV2 = () => {
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["userRatings", userId, filterActive.query],
-    queryFn: ({ pageParam }) => getUserRatings({ userId, cursor: pageParam ?? undefined, filter: filterActive.query }),
-    getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
+    queryFn: ({ pageParam }) => getUserRatings({ userId, next: pageParam, filter: filterActive.query }),
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
     onError: () => removeAccessToken(),
     enabled: !!userId,
   });

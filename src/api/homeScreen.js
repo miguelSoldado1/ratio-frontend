@@ -2,8 +2,8 @@ import axios from "axios";
 
 const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/homeScreen`;
 
-export const getFollowingRatings = async ({ cursor }) => {
-  const response = await axios.get(`${BACK_END_URL}/getFollowingRatings`, { params: { cursor: cursor } });
+export const getFollowingRatings = async ({ next }) => {
+  const response = await axios.get(`${BACK_END_URL}/getFollowingRatings`, { params: { next: next } });
   return response.data;
 };
 
