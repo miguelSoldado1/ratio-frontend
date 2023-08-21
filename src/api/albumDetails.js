@@ -24,9 +24,9 @@ export const getPersonalRating = async ({ album_id, user_id }) => {
   return response.data.personalRating;
 };
 
-export const getAllRatings = async ({ album_id, page_number, order, page_size, user_id }) => {
+export const getCommunityAlbumRating = async ({ album_id, filter, next, previous }) => {
   const response = await axios.get(`${BACK_END_URL}/getCommunityAlbumRating`, {
-    params: { album_id, page_number, order, page_size, user_id },
+    params: { album_id, filter, next, previous },
   });
   return response.data;
 };

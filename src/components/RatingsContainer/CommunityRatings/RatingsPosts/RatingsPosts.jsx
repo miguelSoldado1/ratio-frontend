@@ -7,13 +7,13 @@ import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";
 import "./RatingsPosts.css";
 
 export const RatingsPosts = ({ post, children }) => {
-  const { user_id, comment, rating, createdAt, _id, likes, liked_by_user } = post;
+  const { comment, rating, createdAt, _id, likes, liked_by_user } = post;
   const { ref, overflow, expanded, handleToggleExpanded } = useOverflow();
 
   return (
     <li className="rating-posts-container">
       <div className="rating-posts-header">
-        <RatingPostsAvatar userId={user_id} />
+        <RatingPostsAvatar profile={post.profile} />
         <span>{handleDate(createdAt)}</span>
       </div>
       <div className="rating-posts-body">

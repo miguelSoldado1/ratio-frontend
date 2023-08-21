@@ -26,7 +26,7 @@ export const ProfileScreen = () => {
   return (
     <div className="profile-screen">
       <ProfileScreenHeader />
-      <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage({ pageParam: 0 })} />
+      <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} resetPagination={() => fetchNextPage({ pageParam: 0 })} />
       {!isLoading && (
         <ProfileScreenRatings userPosts={data?.pages?.flatMap((page) => page?.data)} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
       )}

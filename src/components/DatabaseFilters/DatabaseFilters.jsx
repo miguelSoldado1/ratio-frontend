@@ -1,7 +1,7 @@
 import React from "react";
 import "./DatabaseFilters.css";
 
-export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, numberOfRatings = 2 }) => {
+export const DatabaseFilters = ({ setFilterActive, filterActive, resetPagination, numberOfRatings = 2 }) => {
   const handleFilters = (e) => {
     const value = e.target.innerHTML;
     if (value === filterActive.tag) return;
@@ -9,7 +9,7 @@ export const DatabaseFilters = ({ setFilterActive, filterActive, setPage, number
     const newFilter = Object.values(filters).find((filter) => filter.tag === value);
 
     setFilterActive(newFilter || filters.LATEST);
-    setPage(0);
+    resetPagination();
   };
 
   return (

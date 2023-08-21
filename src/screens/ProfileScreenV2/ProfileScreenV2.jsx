@@ -45,7 +45,7 @@ export const ProfileScreenV2 = () => {
       <div>
         <ProfileScreenHeader />
         <div className="profile-screen-container">
-          <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} setPage={() => fetchNextPage()} />
+          <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} resetPagination={() => fetchNextPage()} />
           <div className="profile-screen-container-posts">
             {posts && user
               ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={`${post._id}-${post.liked_by_user}`} />))
