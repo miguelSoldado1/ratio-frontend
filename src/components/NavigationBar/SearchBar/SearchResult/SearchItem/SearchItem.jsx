@@ -14,7 +14,7 @@ export const SearchItem = ({ album, clearSearchBar }) => {
 
   return (
     <div className="search-album-item" onClick={handleAlbumClick}>
-      <img src={image} alt={name} />
+      <img src={image} alt={name} loading="lazy" />
       <div>
         <p className="search-album-name">
           {name} ({new Date(release_date).getFullYear()})

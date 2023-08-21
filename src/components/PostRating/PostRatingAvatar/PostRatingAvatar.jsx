@@ -10,7 +10,7 @@ export const PostRatingAvatar = ({ user, children }) => {
   return (
     <div className="header-container">
       <div className="avatar-container">
-        <img src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} />
+        <img src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} loading="lazy" />
         <Link to={location.pathname !== pathName && pathName} className="underline overflow-ellipsis">
           {user.displayName}
         </Link>

@@ -15,7 +15,7 @@ export const Avatar = ({ userData, userLoading }) => {
 
   return (
     <Link className="avatar" to={`/profile/${userData.id}`}>
-      <img className="avatar-image" src={userData?.imageUrl ?? avatarPlacehoder} alt={userData.displayName} />
+      <img className="avatar-image" src={userData?.imageUrl ?? avatarPlacehoder} alt={userData.displayName} loading="lazy" />
       <p className="avatar-name overflow-ellipsis">{userData.displayName}</p>
     </Link>
   );
