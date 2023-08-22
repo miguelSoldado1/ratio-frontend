@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { NavigationBar, Footer } from "./components";
-import { HomeScreen, LandingPage, NotFound, AlbumDetails, ProfileScreenV2 } from "./screens";
+import { HomeScreen, LandingPage, NotFound, AlbumDetails, ProfileScreen } from "./screens";
 import useAccessToken from "./hooks/useAuthentication";
 
 const mainRouteElement = (
@@ -11,7 +11,7 @@ const mainRouteElement = (
     <Routes>
       <Route path="/" element={<HomeScreen />} />
       <Route path="/album/:albumId" element={<AlbumDetails />} />
-      <Route path="/profile/:userId" element={<ProfileScreenV2 />} />
+      <Route path="/profile/:userId" element={<ProfileScreen />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />

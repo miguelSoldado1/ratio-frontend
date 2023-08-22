@@ -1,14 +1,21 @@
-.profile-screen {
+@media only screen and (max-width: 1025px) {
+  .profile-screen-container-posts {
+    margin: 0.5em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .profile-screen-container-posts {
+    margin: 1em;
+  }
+}
+
+.profile-screen-container {
+  margin: 0;
+}
+
+.profile-screen-container-posts {
   display: flex;
   flex-direction: column;
-}
-
-.profile-screen-no-ratings {
-  align-self: center;
-  font-size: 1.25em;
-}
-
-.profile-screen > .loading-carousel {
-  margin-top: 0.75em;
-  --loader-scale: 1.25;
+  gap: 0.5em;
 }
