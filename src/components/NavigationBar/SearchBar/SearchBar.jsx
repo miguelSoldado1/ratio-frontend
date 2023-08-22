@@ -22,7 +22,7 @@ export const SearchBar = () => {
     };
   }, []);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, status } = useQuery({
     queryKey: ["search", debouncedSearchQuery],
     queryFn: () => debouncedSearchQuery.trim() && searchForAlbum({ accessToken, search_query: debouncedSearchQuery }),
     keepPreviousData: true,
@@ -41,7 +41,7 @@ export const SearchBar = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      {!isLoading && !isError && data?.length > 0 && <SearchResult searchResult={data} clearSearchBar={() => setSearchQuery("")} />}
+      {status === "success" && data?.length > 0 && <SearchResult searchResult={data} clearSearchBar={() => setSearchQuery("")} />}
     </div>
   );
 };

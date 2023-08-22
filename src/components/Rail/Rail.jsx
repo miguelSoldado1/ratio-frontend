@@ -2,9 +2,8 @@ import { Container } from "../";
 import { RailPL } from "../../preloaders";
 import "./Rail.css";
 
-export const Rail = ({ isLoading, isError, data }) => {
+export const Rail = ({ isLoading, data }) => {
   if (isLoading) return <RailPL />;
-  if (isError) return null;
 
   if (data.data) {
     return (

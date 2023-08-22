@@ -13,7 +13,7 @@ export const ProfileRating = ({ userPost }) => {
   const { album_id, createdAt, rating } = userPost || {};
   const { accessToken, removeAccessToken } = useAccessToken();
 
-  const { data: albumData, isLoading } = useQuery({
+  const { data: albumData, status } = useQuery({
     queryKey: ["albumData", album_id],
     queryFn: () => getAlbum({ album_id, accessToken }),
     enabled: !!album_id,
@@ -27,7 +27,7 @@ export const ProfileRating = ({ userPost }) => {
     onError: () => removeAccessToken(),
   });
 
-  if (isLoading) {
+  if (status !== "success") {
     return <ProfileRatingPL />;
   }
 

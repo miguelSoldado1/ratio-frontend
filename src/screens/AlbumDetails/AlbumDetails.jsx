@@ -13,7 +13,7 @@ export const AlbumDetails = () => {
   const { removeAccessToken } = useAccessToken();
   const { albumId } = useParams();
 
-  const { data: albumData, isLoading: albumLoading } = useQuery({
+  const { data: albumData, status: albumStatus } = useQuery({
     queryKey: ["albums", albumId],
     queryFn: () => getAlbum({ album_id: albumId }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
@@ -21,11 +21,7 @@ export const AlbumDetails = () => {
   });
 
   const artist_id = albumData?.artist_id;
-  const {
-    data: relatedAlbumsData,
-    isLoading: relatedAlbumsLoading,
-    isError: relatedAlbumsError,
-  } = useQuery({
+  const { data: relatedAlbumsData, status: relatedAlbumsStatus } = useQuery({
     queryKey: ["relatedAlbums", albumId, artist_id],
     queryFn: () => getRelatedAlbums({ album_id: albumId, artist_id }),
     enabled: !!artist_id,
@@ -35,13 +31,13 @@ export const AlbumDetails = () => {
   return (
     <>
       <Helmet>
-        {!albumLoading && (
+        {albumStatus === "success" && (
           <title>
             {albumData.artist?.map((artist) => artist?.name).join(", ")} | {albumData.name}
           </title>
         )}
       </Helmet>
-      {albumLoading ? (
+      {albumStatus !== "success" ? (
         <AlbumDetailsPL />
       ) : (
         <>
@@ -59,7 +55,7 @@ export const AlbumDetails = () => {
               <RatingsContainer albumId={albumId} />
             </div>
           </div>
-          <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsLoading} isError={relatedAlbumsError} />
+          <Rail data={{ data: relatedAlbumsData, description: "Related albums" }} isLoading={relatedAlbumsStatus !== "success"} />
         </>
       )}
     </>

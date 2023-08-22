@@ -13,17 +13,17 @@ export const RatingsContainer = ({ albumId }) => {
   const { data: userData } = useUserInfo();
   const userId = userData?.id;
 
-  const { data: averageData, isLoading: averageLoading } = useQuery({
+  const { data: averageData, status: averageStatus } = useQuery({
     queryKey: ["averageRating", albumId],
     queryFn: () => getAverageAlbumRating({ album_id: albumId }),
   });
 
-  const { data: personalRating, isLoading: personalLoading } = useQuery({
+  const { data: personalRating, status: personalStatus } = useQuery({
     queryKey: ["personalRating", albumId, userId],
     queryFn: () => getPersonalRating({ album_id: albumId, user_id: userId }),
   });
 
-  if (averageLoading || personalLoading) {
+  if (averageStatus !== "success" || personalStatus !== "success") {
     return <RatingsContainerPL />;
   }
 

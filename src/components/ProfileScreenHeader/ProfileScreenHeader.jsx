@@ -13,20 +13,20 @@ export const ProfileScreenHeader = () => {
   const { userId } = useParams();
   const { removeAccessToken } = useAccessToken();
 
-  const { data: user, isLoading: userLoading } = useQuery({
+  const { data: user, status: userStatus } = useQuery({
     queryKey: ["userProfile", userId],
     queryFn: () => getUserProfile({ userId }),
     onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });
 
-  const { data: followingInfo, isLoading: infoLoading } = useQuery({
+  const { data: followingInfo, status: infoStatus } = useQuery({
     queryKey: ["getFollowingInfo", userId],
     queryFn: () => getFollowingInfo({ followingId: userId }),
     onError: () => removeAccessToken(),
   });
 
-  if (userLoading || infoLoading) {
+  if (userStatus !== "success" || infoStatus !== "success") {
     return <ProfileScreenHeaderPL />;
   }
 

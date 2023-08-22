@@ -14,20 +14,20 @@ export const ProfileScreen = () => {
   const { removeAccessToken } = useAccessToken();
   const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
 
-  const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data, hasNextPage, fetchNextPage, status } = useInfiniteQuery({
     queryKey: ["profilePosts", userId, filterActive.query],
     queryFn: ({ pageParam = 0 }) => getUserPosts({ userId, pageParam: pageParam ?? 0, order: filterActive.query, pageSize: NUMBER_OF_RATINGS }),
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
     onError: () => removeAccessToken(),
   });
 
-  if (isLoading) return <ProfileScreenPL />;
+  if (status !== "success") return <ProfileScreenPL />;
 
   return (
     <div className="profile-screen">
       <ProfileScreenHeader />
       <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} resetPagination={() => fetchNextPage({ pageParam: 0 })} />
-      {!isLoading && (
+      {status === "success" && (
         <ProfileScreenRatings userPosts={data?.pages?.flatMap((page) => page?.data)} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
       )}
     </div>
