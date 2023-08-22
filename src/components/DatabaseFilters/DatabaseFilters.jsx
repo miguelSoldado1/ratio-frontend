@@ -1,35 +1,26 @@
 import React from "react";
 import "./DatabaseFilters.css";
 
-export const DatabaseFilters = ({ setFilterActive, filterActive, resetPagination, numberOfRatings = 2 }) => {
-  const handleFilters = (e) => {
-    const value = e.target.innerHTML;
-    if (value === filterActive.tag) return;
-
-    const newFilter = Object.values(filters).find((filter) => filter.tag === value);
-
-    setFilterActive(newFilter || filters.LATEST);
-    resetPagination();
-  };
+// TODO: Validate if the disable if single is worth keeping
+export const DatabaseFilters = ({ filter, changeFilter, isLoading = false }) => {
+  const handleChange = (e) => !isLoading && changeFilter(e.target.value);
 
   return (
     <div className="filters">
-      {Object.keys(filters).map((filter) => (
-        <button
-          disabled={numberOfRatings <= 1}
-          key={filters[filter].query}
-          className={`filter ${filterActive.query === filters[filter].query ? "enabled" : "disabled"} ${numberOfRatings <= 1 ? "single" : ""}`}
-          onClick={handleFilters}
-        >
-          {filters[filter].tag}
-        </button>
-      ))}
+      {Object.keys(filters).map((filterKey) => {
+        const filterObj = filters[filterKey];
+        return (
+          <button className="filter" disabled={filter === filterObj.query} key={filterObj.query} onClick={handleChange} value={filterObj.query}>
+            {filterObj.label}
+          </button>
+        );
+      })}
     </div>
   );
 };
 
 export const filters = {
-  LATEST: { tag: "Latest", query: "latest" },
-  OLDEST: { tag: "Oldest", query: "oldest" },
-  TOP_RATED: { tag: "Top Rated", query: "top_rated" },
+  LATEST: { label: "Latest", query: "latest" },
+  OLDEST: { label: "Oldest", query: "oldest" },
+  TOP_RATED: { label: "Top Rated", query: "top_rated" },
 };

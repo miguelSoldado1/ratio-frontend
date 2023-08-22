@@ -27,7 +27,8 @@ export const RatingsContainer = ({ albumId }) => {
     return <RatingsContainerPL />;
   }
 
-  const { averageRating, numRatings } = averageData;
+  const averageRating = averageData?.averageRating;
+
   return (
     <div className="ratings-container">
       <div className="ratings-circles">
@@ -35,7 +36,7 @@ export const RatingsContainer = ({ albumId }) => {
         <RatingCircle value={averageRating} description={"Community"} />
       </div>
       {personalRating === null && <SubmitRating albumId={albumId} />}
-      {averageRating !== null ? <CommunityRatings albumId={albumId} numOfRatings={numRatings} /> : <NoRatingsContainer />}
+      {averageRating !== null ? <CommunityRatings albumId={albumId} /> : <NoRatingsContainer />}
     </div>
   );
 };

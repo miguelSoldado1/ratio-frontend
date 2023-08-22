@@ -4,9 +4,11 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import useAccessToken from "../../hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "../../api/profileScreen";
-import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "../../components";
+import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating, filters } from "../../components";
 import { PostRatingPL } from "../../preloaders";
 import "./ProfileScreenV2.css";
+
+const DEFAULT_FILTER = filters.LATEST.query;
 
 const getPageTitle = (displayName) => {
   const formattedName = `${displayName}${displayName?.slice(-1) !== "s" ? "'s" : "'"}`;
@@ -16,7 +18,7 @@ const getPageTitle = (displayName) => {
 export const ProfileScreenV2 = () => {
   const { userId } = useParams();
   const { removeAccessToken } = useAccessToken();
-  const [filterActive, setFilterActive] = useState({ tag: "Latest", query: "latest" });
+  const [filterActive, setFilterActive] = useState(DEFAULT_FILTER);
 
   const { data: user } = useQuery({
     queryKey: ["userProfile", userId],
@@ -29,9 +31,10 @@ export const ProfileScreenV2 = () => {
     data: posts,
     hasNextPage,
     fetchNextPage,
+    status,
   } = useInfiniteQuery({
-    queryKey: ["userRatings", userId, filterActive.query],
-    queryFn: ({ pageParam }) => getUserRatings({ userId, next: pageParam, filter: filterActive.query }),
+    queryKey: ["userRatings", userId, filterActive],
+    queryFn: ({ pageParam }) => getUserRatings({ userId, next: pageParam, filter: filterActive }),
     getNextPageParam: (lastPage) => lastPage.next ?? undefined,
     onError: () => removeAccessToken(),
     enabled: !!userId,
@@ -45,7 +48,7 @@ export const ProfileScreenV2 = () => {
       <div>
         <ProfileScreenHeader />
         <div className="profile-screen-container">
-          <DatabaseFilters setFilterActive={setFilterActive} filterActive={filterActive} resetPagination={() => fetchNextPage()} />
+          <DatabaseFilters filter={filterActive} changeFilter={setFilterActive} isLoading={status !== "success"} />
           <div className="profile-screen-container-posts">
             {posts && user
               ? posts.pages.map((page) => page.data.map((post) => <PostRating {...{ ...post, user }} key={`${post._id}-${post.liked_by_user}`} />))

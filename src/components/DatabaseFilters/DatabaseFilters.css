@@ -8,7 +8,7 @@
 .filters > .filter {
   display: block;
   cursor: pointer;
-  color: var(--accent-text-color);
+  color: white;
   background-color: transparent;
   margin-block: 1em;
   border: 0;
@@ -16,11 +16,6 @@
   padding: 0;
 }
 
-.filters > .enabled {
-  color: white;
-}
-
-.filters > .single {
+.filters > .filter:enabled {
   color: var(--accent-text-color);
-  cursor: not-allowed;
 }
