@@ -12,13 +12,7 @@ export const SocialLogos = () => {
       <a href="https://twitter.com/ratiomusic_" target="_blank" rel="noreferrer" title="Twitter" className="logo">
         <TwitterLogo />
       </a>
-      <a
-        href="https://www.paypal.com/paypalme/ratiomusic"
-        target="_blank"
-        rel="noreferrer"
-        title="Paypal <3"
-        className="logo"
-      >
+      <a href="https://www.paypal.com/paypalme/ratiomusic" target="_blank" rel="noreferrer" title="Paypal <3" className="logo">
         <PayPalLogo />
       </a>
     </>

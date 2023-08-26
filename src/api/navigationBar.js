@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACK_END_URL = `${process.env.REACT_APP_BACK_END_URL}/navigationBar`;
+const BACK_END_URL = `${import.meta.env.VITE_BACK_END_URL}/navigationBar`;
 
 export const getMe = async () => {
   const response = await axios.get(`${BACK_END_URL}/getMe`);

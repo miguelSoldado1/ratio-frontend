@@ -8,7 +8,7 @@ const LOCAL_STORAGE_KEYS = {
   REDIRECT: "redirect",
 };
 
-const REFRESH_TOKEN_URL = `${process.env.REACT_APP_BACK_END_URL}/auth/refresh`;
+const REFRESH_TOKEN_URL = `${import.meta.env.VITE_BACK_END_URL}/auth/refresh`;
 const SECONDS_BEFORE_REFRESH_TOKEN = 60;
 
 const clearAuthStorage = () => {
