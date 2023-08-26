@@ -5,6 +5,7 @@ import eslint from "vite-plugin-eslint";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  console.log("GENERATE_SOURCE_MAP", env.GENERATE_SOURCE_MAP === "true");
   return {
     build: {
       outDir: "build",
