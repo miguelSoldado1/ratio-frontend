@@ -2,9 +2,10 @@ import React, { useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useUserInfo from "@/hooks/useUserInfo";
 import { RatingsPosts } from "./RatingsPosts/RatingsPost";
-import { DatabaseFilters, FilterQueries, filters } from "../../DatabaseFilters/DatabaseFilters";
+import { DatabaseFilters, filters } from "../../DatabaseFilters/DatabaseFilters";
 import { getCommunityAlbumRatings } from "@/api/albumDetails";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
+import { FilterQueries } from "@/enums";
 import type { CommunityAlbumRatings } from "@/types";
 import "./CommunityRatings.css";
 

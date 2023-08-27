@@ -4,8 +4,9 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import useAccessToken from "@/hooks/useAuthentication";
 import { getUserProfile, getUserRatings } from "@/api/profileScreen";
-import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating, FilterQueries } from "@/components";
+import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "@/components";
 import { PostRatingPL } from "@/preloaders";
+import { FilterQueries } from "@/enums";
 import type { User, UserRatings } from "@/types";
 import "./ProfileScreen.css";
 

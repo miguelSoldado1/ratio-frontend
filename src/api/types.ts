@@ -1,4 +1,4 @@
-import { RailTitles } from "./homeScreen";
+import { FilterQueries, RailTitles } from "@/enums";
 
 // Section 1: ProfileScreen
 export interface GetUserProfileParams {
@@ -13,12 +13,11 @@ export interface GetFollowingInfoParams {
   followingId?: string;
 }
 
-// TODO: Make filter an enum
 // userId may be undefined here because of the useParams hook, see if there's a solution for this
 export interface GetUserRatingsParams {
   userId?: string;
   next?: string;
-  filter: string;
+  filter: FilterQueries;
 }
 
 export interface GetUserProfile {

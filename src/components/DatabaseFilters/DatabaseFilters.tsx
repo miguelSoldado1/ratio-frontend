@@ -1,3 +1,4 @@
+import { FilterQueries } from "@/enums";
 import "./DatabaseFilters.css";
 
 interface DatabaseFiltersProps {
@@ -23,12 +24,6 @@ export const DatabaseFilters: React.FC<DatabaseFiltersProps> = ({ filter, change
     </div>
   );
 };
-
-export enum FilterQueries {
-  latest = "latest",
-  oldest = "oldest",
-  top_rated = "top_rated",
-}
 
 export const filters = {
   LATEST: { label: "Latest", query: FilterQueries.latest },
