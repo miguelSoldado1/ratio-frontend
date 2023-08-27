@@ -19,21 +19,26 @@
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "^4.24.4",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-helmet": "^6.1.6",
+    "@types/react-transition-group": "^4.4.6",
     "@vitejs/plugin-react": "^4.0.4",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.4",
+    "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-svgr": "^3.2.0"
   },
   "scripts": {
     "start": "vite --port 3000 --host",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "serve": "vite preview",
-    "lint": "eslint src/**/*.js src/**/*.jsx"
+    "lint": "eslint src/**/*.ts src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": [
