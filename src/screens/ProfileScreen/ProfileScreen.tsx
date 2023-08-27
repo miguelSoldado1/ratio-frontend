@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
-import useAccessToken from "@/hooks/useAuthentication";
+import { useAccessToken } from "@/hooks";
 import { getUserProfile, getUserRatings } from "@/api/profileScreen";
 import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating } from "@/components";
 import { PostRatingPL } from "@/preloaders";

@@ -1,5 +1,5 @@
 import { handleDate } from "@/scripts/scripts";
-import useOverflow from "@/hooks/useOverflow";
+import { useOverflow } from "@/hooks";
 import { RatingCircle } from "@/components";
 import { RatingPostsLikes } from "./RatingPostsLikes/RatingPostsLikes";
 import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";

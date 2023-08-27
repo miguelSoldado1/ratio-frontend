@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import useAccessToken from "@/hooks/useAuthentication";
+import { useAccessToken } from "@/hooks";
 import { getFollowingInfo, getUserProfile } from "@/api/profileScreen";
 import { ProfileScreenHeaderInfo } from "./ProfileScreenHeaderInfo/ProfileScreenHeaderInfo";
 import { FollowButton } from "../FollowButton/FollowButton";

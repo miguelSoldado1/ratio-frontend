@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce, useAccessToken } from "@/hooks";
 import { searchForAlbum } from "@/api/navigationBar";
-import useAccessToken from "@/hooks/useAuthentication";
 import { SearchResult } from "../..";
 import { ReactComponent as SearchIcon } from "@/icons/search-icon.svg";
 import "./SearchBar.css";

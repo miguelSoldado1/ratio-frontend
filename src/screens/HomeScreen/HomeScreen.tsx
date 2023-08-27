@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query";
 import { getRails } from "@/api/homeScreen";
-import useUserInfo from "@/hooks/useUserInfo";
+import { useUserInfo } from "@/hooks";
 import { Rail, PostsFeed } from "@/components";
 import "./HomeScreen.css";
 

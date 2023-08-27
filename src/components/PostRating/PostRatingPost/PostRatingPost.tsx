@@ -1,4 +1,4 @@
-import useOverflow from "@/hooks/useOverflow";
+import { useOverflow } from "@/hooks";
 import { RatingCircle, PostRatingLikes } from "@/components";
 import type { FeedRating } from "@/types";
 import "./PostRatingPost.css";

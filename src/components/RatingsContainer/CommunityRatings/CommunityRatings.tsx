@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useUserInfo from "@/hooks/useUserInfo";
+import { useUserInfo } from "@/hooks";
 import { RatingsPosts } from "./RatingsPosts/RatingsPost";
 import { DatabaseFilters, filters } from "../../DatabaseFilters/DatabaseFilters";
 import { getCommunityAlbumRatings } from "@/api/albumDetails";

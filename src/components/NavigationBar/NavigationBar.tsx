@@ -1,6 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import useAccessToken from "@/hooks/useAuthentication";
-import useUserInfo from "@/hooks/useUserInfo";
+import { useAccessToken, useUserInfo } from "@/hooks";
 import { SearchBar, Avatar } from "..";
 import { ReactComponent as RatioLogo } from "@/icons/ratio-logo.svg";
 import { ReactComponent as LogOutIcon } from "@/icons/logout-icon.svg";

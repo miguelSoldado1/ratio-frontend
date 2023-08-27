@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useUserInfo from "@/hooks/useUserInfo";
+import { useUserInfo } from "@/hooks";
 import { followUser, unfollowUser } from "@/api/profileScreen";
 import type { FollowingInfo } from "@/types";
 import "./FollowButton.css";
