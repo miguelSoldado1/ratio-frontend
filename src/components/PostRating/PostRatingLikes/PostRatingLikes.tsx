@@ -1,10 +1,9 @@
 import React, { ReactNode, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { createLike, deleteLike, getPostLikes } from "../../../api/albumDetails";
-import { numberFormatter } from "../../../scripts/scripts";
-import { LongPressButton } from "../../LongPressButton/LongPressButton";
-import { FollowListModal } from "@/components";
-import { ReactComponent as HeartIcon } from "../../../icons/heart-icon.svg";
+import { createLike, deleteLike, getPostLikes } from "@/api/albumDetails";
+import { numberFormatter } from "@/scripts/scripts";
+import { FollowListModal, LongPressButton } from "@/components";
+import { ReactComponent as HeartIcon } from "@/icons/heart-icon.svg";
 import "./PostRatingLikes.css";
 
 interface PostRatingLikesProps {

@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getArtists } from "../../../../../scripts/scripts";
+import { getArtists } from "@/scripts/scripts";
+import type { Album } from "@/types";
 import "./SearchItem.css";
-import { Album } from "@/types";
 
 interface SearchItemProps {
   album: Album;

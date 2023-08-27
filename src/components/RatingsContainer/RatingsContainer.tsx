@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { SubmitRating } from "..";
-import { RatingsContainerPL } from "../../preloaders";
-import { RatingCircle } from "../RatingCircle/RatingCircle";
-import { CommunityRatings } from "./CommunityRatings/CommunityRatings";
-import { NoRatingsContainer } from "./NoRatingsContainer/NoRatingsContainer";
-import { getAverageAlbumRating, getPersonalRating } from "../../api/albumDetails";
-import useUserInfo from "../../hooks/useUserInfo";
+import { useUserInfo } from "@/hooks";
+import { RatingsContainerPL } from "@/preloaders";
+import { RatingCircle, CommunityRatings, NoRatingsContainer, SubmitRating } from "@/components";
+import { getAverageAlbumRating, getPersonalRating } from "@/api/albumDetails";
 import "./RatingsContainer.css";
 
 interface RatingsContainerProps {
