@@ -2,14 +2,14 @@ import React, { useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useUserInfo } from "@/hooks";
 import { RatingsPosts } from "./RatingsPosts/RatingsPost";
-import { DatabaseFilters, filters } from "../../DatabaseFilters/DatabaseFilters";
+import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getCommunityAlbumRatings } from "@/api/albumDetails";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
 import { FilterQueries } from "@/enums";
 import type { CommunityAlbumRatings } from "@/types";
 import "./CommunityRatings.css";
 
-const DEFAULT_FILTER = filters.LATEST.query;
+const DEFAULT_FILTER = FilterQueries.latest;
 
 interface ReducerState {
   page: number;
@@ -56,6 +56,7 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, num
   const { data, status } = useQuery<CommunityAlbumRatings>({
     queryKey: ["ratings", albumId, page, filter],
     queryFn: () => getCommunityAlbumRatings({ albumId, filter: filter, next: next ?? undefined, previous: previous ?? undefined }),
+    keepPreviousData: true,
   });
 
   const goToPreviousStep = () => dispatch({ type: "previous_page", payload: data?.previous ?? undefined });
@@ -67,6 +68,7 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, num
         filter={filter}
         changeFilter={(filter: string) => dispatch({ type: "change_filter", payload: filter })}
         isLoading={status !== "success"}
+        disabled={data?.ratings && data?.ratings.length <= 1}
       />
       {status === "success" && data.ratings.length > 0 ? (
         <>

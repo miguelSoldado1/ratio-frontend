@@ -5,14 +5,19 @@ interface DatabaseFiltersProps {
   filter: FilterQueries;
   changeFilter: (filter: FilterQueries) => void;
   isLoading?: boolean;
+  disabled?: boolean;
 }
 
 // TODO: Validate if the disable if single is worth keeping
-export const DatabaseFilters: React.FC<DatabaseFiltersProps> = ({ filter, changeFilter, isLoading = false }) => {
-  const handleChange = (query: FilterQueries) => !isLoading && changeFilter(query);
+export const DatabaseFilters: React.FC<DatabaseFiltersProps> = ({ filter, changeFilter, isLoading = false, disabled = false }) => {
+  const handleChange = (query: FilterQueries) => {
+    if (!isLoading && !disabled) {
+      changeFilter(query);
+    }
+  };
 
   return (
-    <div className="filters">
+    <div className={`filters${disabled ? " disabled" : ""}`}>
       {Object.keys(filters).map((filterKey) => {
         const filterObj = filters[filterKey as keyof typeof filters];
         return (
@@ -25,7 +30,7 @@ export const DatabaseFilters: React.FC<DatabaseFiltersProps> = ({ filter, change
   );
 };
 
-export const filters = {
+const filters = {
   LATEST: { label: "Latest", query: FilterQueries.latest },
   OLDEST: { label: "Oldest", query: FilterQueries.oldest },
   TOP_RATED: { label: "Top Rated", query: FilterQueries.top_rated },

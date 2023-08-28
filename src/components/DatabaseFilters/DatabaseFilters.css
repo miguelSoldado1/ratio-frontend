@@ -16,6 +16,10 @@
   padding: 0;
 }
 
+.filters.disabled > .filter {
+  color: var(--accent-text-color);
+}
+
 .filters > .filter:enabled {
   color: var(--accent-text-color);
 }
