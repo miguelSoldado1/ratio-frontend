@@ -7,10 +7,12 @@
   cursor: pointer;
   color: var(--accent-text-color);
   font-weight: bold;
-  padding: 0.2em;
+  padding-block: 0.1em;
+  margin-left: 0.15em;
 }
 
 .profile-screen-posts-number {
   color: var(--accent-text-color);
+  margin-left: 0.15em;
   font-weight: 400;
 }
