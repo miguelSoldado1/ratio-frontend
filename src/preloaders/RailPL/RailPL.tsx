@@ -1,10 +1,15 @@
+import { ContainerPL } from "../ContainerPL/ContainerPL";
 import "./RailPL.css";
 
 export const RailPL = () => {
   return (
-    <>
-      <h1 className="grid-title">Loading...</h1>
-      <div className="rail-preloader gradient" />
-    </>
+    <div className="grid-container">
+      <h1 className="grid-title preloader">Loading...</h1>
+      <ul className="grid">
+        {[...Array(10)].map((_, idx) => (
+          <ContainerPL key={idx} />
+        ))}
+      </ul>
+    </div>
   );
 };

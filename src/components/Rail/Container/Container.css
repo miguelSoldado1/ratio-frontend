@@ -1,6 +1,6 @@
 @media only screen and (max-width: 1025px) {
   .container {
-    padding: 0.6em;
+    padding: 0.3em 0.6em;
   }
 
   .container-album-name {
@@ -14,7 +14,7 @@
 
 @media only screen and (min-width: 1026px) {
   .container {
-    padding: 1em;
+    padding: 0.5em 1em;
   }
 
   .container-album-name {
@@ -47,7 +47,7 @@
   width: 100%;
   aspect-ratio: 1;
   justify-self: center;
-  padding: 0.75em;
+  margin: 0.6em;
 }
 
 .container > p {
