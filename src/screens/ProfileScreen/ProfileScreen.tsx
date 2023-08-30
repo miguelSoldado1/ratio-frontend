@@ -25,7 +25,6 @@ export const ProfileScreen = () => {
   const { data: user } = useQuery<User>({
     queryKey: ["userProfile", userId],
     queryFn: () => getUserProfile({ userId }),
-    onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });
 

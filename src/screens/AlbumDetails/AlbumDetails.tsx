@@ -16,7 +16,6 @@ export const AlbumDetails = () => {
   const { data: albumData, status: albumStatus } = useQuery<DetailedAlbum>({
     queryKey: ["albums", albumId],
     queryFn: () => getAlbum({ albumId }),
-    onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     onError: () => removeAccessToken(),
   });
 
