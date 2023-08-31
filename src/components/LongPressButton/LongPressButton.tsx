@@ -13,20 +13,24 @@ export const LongPressButton: React.FC<LongPressButtonProps> = ({ className, onC
   const [timerId, setTimerId] = useState<number | null>(null);
   const [longPressTriggered, setLongPressTriggered] = useState<boolean>(false);
 
-  const handleMouseDown = () => {
-    const id = setTimeout(() => {
-      setLongPressTriggered(true);
-      onLongPress();
-    }, holdTime);
-    setTimerId(id);
+  const handleMouseDown = (e?: React.MouseEvent<HTMLDivElement>) => {
+    if ((e === undefined || e?.button === 0) && !disabled) {
+      const id = setTimeout(() => {
+        setLongPressTriggered(true);
+        onLongPress();
+      }, holdTime);
+      setTimerId(id);
+    }
   };
 
-  const handleMouseUp = () => {
-    timerId && clearTimeout(timerId);
-    if (!longPressTriggered) {
-      onClick();
+  const handleMouseUp = (e?: React.MouseEvent<HTMLDivElement>) => {
+    if ((e === undefined || e?.button === 0) && !disabled) {
+      timerId && clearTimeout(timerId);
+      if (!longPressTriggered) {
+        onClick();
+      }
+      setLongPressTriggered(false);
     }
-    setLongPressTriggered(false);
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
