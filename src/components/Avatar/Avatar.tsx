@@ -13,7 +13,7 @@ export const Avatar: React.FC<AvatarProps> = ({ userData, userLoading }) => {
     return (
       <div className="avatar">
         <img className="avatar-image" src={avatarPlacehoder} alt="" />
-        <p className="avatar-name overflow-ellipsis">{"           "}</p>
+        <div className="avatar-name" />
       </div>
     );
   }
