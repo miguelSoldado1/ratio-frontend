@@ -10,7 +10,7 @@ interface RatingsPostsProps {
   children?: JSX.Element;
 }
 
-export const RatingsPosts: React.FC<RatingsPostsProps> = ({ ratingPost, children }) => {
+export const RatingsPost: React.FC<RatingsPostsProps> = ({ ratingPost, children }) => {
   const { comment, rating, createdAt, _id, likes, liked_by_user } = ratingPost;
   const { ref, overflow, expanded, handleToggleExpanded } = useOverflow();
 

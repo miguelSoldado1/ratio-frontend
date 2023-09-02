@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useUserInfo } from "@/hooks";
-import { RatingsPosts } from "./RatingsPosts/RatingsPost";
+import { RatingsPost } from "./RatingsPosts/RatingsPost";
 import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getCommunityAlbumRatings } from "@/api/albumDetails";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
@@ -74,13 +74,13 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, num
         <>
           <ol className="community-ratings">
             {data.ratings?.map((rating) => (
-              <RatingsPosts ratingPost={rating} key={`${rating._id}-${rating.liked_by_user}`}>
+              <RatingsPost ratingPost={rating} key={`${rating._id}-${rating.liked_by_user}`}>
                 <>
                   {userData?.id === rating.profile.id && (
                     <RatingPostsDelete ratingId={rating._id} resetPagination={() => dispatch({ type: "reset_pagination" })} />
                   )}
                 </>
-              </RatingsPosts>
+              </RatingsPost>
             ))}
           </ol>
           <div className="nav-arrow-ratings-container">
