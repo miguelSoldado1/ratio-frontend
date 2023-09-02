@@ -4,6 +4,7 @@ export * from "./AlbumTrack/AlbumTrack";
 export * from "./Avatar/Avatar";
 export * from "./Button/Button";
 export * from "./DatabaseFilters/DatabaseFilters";
+export * from "./EmptyProfileScreen/EmptyProfileScreen";
 export * from "./FollowButton/FollowButton";
 export * from "./FollowListModal/FollowListModal";
 export * from "./Footer/Footer";
