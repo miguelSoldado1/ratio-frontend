@@ -19,7 +19,7 @@ export const Avatar: React.FC<AvatarProps> = ({ userData, userLoading }) => {
   }
 
   return (
-    <Link className="avatar" to={`/profile/${userData.id}`}>
+    <Link className="avatar" to={`/profile/${userData.id}`} title={userData.displayName}>
       <img className="avatar-image" src={userData?.imageUrl ?? avatarPlacehoder} alt={userData.displayName} loading="lazy" />
       <p className="avatar-name overflow-ellipsis">{userData.displayName}</p>
     </Link>

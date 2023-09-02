@@ -12,7 +12,9 @@ export const PostRatingAlbum: React.FC<PostRatingAlbumProps> = ({ album }) => {
     <Link to={`/album/${album.id}`} className="album-container">
       <img className="album-image" src={album.image} alt={album.name} loading="lazy" />
       <div className="album-text overflow-ellipsis">
-        <span className="overflow-ellipsis">{album.name}</span>
+        <span className="overflow-ellipsis" title={album.name}>
+          {album.name}
+        </span>
         <span className="album-author overflow-ellipsis">
           <img src={spotifyLogo} className="spotify-logo" alt="spotify logo" />
           {album.artist.map((artist) => artist.name).join(", ")}

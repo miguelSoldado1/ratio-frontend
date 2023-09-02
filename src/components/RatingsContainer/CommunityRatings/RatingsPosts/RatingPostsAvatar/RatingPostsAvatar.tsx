@@ -9,9 +9,9 @@ interface RatingPostsAvatarProps {
 
 export const RatingPostsAvatar: React.FC<RatingPostsAvatarProps> = ({ profile }) => {
   return (
-    <Link className="post-avatar" to={`/profile/${profile?.id}`}>
-      <img className="post-avatar-img" alt={profile?.displayName} src={profile?.imageUrl ?? avatarPlaceholder} loading="lazy" />
-      <p className="post-avatar-name">{profile?.displayName}</p>
+    <Link className="post-avatar" to={`/profile/${profile.id}`} title={profile.displayName}>
+      <img className="post-avatar-img" alt={profile.displayName} src={profile.imageUrl ?? avatarPlaceholder} loading="lazy" />
+      <p className="post-avatar-name">{profile.displayName}</p>
     </Link>
   );
 };

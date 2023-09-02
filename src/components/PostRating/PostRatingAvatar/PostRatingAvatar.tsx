@@ -13,7 +13,7 @@ export const PostRatingAvatar: React.FC<PostRatingAvatarProps> = ({ user, childr
     <div className="header-container">
       <div className="avatar-container">
         <img src={user.imageUrl ?? avatarPlacehoder} alt={user.displayName} loading="lazy" />
-        <Link to={`/profile/${user.id}`} className="underline overflow-ellipsis">
+        <Link to={`/profile/${user.id}`} className="underline overflow-ellipsis" title={user.displayName}>
           {user.displayName}
         </Link>
       </div>
