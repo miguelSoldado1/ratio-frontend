@@ -1,7 +1,6 @@
 import { handleDate } from "@/scripts/scripts";
 import { useOverflow } from "@/hooks";
-import { RatingCircle } from "@/components";
-import { RatingPostsLikes } from "./RatingPostsLikes/RatingPostsLikes";
+import { LikeButton, RatingCircle } from "@/components";
 import { RatingPostsAvatar } from "./RatingPostsAvatar/RatingPostsAvatar";
 import type { AlbumRating } from "@/types";
 import "./RatingsPosts.css";
@@ -29,7 +28,7 @@ export const RatingsPosts: React.FC<RatingsPostsProps> = ({ ratingPost, children
       </div>
       <div className="rating-posts-footer">
         <div>
-          <RatingPostsLikes likes={likes} ratingId={_id} likedByUser={liked_by_user} />
+          <LikeButton className="rating-posts-button" likes={likes} ratingId={_id} likedByUser={liked_by_user} />
           {children}
         </div>
         {overflow && <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={handleToggleExpanded} />}

@@ -115,20 +115,3 @@ ol {
   padding-block: 0.5em;
   width: 17em;
 }
-
-.heart > * {
-  transition: fill 200ms linear;
-}
-
-.liked > * {
-  fill: white;
-}
-
-.heart.disabled.liked > * {
-  fill: var(--accent-text-color);
-}
-
-.heart.disabled > * {
-  stroke: var(--accent-text-color);
-  color: var(--accent-text-color);
-}

@@ -1,5 +1,5 @@
 import { useOverflow } from "@/hooks";
-import { RatingCircle, PostRatingLikes } from "@/components";
+import { RatingCircle, LikeButton } from "@/components";
 import type { FeedRating } from "@/types";
 import "./PostRatingPost.css";
 
@@ -18,9 +18,10 @@ export const PostRatingPost: React.FC<PostRatingPostProps> = ({ post }) => {
         </span>
         <RatingCircle value={post.rating} />
       </div>
-      <PostRatingLikes likes={post.likes} ratingId={post._id} likedByUser={post.liked_by_user}>
+      <div className="home-rating-footer">
+        <LikeButton className="home-rating-posts-button" likes={post.likes} ratingId={post._id} likedByUser={post.liked_by_user} />
         {overflow && <div className={`arrow ${expanded ? "arrow-up" : "arrow-down"}`} onClick={handleToggleExpanded} />}
-      </PostRatingLikes>
+      </div>
     </>
   );
 };

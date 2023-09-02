@@ -30,3 +30,30 @@
   -webkit-line-clamp: 15;
   line-clamp: 15;
 }
+
+.home-rating-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25em 0.5em;
+}
+
+.home-rating-posts-button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 20em;
+  gap: 0.5em;
+  font-size: 1em;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  padding: 0.25em 0.5em;
+}
+
+.home-rating-posts-button:hover {
+  background-color: var(--hover-color);
+}

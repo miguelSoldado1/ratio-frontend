@@ -4,44 +4,39 @@ import { createLike, deleteLike, getPostLikes } from "@/api/albumDetails";
 import { numberFormatter } from "@/scripts/scripts";
 import { LongPressButton, FollowListModal } from "@/components";
 import { ReactComponent as HeartIcon } from "@/icons/heart-icon.svg";
+import "./LikeButton.css";
 
-interface RatingPostsLikesProps {
+interface LikeButtonProps {
   likes?: number;
   ratingId: string;
   likedByUser: boolean;
+  className: string;
 }
 
-export const RatingPostsLikes: React.FC<RatingPostsLikesProps> = ({ likes = 0, ratingId, likedByUser }) => {
-  const [likeCount, setLikeCount] = useState(likes);
-  const [liked, setLiked] = useState(likedByUser);
-  const [show, setShow] = useState(false);
+export const LikeButton: React.FC<LikeButtonProps> = ({ likes = 0, ratingId, likedByUser, className }) => {
+  const [likeCount, setLikeCount] = useState<number>(likes);
+  const [liked, setLiked] = useState<boolean>(likedByUser);
+  const [show, setShow] = useState<boolean>(false);
 
-  const likeOnSuccess = ({ numberOfLikes }: { numberOfLikes: number }) => setLikeCount(numberOfLikes);
-
-  const { mutate: createMutation, isLoading: isCreating } = useMutation({
-    mutationFn: createLike,
-    onSuccess: likeOnSuccess,
-    onMutate: () => setLikeCount((currCount) => currCount + 1),
-  });
-
-  const { mutate: deleteMutation, isLoading: isDeleting } = useMutation({
-    mutationFn: deleteLike,
-    onSuccess: likeOnSuccess,
-    onMutate: () => setLikeCount((currCount) => currCount - 1),
+  const { mutate: likeMutation, isLoading } = useMutation({
+    mutationFn: liked ? deleteLike : createLike,
+    onMutate: () => setLikeCount(liked ? likeCount - 1 : likeCount + 1),
+    onSuccess: ({ numberOfLikes }: { numberOfLikes: number }) => setLikeCount(numberOfLikes),
   });
 
   const handleLike = () => {
-    if (isCreating || isDeleting) return;
-    setLiked((oldStatus) => !oldStatus);
-    if (liked) return deleteMutation({ ratingId });
-    return createMutation({ ratingId });
+    if (!isLoading) {
+      setLiked((oldStatus) => !oldStatus);
+      likeMutation({ ratingId });
+    }
   };
 
   return (
     <>
       <LongPressButton
-        className={`rating-posts-button heart${liked ? " liked" : ""}`}
+        className={`${className} heart${liked ? " liked" : ""}`}
         onClick={handleLike}
+        disabled={isLoading}
         onLongPress={() => likeCount > 0 && setShow(true)}
       >
         <>
