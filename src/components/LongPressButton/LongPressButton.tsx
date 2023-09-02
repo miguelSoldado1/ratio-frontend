@@ -48,7 +48,13 @@ export const LongPressButton: React.FC<LongPressButtonProps> = ({ className, onC
   };
 
   return (
-    <div className={className} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <div
+      className={`${className}${disabled ? " disabled" : ""}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {children}
     </div>
   );

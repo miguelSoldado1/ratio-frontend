@@ -75,14 +75,6 @@
   -o-user-select: none;
 }
 
-.heart > * {
-  transition: fill 200ms linear;
-}
-
-.liked > * {
-  fill: white;
-}
-
 .rating-posts-body > .rating-circle-container {
   width: 2.5em;
 }
