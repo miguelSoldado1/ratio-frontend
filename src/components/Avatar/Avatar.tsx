@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import avatarPlacehoder from "@/icons/avatar-placeholder.svg";
+import { AvatarPL } from "@/preloaders";
 import type { User } from "@/types";
 import "./Avatar.css";
 
@@ -10,12 +11,7 @@ interface AvatarProps {
 
 export const Avatar: React.FC<AvatarProps> = ({ userData, userLoading }) => {
   if (userLoading || !userData) {
-    return (
-      <div className="avatar">
-        <img className="avatar-image" src={avatarPlacehoder} alt="" />
-        <div className="avatar-name" />
-      </div>
-    );
+    return <AvatarPL />;
   }
 
   return (
