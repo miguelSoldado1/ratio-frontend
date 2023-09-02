@@ -5,7 +5,7 @@ import { Rail, PostsFeed } from "@/components";
 import "./HomeScreen.css";
 
 export const HomeScreen = () => {
-  const { data: userData } = useUserInfo();
+  const { userData } = useUserInfo();
   const userId = userData?.id;
 
   const results = useQueries({

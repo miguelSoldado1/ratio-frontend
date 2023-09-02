@@ -10,7 +10,7 @@ interface RatingsContainerProps {
 }
 
 export const RatingsContainer: React.FC<RatingsContainerProps> = ({ albumId }) => {
-  const { data: userData } = useUserInfo();
+  const { userData } = useUserInfo();
   const userId = userData?.id;
 
   const { data: averageData, status: averageStatus } = useQuery({

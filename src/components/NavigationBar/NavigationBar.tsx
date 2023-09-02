@@ -7,7 +7,7 @@ import "./NavigationBar.css";
 
 export const NavigationBar = () => {
   const { removeAccessToken } = useAccessToken();
-  const { data, isLoading } = useUserInfo({ onError: removeAccessToken });
+  const { userData, isLoading } = useUserInfo({ onError: removeAccessToken });
 
   return (
     <>
@@ -20,7 +20,7 @@ export const NavigationBar = () => {
         </div>
         <div className="nav-bar-container">
           <LogOutIcon className="logout-icon" onClick={removeAccessToken} />
-          <Avatar userData={data} userLoading={isLoading} />
+          <Avatar userData={userData} userLoading={isLoading} />
         </div>
       </nav>
       <Outlet />

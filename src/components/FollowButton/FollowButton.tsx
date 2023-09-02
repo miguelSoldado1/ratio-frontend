@@ -15,9 +15,7 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, profile
   const { userId } = useParams();
   const queryClient = useQueryClient();
   const [followingStatus, setFollowingStatus] = useState(isFollowing);
-  const { data: userData } = useUserInfo();
-
-  const ownProfile = !userData?.id || userData?.id === profileId;
+  const { userData } = useUserInfo();
 
   const { mutate: changeFollowStatus, isLoading } = useMutation({
     mutationFn: followingStatus ? unfollowUser : followUser,
@@ -41,12 +39,12 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, profile
     },
   });
 
-  if (ownProfile) {
+  if (!userData?.id || userData?.id === profileId) {
     return <div className="follow-button-container" />;
   }
 
   return (
-    <div className="follow-button-container">
+    <div className="follow-button-container" title={`Click to ${followingStatus ? "unfollow" : "follow"}`}>
       <button
         className={`follow-button ${followingStatus ? "following" : ""}`}
         onClick={() => changeFollowStatus({ followingId: profileId })}

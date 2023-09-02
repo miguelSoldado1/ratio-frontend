@@ -45,7 +45,7 @@ interface CommunityRatingsProps {
 }
 
 export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, numOfRatings }) => {
-  const { data: userData } = useUserInfo();
+  const { userData } = useUserInfo();
   const [{ page, next, previous, filter }, dispatch] = useReducer(reducer, {
     page: 0,
     next: undefined,
