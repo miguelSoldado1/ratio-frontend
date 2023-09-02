@@ -18,11 +18,14 @@ export const PostsFeed: React.FC<PostsFeedProps> = ({ userId }) => {
   });
 
   return (
-    <div className="posts-feed-container">
-      {!data || isInitialLoading
-        ? [...Array(4)].map((_, index) => <PostRatingPL key={index} />)
-        : data.pages.flatMap((x) => x.data).map((post) => <PostRating {...post} key={`${post._id}-${post.liked_by_user}`} />)}
-      {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
-    </div>
+    <>
+      <h4 className="posts-feed-title">Following</h4>
+      <div className="posts-feed-container">
+        {!data || isInitialLoading
+          ? [...Array(4)].map((_, index) => <PostRatingPL key={index} />)
+          : data.pages.flatMap((x) => x.data).map((post) => <PostRating {...post} key={`${post._id}-${post.liked_by_user}`} />)}
+        {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
+      </div>
+    </>
   );
 };

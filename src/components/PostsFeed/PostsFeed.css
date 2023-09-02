@@ -10,6 +10,13 @@
   }
 }
 
+.posts-feed-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  text-align: center;
+  margin: 1em;
+}
+
 .posts-feed-container {
   display: flex;
   flex-direction: column;
