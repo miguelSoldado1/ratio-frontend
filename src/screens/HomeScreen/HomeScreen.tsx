@@ -25,12 +25,14 @@ export const HomeScreen = () => {
     ],
   });
 
+  const queriesLoading = results.every((query) => query.isLoading);
+
   return (
     <>
       <div className="rails-container">
         {results.map((rail, idx) => (
           // I hate having index as key but it doesn't really matter in here
-          <Rail albums={rail.data?.data} description={rail.data?.description} isLoading={rail.isLoading} key={idx} />
+          <Rail albums={rail.data?.data} description={rail.data?.description} isLoading={queriesLoading} key={idx} />
         ))}
       </div>
       <PostsFeed userId={userId} />
