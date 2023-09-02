@@ -24,6 +24,7 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
 
 interface PanelProps {
   children: JSX.Element;
+  title: string;
 }
 
 export const Panel: React.FC<PanelProps> = ({ children }) => {
