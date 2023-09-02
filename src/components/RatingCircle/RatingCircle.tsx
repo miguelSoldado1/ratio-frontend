@@ -29,6 +29,6 @@ const styles: CircularProgressbarStyles = {
     transition: "stroke-dashoffset 0.75s ease 0s",
   },
   trail: {
-    stroke: "transparent",
+    stroke: "var(--background-item-color)",
   },
 };

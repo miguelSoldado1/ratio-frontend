@@ -32,8 +32,8 @@ export const RatingsContainer: React.FC<RatingsContainerProps> = ({ albumId }) =
   return (
     <div className="ratings-container">
       <div className="ratings-circles">
-        <RatingCircle value={personalRating} description="Personal" />
-        <RatingCircle value={averageRating} description="Community" />
+        <RatingCircle value={personalRating ?? -1} description="Personal" />
+        <RatingCircle value={averageRating ?? -1} description="Community" />
       </div>
       {personalRating === null && <SubmitRating albumId={albumId} />}
       {averageRating !== null ? <CommunityRatings albumId={albumId} /> : <NoRatingsContainer />}
