@@ -5,7 +5,7 @@ export interface User {
 }
 
 export interface UserRatings {
-  data: PersonalRatings[];
+  data: PersonalRating[];
   next: string | null;
 }
 
@@ -14,7 +14,7 @@ export interface FollowingRatings {
   next: string | null;
 }
 
-export interface PersonalRatings {
+export interface PersonalRating {
   _id: string;
   user_id: string;
   album_id: string;
@@ -26,7 +26,7 @@ export interface PersonalRatings {
   album: Album;
 }
 
-export interface FeedRating extends PersonalRatings {
+export interface FeedRating extends PersonalRating {
   user: User;
 }
 
