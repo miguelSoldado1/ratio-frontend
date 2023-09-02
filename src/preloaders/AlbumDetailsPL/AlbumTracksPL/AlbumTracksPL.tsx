@@ -3,7 +3,7 @@ import "./AlbumTracksPL.css";
 export const AlbumTracksPL = () => {
   return (
     <>
-      {[...Array(11)].map((track, index) => (
+      {[...Array(11)].map((_, index) => (
         <li className="album-track-outter" key={index}>
           <div className="album-track-container">
             <div className="album-track-number-preloader gradient" />

@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import { useAccessToken } from "@/hooks";
-import { AlbumHeader, AlbumTrack, Rail } from "@/components";
-import { AlbumDetailsPL } from "@/preloaders";
 import { getAlbum, getRelatedAlbums } from "@/api/albumDetails";
-import { RatingsContainer } from "@/components/RatingsContainer/RatingsContainer";
+import { AlbumHeader, AlbumTrack, Rail } from "@/components";
+import { AlbumHeaderPL, AlbumTracksPL } from "@/preloaders";
+import { RatingsContainer } from "@/components";
 import type { Album, DetailedAlbum } from "@/types";
 import "./AlbumDetails.css";
 
@@ -24,8 +24,8 @@ export const AlbumDetails = () => {
   const { data: relatedAlbumsData, status: relatedAlbumsStatus } = useQuery<Album[]>({
     queryKey: ["relatedAlbums", albumId, artist_id],
     queryFn: () => getRelatedAlbums({ albumId: albumId, artistId: artist_id }),
-    enabled: !!artist_id,
     onError: () => removeAccessToken(),
+    enabled: !!artist_id,
   });
 
   return (
@@ -37,27 +37,27 @@ export const AlbumDetails = () => {
           </title>
         )}
       </Helmet>
-      {albumStatus !== "success" ? (
-        <AlbumDetailsPL />
-      ) : (
-        <>
-          <div className="album-details-container">
-            <div className="album-details-column left">
-              <AlbumHeader data={albumData} />
+
+      <>
+        <div className="album-details-container">
+          <div className="album-details-column left">
+            {albumStatus !== "success" ? <AlbumHeaderPL /> : <AlbumHeader data={albumData} />}
+            {albumStatus !== "success" ? (
+              <AlbumTracksPL />
+            ) : (
               <ol className="album-details-tracks">
                 {albumData.tracks?.map((track, index) => (
                   <AlbumTrack key={track.id} track={track} index={index} />
                 ))}
               </ol>
-            </div>
-
-            <div className="album-details-column right">
-              <RatingsContainer albumId={albumId} />
-            </div>
+            )}
           </div>
-          <Rail albums={relatedAlbumsData} description="Related albums" isLoading={relatedAlbumsStatus !== "success"} />
-        </>
-      )}
+          <div className="album-details-column right">
+            <RatingsContainer albumId={albumId} />
+          </div>
+        </div>
+        <Rail albums={relatedAlbumsData} description="Related albums" isLoading={relatedAlbumsStatus !== "success"} />
+      </>
     </>
   );
 };
