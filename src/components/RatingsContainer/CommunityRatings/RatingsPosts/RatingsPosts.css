@@ -19,6 +19,11 @@
   margin-inline: 1em;
 }
 
+.rating-posts-container.disabled {
+  opacity: 0.75;
+  pointer-events: none;
+}
+
 .rating-posts-header {
   display: flex;
   align-items: center;

@@ -1,9 +1,8 @@
 import React, { useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useUserInfo } from "@/hooks";
-import { RatingsPost } from "./RatingsPosts/RatingsPost";
-import { DatabaseFilters } from "../../DatabaseFilters/DatabaseFilters";
 import { getCommunityAlbumRatings } from "@/api/albumDetails";
+import { DatabaseFilters, RatingsPost } from "@/components";
 import { RatingPostsDelete } from "./RatingsPosts/RatingPostsDelete/RatingPostsDelete";
 import { FilterQueries } from "@/enums";
 import type { CommunityAlbumRatings } from "@/types";
@@ -41,10 +40,9 @@ const reducer = (state: ReducerState, action: ReducerAction): ReducerState => {
 
 interface CommunityRatingsProps {
   albumId?: string;
-  numOfRatings?: number;
 }
 
-export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, numOfRatings }) => {
+export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId }) => {
   const { userData } = useUserInfo();
   const [{ page, next, previous, filter }, dispatch] = useReducer(reducer, {
     page: 0,
@@ -53,8 +51,8 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, num
     filter: DEFAULT_FILTER,
   });
 
-  const { data, status } = useQuery<CommunityAlbumRatings>({
-    queryKey: ["ratings", albumId, page, filter],
+  const { data, status, isPreviousData } = useQuery<CommunityAlbumRatings>({
+    queryKey: ["ratings", page, albumId, filter],
     queryFn: () => getCommunityAlbumRatings({ albumId, filter: filter, next: next ?? undefined, previous: previous ?? undefined }),
     keepPreviousData: true,
   });
@@ -74,7 +72,7 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId, num
         <>
           <ol className="community-ratings">
             {data.ratings?.map((rating) => (
-              <RatingsPost ratingPost={rating} key={`${rating._id}-${rating.liked_by_user}`}>
+              <RatingsPost ratingPost={rating} key={`${rating._id}-${rating.liked_by_user}`} disabled={isPreviousData}>
                 <>
                   {userData?.id === rating.profile.id && (
                     <RatingPostsDelete ratingId={rating._id} resetPagination={() => dispatch({ type: "reset_pagination" })} />

@@ -7,15 +7,16 @@ import "./RatingsPosts.css";
 
 interface RatingsPostsProps {
   ratingPost: AlbumRating;
+  disabled?: boolean;
   children?: JSX.Element;
 }
 
-export const RatingsPost: React.FC<RatingsPostsProps> = ({ ratingPost, children }) => {
+export const RatingsPost: React.FC<RatingsPostsProps> = ({ ratingPost, disabled = false, children }) => {
   const { comment, rating, createdAt, _id, likes, liked_by_user } = ratingPost;
   const { ref, overflow, expanded, handleToggleExpanded } = useOverflow();
 
   return (
-    <li className="rating-posts-container">
+    <li className={`rating-posts-container${disabled ? " disabled" : ""}`}>
       <div className="rating-posts-header">
         <RatingPostsAvatar profile={ratingPost.profile} />
         <span>{handleDate(createdAt)}</span>
