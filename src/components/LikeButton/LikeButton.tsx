@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createLike, deleteLike, getPostLikes } from "@/api/albumDetails";
 import { numberFormatter } from "@/scripts/scripts";
 import { LongPressButton, FollowListModal } from "@/components";
@@ -13,7 +13,11 @@ interface LikeButtonProps {
   className: string;
 }
 
+// Just setting this variable to make sure the keys are for sure equal
+const LIKES_PROFILES = "likesProfiles";
+
 export const LikeButton: React.FC<LikeButtonProps> = ({ likes = 0, ratingId, likedByUser, className }) => {
+  const queryClient = useQueryClient();
   const [likeCount, setLikeCount] = useState<number>(likes);
   const [liked, setLiked] = useState<boolean>(likedByUser);
   const [show, setShow] = useState<boolean>(false);
@@ -31,13 +35,18 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ likes = 0, ratingId, lik
     }
   };
 
+  const handleLongPress = () => {
+    queryClient.resetQueries([LIKES_PROFILES, ratingId]);
+    likeCount > 0 && setShow(true);
+  };
+
   return (
     <>
       <LongPressButton
         className={`${className} heart${liked ? " liked" : ""}`}
         onClick={handleLike}
         disabled={isLoading}
-        onLongPress={() => likeCount > 0 && setShow(true)}
+        onLongPress={handleLongPress}
       >
         <>
           <HeartIcon />
@@ -50,7 +59,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ likes = 0, ratingId, lik
         show={show}
         onClose={() => setShow(false)}
         title="Likes"
-        queryKey={["likesProfiles", ratingId]}
+        queryKey={[LIKES_PROFILES, ratingId]}
         queryFn={({ pageParam = undefined }) => getPostLikes({ postId: ratingId, next: pageParam })}
       />
     </>
