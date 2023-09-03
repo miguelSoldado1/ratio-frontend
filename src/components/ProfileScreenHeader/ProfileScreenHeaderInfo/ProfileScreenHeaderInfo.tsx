@@ -24,7 +24,7 @@ export const ProfileScreenHeaderInfo: React.FC<FollowingInfo> = (followingInfo) 
   const closeModals = () => setShowModal({ following: false, followers: false });
 
   const handleShowModals = (queryKeyString: string, modalState: StateType) => {
-    queryClient.resetQueries([queryKeyString, userId]);
+    queryClient.removeQueries([queryKeyString, userId]);
     setShowModal(modalState);
   };
 

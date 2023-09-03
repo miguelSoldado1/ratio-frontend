@@ -36,7 +36,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ likes = 0, ratingId, lik
   };
 
   const handleLongPress = () => {
-    queryClient.resetQueries([LIKES_PROFILES, ratingId]);
+    queryClient.removeQueries([LIKES_PROFILES, ratingId]);
     likeCount > 0 && setShow(true);
   };
 
