@@ -1,12 +1,13 @@
 :root {
-  --background-color: #151515;
+  --background-color: rgb(21, 21, 21);
   --hover-color: rgba(37, 37, 37, 0.7);
   --background-item-color: rgba(37, 37, 37, 0.3);
-  --accent-text-color: rgba(255, 255, 255, 0.6);
-  --button-color: #1db954;
-  --button-hover-color: #1bc559;
-  --button-text-color: white;
-  --hover-shadow-color: #0b0b0b;
+  --accent-text-color: rgb(162, 162, 162);
+  --button-color: rgb(29, 185, 84);
+  --button-hover-color: rgb(27, 197, 89);
+  --button-text-color: rgb(255, 255, 255);
+  --hover-shadow-color: rgb(11, 11, 11);
+
   --loader-scale: 1;
 }
 
