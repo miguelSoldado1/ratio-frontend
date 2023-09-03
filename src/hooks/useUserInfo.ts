@@ -13,7 +13,7 @@ const useUserInfo = (queryProps?: UseQueryOptions<User>) => {
     ...queryProps,
     queryKey: ["userInfo", accessToken],
     queryFn: getMe,
-    staleTime: CACHE_TIME,
+    staleTime: CACHE_TIME + 1500,
     cacheTime: CACHE_TIME,
   });
 
