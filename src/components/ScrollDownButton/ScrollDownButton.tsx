@@ -7,10 +7,15 @@ interface ScrollDownButtonProps {
 }
 
 export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ textAreaRef }) => {
-  const [showButton, setShowButton] = useState(true);
+  const [showButton, setShowButton] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    // Delay the button appearance by 1000 milliseconds (1 second)
+    setTimeout(() => {
+      setShowButton(true);
+    }, 1000);
+
     if (textAreaRef.current) {
       const handleIntersection = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
@@ -37,12 +42,12 @@ export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ textAreaRef 
     textAreaRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  if (!showButton || !textAreaRef) {
+  if (!textAreaRef.current) {
     return null;
   }
 
   return (
-    <div className="scroll-down-button">
+    <div className={`scroll-down-button${showButton ? " show" : ""}`}>
       <Button onClick={handleClick}>Give it a rating</Button>
     </div>
   );
