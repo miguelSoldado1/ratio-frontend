@@ -104,7 +104,7 @@ export const SubmitRating: React.FC<SubmitRatingProps> = ({ albumId }) => {
           />
         </div>
       </div>
-      {textAreaRef && <ScrollDownButton textAreaRef={textAreaRef} />}
+      <ScrollDownButton textAreaRef={textAreaRef} />
     </>
   );
 };
