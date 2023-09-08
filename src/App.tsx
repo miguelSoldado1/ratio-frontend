@@ -33,12 +33,12 @@ const App = () => {
   }, [getAccessToken]);
 
   return (
-    <>
+    <div>
       <Helmet>
         <title>Ratio</title>
       </Helmet>
       {accessToken ? <MainRouteElement /> : <LandingPage />}
-    </>
+    </div>
   );
 };
 
