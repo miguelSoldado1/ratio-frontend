@@ -8,7 +8,6 @@ interface DatabaseFiltersProps {
   disabled?: boolean;
 }
 
-// TODO: Validate if the disable if single is worth keeping
 export const DatabaseFilters: React.FC<DatabaseFiltersProps> = ({ filter, changeFilter, isLoading = false, disabled = false }) => {
   const handleChange = (query: FilterQueries) => {
     if (!isLoading && !disabled) {
