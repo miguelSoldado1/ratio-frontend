@@ -5,3 +5,9 @@
   padding: 1em;
   background: linear-gradient(to bottom, var(--background-item-color) 30%, var(--background-color) 100%);
 }
+
+.rating-circle-preloader {
+  width: 11em;
+  height: 11em;
+  border-radius: 100%;
+}

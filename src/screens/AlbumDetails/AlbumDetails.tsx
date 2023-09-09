@@ -37,7 +37,6 @@ export const AlbumDetails = () => {
           </title>
         )}
       </Helmet>
-
       <>
         <div className="album-details-container">
           <div className="album-details-column left">
