@@ -7,7 +7,7 @@ import { getUserProfile, getUserRatings } from "@/api/profileScreen";
 import { DatabaseFilters, Loading, ProfileScreenHeader, PostRating, EmptyProfileScreen } from "@/components";
 import { PostRatingPL } from "@/preloaders";
 import { FilterQueries } from "@/enums";
-import type { User, UserRatings } from "@/types";
+import type { PersonalRating, User, UserRatings } from "@/types";
 import "./ProfileScreen.css";
 
 const DEFAULT_FILTER = FilterQueries.latest;
@@ -32,12 +32,7 @@ export const ProfileScreen = () => {
     onError: () => removeAccessToken(),
   });
 
-  const {
-    data: ratings,
-    hasNextPage,
-    fetchNextPage,
-    status: ratingsStatus,
-  } = useInfiniteQuery<UserRatings>({
+  const { data, hasNextPage, fetchNextPage, isInitialLoading } = useInfiniteQuery<UserRatings>({
     queryKey: ["userRatings", userId, filterActive],
     queryFn: ({ pageParam }) => getUserRatings({ userId, next: pageParam, filter: filterActive }),
     getNextPageParam: (lastPage) => lastPage.next ?? undefined,
@@ -45,7 +40,7 @@ export const ProfileScreen = () => {
     enabled: !!userId,
   });
 
-  const postRatings = ratings?.pages.flatMap((x) => x.data) ?? [];
+  const ratings = data?.pages.flatMap((x) => x.data) ?? [];
 
   return (
     <>
@@ -54,29 +49,30 @@ export const ProfileScreen = () => {
       </Helmet>
       <ProfileScreenHeader />
       <div className="profile-screen-container">
-        <DatabaseFilters
-          filter={filterActive}
-          changeFilter={setFilterActive}
-          isLoading={ratingsStatus !== "success"}
-          disabled={postRatings.length === 0}
-        />
+        <DatabaseFilters filter={filterActive} changeFilter={setFilterActive} isLoading={isInitialLoading} disabled={ratings?.length === 0} />
         <div className="profile-screen-container-posts">
-          {ratingsStatus === "success" && userStatus === "success" ? (
-            postRatings.length > 0 ? (
-              postRatings.map((post) => <PostRating {...{ ...post, user }} key={`${post._id}-${post.liked_by_user}`} />)
+          {!isInitialLoading && userStatus === "success" ? (
+            ratings.length > 0 ? (
+              <>
+                <RenderRatings ratings={ratings} user={user} />
+                {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
+              </>
             ) : (
               <EmptyProfileScreen />
             )
           ) : (
-            <>
-              {[...Array(4)].map((_, index) => (
-                <PostRatingPL key={index} />
-              ))}
-            </>
+            <RatingsPreloader />
           )}
-          {hasNextPage && <Loading fetchNextPage={fetchNextPage} />}
         </div>
       </div>
     </>
   );
+};
+
+const RatingsPreloader = () => {
+  return [...Array(4)].map((_, index) => <PostRatingPL key={index} />);
+};
+
+const RenderRatings = ({ ratings, user }: { ratings: PersonalRating[]; user: User }) => {
+  return ratings.map((post) => <PostRating {...{ ...post, user }} key={`${post._id}-${post.liked_by_user}`} />);
 };
