@@ -16,14 +16,9 @@ export const getRelatedAlbums = async ({ albumId, artistId }: types.GetRelatedAl
   return response.data;
 };
 
-export const getAverageAlbumRating = async ({ albumId }: types.GetAverageAlbumRatingParams) => {
-  const response = await axios.get(`${BACK_END_URL}/getAverageAlbumRating`, { params: { album_id: albumId } });
+export const getAlbumRatings = async ({ albumId, userId }: types.GetAlbumRatingsParams) => {
+  const response = await axios.get(`${BACK_END_URL}/getAlbumRatings`, { params: { album_id: albumId, user_id: userId } });
   return response.data;
-};
-
-export const getPersonalRating = async ({ albumId, userId }: types.GetPersonalRatingParams) => {
-  const response = await axios.get(`${BACK_END_URL}/getMyAlbumRating`, { params: { album_id: albumId, user_id: userId } });
-  return response.data.personalRating;
 };
 
 export const getCommunityAlbumRatings = async ({ albumId, filter, next, previous }: types.GetCommunityAlbumRatingsParams) => {

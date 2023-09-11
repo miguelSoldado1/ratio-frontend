@@ -27,8 +27,7 @@ export const SubmitRating: React.FC<SubmitRatingProps> = ({ albumId }) => {
     mutationFn: createRating,
     onSuccess: () => {
       queryClient.invalidateQueries(["ratings"]);
-      queryClient.invalidateQueries(["personalRating"]);
-      queryClient.invalidateQueries(["averageRating"]);
+      queryClient.invalidateQueries(["albumRatings"]);
     },
   });
 

@@ -12,13 +12,13 @@ interface RatingPostsDeleteProps {
 export const RatingPostsDelete: React.FC<RatingPostsDeleteProps> = ({ ratingId, resetPagination }) => {
   const queryClient = useQueryClient();
   const [show, setShow] = useState(false);
+
   const { mutate } = useMutation({
     mutationFn: deleteRating,
     onSuccess: () => {
       resetPagination();
       queryClient.invalidateQueries(["ratings"]);
-      queryClient.invalidateQueries(["personalRating"]);
-      queryClient.invalidateQueries(["averageRating"]);
+      queryClient.invalidateQueries(["albumRatings"]);
     },
   });
 

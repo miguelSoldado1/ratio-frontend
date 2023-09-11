@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { getAlbumRatings } from "@/api/albumDetails";
 import { useUserInfo } from "@/hooks";
 import { RatingsContainerPL } from "@/preloaders";
 import { RatingCircle, CommunityRatings, NoRatingsContainer, SubmitRating } from "@/components";
-import { getAverageAlbumRating, getPersonalRating } from "@/api/albumDetails";
+import type { AlbumRatings } from "@/types";
 import "./RatingsContainer.css";
 
 interface RatingsContainerProps {
@@ -13,30 +14,24 @@ export const RatingsContainer: React.FC<RatingsContainerProps> = ({ albumId }) =
   const { userData } = useUserInfo();
   const userId = userData?.id;
 
-  const { data: averageData, status: averageStatus } = useQuery({
-    queryKey: ["averageRating", albumId],
-    queryFn: () => getAverageAlbumRating({ albumId }),
+  const { data, status } = useQuery<AlbumRatings>({
+    queryKey: ["albumRatings", albumId, userId],
+    queryFn: () => getAlbumRatings({ albumId, userId }),
+    enabled: !!userId,
   });
 
-  const { data: personalRating, status: personalStatus } = useQuery({
-    queryKey: ["personalRating", albumId, userId],
-    queryFn: () => getPersonalRating({ albumId, userId }),
-  });
-
-  if (averageStatus !== "success" || personalStatus !== "success") {
+  if (status !== "success") {
     return <RatingsContainerPL />;
   }
-
-  const averageRating = averageData?.averageRating;
 
   return (
     <div className="ratings-container">
       <div className="ratings-circles">
-        <RatingCircle value={personalRating ?? -1} description="Personal" />
-        <RatingCircle value={averageRating ?? -1} description="Community" />
+        <RatingCircle value={data?.userRating ?? -1} description="Personal" />
+        <RatingCircle value={data?.averageRating ?? -1} description="Community" />
       </div>
-      {personalRating === null && <SubmitRating albumId={albumId} />}
-      {averageRating !== null ? <CommunityRatings albumId={albumId} /> : <NoRatingsContainer />}
+      {data?.userRating === null && <SubmitRating albumId={albumId} />}
+      {data?.averageRating !== null ? <CommunityRatings albumId={albumId} /> : <NoRatingsContainer />}
     </div>
   );
 };

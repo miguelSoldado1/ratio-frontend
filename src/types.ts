@@ -116,3 +116,8 @@ export interface RailResponse {
   data?: Album[];
   description: string;
 }
+
+export interface AlbumRatings {
+  averageRating: number | null;
+  userRating: number | null;
+}

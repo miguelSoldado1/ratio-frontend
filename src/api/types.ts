@@ -42,8 +42,9 @@ export interface GetRelatedAlbumsParams {
   artistId?: string;
 }
 
-export interface GetAverageAlbumRatingParams {
+export interface GetAlbumRatingsParams {
   albumId?: string;
+  userId?: string;
 }
 
 export interface GetPersonalRatingParams {
