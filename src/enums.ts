@@ -10,3 +10,9 @@ export enum FilterQueries {
   oldest = "oldest",
   top_rated = "top_rated",
 }
+
+export enum DatePrecision {
+  day = "day",
+  month = "month",
+  year = "year",
+}

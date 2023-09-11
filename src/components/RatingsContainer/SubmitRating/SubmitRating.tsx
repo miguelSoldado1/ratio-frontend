@@ -1,14 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useReducer } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import CircularSlider from "@fseehawer/react-circular-slider";
 import { createRating } from "@/api/albumDetails";
-import { ScrollDownButton } from "../..";
+import { ScrollDownButton, CircularSlider } from "@/components";
 import "./SubmitRating.css";
 
-const SLIDER_WIDTH = window.innerWidth > window.innerHeight ? window.innerWidth / 13 : window.innerHeight / 6.5;
-const SLIDER_PROGRESS = window.innerWidth > window.innerHeight ? window.innerWidth / 100 : window.innerHeight / 50;
-const SLIDER_KNOB = window.innerWidth > window.innerHeight ? window.innerWidth / 50 : window.innerHeight / 25;
-const VALUE_SIZE = window.innerWidth > window.innerHeight ? window.innerWidth / 38 : window.innerWidth / 13;
 const MAX_CHARS = 300;
 const MIN_CHARS = 3;
 const MAX_NUM_OF_LINES = 12;
@@ -17,12 +12,16 @@ interface SubmitRatingProps {
   albumId?: string;
 }
 
+type Rating = {
+  value: number;
+  comment: string;
+};
+
 export const SubmitRating: React.FC<SubmitRatingProps> = ({ albumId }) => {
   const queryClient = useQueryClient();
-  const [rating, setRating] = useState<number>(-1);
+  const [rating, setRating] = useReducer((state: Rating, newState: Partial<Rating>) => ({ ...state, ...newState }), { value: -1, comment: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [numOfLines, setNumOfLines] = useState<number>(0);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: createRating,
@@ -34,77 +33,49 @@ export const SubmitRating: React.FC<SubmitRatingProps> = ({ albumId }) => {
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const { value, comment } = rating;
     e.preventDefault();
-    if (textAreaRef.current?.value && textAreaRef.current?.value.replace(/\s/g, "").length < MIN_CHARS) {
-      setErrorMessage("Make it longer...");
-      return;
-    }
 
-    if (rating <= -1) {
-      setErrorMessage("Give your ratio a rating!");
-      return;
+    if (comment.replace(/\s/g, "").length < MIN_CHARS) {
+      return setErrorMessage("Make it longer...");
     }
-
-    if (numOfLines >= MAX_NUM_OF_LINES) {
-      setErrorMessage("Way too many lines...");
-      return;
+    if (value <= -1) {
+      return setErrorMessage("Give your review a rating!");
     }
-
-    if (!isLoading && textAreaRef.current?.value && albumId) {
-      setErrorMessage(null);
-      mutate({ album_id: albumId, rating: rating, comment: textAreaRef.current.value });
+    if (comment.split(/\r\n|\r|\n/).length >= MAX_NUM_OF_LINES) {
+      return setErrorMessage("Way too many lines...");
     }
+    if (!isLoading && albumId) {
+      mutate({ album_id: albumId, rating: value, comment: comment });
+    }
+    setErrorMessage("");
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
-    setNumOfLines(inputValue.split(/\r\n|\r|\n/).length);
+    setRating({ comment: inputValue });
+    const numOfLines = inputValue.split(/\r\n|\r|\n/).length;
     if (numOfLines >= MAX_NUM_OF_LINES) {
-      setErrorMessage("Way too many lines...");
-      return;
+      return setErrorMessage("Way too many lines...");
     }
-    setErrorMessage(null);
+    setErrorMessage("");
   };
 
   return (
     <>
-      <div className="submit-rating">
+      <div className="submit-rating" ref={formRef}>
         <form className="submit-rating-form" onSubmit={handleSubmit}>
           <div className="submit-rating-input-text">
-            <textarea
-              className="submit-rating-comment"
-              placeholder="Leave a comment..."
-              maxLength={MAX_CHARS}
-              onChange={handleOnChange}
-              rows={3}
-              ref={textAreaRef}
-            />
+            <textarea className="submit-rating-comment" placeholder="Leave a comment..." maxLength={MAX_CHARS} onChange={handleOnChange} rows={3} />
             <span className="submit-rating-form-error">{errorMessage}</span>
           </div>
           <input className="custom-button submit" type="submit" value="Submit" disabled={isLoading} />
         </form>
         <div className="submit-rating-cirlce">
-          <CircularSlider
-            //hidden character because it was breaking on mobile
-            label="&#8192;"
-            width={SLIDER_WIDTH}
-            labelColor={rating >= 0 ? "white" : "gray"}
-            knobColor={rating >= 0 ? "white" : "gray"}
-            progressColorFrom={rating >= 0 ? "white" : "gray"}
-            progressColorTo={rating >= 0 ? "white" : "gray"}
-            progressSize={SLIDER_PROGRESS}
-            knobSize={SLIDER_KNOB}
-            trackSize={0}
-            min={0}
-            max={10}
-            valueFontSize={`${VALUE_SIZE}px`}
-            progressLineCap="flat"
-            knobPosition="top"
-            onChange={(value: number) => setRating(value)}
-          />
+          <CircularSlider value={rating.value} onChange={(value: number) => setRating({ value })} />
         </div>
       </div>
-      <ScrollDownButton textAreaRef={textAreaRef} />
+      <ScrollDownButton scrollRef={formRef} />
     </>
   );
 };

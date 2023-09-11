@@ -3,15 +3,15 @@ import { Button } from "..";
 import "./ScrollDownButton.css";
 
 interface ScrollDownButtonProps {
-  textAreaRef: React.RefObject<HTMLTextAreaElement>;
+  scrollRef: React.RefObject<HTMLDivElement>;
 }
 
-export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ textAreaRef }) => {
+export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ scrollRef }) => {
   const [showButton, setShowButton] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (textAreaRef.current) {
+    if (scrollRef?.current) {
       const handleIntersection = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -22,7 +22,7 @@ export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ textAreaRef 
       };
 
       observerRef.current = new IntersectionObserver(handleIntersection, { root: null, rootMargin: "150px", threshold: 0 });
-      observerRef.current.observe(textAreaRef.current);
+      observerRef.current.observe(scrollRef.current);
 
       return () => {
         if (observerRef.current) {
@@ -30,14 +30,14 @@ export const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ textAreaRef 
         }
       };
     }
-  }, [textAreaRef]);
+  }, [scrollRef]);
 
   const handleClick = () => {
     setShowButton(false);
-    textAreaRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    scrollRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  if (!textAreaRef.current) {
+  if (!scrollRef?.current) {
     return null;
   }
 

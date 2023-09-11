@@ -3,6 +3,7 @@ export * from "./AlbumHeader/AlbumHeader";
 export * from "./AlbumTrack/AlbumTrack";
 export * from "./Avatar/Avatar";
 export * from "./Button/Button";
+export * from "./CircularSlider/CircularSlider";
 export * from "./DatabaseFilters/DatabaseFilters";
 export * from "./EmptyPostsFeed/EmptyPostsFeed";
 export * from "./EmptyProfileScreen/EmptyProfileScreen";

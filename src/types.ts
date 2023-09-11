@@ -1,3 +1,5 @@
+import { DatePrecision } from "./enums";
+
 export interface User {
   id: string;
   displayName: string;
@@ -49,7 +51,7 @@ export interface DetailedAlbum {
   id: string;
   release_date: string;
   image: string | null;
-  release_date_precision: "year" | "month" | "day";
+  release_date_precision: DatePrecision;
   tracks?: Track[];
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { DatePrecision } from "@/enums";
 import type { Artist } from "@/types";
 
 const intervals = [
@@ -51,3 +52,16 @@ export const renderArtists = (artists: Artist[]) => {
 };
 
 export const numberFormatter = Intl.NumberFormat("en", { notation: "compact" });
+
+export const handleDatePrecision = (release_date: string, release_date_precision: DatePrecision) => {
+  const unformattedDate = new Date(release_date);
+  switch (release_date_precision) {
+    case DatePrecision.day:
+      return new Intl.DateTimeFormat("EN", { year: "numeric", month: "long", day: "numeric" }).format(unformattedDate);
+    case DatePrecision.month:
+      return new Intl.DateTimeFormat("EN", { year: "numeric", month: "long" }).format(unformattedDate);
+    case DatePrecision.year:
+    default:
+      return new Intl.DateTimeFormat("EN", { year: "numeric" }).format(unformattedDate);
+  }
+};
