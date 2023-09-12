@@ -88,7 +88,7 @@ export const CommunityRatings: React.FC<CommunityRatingsProps> = ({ albumId }) =
           </div>
         </>
       ) : (
-        <div className="ratings-loader" />
+        <div className="loading-ratings" />
       )}
     </>
   );

@@ -21,3 +21,10 @@
   flex-direction: column;
   gap: 0.75em;
 }
+
+.loading-ratings {
+  border-radius: 1em;
+  height: 20em;
+  padding: 1em;
+  background: linear-gradient(to bottom, var(--background-item-color) 30%, var(--background-color) 100%);
+}
