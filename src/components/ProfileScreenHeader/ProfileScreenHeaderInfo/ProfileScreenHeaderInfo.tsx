@@ -23,40 +23,44 @@ export const ProfileScreenHeaderInfo: React.FC<FollowingInfo> = (followingInfo) 
 
   const closeModals = () => setShowModal({ following: false, followers: false });
 
-  const handleShowModals = (queryKeyString: string, modalState: StateType) => {
-    queryClient.removeQueries([queryKeyString, userId]);
-    setShowModal(modalState);
+  const handleShowModals = (queryKeyString: "following" | "followers", modalState: StateType) => {
+    if (followingInfo[queryKeyString] > 0) {
+      queryClient.removeQueries([queryKeyString, userId]);
+      setShowModal(modalState);
+    }
   };
 
   return (
     <>
       <div className="profile-screen-header-follow-info">
-        <span className="follow-info underline" onClick={() => handleShowModals(FOLLOWING, { following: true, followers: false })}>
+        <span
+          className={`follow-info${followingInfo.following > 0 ? " underline" : ""}`}
+          onClick={() => handleShowModals(FOLLOWING, { following: true, followers: false })}
+        >
           {numberFormatter.format(followingInfo.following)} Following
         </span>
-        <span className="follow-info underline" onClick={() => handleShowModals(FOLLOWERS, { following: false, followers: true })}>
+        <span
+          className={`follow-info${followingInfo.followers > 0 ? " underline" : ""}`}
+          onClick={() => handleShowModals(FOLLOWERS, { following: false, followers: true })}
+        >
           {numberFormatter.format(followingInfo.followers)} Followers
         </span>
       </div>
       <span className="profile-screen-posts-number">{numberFormatter.format(followingInfo.numberOfPosts)} Personal Ratings</span>
-      {followingInfo.following > 0 && (
-        <FollowListModal
-          show={showModal.following}
-          onClose={closeModals}
-          title="Following"
-          queryKey={[FOLLOWING, userId]}
-          queryFn={({ pageParam = undefined }) => getUserFollowing({ next: pageParam, userId })}
-        />
-      )}
-      {followingInfo.followers > 0 && (
-        <FollowListModal
-          show={showModal.followers}
-          onClose={closeModals}
-          title="Followers"
-          queryKey={[FOLLOWERS, userId]}
-          queryFn={({ pageParam = undefined }) => getUserFollowers({ next: pageParam, userId })}
-        />
-      )}
+      <FollowListModal
+        show={showModal.following}
+        onClose={closeModals}
+        title="Following"
+        queryKey={[FOLLOWING, userId]}
+        queryFn={({ pageParam = undefined }) => getUserFollowing({ next: pageParam, userId })}
+      />
+      <FollowListModal
+        show={showModal.followers}
+        onClose={closeModals}
+        title="Followers"
+        queryKey={[FOLLOWERS, userId]}
+        queryFn={({ pageParam = undefined }) => getUserFollowers({ next: pageParam, userId })}
+      />
     </>
   );
 };
