@@ -33,7 +33,19 @@
   display: flex;
   justify-content: space-between;
   gap: 1em;
-  margin: 1em 0.5em 1em;
+  padding: 0.75em 0.5em;
+  position: sticky;
+  top: 0px;
+  background-color: var(--background-color);
+  height: 2.75em;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
+  z-index: 100;
+}
+
+.nav-bar.hide {
+  top: -4.25em;
 }
 
 .ratio-logo-container {

@@ -1,0 +1,36 @@
+@media only screen and (max-width: 1025px) {
+  .avatar-container > img {
+    width: 1.75em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .avatar-container > img {
+    width: 2em;
+  }
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25em;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  border-radius: 20em;
+  padding: 0.25em 0.75em;
+  gap: 0.3em;
+}
+
+.avatar-container > img {
+  aspect-ratio: 1;
+  border-radius: 100%;
+}
+
+.avatar-container > a {
+  all: unset;
+  font-size: 1em;
+}

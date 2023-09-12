@@ -1,6 +1,6 @@
 @media only screen and (max-width: 1025px) {
-  .profile-screen-header {
-    margin: 1em;
+  .profile-screen-header-wrapper {
+    margin: 0.5em 1em;
   }
 
   .profile-screen-header-image {
@@ -9,13 +9,17 @@
 }
 
 @media only screen and (min-width: 1026px) {
-  .profile-screen-header {
+  .profile-screen-header-wrapper {
     margin: 1em 2em;
   }
 
   .profile-screen-header-image {
     width: 15%;
   }
+}
+
+.profile-screen-header-wrapper {
+  margin-bottom: 0;
 }
 
 .profile-screen-header {
@@ -29,12 +33,18 @@
   aspect-ratio: 1;
 }
 
+.profile-screen-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
 .profile-screen-header-name {
   margin: 0;
   font-size: 1.75em;
 }
 
-.profile-screen-header-num-ratings {
+.profile-screen-header-num-followers {
   margin-top: 0.25em;
   font-size: 1em;
   color: var(--accent-text-color);

@@ -2,19 +2,36 @@
   .profile-screen-header-name.preloader {
     width: 7em;
   }
+
+  .profile-screen-header-follow-info.preloader > .follow-info.preloader {
+    width: 10em;
+  }
 }
 
 @media only screen and (min-width: 1026px) {
   .profile-screen-header-name.preloader {
     width: 10em;
   }
+
+  .profile-screen-header-follow-info.preloader > .follow-info.preloader {
+    width: 12em;
+  }
 }
 
 .profile-screen-header-name.preloader {
+  height: 1.15em;
+}
+
+.profile-screen-header-follow-info.preloader > .follow-info.preloader {
   height: 1em;
 }
 
-.profile-screen-header-num-ratings.preloader {
-  width: 50%;
+.profile-screen-posts-number.preloader {
+  width: 8em;
   height: 1em;
+}
+
+.profile-screen-follow-button.preloader {
+  height: 2.8em;
+  width: 1em;
 }

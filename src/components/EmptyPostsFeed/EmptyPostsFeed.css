@@ -1,0 +1,15 @@
+.posts-feed-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--background-item-color) 30%, var(--background-color) 100%);
+  height: 20em;
+  border-radius: 1em;
+  padding: 2.5em 1em;
+  text-align: center;
+  gap: 0.5em;
+}
+
+.posts-feed-empty-subtext {
+  padding: 0 0.5em;
+}

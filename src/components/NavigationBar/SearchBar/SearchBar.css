@@ -16,12 +16,17 @@
   border: none;
   outline: none;
   padding-block: 0.6em;
-  padding-left: 2.35em;
+  padding-left: 2em;
   padding-right: 0.5em;
   font-size: 1em;
   border-radius: 2em;
   width: 100%;
   -webkit-appearance: none !important;
+  border: 1px solid transparent;
+}
+
+.search-input:focus {
+  border: 1px solid var(--background-color);
 }
 
 /* balls to the wall approach to hide safari mobile magnifying glass */

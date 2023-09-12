@@ -1,0 +1,8 @@
+.container-album-name.preloader {
+  height: 1.2em;
+}
+
+.container-artist-name.preloader {
+  height: 1em;
+  margin: 0.075em 0;
+}

@@ -1,19 +1,19 @@
 :root {
-  --background-color: #151515;
+  --background-color: rgb(21, 21, 21);
   --hover-color: rgba(37, 37, 37, 0.7);
   --background-item-color: rgba(37, 37, 37, 0.3);
-  --accent-text-color: rgba(255, 255, 255, 0.6);
-  --button-color: #1db954;
-  --button-hover-color: #1bc559;
-  --button-text-color: white;
-  --hover-shadow-color: #0b0b0b;
+  --accent-text-color: rgb(162, 162, 162);
+  --button-color: rgb(29, 185, 84);
+  --button-hover-color: rgb(27, 197, 89);
+  --button-text-color: rgb(255, 255, 255);
+  --hover-shadow-color: rgb(11, 11, 11);
+
   --loader-scale: 1;
 }
 
 html,
 body,
-#root,
-.App {
+#root {
   height: 100%;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -61,6 +61,7 @@ ol {
 }
 
 .arrow {
+  all: unset;
   --arrow-width: 0.125em;
   --arrow-size: calc(3 * var(--arrow-width));
   border: solid white;
@@ -68,4 +69,49 @@ ol {
   display: inline-block;
   padding: var(--arrow-size);
   cursor: pointer;
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.arrow.arrow-down {
+  transform: rotate(45deg);
+  margin-block: 0 calc(5 * var(--arrow-width));
+  transition: all 0.5s ease;
+}
+
+.arrow.arrow-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin-block: calc(5 * var(--arrow-width)) 0;
+  transition: all 0.5s ease;
+}
+
+.expanded {
+  -webkit-line-clamp: 15;
+  line-clamp: 15;
+}
+
+.spotify-logo {
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 0.3em 0 0.1em;
+}
+
+.underline:hover {
+  text-decoration: underline !important;
+}
+
+.avatar-modal-list {
+  --avatar-height: 2em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: var(--avatar-height);
+  max-height: calc(6 * var(--avatar-height) + var(--avatar-height) / 2);
+  padding-inline: 1em;
+  padding-block: 0.5em;
+  width: 17em;
 }

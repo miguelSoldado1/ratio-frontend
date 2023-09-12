@@ -30,18 +30,12 @@
 
 @media only screen and (min-width: 1026px) {
   .album-header-image {
-    width: 20em;
+    width: 17.5em;
   }
 
   .album-details-details {
     margin: 0 0.7em;
     overflow: hidden;
-  }
-
-  .album-details-line {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .album-details-details > * {

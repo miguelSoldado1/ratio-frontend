@@ -1,0 +1,24 @@
+@media only screen and (max-width: 1025px) {
+  .posts-feed-container {
+    margin: 0.5em;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .posts-feed-container {
+    margin: 1em;
+  }
+}
+
+.posts-feed-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  text-align: center;
+  margin: 1em;
+}
+
+.posts-feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}

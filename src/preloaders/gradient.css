@@ -1,18 +1,7 @@
-@media only screen and (max-width: 1025px) {
-  .gradient {
-    background: linear-gradient(to right, rgb(37, 37, 37), rgb(33, 33, 33), rgb(29, 29, 29), rgb(25, 25, 25));
-  }
-}
-
-@media only screen and (min-width: 1026px) {
-  .gradient {
-    background: linear-gradient(to right, rgb(37, 37, 37), rgb(35, 35, 35), rgb(33, 33, 33), rgb(33, 33, 33));
-  }
-}
-
 .gradient {
-  background-size: 400% 400%;
-  animation: gradient 5s ease infinite;
+  background: linear-gradient(to right, rgb(25, 25, 25), rgb(35, 35, 35), rgb(45, 45, 45), rgb(35, 35, 35), rgb(25, 25, 25));
+  animation: gradient 15s ease infinite;
+  background-size: 450% 400%;
 }
 
 @keyframes gradient {
@@ -20,7 +9,13 @@
   100% {
     background-position: 0% 0;
   }
-  50% {
+  25% {
     background-position: 100% 0;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  75% {
+    background-position: 100% 100%;
   }
 }

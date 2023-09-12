@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-.arrow.disabled {
+.arrow:disabled {
   cursor: not-allowed;
   border: solid var(--accent-text-color);
 }

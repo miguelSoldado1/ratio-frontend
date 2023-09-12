@@ -1,0 +1,59 @@
+.post-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  margin-left: 1em;
+}
+
+.post-container-content {
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-top: 0.75em;
+  white-space: pre-wrap;
+}
+
+.post-container > .rating-circle-container {
+  width: calc(3em * 0.8);
+  flex-shrink: 0;
+}
+
+.post-container > .rating-circle-container > * {
+  font-size: calc(0.4em * 0.8);
+}
+
+.expanded {
+  -webkit-line-clamp: 15;
+  line-clamp: 15;
+}
+
+.home-rating-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25em 0.5em;
+}
+
+.home-rating-posts-button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 20em;
+  gap: 0.5em;
+  font-size: 1em;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  padding: 0.25em 0.5em;
+}
+
+.home-rating-posts-button:hover {
+  background-color: var(--hover-color);
+}

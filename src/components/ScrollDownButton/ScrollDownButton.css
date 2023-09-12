@@ -4,6 +4,7 @@
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  transition: opacity 0.25s ease-in-out; /* Add a transition for opacity */
 }
 
 .scroll-down-button > .custom-button {
@@ -12,7 +13,7 @@
 }
 
 @media only screen and (max-width: 1025px) {
-  .scroll-down-button {
-    opacity: 1;
+  .scroll-down-button.show {
+    opacity: 1; /* Show the button */
   }
 }

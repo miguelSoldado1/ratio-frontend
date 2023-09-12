@@ -1,0 +1,40 @@
+@media only screen and (max-width: 1025px) {
+  .profile-screen-header-wrapper > .follow-button-container {
+    width: 35%;
+  }
+}
+
+@media only screen and (min-width: 1026px) {
+  .profile-screen-header-wrapper > .follow-button-container {
+    width: 15%;
+    height: 2em;
+  }
+}
+
+.follow-button-container {
+  height: 1.45em;
+}
+
+.follow-button {
+  background: var(--button-color);
+  border: 1px solid;
+  border-radius: 0.3em;
+  width: 6em;
+  height: inherit;
+  cursor: pointer;
+}
+
+.follow-button.following {
+  background: var(--background-color);
+  color: var(--button-text-color);
+}
+
+.profile-screen-header-wrapper > .follow-button-container {
+  margin-top: 0.85em;
+}
+
+.profile-screen-header-wrapper > .follow-button-container > .follow-button {
+  padding-block: 0.5em;
+  width: 100%;
+  height: 2.25em;
+}

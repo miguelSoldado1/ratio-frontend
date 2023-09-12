@@ -1,0 +1,27 @@
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background: var(--background-item-color);
+  border-radius: 1em;
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.rating-container:hover {
+  background-color: var(--hover-color);
+}
+
+.created-date {
+  color: var(--accent-text-color);
+  font-size: 0.9em;
+}
+
+.like-button-container {
+  all: unset;
+  display: flex;
+  gap: 0.25em;
+}
