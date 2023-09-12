@@ -1,7 +1,7 @@
 import { useState, useRef, useReducer } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createRating } from "@/api/albumDetails";
-import { ScrollDownButton, CircularSlider } from "@/components";
+import { CircularSlider } from "@/components";
 import "./SubmitRating.css";
 
 const MAX_CHARS = 300;
@@ -61,20 +61,17 @@ export const SubmitRating: React.FC<SubmitRatingProps> = ({ albumId }) => {
   };
 
   return (
-    <>
-      <div className="submit-rating" ref={formRef}>
-        <form className="submit-rating-form" onSubmit={handleSubmit}>
-          <div className="submit-rating-input-text">
-            <textarea className="submit-rating-comment" placeholder="Leave a comment..." maxLength={MAX_CHARS} onChange={handleOnChange} rows={3} />
-            <span className="submit-rating-form-error">{errorMessage}</span>
-          </div>
-          <input className="custom-button submit" type="submit" value="Submit" disabled={isLoading} />
-        </form>
-        <div className="submit-rating-cirlce">
-          <CircularSlider value={rating.value} onChange={(value: number) => setRating({ value })} />
+    <div className="submit-rating" ref={formRef}>
+      <form className="submit-rating-form" onSubmit={handleSubmit}>
+        <div className="submit-rating-input-text">
+          <textarea className="submit-rating-comment" placeholder="Leave a comment..." maxLength={MAX_CHARS} onChange={handleOnChange} rows={3} />
+          <span className="submit-rating-form-error">{errorMessage}</span>
         </div>
+        <input className="custom-button submit" type="submit" value="Submit" disabled={isLoading} />
+      </form>
+      <div className="submit-rating-cirlce">
+        <CircularSlider value={rating.value} onChange={(value: number) => setRating({ value })} />
       </div>
-      <ScrollDownButton scrollRef={formRef} />
-    </>
+    </div>
   );
 };
