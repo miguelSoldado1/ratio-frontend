@@ -39,20 +39,24 @@ export const ProfileScreenHeaderInfo: React.FC<FollowingInfo> = (followingInfo) 
         </span>
       </div>
       <span className="profile-screen-posts-number">{numberFormatter.format(followingInfo.numberOfPosts)} Personal Ratings</span>
-      <FollowListModal
-        show={showModal.following}
-        onClose={closeModals}
-        title="Following"
-        queryKey={[FOLLOWING, userId]}
-        queryFn={({ pageParam = undefined }) => getUserFollowing({ next: pageParam, userId })}
-      />
-      <FollowListModal
-        show={showModal.followers}
-        onClose={closeModals}
-        title="Followers"
-        queryKey={[FOLLOWERS, userId]}
-        queryFn={({ pageParam = undefined }) => getUserFollowers({ next: pageParam, userId })}
-      />
+      {followingInfo.following > 0 && (
+        <FollowListModal
+          show={showModal.following}
+          onClose={closeModals}
+          title="Following"
+          queryKey={[FOLLOWING, userId]}
+          queryFn={({ pageParam = undefined }) => getUserFollowing({ next: pageParam, userId })}
+        />
+      )}
+      {followingInfo.followers > 0 && (
+        <FollowListModal
+          show={showModal.followers}
+          onClose={closeModals}
+          title="Followers"
+          queryKey={[FOLLOWERS, userId]}
+          queryFn={({ pageParam = undefined }) => getUserFollowers({ next: pageParam, userId })}
+        />
+      )}
     </>
   );
 };
