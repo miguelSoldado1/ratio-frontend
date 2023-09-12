@@ -18,7 +18,7 @@ for the database.
 - the [backend](https://github.com/miguelSoldado1/ratio-backend) 
 also heavily uses the [Spotify Web API Node](https://github.com/thelinmichael/spotify-web-api-node).
 - Also the frontend is deployed in [Vercel](https://vercel.com/) and the backend is 
-deployed in [Railway](https://railway.app/).
+deployed in [Zeabur](https://dash.zeabur.com/).
 ## Setup/Environment Variables
 
 1. To run this project, you will need to run 2 terminal instances with the frontend and the
@@ -26,6 +26,6 @@ backend.
 2. Run `npm install` for both directories.
 3. Create a `.env` file with the following variables:
 ```
-REACT_APP_BACK_END_URL=http://localhost:5000
+VITE_BACK_END_URL=http://localhost:5000
 ```
-4. Run `npm start` to start the directory.
+4. Run `npm run dev` to start the directory.
