@@ -1,7 +1,7 @@
 import "./EmptyPostsFeed.css";
 
 const EMPTY_POSTS_FEED_TITLE = "You are not following anyone yet!";
-const EMPTY_POSTS_FEED_SUBTEXT = "This is your feed! Start by following some people so you can keep track of what they're listening...";
+const EMPTY_POSTS_FEED_SUBTEXT = "This is your feed! Start by following some people so you can keep track of what they're reviewing...";
 
 export const EmptyPostsFeed = () => {
   return (
