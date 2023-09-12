@@ -15,6 +15,7 @@ const useUserInfo = (queryProps?: UseQueryOptions<User>) => {
     queryFn: getMe,
     staleTime: CACHE_TIME + 1500,
     cacheTime: CACHE_TIME,
+    enabled: !!accessToken,
   });
 
   return { userData: data, ...query };
