@@ -49,7 +49,7 @@ export const ProfileScreen = () => {
       </Helmet>
       <ProfileScreenHeader />
       <div className="profile-screen-container">
-        <DatabaseFilters filter={filterActive} changeFilter={setFilterActive} isLoading={isInitialLoading} disabled={ratings?.length === 0} />
+        <DatabaseFilters filter={filterActive} changeFilter={setFilterActive} isLoading={isInitialLoading} />
         <div className="profile-screen-container-posts">
           {!isInitialLoading && userStatus === "success" ? (
             ratings.length > 0 ? (
