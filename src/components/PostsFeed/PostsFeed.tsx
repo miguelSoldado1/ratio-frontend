@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getFollowingRatings } from "@/api/homeScreen";
+import { useAccessToken } from "@/hooks";
 import { PostRating, Loading, EmptyPostsFeed } from "..";
 import { PostRatingPL } from "@/preloaders";
 import type { FeedRating, FollowingRatings } from "@/types";
 import "./PostsFeed.css";
-import { useAccessToken } from "@/hooks";
 
 interface PostsFeedProps {
   userId?: string;
