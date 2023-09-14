@@ -4,16 +4,20 @@ import { PostRating, Loading, EmptyPostsFeed } from "..";
 import { PostRatingPL } from "@/preloaders";
 import type { FeedRating, FollowingRatings } from "@/types";
 import "./PostsFeed.css";
+import { useAccessToken } from "@/hooks";
 
 interface PostsFeedProps {
   userId?: string;
 }
 
 export const PostsFeed: React.FC<PostsFeedProps> = ({ userId }) => {
+  const { removeAccessToken } = useAccessToken();
+
   const { data, isInitialLoading, hasNextPage, fetchNextPage } = useInfiniteQuery<FollowingRatings>({
     queryKey: ["followingRatings", userId],
     queryFn: ({ pageParam = undefined }) => getFollowingRatings({ next: pageParam }),
     getNextPageParam: (lastPage) => lastPage.next ?? undefined,
+    onError: removeAccessToken,
     enabled: !!userId,
   });
 
