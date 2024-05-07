@@ -66,6 +66,7 @@
   overflow-x: auto;
   scroll-snap-type: inline mandatory;
   padding-bottom: 0.5em;
+  overflow-y: hidden;
 }
 
 .grid > * {

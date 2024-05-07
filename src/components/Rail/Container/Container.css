@@ -28,6 +28,7 @@
 
 .container {
   display: grid;
+  align-items: center;
   background-color: var(--background-item-color);
   cursor: pointer;
   border-radius: 5%;
